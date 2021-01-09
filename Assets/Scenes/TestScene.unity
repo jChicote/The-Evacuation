@@ -213,10 +213,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2399491919581176301, guid: e2172ef216202ee488a8a68514f18eee, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2399491920065791617, guid: e2172ef216202ee488a8a68514f18eee, type: 3}
       propertyPath: m_Name
       value: UI_GameplayHUD
@@ -304,6 +300,10 @@ PrefabInstance:
     - target: {fileID: 2399491920065791621, guid: e2172ef216202ee488a8a68514f18eee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2399491920346881969, guid: e2172ef216202ee488a8a68514f18eee, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -37.69995
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2172ef216202ee488a8a68514f18eee, type: 3}

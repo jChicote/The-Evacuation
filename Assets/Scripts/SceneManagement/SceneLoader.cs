@@ -10,12 +10,22 @@ public interface ISceneLoad
 
 public class SceneLoader : MonoBehaviour, ISceneLoad
 {
+    public static SceneLoader Instance = null;
+
     private GameManager gameManager;
     private ILoadingScreen loadingScreenUI;
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>

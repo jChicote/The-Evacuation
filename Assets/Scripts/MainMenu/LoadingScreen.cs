@@ -12,12 +12,22 @@ public interface ILoadingScreen
 
 public class LoadingScreen : MonoBehaviour, ILoadingScreen
 {
+    public static LoadingScreen Instance = null;
+
     public Slider loadingBar;
     public Image screenImage;
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>
@@ -69,5 +79,6 @@ public class LoadingScreen : MonoBehaviour, ILoadingScreen
 
         loadingBar.gameObject.SetActive(false);
         screenImage.gameObject.SetActive(false);
+        Debug.Log("Triggered hidden");
     }
 }
