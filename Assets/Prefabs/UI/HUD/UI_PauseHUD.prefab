@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 2399491920065791619}
   - component: {fileID: 2399491920065791616}
   m_Layer: 5
-  m_Name: UI_GameplayHUD
+  m_Name: UI_PauseHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
