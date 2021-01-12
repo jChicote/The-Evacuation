@@ -24,22 +24,18 @@ namespace UserInterfaces.Touch
         public Image circleImage;
 
         // Transform related variables
+        private Vector2 currentTouchPosition; //TODO: NEED TO REMOVE
         private Vector2 centerPosition;
-        private float maxRadiusTransform; //Clamp distance
+        private float maxRadiusTransform = 450f / 2; // clamp distance and contains FEAULT VALUES ATM
         private float distanceToCenter;
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
 
         /// <summary>
         /// Hides pad when exiting touch
         /// </summary>
         public void HidePad()
         {
-            throw new System.NotImplementedException();
+            StopCoroutine("FadeInNavpadUI");
+            StartCoroutine("FadeOutNavpadUI");
         }
 
         /// <summary>
@@ -48,6 +44,11 @@ namespace UserInterfaces.Touch
         public void RevealPad(Vector2 begintouchPosition)
         {
             centerPosition = begintouchPosition;
+            touchStickIndicator.position = centerPosition;
+            touchCircle.position = centerPosition;
+
+            StopCoroutine("FadeOutNavpadUI");
+            StartCoroutine("FadeInNavpadUI");
         }
 
         /// <summary>
@@ -56,7 +57,11 @@ namespace UserInterfaces.Touch
         /// <param name="touchPosition"></param>
         public void TransformNavStick(Vector2 touchPosition)
         {
-            throw new System.NotImplementedException();
+            distanceToCenter = Vector3.Magnitude(centerPosition - touchPosition);
+            distanceToCenter = Mathf.Clamp(distanceToCenter, 0, maxRadiusTransform);
+            currentTouchPosition = (touchPosition - centerPosition).normalized * distanceToCenter;
+
+            touchStickIndicator.position = currentTouchPosition + centerPosition;
         }
 
         /// <summary>
@@ -66,8 +71,20 @@ namespace UserInterfaces.Touch
         private IEnumerator FadeInNavpadUI()
         {
             float alpha = indicatorImage.color.a;
+            float deltaVal = 5 * Time.deltaTime;
+            Color tempColor = Color.white;
 
-            yield return null;
+            tempColor.a = alpha;
+            touchNavElement.SetActive(true);
+
+            while (alpha < 1)
+            {
+                alpha += deltaVal; // modifies alpha value
+                tempColor.a = alpha;
+                indicatorImage.color = tempColor;
+                circleImage.color = tempColor;
+                yield return null;
+            }
         }
 
         /// <summary>
@@ -77,8 +94,21 @@ namespace UserInterfaces.Touch
         private IEnumerator FadeOutNavpadUI()
         {
             float alpha = indicatorImage.color.a;
+            float deltaVal = 5 * Time.deltaTime;
+            Color tempColor = Color.white;
 
-            yield return null;
+            tempColor.a = alpha;
+
+            while (alpha < 1)
+            {
+                alpha -= deltaVal; // modifies alpha value
+                tempColor.a = alpha;
+                indicatorImage.color = tempColor;
+                circleImage.color = tempColor;
+                yield return null;
+            }
+
+            touchNavElement.SetActive(false);
         }
     }
 }
