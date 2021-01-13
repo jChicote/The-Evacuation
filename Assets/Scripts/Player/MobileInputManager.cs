@@ -24,6 +24,7 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
     private void OnMovement(InputValue value)
     {
         Debug.Log("Value Passed");
+        Debug.Log("Hold position at: " + value.Get<Vector2>());
     }
 
 }
