@@ -1,0 +1,33 @@
+{
+    "name": "PlayerInput",
+    "maps": [
+        {
+            "name": "Mobile",
+            "id": "93226f20-54cf-440d-9cf0-a426547a0681",
+            "actions": [
+                {
+                    "name": "Movement",
+                    "type": "Value",
+                    "id": "773e632a-127c-45af-b9fb-a4178f197525",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cdad3fa0-6264-48f8-a5d8-5caa6a1612d0",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
