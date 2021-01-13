@@ -21,10 +21,10 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
 
     }
 
-    private void OnMovement(InputValue value)
+    private void OnMovement(Vector2 value)
     {
         Debug.Log("Value Passed");
-        Debug.Log("Hold position at: " + value.Get<Vector2>());
+        Debug.Log("Hold position at: " + value);
     }
 
 }
