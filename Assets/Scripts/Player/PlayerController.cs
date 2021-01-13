@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour, IPlayerInitialiser
     /// </summary>
     public void InitialisePlayer()
     {
+        Debug.Log("Is initialising player");
         InitiateInputSystem();
     }
 
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour, IPlayerInitialiser
     {
         if (Application.isMobilePlatform)
         {
+            Debug.Log("Is ported to mobile");
             IMobileInput mobileInput = this.GetComponent<IMobileInput>();
         }
     }
