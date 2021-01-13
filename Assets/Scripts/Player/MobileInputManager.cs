@@ -23,7 +23,7 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
 
     private void OnMovement(InputValue value)
     {
-        Debug.Log("Value");
+        Debug.Log("Value Passed");
     }
 
 }
