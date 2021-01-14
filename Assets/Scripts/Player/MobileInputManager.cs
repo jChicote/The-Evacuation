@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-//using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem.Utilities;
 using UnityEngine.InputSystem.EnhancedTouch;
-using UnityEngine.InputSystem.Controls;
 
 public interface IMobileInput
 {
@@ -19,36 +18,30 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
     public event EndTouchEvent OnEndTouch;*/
 
 
-    private ITouchLeftNavpadControl leftNavpad;
-    //private TouchState touch;
-    private TouchControl touchControl;
-
-
-    private Vector2 lastTouchPosition;
+    private ITouchLeftNavpadControl joystick;
+    private ReadOnlyArray<UnityEngine.InputSystem.EnhancedTouch.Touch> activeTouches;
+    private Vector2 touchPosition;
 
     /// <summary>
     /// 
     /// </summary>
     public void InitialiseInput(GameObject mobileHUD)
     {
-        leftNavpad = mobileHUD.GetComponent<ITouchLeftNavpadControl>();
-        touchControl = new TouchControl();
+        joystick = mobileHUD.GetComponent<ITouchLeftNavpadControl>();
+        Debug.Log("joystick enabled");
+
     }
 
     protected void OnEnable()
     {
         EnhancedTouchSupport.Enable();
         TouchSimulation.Enable();
-
-        //UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerDown += FingerDown;
     }
 
     protected void OnDisable()
     {
         EnhancedTouchSupport.Disable();
         TouchSimulation.Disable();
-
-        //UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerDown -= FingerDown;
     }
 
 
@@ -86,24 +79,57 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
         }*/
     }
 
-    /*private void FingerDown(Finger finger)
-    {
-        if (OnStartTouch != null) OnEndTouch(finger.screenPosition, Time.time);
-    }
-
-    private void FingerUp(Finger finger)
-    {
-        if (OnStartTouch != null) OnStartTouch(finger.screenPosition, Time.time);
-    }*/
-
+    /// <summary>
+    /// 
+    /// </summary>
     private void Update()
     {
-        var activeTouches = UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches;
-        for (var i = 0; i < activeTouches.Count; i++)
+        ProcessTouchInput();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private void ProcessTouchInput()
+    {
+        activeTouches = UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches;
+
+        if (activeTouches.Count > 0)
         {
-            Debug.Log("Active touch: " + activeTouches[i]);
-            Debug.Log("Position at: " + activeTouches[i].screenPosition);
+            for (var i = 0; i < activeTouches.Count; i++)
+            {
+                //Debug.Log("Active touch: " + activeTouches[i]);
+                //Debug.Log("Position at: " + activeTouches[i].screenPosition);
+                OnJoyStickControl(activeTouches[i]);
+            }
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private void OnJoyStickControl(UnityEngine.InputSystem.EnhancedTouch.Touch touch)
+    {
+        touchPosition = touch.screenPosition;
+
+        if (touchPosition.x <= Screen.width / 2)
+        {
+            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
+            {
+                joystick.RevealPad(touchPosition);
+            }
+
+            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
+            {
+                joystick.TransformNavStick(touchPosition);
+            }
+
+            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
+            {
+                joystick.HidePad();
+            }
+        }
+    }
+
 
 }
