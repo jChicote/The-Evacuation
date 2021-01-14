@@ -29,9 +29,10 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
     {
         lastTouchPosition = value.Get<Vector2>();
         Debug.Log(value.isPressed);
+        Debug.Log("Hold position at: " + value.Get<Vector2>());
 
         //Determine whether movement topuch detection is on the correct screen side
-        if (lastTouchPosition.x <= Screen.width / 2)
+        /*if (lastTouchPosition.x <= Screen.width / 2)
         {
             if (value.isPressed)
             {
@@ -44,7 +45,7 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
             {
                 leftNavpad.HidePad();
             }
-        }
+        }*/
     }
 
 }
