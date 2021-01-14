@@ -20,7 +20,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Movement"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""773e632a-127c-45af-b9fb-a4178f197525"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",

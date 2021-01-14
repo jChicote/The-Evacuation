@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 
 public interface IMobileInput
 {
@@ -29,6 +28,7 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
     private void OnMovement(InputValue value)
     {
         lastTouchPosition = value.Get<Vector2>();
+        Debug.Log(value.isPressed);
 
         //Determine whether movement topuch detection is on the correct screen side
         if (lastTouchPosition.x <= Screen.width / 2)
