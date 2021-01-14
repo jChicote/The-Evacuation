@@ -12,75 +12,44 @@ public interface IMobileInput
 
 public class MobileInputManager : MonoBehaviour, IMobileInput
 {
-    /*public delegate void StartTouchEvent(Vector2 position, float time);
-    public event StartTouchEvent OnStartTouch;
-    public delegate void EndTouchEvent(Vector2 position, float time);
-    public event EndTouchEvent OnEndTouch;*/
-
-
+    //  Interfaces
     private ITouchLeftNavpadControl joystick;
+    private ICheckPaused pauseChecker;
+
+    //  Data Variables
     private ReadOnlyArray<UnityEngine.InputSystem.EnhancedTouch.Touch> activeTouches;
     private Vector2 touchPosition;
 
     /// <summary>
-    /// 
+    /// Initialises the input system for the input manager.
     /// </summary>
     public void InitialiseInput(GameObject mobileHUD)
     {
         joystick = mobileHUD.GetComponent<ITouchLeftNavpadControl>();
+        pauseChecker = this.GetComponent<ICheckPaused>();
         Debug.Log("joystick enabled");
-
     }
 
+    /// <summary>
+    /// Runs on enable of the class this gameobject is attached to.
+    /// </summary>
     protected void OnEnable()
     {
         EnhancedTouchSupport.Enable();
         TouchSimulation.Enable();
     }
 
+    /// <summary>
+    /// Disables when invoked or closed.
+    /// </summary>
     protected void OnDisable()
     {
         EnhancedTouchSupport.Disable();
         TouchSimulation.Disable();
     }
 
-
     /// <summary>
-    /// 
-    /// </summary>
-    private void OnMovement(InputValue value)
-    {
-        //lastTouchPosition = value.Get<Vector2>();
-        //Debug.Log(touch.phase);
-        //Debug.Log("Hold position at: " + touch.position);
-        //Debug.Log(value.Get<TouchState>());
-        //touch = value.Get<TouchState>();
-        //Debug.Log(touch.ToString());
-
-
-        //Determine whether movement topuch detection is on the correct screen side
-        /*if (touch.position.x <= Screen.width / 2)
-        {
-
-            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
-            {
-                leftNavpad.RevealPad(touch.position);
-            }
-
-            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
-            {
-                leftNavpad.TransformNavStick(touch.position);
-            }
-
-            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
-            {
-                leftNavpad.HidePad();
-            }
-        }*/
-    }
-
-    /// <summary>
-    /// 
+    /// Performs an update during each frame
     /// </summary>
     private void Update()
     {
@@ -88,25 +57,30 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
     }
 
     /// <summary>
-    /// 
+    /// Processes all touch input coming through the input system.
     /// </summary>
     private void ProcessTouchInput()
     {
-        activeTouches = UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches;
-
-        if (activeTouches.Count > 0)
+        if (pauseChecker.CheckIsPaused())
         {
-            for (var i = 0; i < activeTouches.Count; i++)
+            activeTouches = UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches;
+
+            if (activeTouches.Count > 0)
             {
-                //Debug.Log("Active touch: " + activeTouches[i]);
-                //Debug.Log("Position at: " + activeTouches[i].screenPosition);
-                OnJoyStickControl(activeTouches[i]);
+                for (var i = 0; i < activeTouches.Count; i++)
+                {
+                    OnJoyStickControl(activeTouches[i]);
+                }
             }
+        } else
+        {
+            joystick.HidePad();
         }
+        
     }
 
     /// <summary>
-    /// 
+    /// Dictates the control behaviour of the Joystick UI.
     /// </summary>
     private void OnJoyStickControl(UnityEngine.InputSystem.EnhancedTouch.Touch touch)
     {
@@ -130,6 +104,4 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
             }
         }
     }
-
-
 }
