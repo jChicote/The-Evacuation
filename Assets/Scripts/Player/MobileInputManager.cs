@@ -29,15 +29,17 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
     /// </summary>
     private void OnMovement(InputValue value)
     {
-        Debug.Log(value.Get<TouchState>());
-        touch = value.Get<TouchState>();
         //lastTouchPosition = value.Get<Vector2>();
         //Debug.Log(touch.phase);
         //Debug.Log("Hold position at: " + touch.position);
+        //Debug.Log(value.Get<TouchState>());
+        touch = value.Get<TouchState>();
+        Debug.Log(touch.ToString());
 
         //Determine whether movement topuch detection is on the correct screen side
         if (touch.position.x <= Screen.width / 2)
         {
+
             if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
             {
                 leftNavpad.RevealPad(touch.position);
