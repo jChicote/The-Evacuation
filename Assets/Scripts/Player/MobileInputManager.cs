@@ -12,6 +12,7 @@ public interface IMobileInput
 public class MobileInputManager : MonoBehaviour, IMobileInput
 {
     private ITouchLeftNavpadControl leftNavpad;
+    private TouchState touch;
 
     private Vector2 lastTouchPosition;
 
@@ -29,9 +30,10 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
     private void OnMovement(InputValue value)
     {
         Debug.Log(value.Get<TouchState>());
+        touch = value.Get<TouchState>();
         //lastTouchPosition = value.Get<Vector2>();
-        //Debug.Log(value.isPressed);
-        //Debug.Log("Hold position at: " + value.Get<Vector2>());
+        Debug.Log(touch.phase);
+        Debug.Log("Hold position at: " + touch.position);
 
         //Determine whether movement topuch detection is on the correct screen side
         /*if (lastTouchPosition.x <= Screen.width / 2)
