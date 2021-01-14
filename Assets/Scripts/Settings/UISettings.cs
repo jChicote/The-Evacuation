@@ -7,4 +7,7 @@ public class UISettings : ScriptableObject
 {
     [Header("UI Menus")]
     public GameObject mainMenuPrefab;
+
+    [Header("UI HUD")]
+    public GameObject mobileUIHUDPrefab;
 }

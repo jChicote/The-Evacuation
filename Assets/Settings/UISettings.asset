@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: UISettings
   m_EditorClassIdentifier: 
   mainMenuPrefab: {fileID: 6552525121741930182, guid: 6084435313e69c846a6225c692a3981d, type: 3}
+  mobileUIHUDPrefab: {fileID: 7538488484106780131, guid: b07ed03d95ef8b249b8e9f49b295aef8, type: 3}
