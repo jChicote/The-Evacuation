@@ -24,7 +24,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""id"": ""773e632a-127c-45af-b9fb-a4178f197525"",
                     ""expectedControlType"": ""Touch"",
                     ""processors"": """",
-                    ""interactions"": ""Hold(duration=0.1,pressPoint=0.5)""
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
