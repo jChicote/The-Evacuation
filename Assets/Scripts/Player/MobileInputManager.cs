@@ -32,24 +32,27 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
         Debug.Log(value.Get<TouchState>());
         touch = value.Get<TouchState>();
         //lastTouchPosition = value.Get<Vector2>();
-        Debug.Log(touch.phase);
-        Debug.Log("Hold position at: " + touch.position);
+        //Debug.Log(touch.phase);
+        //Debug.Log("Hold position at: " + touch.position);
 
         //Determine whether movement topuch detection is on the correct screen side
-        /*if (lastTouchPosition.x <= Screen.width / 2)
+        if (touch.position.x <= Screen.width / 2)
         {
-            if (value.isPressed)
+            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
             {
-                Debug.Log("Hold position at: " + value.Get<Vector2>());
-                leftNavpad.RevealPad(lastTouchPosition);
-                leftNavpad.TransformNavStick(lastTouchPosition);
+                leftNavpad.RevealPad(touch.position);
             }
 
-            if (!value.isPressed)
+            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
+            {
+                leftNavpad.TransformNavStick(touch.position);
+            }
+
+            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
             {
                 leftNavpad.HidePad();
             }
-        }*/
+        }
     }
 
 }
