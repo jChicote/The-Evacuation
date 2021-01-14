@@ -34,6 +34,8 @@ namespace UserInterfaces.Touch
         /// </summary>
         public void HidePad()
         {
+            if (!touchNavElement.activeInHierarchy) return;
+
             StopCoroutine("FadeInNavpadUI");
             StartCoroutine("FadeOutNavpadUI");
         }
@@ -43,6 +45,8 @@ namespace UserInterfaces.Touch
         /// </summary>
         public void RevealPad(Vector2 begintouchPosition)
         {
+            if (touchNavElement.activeInHierarchy) return;
+
             centerPosition = begintouchPosition;
             touchStickIndicator.position = centerPosition;
             touchCircle.position = centerPosition;

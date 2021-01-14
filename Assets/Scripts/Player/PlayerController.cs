@@ -32,7 +32,12 @@ public class PlayerController : MonoBehaviour, IPlayerInitialiser
         if (Application.isMobilePlatform)
         {
             Debug.Log("Is ported to mobile");
+            //Spawn UI HUD
+            UISettings uiSettings = GameManager.Instance.uiSettings;
+            GameObject mobileHUD = Instantiate(uiSettings.mobileUIHUDPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+
             IMobileInput mobileInput = this.GetComponent<IMobileInput>();
+            mobileInput.InitialiseInput(mobileHUD);
         }
     }
 }
