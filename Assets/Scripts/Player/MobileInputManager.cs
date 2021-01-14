@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public interface IMobileInput
 {
@@ -24,10 +25,10 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
     /// <summary>
     /// 
     /// </summary>
-    private void OnMovement(InputValue value)
+    private void OnMovement(TouchState value)
     {
         Debug.Log("Value Passed");
-        Debug.Log("Hold position at: " + value.Get<Vector2>());
+        Debug.Log("Hold position at: " + value.position);
     }
 
 }
