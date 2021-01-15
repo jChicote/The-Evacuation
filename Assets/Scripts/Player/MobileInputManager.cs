@@ -67,7 +67,7 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
     /// </summary>
     private void ProcessTouchInput()
     {
-        if (pauseChecker.CheckIsPaused())
+        if (!pauseChecker.CheckIsPaused())
         {
             activeTouches = UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches;
 
@@ -82,7 +82,6 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
         {
             joystick.HidePad();
         }
-        
     }
 
     /// <summary>
