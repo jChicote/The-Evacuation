@@ -51,29 +51,49 @@ public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, IC
         if (Application.isMobilePlatform)
         {
             Debug.Log("Is ported to mobile");
-
-            //Spawn UI HUD
-            UISettings uiSettings = GameManager.Instance.uiSettings;
-            GameObject mobileHUD = Instantiate(uiSettings.mobileUIHUDPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-
-            DesktopInputManager desktopinput = this.GetComponent<DesktopInputManager>();
-            desktopinput.enabled = false;
-
-            playerInput.SwitchCurrentActionMap("Mobile");
-            IMobileInput mobileInput = this.GetComponent<IMobileInput>();
-            mobileInput.InitialiseInput(mobileHUD);
+            BeginMobileInputSystem();
+            
         } else
         {
             Debug.Log("Is ported to desktop");
-
-            playerInput.SwitchCurrentActionMap("Desktop");
-            MobileInputManager mobileInput = this.GetComponent<MobileInputManager>();
-            mobileInput.enabled = false;
-            IDesktopInput deskTopInput = this.GetComponent<IDesktopInput>();
-            deskTopInput.InitialiseDesktop();
+            BeginDesktopInputSystem();
         }
     }
 
+    /// <summary>
+    /// Initiates the mobile input systerm to this player
+    /// </summary>
+    private void BeginMobileInputSystem()
+    {
+        //Spawn UI HUD
+        UISettings uiSettings = GameManager.Instance.uiSettings;
+        GameObject mobileHUD = Instantiate(uiSettings.mobileUIHUDPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+
+        playerInput.SwitchCurrentActionMap("Mobile");
+        DesktopInputManager desktopinput = this.GetComponent<DesktopInputManager>();
+        desktopinput.enabled = false;
+
+        IMobileInput mobileInput = this.GetComponent<IMobileInput>();
+        mobileInput.InitialiseInput(mobileHUD);
+    }
+
+
+    /// <summary>
+    /// Initiates the desktop input system for this player
+    /// </summary>
+    private void BeginDesktopInputSystem()
+    {
+        playerInput.SwitchCurrentActionMap("Desktop");
+        MobileInputManager mobileInput = this.GetComponent<MobileInputManager>();
+        mobileInput.enabled = false;
+
+        IDesktopInput deskTopInput = this.GetComponent<IDesktopInput>();
+        deskTopInput.InitialiseDesktop();
+    }
+
+    /// <summary>
+    /// Initialises movement related classes.
+    /// </summary>
     public void InitiateMovement()
     {
         PlayerMovementController playerMovement = this.GetComponent<PlayerMovementController>();

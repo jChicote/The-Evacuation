@@ -52,6 +52,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""1ae8a80c-54f6-4024-8971-268e971cd461"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -63,6 +71,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c10dcd8-e265-4607-adcc-0ce662966932"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -77,6 +96,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         // Desktop
         m_Desktop = asset.FindActionMap("Desktop", throwIfNotFound: true);
         m_Desktop_Movement = m_Desktop.FindAction("Movement", throwIfNotFound: true);
+        m_Desktop_Pause = m_Desktop.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -160,11 +180,13 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Desktop;
     private IDesktopActions m_DesktopActionsCallbackInterface;
     private readonly InputAction m_Desktop_Movement;
+    private readonly InputAction m_Desktop_Pause;
     public struct DesktopActions
     {
         private @PlayerInput m_Wrapper;
         public DesktopActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Desktop_Movement;
+        public InputAction @Pause => m_Wrapper.m_Desktop_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Desktop; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -177,6 +199,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Movement.started -= m_Wrapper.m_DesktopActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_DesktopActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_DesktopActionsCallbackInterface.OnMovement;
+                @Pause.started -= m_Wrapper.m_DesktopActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_DesktopActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_DesktopActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_DesktopActionsCallbackInterface = instance;
             if (instance != null)
@@ -184,6 +209,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -195,5 +223,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     public interface IDesktopActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

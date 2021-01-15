@@ -12,21 +12,62 @@ public class PauseScreen : MonoBehaviour
 
     private bool isRevealed = false;
 
-    // Start is called before the first frame update
-
-    public void RevealPauseScreen()
+    /// <summary>
+    /// 
+    /// </summary>
+    public void RevealPauseScreen(bool isActive)
     {
         Debug.Log("is triggered");
-        isRevealed = !isRevealed;
+        isRevealed = isActive;
         pausePanel.SetActive(isRevealed);
         pauseBackImage.enabled = isRevealed;
     }
 
+    /// <summary>
+    /// Engages pause on all objects with the interface.
+    /// </summary>
+    public void OnPause()
+    {
+        IPausable pausableItem;
+
+        GameObject[] pausableObjects = FindObjectsOfType<GameObject>();
+        
+        foreach(GameObject item in pausableObjects)
+        {
+            pausableItem = item.GetComponent<IPausable>();
+
+            if(pausableItem != null)
+            {
+                Debug.Log("had ipausable");
+                Debug.Log(pausableItem.ToString());
+                pausableItem.OnPause();
+            }
+        }
+
+        RevealPauseScreen(true);
+    }
+
+    /// <summary>
+    /// Disengages pause from all objects with the interface.
+    /// </summary>
     public void OnResume()
     {
         Debug.Log("Resumed");
 
-        RevealPauseScreen();
+        IPausable pausableItem;
+
+        GameObject[] pausableObjects = FindObjectsOfType<GameObject>();
+        foreach (GameObject item in pausableObjects)
+        {
+            pausableItem = item.GetComponent<IPausable>();
+
+            if (pausableItem != null)
+            {
+                pausableItem.OnUnpause();
+            }
+        }
+
+        RevealPauseScreen(false);
     }
 
     public void OnRestart()

@@ -10,6 +10,9 @@ public class SceneController : MonoBehaviour
     public UnityEvent OnPlayerRespawn;
     public UnityEvent OnPlayerDeath;
 
+    [Header("User Interfaces")]
+    public PauseScreen pauseMenu;
+
     // Start is called before the first frame update
     private void Awake()
     {

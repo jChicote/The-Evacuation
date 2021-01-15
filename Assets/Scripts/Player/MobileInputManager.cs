@@ -89,21 +89,19 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
     /// </summary>
     private void OnJoyStickControl(UnityEngine.InputSystem.EnhancedTouch.Touch touch)
     {
-        Debug.Log("Detected touch");
         touchPosition = touch.screenPosition;
         startTouchPosition = touch.startScreenPosition;
 
         if (touchPosition.x > Screen.width / 2) return;
         if (!isJoystickActive)
         {
-            Debug.Log("Is detecting new Input id");
             currentTocuhID = touch.touchId;
             isJoystickActive = true;
         } 
 
         if (currentTocuhID == touch.touchId && isJoystickActive)
         {
-            Debug.Log("Is passed id test condition");
+            //Debug.Log("Is passed id test condition");
             if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
             {
                 joystick.RevealPad(startTouchPosition);

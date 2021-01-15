@@ -200,9 +200,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5175269804125437526}
+      - m_Target: {fileID: 604325423948439622}
         m_TargetAssemblyTypeName: PauseScreen, Assembly-CSharp
-        m_MethodName: OnRestart
+        m_MethodName: OnResume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -333,9 +333,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5175269804125437526}
+      - m_Target: {fileID: 604325423948439622}
         m_TargetAssemblyTypeName: PauseScreen, Assembly-CSharp
-        m_MethodName: RevealPauseScreen
+        m_MethodName: OnPause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -356,7 +356,6 @@ GameObject:
   - component: {fileID: 2399491919581176300}
   - component: {fileID: 2399491919581176302}
   - component: {fileID: 2399491919581176303}
-  - component: {fileID: 5175269804125437526}
   m_Layer: 5
   m_Name: PauseScreen
   m_TagString: Untagged
@@ -422,20 +421,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5175269804125437526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2399491919581176301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f865807aa0ad5418041b67b0565c78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pausePanel: {fileID: 2399491919677366184}
-  pauseBackImage: {fileID: 2399491919581176303}
 --- !u!1 &2399491919669357739
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,6 +552,7 @@ GameObject:
   - component: {fileID: 2399491920065791618}
   - component: {fileID: 2399491920065791619}
   - component: {fileID: 2399491920065791616}
+  - component: {fileID: 604325423948439622}
   m_Layer: 5
   m_Name: UI_PauseHUD
   m_TagString: Untagged
@@ -656,6 +642,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &604325423948439622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2399491920065791617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f865807aa0ad5418041b67b0565c78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 2399491919677366184}
+  pauseBackImage: {fileID: 2399491919581176303}
 --- !u!1 &2399491920273996093
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,7 +1069,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5175269804125437526}
+      - m_Target: {fileID: 604325423948439622}
         m_TargetAssemblyTypeName: PauseScreen, Assembly-CSharp
         m_MethodName: OnQuit
         m_Mode: 1
@@ -1202,7 +1202,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5175269804125437526}
+      - m_Target: {fileID: 604325423948439622}
         m_TargetAssemblyTypeName: PauseScreen, Assembly-CSharp
         m_MethodName: OnResume
         m_Mode: 1
@@ -1414,7 +1414,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5175269804125437526}
+      - m_Target: {fileID: 604325423948439622}
         m_TargetAssemblyTypeName: PauseScreen, Assembly-CSharp
         m_MethodName: OnSettings
         m_Mode: 1

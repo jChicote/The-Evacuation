@@ -10,13 +10,16 @@ public interface IDesktopInput
 
 public class DesktopInputManager : MonoBehaviour, IDesktopInput
 {
+    private ICheckPaused pauseChecker;
     private IMovement playerMovement;
+
     private Vector2 centerPosition;
     private Vector2 currentMousePosition;
     
     public void InitialiseDesktop()
     {
         playerMovement = this.GetComponent<IMovement>();
+        pauseChecker = this.GetComponent<ICheckPaused>();
         centerPosition = new Vector2();
         centerPosition.x = Screen.width / 2;
         centerPosition.y = Screen.height / 2;
@@ -24,8 +27,24 @@ public class DesktopInputManager : MonoBehaviour, IDesktopInput
 
     private void OnMovement(InputValue value)
     {
-        currentMousePosition = value.Get<Vector2>();
+        if (pauseChecker.CheckIsPaused()) return;
 
+        currentMousePosition = value.Get<Vector2>();
         playerMovement.CalculateMovement(centerPosition, currentMousePosition);
+    }
+
+    private void OnPause(InputValue value)
+    {
+        PauseScreen pauseMenu = GameManager.Instance.sceneController.pauseMenu;
+
+        if (pauseMenu == null) return;
+        if (pauseChecker.CheckIsPaused())
+        {
+            pauseMenu.OnPause();
+        } else
+        {
+            pauseMenu.OnResume();
+        }
+            
     }
 }

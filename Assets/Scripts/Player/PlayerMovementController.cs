@@ -30,46 +30,55 @@ public class PlayerMovementController : MonoBehaviour, IMovement
 
     private void FixedUpdate()
     {
-        if (pauseChecker.CheckIsPaused() || !ValidateRequirements()) return;
+        if (pauseChecker.CheckIsPaused())
+        {
+            playerRB.velocity = Vector2.zero;
+            return;
+        }
+        if(!ValidateRequirements()) return;
 
         RunMovement();
         RunRotation();
     }
 
     /// <summary>
-    /// 
+    /// Calcualtes the movement of the player.
     /// </summary>
     public void CalculateMovement(Vector2 startPos, Vector2 currentPos)
     {
-        //Debug.Log("Is calculating movement");
         currentSpeed = maxVelocity * (Vector3.Magnitude(startPos - currentPos) / maxRadiusTransform);
         currentDirection = (currentPos - startPos).normalized;
         currentVelocity = currentDirection * currentSpeed;
-        //bug.Log(currentVelocity)
 
         CalculateRotation();
     }
 
+    /// <summary>
+    /// Calculates the local rotation of the player.
+    /// </summary>
     private void CalculateRotation()
     {
         angleRotation = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg - 90;
     }
 
     /// <summary>
-    /// 
+    /// Performs the movement actions.
     /// </summary>
     private void RunMovement()
     {
        playerRB.velocity = currentVelocity;
     }
 
+    /// <summary>
+    /// Performs the player's rotation.
+    /// </summary>
     private void RunRotation()
     {
         gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleRotation));
     }
 
     /// <summary>
-    /// 
+    /// Checks crucial variables ensuring that they exist before running functions.
     /// </summary>
     private bool ValidateRequirements()
     {
