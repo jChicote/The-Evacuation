@@ -90,10 +90,11 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
     /// </summary>
     private void OnJoyStickControl(UnityEngine.InputSystem.EnhancedTouch.Touch touch)
     {
+        Debug.Log("Detected touch");
         touchPosition = touch.screenPosition;
         startTouchPosition = touch.startScreenPosition;
 
-        if (touchPosition.x > Screen.width) return;
+        if (touchPosition.x > Screen.width / 2) return;
         if (!isJoystickActive)
         {
             Debug.Log("Is detecting new Input id");
