@@ -29,7 +29,7 @@ public class PlayerMovementController : MonoBehaviour, IMovement
 
     private void FixedUpdate()
     {
-        if (pauseChecker.CheckIsPaused() || !ValidateRequirements()) return;
+        if (pauseChecker.CheckIsPaused()) return;
 
         RunMovement();
     }
@@ -50,7 +50,7 @@ public class PlayerMovementController : MonoBehaviour, IMovement
     /// </summary>
     private void RunMovement()
     {
-        playerRB.velocity = currentVelocity * Time.deltaTime;
+        playerRB.velocity = currentVelocity;
     }
 
     /// <summary>
