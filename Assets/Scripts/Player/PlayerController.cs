@@ -57,8 +57,8 @@ public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, IC
         } else
         {
             Debug.Log("Is ported to desktop");
-            MobileInputManager mobileInput = this.GetComponent<MobileInputManager>();
-            mobileInput.enabled = false;
+            //MobileInputManager mobileInput = this.GetComponent<MobileInputManager>();
+            //mobileInput.enabled = false;
 
         }
     }
