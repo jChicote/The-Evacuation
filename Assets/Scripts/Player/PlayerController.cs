@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, IC
     {
         Debug.Log("Is initialising player");
         InitiateInputSystem();
+        InitiateMovement();
     }
 
     /// <summary>
@@ -50,12 +51,22 @@ public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, IC
             UISettings uiSettings = GameManager.Instance.uiSettings;
             GameObject mobileHUD = Instantiate(uiSettings.mobileUIHUDPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 
+
             IMobileInput mobileInput = this.GetComponent<IMobileInput>();
             mobileInput.InitialiseInput(mobileHUD);
         } else
         {
             Debug.Log("Is ported to desktop");
+            MobileInputManager mobileInput = this.GetComponent<MobileInputManager>();
+            mobileInput.enabled = false;
+
         }
+    }
+
+    public void InitiateMovement()
+    {
+        PlayerMovementController playerMovement = this.GetComponent<PlayerMovementController>();
+        playerMovement.InitialiseMovement();
     }
 
     public void OnPause()

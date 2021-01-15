@@ -15,10 +15,15 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
     //  Interfaces
     private ITouchLeftNavpadControl joystick;
     private ICheckPaused pauseChecker;
+    private IMovement playerMovement;
 
     //  Data Variables
     private ReadOnlyArray<UnityEngine.InputSystem.EnhancedTouch.Touch> activeTouches;
+    private Vector2 startTouchPosition;
     private Vector2 touchPosition;
+
+    private int currentTocuhID;
+    private bool isJoystickActive = false;
 
     /// <summary>
     /// Initialises the input system for the input manager.
@@ -27,6 +32,7 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
     {
         joystick = mobileHUD.GetComponent<ITouchLeftNavpadControl>();
         pauseChecker = this.GetComponent<ICheckPaused>();
+        playerMovement = this.GetComponent<IMovement>();
         Debug.Log("joystick enabled");
     }
 
@@ -85,12 +91,20 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
     private void OnJoyStickControl(UnityEngine.InputSystem.EnhancedTouch.Touch touch)
     {
         touchPosition = touch.screenPosition;
+        startTouchPosition = touch.startScreenPosition;
 
-        if (touchPosition.x <= Screen.width / 2)
+        if (touchPosition.x > Screen.width) return;
+        if (!isJoystickActive)
+        {
+            currentTocuhID = touch.touchId;
+            isJoystickActive = true;
+        } 
+
+        if (currentTocuhID == touch.touchId && isJoystickActive)
         {
             if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
             {
-                joystick.RevealPad(touchPosition);
+                joystick.RevealPad(startTouchPosition);
             }
 
             if (touch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
@@ -102,6 +116,8 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
             {
                 joystick.HidePad();
             }
+
+            playerMovement.CalculateMovement(startTouchPosition, touchPosition);
         }
     }
 }
