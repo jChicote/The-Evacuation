@@ -14,6 +14,7 @@ public class PlayerMovementController : MonoBehaviour, IMovement
 
     public Rigidbody2D playerRB;
     public float currentSpeed;
+    public float angleRotation;
     public Vector3 currentVelocity;
     public Vector3 currentDirection;
 
@@ -29,9 +30,10 @@ public class PlayerMovementController : MonoBehaviour, IMovement
 
     private void FixedUpdate()
     {
-        if (pauseChecker.CheckIsPaused()) return;
+        if (pauseChecker.CheckIsPaused() || !ValidateRequirements()) return;
 
         RunMovement();
+        RunRotation();
     }
 
     /// <summary>
@@ -39,10 +41,18 @@ public class PlayerMovementController : MonoBehaviour, IMovement
     /// </summary>
     public void CalculateMovement(Vector2 startPos, Vector2 currentPos)
     {
-        Debug.Log("Is calculating movement");
+        //Debug.Log("Is calculating movement");
         currentSpeed = maxVelocity * (Vector3.Magnitude(startPos - currentPos) / maxRadiusTransform);
         currentDirection = (currentPos - startPos).normalized;
         currentVelocity = currentDirection * currentSpeed;
+        //bug.Log(currentVelocity)
+
+        CalculateRotation();
+    }
+
+    private void CalculateRotation()
+    {
+        angleRotation = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg - 90;
     }
 
     /// <summary>
@@ -50,7 +60,12 @@ public class PlayerMovementController : MonoBehaviour, IMovement
     /// </summary>
     private void RunMovement()
     {
-        playerRB.velocity = currentVelocity;
+       playerRB.velocity = currentVelocity;
+    }
+
+    private void RunRotation()
+    {
+        gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleRotation));
     }
 
     /// <summary>

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public interface IPausable
 {
@@ -20,6 +21,7 @@ public interface IPlayerInitialiser
 
 public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, ICheckPaused
 {
+    public UnityEngine.InputSystem.PlayerInput playerInput;
     public bool isPaused = false;
 
     // Start is called before the first frame update
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, IC
     public void InitialisePlayer()
     {
         Debug.Log("Is initialising player");
+
         InitiateInputSystem();
         InitiateMovement();
     }
@@ -43,6 +46,8 @@ public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, IC
     /// </summary>
     public void InitiateInputSystem()
     {
+        playerInput = this.GetComponent<UnityEngine.InputSystem.PlayerInput>();
+
         if (Application.isMobilePlatform)
         {
             Debug.Log("Is ported to mobile");
@@ -51,15 +56,21 @@ public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, IC
             UISettings uiSettings = GameManager.Instance.uiSettings;
             GameObject mobileHUD = Instantiate(uiSettings.mobileUIHUDPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 
+            DesktopInputManager desktopinput = this.GetComponent<DesktopInputManager>();
+            desktopinput.enabled = false;
 
+            playerInput.SwitchCurrentActionMap("Mobile");
             IMobileInput mobileInput = this.GetComponent<IMobileInput>();
             mobileInput.InitialiseInput(mobileHUD);
         } else
         {
             Debug.Log("Is ported to desktop");
-            //MobileInputManager mobileInput = this.GetComponent<MobileInputManager>();
-            //mobileInput.enabled = false;
 
+            playerInput.SwitchCurrentActionMap("Desktop");
+            MobileInputManager mobileInput = this.GetComponent<MobileInputManager>();
+            mobileInput.enabled = false;
+            IDesktopInput deskTopInput = this.GetComponent<IDesktopInput>();
+            deskTopInput.InitialiseDesktop();
         }
     }
 

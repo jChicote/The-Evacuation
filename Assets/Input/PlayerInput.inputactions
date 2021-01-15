@@ -27,6 +27,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Desktop",
+            "id": "7eb654c3-5d5e-4def-9c7f-b6040c376a0e",
+            "actions": [
+                {
+                    "name": "Movement",
+                    "type": "Value",
+                    "id": "f5a03672-9395-413e-aa12-e41bf70abe68",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "99b15358-73eb-43dc-939c-b7f607231ba7",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
