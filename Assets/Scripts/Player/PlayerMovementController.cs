@@ -39,6 +39,7 @@ public class PlayerMovementController : MonoBehaviour, IMovement
     /// </summary>
     public void CalculateMovement(Vector2 startPos, Vector2 currentPos)
     {
+        Debug.Log("Is calculating movement");
         currentSpeed = maxVelocity * (Vector3.Magnitude(startPos - currentPos) / maxRadiusTransform);
         currentDirection = (currentPos - startPos).normalized;
         currentVelocity = currentDirection * currentSpeed;

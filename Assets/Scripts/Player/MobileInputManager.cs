@@ -96,12 +96,14 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
         if (touchPosition.x > Screen.width) return;
         if (!isJoystickActive)
         {
+            Debug.Log("Is detecting new Input id");
             currentTocuhID = touch.touchId;
             isJoystickActive = true;
         } 
 
         if (currentTocuhID == touch.touchId && isJoystickActive)
         {
+            Debug.Log("Is passed id test condition");
             if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
             {
                 joystick.RevealPad(startTouchPosition);
@@ -115,6 +117,7 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
             if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
             {
                 joystick.HidePad();
+                isJoystickActive = false;
             }
 
             playerMovement.CalculateMovement(startTouchPosition, touchPosition);
