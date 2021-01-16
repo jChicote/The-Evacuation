@@ -3,7 +3,13 @@ guid: ce22cabce8aa65445bbe9ea7336e8719
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - uiSettings: {instanceID: 0}
+  - weaponSettings: {fileID: 11400000, guid: 00740a9519e627b4697a699e851f40fd, type: 2}
+  - LoadingScreen: {instanceID: 0}
+  - mainMenuUI: {instanceID: 0}
+  - sceneController: {instanceID: 0}
+  - sceneLoader: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

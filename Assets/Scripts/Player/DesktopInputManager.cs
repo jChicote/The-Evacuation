@@ -12,6 +12,7 @@ public class DesktopInputManager : MonoBehaviour, IDesktopInput
 {
     private ICheckPaused pauseChecker;
     private IMovement playerMovement;
+    private IWeaponController playerWeapons;
 
     private Vector2 centerPosition;
     private Vector2 currentMousePosition;
@@ -19,6 +20,7 @@ public class DesktopInputManager : MonoBehaviour, IDesktopInput
     public void InitialiseDesktop()
     {
         playerMovement = this.GetComponent<IMovement>();
+        playerWeapons = this.GetComponent<IWeaponController>();
         pauseChecker = this.GetComponent<ICheckPaused>();
         centerPosition = new Vector2();
         centerPosition.x = Screen.width / 2;
@@ -45,6 +47,11 @@ public class DesktopInputManager : MonoBehaviour, IDesktopInput
         {
             pauseMenu.OnResume();
         }
-            
+    }
+
+    private void OnAttack(InputValue value)
+    {
+        Debug.Log(value.isPressed);
+        playerWeapons.ActivateWeapons(value.isPressed);
     }
 }

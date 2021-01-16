@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Settings")]
     public UISettings uiSettings;
+    public WeaponSettings weaponSettings;
 
     [Header("Player Events")]
     public UnityEvent OnMainMenu;

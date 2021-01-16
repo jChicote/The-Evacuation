@@ -102,23 +102,28 @@ public class MobileInputManager : MonoBehaviour, IMobileInput
         if (currentTocuhID == touch.touchId && isJoystickActive)
         {
             //Debug.Log("Is passed id test condition");
-            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
-            {
-                joystick.RevealPad(startTouchPosition);
-            }
-
-            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
-            {
-                joystick.TransformNavStick(touchPosition);
-            }
-
-            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
-            {
-                joystick.HidePad();
-                isJoystickActive = false;
-            }
-
-            playerMovement.CalculateMovement(startTouchPosition, touchPosition);
+            PerformJoystickActions(touch);
         }
+    }
+
+    private void PerformJoystickActions(UnityEngine.InputSystem.EnhancedTouch.Touch touch)
+    {
+        if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
+        {
+            joystick.RevealPad(startTouchPosition);
+        }
+
+        if (touch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
+        {
+            joystick.TransformNavStick(touchPosition);
+        }
+
+        if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
+        {
+            joystick.HidePad();
+            isJoystickActive = false;
+        }
+
+        playerMovement.CalculateMovement(startTouchPosition, touchPosition);
     }
 }

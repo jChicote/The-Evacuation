@@ -60,6 +60,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""2db943a6-e14d-434d-8788-ed6c1fd080ff"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
                 }
             ],
             ""bindings"": [
@@ -84,6 +92,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b76fffce-f074-4dcb-a1b3-1e5fe8fba3b9"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -97,6 +116,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Desktop = asset.FindActionMap("Desktop", throwIfNotFound: true);
         m_Desktop_Movement = m_Desktop.FindAction("Movement", throwIfNotFound: true);
         m_Desktop_Pause = m_Desktop.FindAction("Pause", throwIfNotFound: true);
+        m_Desktop_Attack = m_Desktop.FindAction("Attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -181,12 +201,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private IDesktopActions m_DesktopActionsCallbackInterface;
     private readonly InputAction m_Desktop_Movement;
     private readonly InputAction m_Desktop_Pause;
+    private readonly InputAction m_Desktop_Attack;
     public struct DesktopActions
     {
         private @PlayerInput m_Wrapper;
         public DesktopActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Desktop_Movement;
         public InputAction @Pause => m_Wrapper.m_Desktop_Pause;
+        public InputAction @Attack => m_Wrapper.m_Desktop_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Desktop; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -202,6 +224,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Pause.started -= m_Wrapper.m_DesktopActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_DesktopActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_DesktopActionsCallbackInterface.OnPause;
+                @Attack.started -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAttack;
             }
             m_Wrapper.m_DesktopActionsCallbackInterface = instance;
             if (instance != null)
@@ -212,6 +237,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
             }
         }
     }
@@ -224,5 +252,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
 }

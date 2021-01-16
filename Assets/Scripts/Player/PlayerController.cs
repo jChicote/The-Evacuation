@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, IC
 
         InitiateInputSystem();
         InitiateMovement();
+        InitiateWeapons();
     }
 
     /// <summary>
@@ -98,6 +99,12 @@ public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, IC
     {
         PlayerMovementController playerMovement = this.GetComponent<PlayerMovementController>();
         playerMovement.InitialiseMovement();
+    }
+
+    public void InitiateWeapons()
+    {
+        PlayerWeaponController playerWeapons = this.GetComponent<PlayerWeaponController>();
+        playerWeapons.InitialiseWeaponController();
     }
 
     public void OnPause()

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0dc4af40fb48349bdb375216e613d8, type: 3}
+  m_Name: WeaponSettings
+  m_EditorClassIdentifier: 
+  turrentWeapons:
+  - weaponType: 0
+    weaponData:
+      damage: 1
+      speed: 15
+      fireRate: 0.3
+      life: 3
+    weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
+    projectileShell: {fileID: 8389416922106746612, guid: 01c4259b9ac9b574ebd50b82c759294a, type: 3}
+  laserWeapon:
+  - weaponType: 1
+    weaponData:
+      damage: 0
+      speed: 0
+      fireRate: 0
+      life: 0
+    weaponPrefab: {fileID: 0}
+    projectileShell: {fileID: 0}
+  launcherWeapons:
+  - weaponType: 2
+    weaponData:
+      damage: 0
+      speed: 0
+      fireRate: 0
+      life: 0
+    weaponPrefab: {fileID: 0}
+    projectileShell: {fileID: 0}
