@@ -13,29 +13,38 @@ MonoBehaviour:
   m_Name: WeaponSettings
   m_EditorClassIdentifier: 
   turrentWeapons:
-  - weaponType: 0
+  - stringID: '#167456'
     weaponData:
+      stringID: '#167456'
+      weaponType: 0
       damage: 1
-      speed: 15
+      speed: 8
       fireRate: 0.3
-      life: 3
+      life: 6
+      spread: 1
+      price: 10000
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
-    projectileShell: {fileID: 8389416922106746612, guid: 01c4259b9ac9b574ebd50b82c759294a, type: 3}
   laserWeapon:
-  - weaponType: 1
+  - stringID: 
     weaponData:
+      stringID: 
+      weaponType: 0
       damage: 0
       speed: 0
       fireRate: 0
       life: 0
+      spread: 0
+      price: 0
     weaponPrefab: {fileID: 0}
-    projectileShell: {fileID: 0}
   launcherWeapons:
-  - weaponType: 2
+  - stringID: 
     weaponData:
+      stringID: 
+      weaponType: 0
       damage: 0
       speed: 0
       fireRate: 0
       life: 0
+      spread: 0
+      price: 0
     weaponPrefab: {fileID: 0}
-    projectileShell: {fileID: 0}

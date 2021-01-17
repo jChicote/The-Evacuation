@@ -13,29 +13,20 @@ public class LoadoutHolder : MonoBehaviour
     public GameObject weapon;
 
     /// <summary>
-    /// 
+    /// Is given a loadout configuration which then loads the weapon.
     /// </summary>
     public IWeapon SetWeapon(Loadout loadout)
     {
         WeaponInfo weaponInfo = loadout.weaponInformation;
         weaponLoadout = loadout;
 
-        //TODO: Shortening the weapon constructing to be centric to the weapon prefab instead of a seperate list
         //Spawn and Initialise Weapon
         GameObject weapon = Instantiate(weaponInfo.weaponPrefab, transform);
         IWeapon weaponInterface = weapon.GetComponent<IWeapon>();
-        weaponInterface.InitialiseWeapon(weaponInfo.weaponData, weaponInfo.projectileShell);
+        weaponInterface.InitialiseWeapon(weaponInfo.weaponData);
         weaponInterface.ConfigureWeaponPositioning(loadoutType);
 
         return weaponInterface;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public void GetWeapon()
-    {
-
     }
 }
 

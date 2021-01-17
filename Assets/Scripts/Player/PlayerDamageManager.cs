@@ -7,10 +7,13 @@ public interface IDamageable
     void OnDamage(float damage);
 }
 
-public class PlayerDamageManager : MonoBehaviour, IDamageable
+namespace PlayerSystems
 {
-    public void OnDamage(float damage)
+    public class PlayerDamageManager : MonoBehaviour, IDamageable
     {
-        Debug.Log("Damage at: " + damage);
+        public void OnDamage(float damage)
+        {
+            Debug.Log("Damage at: " + damage);
+        }
     }
 }

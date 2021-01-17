@@ -19,106 +19,110 @@ public interface IPlayerInitialiser
     void InitialisePlayer();
 }
 
-public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, ICheckPaused
+namespace PlayerSystems
 {
-    public UnityEngine.InputSystem.PlayerInput playerInput;
-    public bool isPaused = false;
-
-    // Start is called before the first frame update
-    void Start()
+    public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, ICheckPaused
     {
-        InitialisePlayer();
-    }
+        public UnityEngine.InputSystem.PlayerInput playerInput;
+        public bool isPaused = false;
 
-    /// <summary>
-    /// Initialises classes systems to the player
-    /// </summary>
-    public void InitialisePlayer()
-    {
-        Debug.Log("Is initialising player");
-
-        InitiateInputSystem();
-        InitiateMovement();
-        InitiateWeapons();
-    }
-
-    /// <summary>
-    /// Intiailises player related input classes
-    /// </summary>
-    public void InitiateInputSystem()
-    {
-        playerInput = this.GetComponent<UnityEngine.InputSystem.PlayerInput>();
-
-        if (Application.isMobilePlatform)
+        // Start is called before the first frame update
+        void Start()
         {
-            Debug.Log("Is ported to mobile");
-            BeginMobileInputSystem();
-            
-        } else
-        {
-            Debug.Log("Is ported to desktop");
-            BeginDesktopInputSystem();
+            InitialisePlayer();
         }
-    }
 
-    /// <summary>
-    /// Initiates the mobile input systerm to this player
-    /// </summary>
-    private void BeginMobileInputSystem()
-    {
-        //Spawn UI HUD
-        UISettings uiSettings = GameManager.Instance.uiSettings;
-        GameObject mobileHUD = Instantiate(uiSettings.mobileUIHUDPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+        /// <summary>
+        /// Initialises classes systems to the player
+        /// </summary>
+        public void InitialisePlayer()
+        {
+            Debug.Log("Is initialising player");
 
-        playerInput.SwitchCurrentActionMap("Mobile");
-        DesktopInputManager desktopinput = this.GetComponent<DesktopInputManager>();
-        desktopinput.enabled = false;
+            InitiateInputSystem();
+            InitiateMovement();
+            InitiateWeapons();
+        }
 
-        IMobileInput mobileInput = this.GetComponent<IMobileInput>();
-        mobileInput.InitialiseInput(mobileHUD);
-    }
+        /// <summary>
+        /// Intiailises player related input classes
+        /// </summary>
+        public void InitiateInputSystem()
+        {
+            playerInput = this.GetComponent<UnityEngine.InputSystem.PlayerInput>();
+
+            if (Application.isMobilePlatform)
+            {
+                Debug.Log("Is ported to mobile");
+                BeginMobileInputSystem();
+
+            }
+            else
+            {
+                Debug.Log("Is ported to desktop");
+                BeginDesktopInputSystem();
+            }
+        }
+
+        /// <summary>
+        /// Initiates the mobile input systerm to this player
+        /// </summary>
+        private void BeginMobileInputSystem()
+        {
+            //Spawn UI HUD
+            UISettings uiSettings = GameManager.Instance.uiSettings;
+            GameObject mobileHUD = Instantiate(uiSettings.mobileUIHUDPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+
+            playerInput.SwitchCurrentActionMap("Mobile");
+            DesktopInputManager desktopinput = this.GetComponent<DesktopInputManager>();
+            desktopinput.enabled = false;
+
+            IMobileInput mobileInput = this.GetComponent<IMobileInput>();
+            mobileInput.InitialiseInput(mobileHUD);
+        }
 
 
-    /// <summary>
-    /// Initiates the desktop input system for this player
-    /// </summary>
-    private void BeginDesktopInputSystem()
-    {
-        playerInput.SwitchCurrentActionMap("Desktop");
-        MobileInputManager mobileInput = this.GetComponent<MobileInputManager>();
-        mobileInput.enabled = false;
+        /// <summary>
+        /// Initiates the desktop input system for this player
+        /// </summary>
+        private void BeginDesktopInputSystem()
+        {
+            playerInput.SwitchCurrentActionMap("Desktop");
+            MobileInputManager mobileInput = this.GetComponent<MobileInputManager>();
+            mobileInput.enabled = false;
 
-        IDesktopInput deskTopInput = this.GetComponent<IDesktopInput>();
-        deskTopInput.InitialiseDesktop();
-    }
+            IDesktopInput deskTopInput = this.GetComponent<IDesktopInput>();
+            deskTopInput.InitialiseDesktop();
+        }
 
-    /// <summary>
-    /// Initialises movement related classes.
-    /// </summary>
-    public void InitiateMovement()
-    {
-        PlayerMovementController playerMovement = this.GetComponent<PlayerMovementController>();
-        playerMovement.InitialiseMovement();
-    }
+        /// <summary>
+        /// Initialises movement related classes.
+        /// </summary>
+        public void InitiateMovement()
+        {
+            PlayerMovementController playerMovement = this.GetComponent<PlayerMovementController>();
+            playerMovement.InitialiseMovement();
+        }
 
-    public void InitiateWeapons()
-    {
-        PlayerWeaponController playerWeapons = this.GetComponent<PlayerWeaponController>();
-        playerWeapons.InitialiseWeaponController();
-    }
+        public void InitiateWeapons()
+        {
+            PlayerWeaponController playerWeapons = this.GetComponent<PlayerWeaponController>();
+            playerWeapons.InitialiseWeaponController();
+        }
 
-    public void OnPause()
-    {
-        isPaused = true;
-    }
+        public void OnPause()
+        {
+            isPaused = true;
+        }
 
-    public void OnUnpause()
-    {
-        isPaused = false;
-    }
+        public void OnUnpause()
+        {
+            isPaused = false;
+        }
 
-    public bool CheckIsPaused()
-    {
-        return isPaused;
+        public bool CheckIsPaused()
+        {
+            return isPaused;
+        }
     }
 }

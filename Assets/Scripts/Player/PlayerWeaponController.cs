@@ -1,98 +1,88 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Weapons;
 
 public interface IWeaponController
 {
     void InitialiseWeaponController();
     void ActivateWeapons(bool isFiring);
-} 
+}
 
-/// <summary>
-/// Responsible for handling weapons fire and interfacing with weapons
-/// </summary>
-public class PlayerWeaponController : MonoBehaviour, IWeaponController
+
+namespace PlayerSystems
 {
-    [Header("Weapon Loadout")]
-    public LoadoutHolder[] forwardWeaponLoadout;
-    public LoadoutHolder[] turrentWeaponLoadout;
-
-    // Interfaces
-    private ICheckPaused pauseChecker;
-    private List<IWeapon> weapons;
-
-
-    private bool isFiring = false;
-
-    public void InitialiseWeaponController()
+    /// <summary>
+    /// Responsible for handling weapons fire and interfacing with weapons
+    /// </summary>
+    public class PlayerWeaponController : MonoBehaviour, IWeaponController
     {
-        pauseChecker = this.GetComponent<ICheckPaused>();
-        SetupWeapons();
-    }
+        [Header("Weapon Loadout")]
+        public LoadoutHolder[] forwardWeaponLoadout;
+        public LoadoutHolder[] turrentWeaponLoadout;
 
-    private void SetupWeapons()
-    {
-        weapons = new List<IWeapon>();
+        // Interfaces
+        private ICheckPaused pauseChecker;
+        private List<IWeapon> weapons;
 
-        if (forwardWeaponLoadout.Length != 0)
+        // Bool Checks
+        private bool isFiring = false;
+
+        /// <summary>
+        /// Initialises the weapon controller.
+        /// </summary>
+        public void InitialiseWeaponController()
         {
-            SetupForwardWeapons();
+            pauseChecker = this.GetComponent<ICheckPaused>();
+            SetupWeapons();
         }
 
-        if (turrentWeaponLoadout.Length != 0)
+        /// <summary>
+        /// Collects loadout positions and maps weapons to respective positions using the setup handler.
+        /// </summary>
+        private void SetupWeapons()
         {
-            SetupTurrentWeapons();
+            WeaponSetupHandler setuphandler = new WeaponSetupHandler();
+            weapons = new List<IWeapon>();
+
+            if (forwardWeaponLoadout.Length != 0)
+            {
+                setuphandler.SetupForwardWeapons(weapons, forwardWeaponLoadout);
+            }
+
+            if (turrentWeaponLoadout.Length != 0)
+            {
+                setuphandler.SetupTurrentWeapons(weapons, turrentWeaponLoadout);
+            }
         }
-    }
 
-    //TODO: Change loadouts to exist within the stat handler and be a feature that is handled in the ship settings.
-    //TODO: Consider moving setup methods into its own class.
-    private void SetupForwardWeapons()
-    {
-        // TEMPORARY: ALL WEAPONS WILL BE SET TO DEFAULT BEFORE STAT HANDLER IMPLEMENTATION
-        WeaponSettings settings = GameManager.Instance.weaponSettings;
-        Loadout loadout = new Loadout();
-
-        foreach (LoadoutHolder holder in forwardWeaponLoadout)
+        // Update is called once per frame
+        private void FixedUpdate()
         {
-            loadout.weaponInformation = settings.turrentWeapons[0];
-            weapons.Add(holder.SetWeapon(loadout));
+            if (pauseChecker.CheckIsPaused()) return;
+            if (!isFiring) return;
+
+            FireWeapons();
         }
-    }
 
-    private void SetupTurrentWeapons()
-    {
-        // TEMPORARY: ALL WEAPONS WILL BE SET TO DEFAULT BEFORE STAT HANDLER IMPLEMENTATION
-        WeaponSettings settings = GameManager.Instance.weaponSettings;
-        Loadout loadout = new Loadout();
-
-        foreach (LoadoutHolder holder in turrentWeaponLoadout)
+        /// <summary>
+        /// Connects with the input system and activates the weapons on trigger.
+        /// </summary>
+        /// <param name="isFiring"></param>
+        public void ActivateWeapons(bool isFiring)
         {
-            loadout.weaponInformation = settings.turrentWeapons[0];
-            weapons.Add(holder.SetWeapon(loadout));
+            this.isFiring = isFiring;
         }
-    }
 
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
-        if (pauseChecker.CheckIsPaused()) return;
-        if (!isFiring) return;
-
-        FireWeapons();
-        Debug.Log("Is Firing");
-    }
-
-    public void ActivateWeapons(bool isFiring)
-    {
-        this.isFiring = isFiring;
-    }
-
-    private void FireWeapons()
-    {
-        foreach (IWeapon weapon in weapons)
+        /// <summary>
+        /// Fires the weapons.
+        /// </summary>
+        private void FireWeapons()
         {
-            weapon.FireWeapon();
+            foreach (IWeapon weapon in weapons)
+            {
+                weapon.FireWeapon();
+            }
         }
     }
 }

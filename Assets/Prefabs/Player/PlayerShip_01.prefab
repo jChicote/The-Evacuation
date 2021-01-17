@@ -341,6 +341,7 @@ GameObject:
   - component: {fileID: 4413370118639381925}
   - component: {fileID: 4413370118639381918}
   - component: {fileID: 4413370118639381920}
+  - component: {fileID: 2484082738970065172}
   - component: {fileID: 4413370118639381923}
   - component: {fileID: 4413370118639381922}
   - component: {fileID: 4413370118639381919}
@@ -407,6 +408,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 0}
   isPaused: 0
+--- !u!114 &2484082738970065172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4413370118639381924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cedcb1408a183c740b55d76a015bfd8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  currentShield: 0
+  statModifier:
+    speedModifier: 0
+    shieldModifier: 0
+    healthModifier: 0
+    fireRateModifier: 0
+    damageModifier: 0
 --- !u!114 &4413370118639381923
 MonoBehaviour:
   m_ObjectHideFlags: 0

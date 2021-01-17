@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 008f04e09dac2744d95b17f35bc750c7, type: 3}
+  m_Name: PlayerSettings
+  m_EditorClassIdentifier: 
+  shipsList:
+  - shipName: Old Reliable
+    stringID: '#132'
+    stats:
+      shipID: '#132'
+      maxHealth: 100
+      maxSheild: 100
+      maxSpeed: 8
+      maxHandling: 6
+    shipPrefab: {fileID: 4413370118639381924, guid: 1f1fe562a11991d4eaace466e6d38aa6, type: 3}
