@@ -34,25 +34,29 @@ namespace PlayerSystems
         public void InitialiseWeaponController()
         {
             pauseChecker = this.GetComponent<ICheckPaused>();
-            SetupWeapons();
+
+            IShipData shipDataInterface = this.GetComponent<IShipData>();
+            ShipStats shipStats = shipDataInterface.GetShipStats();
+
+            SetupWeapons(shipStats);
         }
 
         /// <summary>
         /// Collects loadout positions and maps weapons to respective positions using the setup handler.
         /// </summary>
-        private void SetupWeapons()
+        private void SetupWeapons(ShipStats shipStats)
         {
             WeaponSetupHandler setuphandler = new WeaponSetupHandler();
             weapons = new List<IWeapon>();
 
-            if (forwardWeaponLoadout.Length != 0)
+            if (forwardWeaponLoadout.Length != 0 && shipStats.forwardLoadouts != null && shipStats.forwardLoadouts.Length != 0)
             {
-                setuphandler.SetupForwardWeapons(weapons, forwardWeaponLoadout);
+                setuphandler.SetupForwardWeapons(weapons, shipStats.forwardLoadouts, forwardWeaponLoadout);
             }
-
-            if (turrentWeaponLoadout.Length != 0)
+            
+            if (turrentWeaponLoadout.Length != 0 && shipStats.turrentLoadouts != null && shipStats.turrentLoadouts.Length != 0)
             {
-                setuphandler.SetupTurrentWeapons(weapons, turrentWeaponLoadout);
+                setuphandler.SetupTurrentWeapons(weapons, shipStats.turrentLoadouts, turrentWeaponLoadout);
             }
         }
 
@@ -79,6 +83,12 @@ namespace PlayerSystems
         /// </summary>
         private void FireWeapons()
         {
+            if (weapons.Count == 0)
+            {
+                Debug.Log("No Weapons Loaded");
+                return;
+            }
+
             foreach (IWeapon weapon in weapons)
             {
                 weapon.FireWeapon();

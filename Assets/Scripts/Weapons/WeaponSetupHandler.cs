@@ -9,33 +9,35 @@ namespace Weapons
         /// <summary>
         /// Setup the forward weapons with the given forward weapon loadout.
         /// </summary>
-        public void SetupForwardWeapons(List<IWeapon> weapons, LoadoutHolder[] forwardWeapons)
+        public void SetupForwardWeapons(List<IWeapon> weapons, Loadout[] loadoutCompliment, LoadoutHolder[] forwardWeapons)
         {
-            // TEMPORARY: ALL WEAPONS WILL BE SET TO DEFAULT BEFORE STAT HANDLER IMPLEMENTATION
-            WeaponSettings settings = GameManager.Instance.weaponSettings;
-            Loadout loadout = new Loadout();
-
-            foreach (LoadoutHolder holder in forwardWeapons)
+            for (int i = 0; i < forwardWeapons.Length; i++)
             {
-                loadout.weaponInformation = settings.turrentWeapons[0];
-                weapons.Add(holder.SetWeapon(loadout));
+                //Check if in bounds
+                if (CheckInBounds(i, loadoutCompliment.Length)) {
+                    weapons.Add(forwardWeapons[i].SetWeapon(loadoutCompliment[i]));
+                }
             }
         }
 
         /// <summary>
         /// Setup the turrent weapons with the given turrent weapon loadout.
         /// </summary>
-        public void SetupTurrentWeapons(List<IWeapon> weapons, LoadoutHolder[] turrentWeapons)
+        public void SetupTurrentWeapons(List<IWeapon> weapons, Loadout[] loadoutCompliment, LoadoutHolder[] turrentWeapons)
         {
-            // TEMPORARY: ALL WEAPONS WILL BE SET TO DEFAULT BEFORE STAT HANDLER IMPLEMENTATION
-            WeaponSettings settings = GameManager.Instance.weaponSettings;
-            Loadout loadout = new Loadout();
-
-            foreach (LoadoutHolder holder in turrentWeapons)
+            for (int i = 0; i < turrentWeapons.Length; i++)
             {
-                loadout.weaponInformation = settings.turrentWeapons[0];
-                weapons.Add(holder.SetWeapon(loadout));
+                //Check if in bounds
+                if (CheckInBounds(i, loadoutCompliment.Length))
+                {
+                    weapons.Add(turrentWeapons[i].SetWeapon(loadoutCompliment[i]));
+                }
             }
+        }
+
+        private bool CheckInBounds(int index, int length)
+        {
+            return (index >= 0) && (index < length);
         }
     }
 }

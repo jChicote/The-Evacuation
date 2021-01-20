@@ -10,22 +10,28 @@ public interface IMovement
 
 public class PlayerMovementController : MonoBehaviour, IMovement
 {
+    // Interfaces 
     private ICheckPaused pauseChecker;
 
+    // Physics and Motion
     public Rigidbody2D playerRB;
     public float currentSpeed;
     public float angleRotation;
     public Vector3 currentVelocity;
     public Vector3 currentDirection;
 
+    // Stats, Modifiers and other localised variables
+    public ShipStats shipStats;
+
     [Header("Test Variables")]
-    public float maxVelocity = 5f;
     private float maxRadiusTransform = 450f / 2; //DEFAULT VALUES FROM UI
 
     public void InitialiseMovement()
     {
         pauseChecker = this.GetComponent<ICheckPaused>();
         playerRB = this.GetComponent<Rigidbody2D>();
+
+        this.shipStats = this.GetComponent<IShipData>().GetShipStats();
     }
 
     private void FixedUpdate()
@@ -46,7 +52,7 @@ public class PlayerMovementController : MonoBehaviour, IMovement
     /// </summary>
     public void CalculateMovement(Vector2 startPos, Vector2 currentPos)
     {
-        currentSpeed = maxVelocity * (Vector3.Magnitude(startPos - currentPos) / maxRadiusTransform);
+        currentSpeed = shipStats.maxSpeed * (Vector3.Magnitude(startPos - currentPos) / maxRadiusTransform);
         currentDirection = (currentPos - startPos).normalized;
         currentVelocity = currentDirection * currentSpeed;
 

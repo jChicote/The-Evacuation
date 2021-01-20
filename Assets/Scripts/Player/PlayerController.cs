@@ -39,9 +39,19 @@ namespace PlayerSystems
         {
             Debug.Log("Is initialising player");
 
+            // Initialises and sets primary data for vessel
+            InitiateShipStatHandler();
+
+            // Initialises and activates related handlers and controls
             InitiateInputSystem();
             InitiateMovement();
             InitiateWeapons();
+        }
+
+        private void InitiateShipStatHandler()
+        {
+            IStatHandler statHandler = this.GetComponent<IStatHandler>();
+            statHandler.InitialiseStats();
         }
 
         /// <summary>
