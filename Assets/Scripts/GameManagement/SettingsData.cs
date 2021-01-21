@@ -8,34 +8,37 @@ public interface ILoadSettings
     void SaveSettings();
 }
 
-public class SettingsMenu : MonoBehaviour
+namespace UserInterfaces
 {
-    public float settingsData;
-
-    /// <summary>
-    /// Checks and gets the previous state if existing in memory.
-    /// </summary>
-    public void CheckPreviousSave()
+    public class SettingsMenu : MonoBehaviour
     {
-        
+        public float settingsData;
+
+        /// <summary>
+        /// Checks and gets the previous state if existing in memory.
+        /// </summary>
+        public void CheckPreviousSave()
+        {
+
+        }
+
+        /// <summary>
+        /// Saves settings data to memory
+        /// </summary>
+        public void SaveSettings()
+        {
+
+        }
     }
 
-    /// <summary>
-    /// Saves settings data to memory
-    /// </summary>
-    public void SaveSettings()
+    public class SettingsParameters
     {
+        // Video Settings
 
+
+        // Audio Settings
+        public float volume;
+        public float vfxVolume;
+        public float musicVolume;
     }
-}
-
-public class SettingsData
-{
-    // Video Settings
-
-
-    // Audio Settings
-    public float volume;
-    public float vfxVolume;
-    public float musicVolume;
 }

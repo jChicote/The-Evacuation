@@ -10,4 +10,7 @@ public class UISettings : ScriptableObject
 
     [Header("UI HUD")]
     public GameObject mobileUIHUDPrefab;
+
+    [Header("Prototype Elements")]
+    public GameObject prototypeShopCell;
 }

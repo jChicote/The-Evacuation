@@ -11,12 +11,12 @@ public interface IWeapon
 
 public interface IImageExtract
 {
-
+    Sprite ExtractImage();
 }
 
 namespace Weapons
 {
-    public abstract class Weapon : MonoBehaviour, IWeapon, IPausable
+    public abstract class Weapon : MonoBehaviour, IWeapon, IPausable, IImageExtract
     {
         // Public Members
         public SpriteRenderer weaponRenderer;
@@ -75,6 +75,7 @@ namespace Weapons
 public struct WeaponInfo
 {
     public string stringID;
+    public string name;
 
     [Header("Data")]
     public WeaponData weaponData;

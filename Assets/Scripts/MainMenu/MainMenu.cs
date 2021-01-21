@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject mainMenu;
+    public GameObject hangarMenu;
+
     public void OnPlay()
     {
         ISceneLoad sceneLoad = GameManager.Instance.sceneLoader.GetComponent<ISceneLoad>();
@@ -13,11 +16,14 @@ public class MainMenu : MonoBehaviour
     public void RevealHanger()
     {
         Debug.Log("Reveal Hanger");
+        mainMenu.SetActive(false);
+        hangarMenu.SetActive(true);
     }
 
-    public void OnSettings()
+    public void OnSetting()
     {
         Debug.Log("Reveal Setting");
+        
     }
 
     public void OnExit()
