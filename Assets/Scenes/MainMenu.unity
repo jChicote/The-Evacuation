@@ -358,7 +358,6 @@ GameObject:
   m_Component:
   - component: {fileID: 378726840}
   - component: {fileID: 378726839}
-  - component: {fileID: 378726838}
   m_Layer: 0
   m_Name: Session
   m_TagString: Untagged
@@ -366,18 +365,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &378726838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 378726837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef1b17889c68c2b47af73c67456a3161, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &378726839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,6 +377,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b886e6fa013034f8de593406dbd2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hangarCurrentSave:
+    hangarShips: []
+  selectedShip:
+    stringID: 
+    name: 
+    price: 0
+    maxHealth: 0
+    maxSheild: 0
+    maxSpeed: 0
+    maxHandling: 0
 --- !u!4 &378726840
 Transform:
   m_ObjectHideFlags: 0

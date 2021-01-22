@@ -21,7 +21,7 @@ public class PlayerMovementController : MonoBehaviour, IMovement
     public Vector3 currentDirection;
 
     // Stats, Modifiers and other localised variables
-    public ShipStats shipStats;
+    public ShipInfo shipInfo;
 
     [Header("Test Variables")]
     private float maxRadiusTransform = 450f / 2; //DEFAULT VALUES FROM UI
@@ -31,7 +31,7 @@ public class PlayerMovementController : MonoBehaviour, IMovement
         pauseChecker = this.GetComponent<ICheckPaused>();
         playerRB = this.GetComponent<Rigidbody2D>();
 
-        this.shipStats = this.GetComponent<IShipData>().GetShipStats();
+        this.shipInfo = this.GetComponent<IShipData>().GetShipStats();
     }
 
     private void FixedUpdate()
@@ -52,7 +52,7 @@ public class PlayerMovementController : MonoBehaviour, IMovement
     /// </summary>
     public void CalculateMovement(Vector2 startPos, Vector2 currentPos)
     {
-        currentSpeed = shipStats.maxSpeed * (Vector3.Magnitude(startPos - currentPos) / maxRadiusTransform);
+        currentSpeed = shipInfo.maxSpeed * (Vector3.Magnitude(startPos - currentPos) / maxRadiusTransform);
         currentDirection = (currentPos - startPos).normalized;
         currentVelocity = currentDirection * currentSpeed;
 

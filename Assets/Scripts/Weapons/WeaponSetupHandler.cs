@@ -9,13 +9,13 @@ namespace Weapons
         /// <summary>
         /// Setup the forward weapons with the given forward weapon loadout.
         /// </summary>
-        public void SetupForwardWeapons(List<IWeapon> weapons, Loadout[] loadoutCompliment, LoadoutHolder[] forwardWeapons)
+        public void SetupForwardWeapons(List<IWeapon> weapons, List<WeaponInfo> forwardWeapon, LoadoutHolder[] holders)
         {
-            for (int i = 0; i < forwardWeapons.Length; i++)
+            for (int i = 0; i < holders.Length; i++)
             {
                 //Check if in bounds
-                if (CheckInBounds(i, loadoutCompliment.Length)) {
-                    weapons.Add(forwardWeapons[i].SetWeapon(loadoutCompliment[i]));
+                if (CheckInBounds(i, forwardWeapon.Count)) {
+                    weapons.Add(holders[i].SetWeapon(forwardWeapon[i]));
                 }
             }
         }
@@ -23,14 +23,14 @@ namespace Weapons
         /// <summary>
         /// Setup the turrent weapons with the given turrent weapon loadout.
         /// </summary>
-        public void SetupTurrentWeapons(List<IWeapon> weapons, Loadout[] loadoutCompliment, LoadoutHolder[] turrentWeapons)
+        public void SetupTurrentWeapons(List<IWeapon> weapons, List<WeaponInfo> turrentWeapon, LoadoutHolder[] holders)
         {
-            for (int i = 0; i < turrentWeapons.Length; i++)
+            for (int i = 0; i < holders.Length; i++)
             {
                 //Check if in bounds
-                if (CheckInBounds(i, loadoutCompliment.Length))
+                if (CheckInBounds(i, turrentWeapon.Count))
                 {
-                    weapons.Add(turrentWeapons[i].SetWeapon(loadoutCompliment[i]));
+                    weapons.Add(holders[i].SetWeapon(turrentWeapon[i]));
                 }
             }
         }

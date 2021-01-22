@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IWeapon
 {
-    void InitialiseWeapon(WeaponData data);
+    void InitialiseWeapon(WeaponInfo data);
     void FireWeapon();
     void ConfigureWeaponPositioning(LoadoutPosition loadoutType);
 }
@@ -23,14 +23,14 @@ namespace Weapons
         public Transform firingPoint;
 
         // Weapon Data
-        protected WeaponData weaponData;
+        protected WeaponInfo weaponData;
 
         // Modifiable
         protected bool isReloading = false;
         protected bool isPaused = false;
         protected float timeTillNextFire = 0;
 
-        public abstract void InitialiseWeapon(WeaponData data);
+        public abstract void InitialiseWeapon(WeaponInfo data);
 
         public abstract void FireWeapon();
 
@@ -72,40 +72,9 @@ namespace Weapons
 }
 
 [System.Serializable]
-public struct WeaponInfo
+public class ObjectInfo
 {
     public string stringID;
     public string name;
-
-    [Header("Data")]
-    public WeaponData weaponData;
-
-    [Header("Prefabs")]
-    public GameObject weaponPrefab;
-
-}
-
-[System.Serializable]
-public struct WeaponData
-{
-    public string stringID;
-    public WeaponType weaponType;
-
-    [Header("Data Members")]
-    public float damage;
-    public float speed;
-    public float fireRate;
-    public float life;
-    public int spread;
-
-    [Header("Additional Data")]
     public float price;
 }
-
-public enum WeaponType
-{
-    Turrent,
-    Laser,
-    Launcher
-}
-

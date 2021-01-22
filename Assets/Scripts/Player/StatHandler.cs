@@ -4,18 +4,18 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public interface IStatHandler {
-    void InitialiseStats();
+    void InitialiseStats(ShipInfo shipInfo);
 }
 
 public interface IWeaponStats {
-    Loadout[] GetForwardLoadout();
-    Loadout[] GetTurrentLoadout();
+    List<WeaponInfo> GetForwardLoadout();
+    List<WeaponInfo> GetTurrentLoadout();
 }
 
 public interface IShipData
 {
     Modifier GetShipModifiers();
-    ShipStats GetShipStats();
+    ShipInfo GetShipStats();
 }
 
 public interface IShipHealth
@@ -37,19 +37,16 @@ public class StatHandler : MonoBehaviour, IStatHandler, IWeaponStats, IShipData,
     public float currentShield = 0;
 
     [Header("Ship Sub Stats")]
-    public ShipStats shipStats;
+    public ShipInfo shipInfo;
     public Modifier shipModifier;
 
     [Header("Event Observers")]
     public ShipHitPoint OnHealthChanged;
     public ShipHitPoint OnShieldChanged;
 
-    public void InitialiseStats()
+    public void InitialiseStats(ShipInfo shipInfo)
     {
-        // Gets ships stats from the p0ublic inventory
-        // Currently uses the defaults from the settings
-        Shipinfo retrievedInfo = GameManager.Instance.playerSettigns.shipsList[0];
-        shipStats = retrievedInfo.stats;
+        this.shipInfo = shipInfo;
 
         SubscribeToEvents();
     }
@@ -65,14 +62,14 @@ public class StatHandler : MonoBehaviour, IStatHandler, IWeaponStats, IShipData,
         //TODO: Subscribe UI items
     }
 
-    public Loadout[] GetForwardLoadout()
+    public List<WeaponInfo> GetForwardLoadout()
     {
-        return shipStats.forwardLoadouts;
+        return shipInfo.forwardWeapons;
     }
 
-    public Loadout[] GetTurrentLoadout()
+    public List<WeaponInfo> GetTurrentLoadout()
     {
-        return shipStats.turrentLoadouts;
+        return shipInfo.turrentWeapons;
     }
 
     public Modifier GetShipModifiers()
@@ -80,9 +77,9 @@ public class StatHandler : MonoBehaviour, IStatHandler, IWeaponStats, IShipData,
         return shipModifier;
     }
 
-    public ShipStats GetShipStats()
+    public ShipInfo GetShipStats()
     {
-        return shipStats;
+        return shipInfo;
     }
 
     public float GetShipHealth()
@@ -117,22 +114,4 @@ public struct Modifier
     public float healthModifier;
     public float fireRateModifier;
     public float damageModifier;
-}
-
-[System.Serializable]
-public class ShipStats
-{
-    [Tooltip("A copy is necessary as the struct is what is passed into ship prefabs")]
-    public string shipID;
-
-    public float maxHealth = 100;
-    public float maxSheild = 100;
-
-    [Header("Movement")]
-    public float maxSpeed = 20;
-    public float maxHandling = 0;
-
-    [Header("Weapon Loadouts")]
-    public Loadout[] forwardLoadouts;
-    public Loadout[] turrentLoadouts;
 }

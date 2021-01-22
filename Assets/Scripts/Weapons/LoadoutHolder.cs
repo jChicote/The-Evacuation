@@ -15,15 +15,17 @@ public class LoadoutHolder : MonoBehaviour
     /// <summary>
     /// Is given a loadout configuration which then loads the weapon.
     /// </summary>
-    public IWeapon SetWeapon(Loadout loadout)
+    public IWeapon SetWeapon(WeaponInfo info)
     {
-        WeaponInfo weaponInfo = loadout.weaponInformation;
-        weaponLoadout = loadout;
+        // Grab asset from the scriptable object
+        WeaponAsset weaponAsset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.stringID);
+
+        if (weaponAsset == null) return null;
 
         //Spawn and Initialise Weapon
-        GameObject weapon = Instantiate(weaponInfo.weaponPrefab, transform);
+        GameObject weapon = Instantiate(weaponAsset.weaponPrefab, transform);
         IWeapon weaponInterface = weapon.GetComponent<IWeapon>();
-        weaponInterface.InitialiseWeapon(weaponInfo.weaponData);
+        weaponInterface.InitialiseWeapon(info);
         weaponInterface.ConfigureWeaponPositioning(loadoutType);
 
         return weaponInterface;
@@ -36,7 +38,7 @@ public class LoadoutHolder : MonoBehaviour
 public class Loadout
 {
     public int positionNum;
-    public WeaponInfo weaponInformation;
+    public WeaponAsset weaponInformation;
 }
 
 public enum LoadoutPosition

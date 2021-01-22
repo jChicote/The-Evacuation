@@ -18,7 +18,6 @@ public class HangarMenu : MonoBehaviour
         inventoryMenu.SetActive(false);
         shopMenu.SetActive(true);
 
-
         ShopMenu menu = shopMenu.GetComponent<ShopMenu>();
         menu.PopulateWeaponList();
     }

@@ -10,7 +10,7 @@ namespace Weapons
         /// Initialises the weapon on start.
         /// </summary>
         /// <param name="data"></param>
-        public override void InitialiseWeapon(WeaponData data)
+        public override void InitialiseWeapon(WeaponInfo data)
         {
             this.weaponData = data;
         }

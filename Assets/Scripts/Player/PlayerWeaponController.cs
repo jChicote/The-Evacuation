@@ -36,27 +36,27 @@ namespace PlayerSystems
             pauseChecker = this.GetComponent<ICheckPaused>();
 
             IShipData shipDataInterface = this.GetComponent<IShipData>();
-            ShipStats shipStats = shipDataInterface.GetShipStats();
+            ShipInfo shipInfo = shipDataInterface.GetShipStats();
 
-            SetupWeapons(shipStats);
+            SetupWeapons(shipInfo);
         }
 
         /// <summary>
         /// Collects loadout positions and maps weapons to respective positions using the setup handler.
         /// </summary>
-        private void SetupWeapons(ShipStats shipStats)
+        private void SetupWeapons(ShipInfo shipInfo)
         {
             WeaponSetupHandler setuphandler = new WeaponSetupHandler();
             weapons = new List<IWeapon>();
 
-            if (forwardWeaponLoadout.Length != 0 && shipStats.forwardLoadouts != null && shipStats.forwardLoadouts.Length != 0)
+            if (forwardWeaponLoadout.Length != 0 && shipInfo.forwardWeapons != null && shipInfo.forwardWeapons.Count != 0)
             {
-                setuphandler.SetupForwardWeapons(weapons, shipStats.forwardLoadouts, forwardWeaponLoadout);
+                setuphandler.SetupForwardWeapons(weapons, shipInfo.forwardWeapons, forwardWeaponLoadout);
             }
             
-            if (turrentWeaponLoadout.Length != 0 && shipStats.turrentLoadouts != null && shipStats.turrentLoadouts.Length != 0)
+            if (turrentWeaponLoadout.Length != 0 && shipInfo.turrentWeapons != null && shipInfo.turrentWeapons.Count != 0)
             {
-                setuphandler.SetupTurrentWeapons(weapons, shipStats.turrentLoadouts, turrentWeaponLoadout);
+                setuphandler.SetupTurrentWeapons(weapons, shipInfo.turrentWeapons, turrentWeaponLoadout);
             }
         }
 

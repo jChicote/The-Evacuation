@@ -11,7 +11,7 @@ namespace Weapons
 
         public override void FireWeapon() {}
 
-        public override void InitialiseWeapon(WeaponData data) {}
+        public override void InitialiseWeapon(WeaponInfo data) {}
 
     }
 }

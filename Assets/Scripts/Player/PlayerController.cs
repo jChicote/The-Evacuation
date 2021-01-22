@@ -51,7 +51,7 @@ namespace PlayerSystems
         private void InitiateShipStatHandler()
         {
             IStatHandler statHandler = this.GetComponent<IStatHandler>();
-            statHandler.InitialiseStats();
+            statHandler.InitialiseStats(SessionData.instance.selectedShip);
         }
 
         /// <summary>
