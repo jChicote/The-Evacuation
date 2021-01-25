@@ -28,8 +28,8 @@ public class ShipAsset : ObjectInfo
             stats.maxSheild,
             stats.maxSpeed,
             stats.maxHandling,
-            stats.forwardLoadouts,
-            stats.turrentLoadouts);
+            stats.forwardSize,
+            stats.turrentSize);
 
         return info;
     }
@@ -51,6 +51,6 @@ public class ShipStats
     public float maxHandling = 0;
 
     [Header("Weapon Loadouts")]
-    public List<WeaponInfo> forwardLoadouts;
-    public List<WeaponInfo> turrentLoadouts;
+    public int forwardSize;
+    public int turrentSize;
 }

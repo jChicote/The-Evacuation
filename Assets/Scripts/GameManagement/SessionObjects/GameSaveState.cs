@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameSaveState
 {
     public HangarInventory hangarSave;
+    public UserStatus userStatus;
 
     public HangarInventory GetHangarSave()
     {

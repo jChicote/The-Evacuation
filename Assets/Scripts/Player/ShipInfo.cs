@@ -39,7 +39,7 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
     public List<WeaponInfo> forwardWeapons;
     public List<WeaponInfo> turrentWeapons;
 
-    public void SetData(string stringID, string name, float price, float maxHealth, float maxShield, float maxSpeed, float maxHandling, List<WeaponInfo> forwardWeapons, List<WeaponInfo> turrentWeapons)
+    public void SetData(string stringID, string name, float price, float maxHealth, float maxShield, float maxSpeed, float maxHandling, int forwardWeaponSize, int turrentWeaponSize)
     {
         this.stringID = stringID;
         this.name = name;
@@ -50,8 +50,18 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
         this.maxSpeed = maxSpeed;
         this.maxHandling = maxHandling;
 
-        this.forwardWeapons = forwardWeapons;
-        this.turrentWeapons = turrentWeapons;
+        this.forwardWeapons = new List<WeaponInfo>(new WeaponInfo[forwardWeaponSize]);
+        PopulateListToNull(forwardWeapons);
+        this.turrentWeapons = new List<WeaponInfo>(new WeaponInfo[turrentWeaponSize]);
+        PopulateListToNull(turrentWeapons);
+    }
+
+    private void PopulateListToNull(List<WeaponInfo> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i] = null;
+        }
     }
 
     public void AssignWeapons(WeaponConfiguration weaponConfig, string weaponID, int indexPosition)

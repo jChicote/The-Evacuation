@@ -74,7 +74,6 @@ namespace Weapons
 [System.Serializable]
 public class ObjectInfo
 {
-    [HideInInspector]
     public string stringID;
     //public string uniqueID; //This is an id that is uniquly assigned to this object - BUT WILL BE IGNORED FOR NOW
     public string name;

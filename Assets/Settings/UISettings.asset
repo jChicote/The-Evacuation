@@ -15,3 +15,7 @@ MonoBehaviour:
   mainMenuPrefab: {fileID: 6552525121741930182, guid: 6084435313e69c846a6225c692a3981d, type: 3}
   mobileUIHUDPrefab: {fileID: 7538488484106780131, guid: b07ed03d95ef8b249b8e9f49b295aef8, type: 3}
   prototypeShopCell: {fileID: 3057064440141253118, guid: ed489d4ea10e96448910ac7bc5ca649a, type: 3}
+  prototypeShipCell: {fileID: 0}
+  prototypeEquipmentCell: {fileID: 7733453777284122658, guid: 4ac63db632f70f342a77b7a936486f01, type: 3}
+  prototypeInventoryCell: {fileID: 6096301403271185055, guid: 7847f226b78565440bca78bb65e716cf, type: 3}
+  emptyListCell: {fileID: 5028912154705828124, guid: 036bd4ddbbe1a1f4da4a6e8d02b58648, type: 3}

@@ -14,6 +14,7 @@ public class SessionData : MonoBehaviour
     public static SessionData instance = null;
 
     public HangarInventory hangarCurrentSave;
+    public UserStatus userStatus;
 
     // Contains variables that relate to the active variables used for the game
     [Header("Session State")]
@@ -120,4 +121,15 @@ public class SessionData : MonoBehaviour
 
         SetupDefaultPlayer();
     }
+}
+
+public class UserStatus
+{
+    public int userLevel;
+    public int credits;
+
+    public int goalsCollected;
+    public int totalKills;
+    public int peopleSaved;
+
 }

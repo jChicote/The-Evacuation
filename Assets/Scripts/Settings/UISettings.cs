@@ -13,4 +13,10 @@ public class UISettings : ScriptableObject
 
     [Header("Prototype Elements")]
     public GameObject prototypeShopCell;
+    public GameObject prototypeShipCell;
+    public GameObject prototypeEquipmentCell;
+    public GameObject prototypeInventoryCell;
+
+    [Space]
+    public GameObject emptyListCell;
 }
