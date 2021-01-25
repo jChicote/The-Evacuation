@@ -7,39 +7,33 @@ using TMPro;
 
 public interface IInventoryCell
 {
-    void SetData(string stringID, string title, Sprite cellThumbnail, string cellPrice);
+    void SetData(string stringID, string title, Sprite cellThumbnail, string cellPrice, EquipmentType type);
 }
 
-public class InventoryListCell : MonoBehaviour
+public abstract class InventoryListCell : MonoBehaviour
 {
     [Header("Cell Attributes")]
     public TextMeshProUGUI cellTitle;
     public Image cellThumbnail;
     public TextMeshProUGUI cellPrice;
 
-    [Header("Cell Attributes")]
-    public GameObject actionGroup;
-    public Button informationButton;
-    public Button attachButton;
+    // Information view for item listing
+    protected GameObject informationView;
+    protected EquipmentType equipmentType;
 
-    private string stringID;
-    private IShipAssign assignerAction;
+    protected string equipmentID;
 
-    public void SetData(string stringID, string title, Sprite cellThumbnail, string cellPrice)
+    public void SetData(string stringID, string title, Sprite cellThumbnail, string cellPrice, EquipmentType type)
     {
-        this.stringID = stringID;
+        this.equipmentID = stringID;
         this.cellTitle.text = title;
         this.cellThumbnail.sprite = cellThumbnail;
         this.cellPrice.text = cellPrice;
+        this.equipmentType = type;
     }
 
-    public void RevealActionGroup()
+    public void RevealInformation()
     {
-        actionGroup.SetActive(true);
-    }
 
-    public void InvokeAssignAction()
-    {
-        assignerAction.AssignItem(stringID);
     }
 }

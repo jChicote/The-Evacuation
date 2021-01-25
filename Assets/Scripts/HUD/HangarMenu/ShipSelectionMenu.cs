@@ -22,13 +22,13 @@ public interface IShipAssign
 
 public interface ICheckShipSlot
 {
-    bool CheckAvailableSlot();
+    bool CheckSlotAvailability();
 }
 
 
 public class ShipSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign, ICheckShipSlot
 {
-    public WeaponConfiguration weaponConfig;
+    public EquipmentType equipmentType;
 
     [Header("Content Attributes")]
     public Image shipImage;
@@ -36,36 +36,88 @@ public class ShipSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign, IChe
 
     private string shipID;
 
-    public bool AssignItem(string stringID)
+    public void PopulateInventoryList()
     {
+
+    }
+
+    public bool AssignItem(string equipmentID)
+    {
+        // Get the selected ship
+        List<ShipInfo> hangarShips = SessionData.instance.hangarCurrentSave.GetHangarShips();
+
+        ShipInfo selectedShip = hangarShips.Where(x => x.stringID == shipID).First();
+        
+        if(equipmentType == EquipmentType.ForwardWeapon)
+        {
+            int availableIndex = 0;
+            bool isAvailable = false;
+
+            for (int i = 0; i < selectedShip.forwardWeapons.Count; i++)
+            {
+                if (selectedShip.forwardWeapons[i] == null && !isAvailable)
+                {
+                    availableIndex = i;
+                    isAvailable = true;
+                }
+            }
+
+            selectedShip.AssignWeapons(WeaponConfiguration.Forward, equipmentID, availableIndex);
+        }
+
+        if(equipmentType == EquipmentType.TurrentWeapon)
+        {
+            int availableIndex = 0;
+            bool isAvailable = false;
+
+            for (int i = 0; i < selectedShip.turrentWeapons.Count; i++)
+            {
+                if (selectedShip.forwardWeapons[i] == null && !isAvailable)
+                {
+                    availableIndex = i;
+                    isAvailable = true;
+                }
+            }
+
+            selectedShip.AssignWeapons(WeaponConfiguration.Forward, equipmentID, availableIndex);
+        }
+
+
         return false;
     }
 
-    public bool CheckAvailableSlot()
+
+    public bool CheckSlotAvailability()
     {
-        if (weaponConfig == WeaponConfiguration.Forward)
+        ShipInfo info = SessionData.instance.hangarCurrentSave.hangarShips.Where(x => x.stringID == this.shipID).First();
+
+        if (equipmentType == EquipmentType.ForwardWeapon)
         {
-            ShipInfo info = SessionData.instance.hangarCurrentSave.hangarShips.Where(x => x.stringID == this.shipID).First();
             return info.forwardWeapons.Where(x => x == null).First() == null;
         } else
         {
-            ShipInfo info = SessionData.instance.hangarCurrentSave.hangarShips.Where(x => x.stringID == this.shipID).First();
             return info.turrentWeapons.Where(x => x == null).First() == null;
         }
     }
 
     public void DisplayForwardInventory()
     {
-        weaponConfig = WeaponConfiguration.Forward;
+        equipmentType = EquipmentType.ForwardWeapon;
     }
 
     public void DisplayTurrentInventory()
     {
-        weaponConfig = WeaponConfiguration.Turrent;
+        equipmentType = EquipmentType.TurrentWeapon;
     }
 
     public string GetShipID()
     {
         return shipID;
     }
+}
+
+public enum EquipmentType
+{
+    ForwardWeapon,
+    TurrentWeapon
 }
