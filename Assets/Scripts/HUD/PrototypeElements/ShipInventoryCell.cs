@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShipInventoryCell : InventoryListCell
+public interface IEquipmentCell
+{
+    void SetCell(ICheckShipSlot slotChecker);
+}
+
+public class ShipInventoryCell : InventoryListCell, IEquipmentCell
 {
     [Header("Cell Attributes")]
     public GameObject actionGroup;
@@ -15,6 +20,11 @@ public class ShipInventoryCell : InventoryListCell
     private ICheckShipSlot slotChecker;
 
     private bool isActionsVisible = false;
+
+    public void SetCell(ICheckShipSlot slotChecker)
+    {
+        this.slotChecker = slotChecker;
+    }
 
     public void RevealActionGroup()
     {
@@ -30,8 +40,14 @@ public class ShipInventoryCell : InventoryListCell
         }
     }
 
+
     public void InvokeAttachAction()
     {
         assignerAction.AssignItem(equipmentID);
+    }
+
+    public override void RevealInformation()
+    {
+        infoPanelInterface.SetInfoPanel(this.equipmentID);
     }
 }

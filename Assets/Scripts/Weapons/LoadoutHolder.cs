@@ -15,9 +15,10 @@ public class LoadoutHolder : MonoBehaviour
     /// <summary>
     /// Is given a loadout configuration which then loads the weapon.
     /// </summary>
-    public IWeapon SetWeapon(WeaponInfo info)
+    public IWeapon SetWeapon(string weaponID)
     {
         // Grab asset from the scriptable object
+        WeaponInfo info = SessionData.instance.GetWeaponItem(weaponID);
         WeaponAsset weaponAsset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.stringID);
 
         if (weaponAsset == null) return null;

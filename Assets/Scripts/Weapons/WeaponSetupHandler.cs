@@ -9,7 +9,7 @@ namespace Weapons
         /// <summary>
         /// Setup the forward weapons with the given forward weapon loadout.
         /// </summary>
-        public void SetupForwardWeapons(List<IWeapon> weapons, List<WeaponInfo> forwardWeapon, LoadoutHolder[] holders)
+        public void SetupForwardWeapons(List<IWeapon> weapons, List<string> forwardWeapon, LoadoutHolder[] holders)
         {
             for (int i = 0; i < holders.Length; i++)
             {
@@ -23,7 +23,7 @@ namespace Weapons
         /// <summary>
         /// Setup the turrent weapons with the given turrent weapon loadout.
         /// </summary>
-        public void SetupTurrentWeapons(List<IWeapon> weapons, List<WeaponInfo> turrentWeapon, LoadoutHolder[] holders)
+        public void SetupTurrentWeapons(List<IWeapon> weapons, List<string> turrentWeapon, LoadoutHolder[] holders)
         {
             for (int i = 0; i < holders.Length; i++)
             {

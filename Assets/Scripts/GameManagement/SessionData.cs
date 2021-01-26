@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -120,6 +121,21 @@ public class SessionData : MonoBehaviour
         Debug.Log("Finihsed Reset");
 
         SetupDefaultPlayer();
+    }
+
+    public WeaponInfo GetWeaponItem(string weaponID)
+    {
+        // To limit the clunckiness of passing weapon info around, each vessel will instead store only the string reference.
+
+        return hangarCurrentSave.hangarWeapons.Where(x => x.stringID == weaponID).First();
+    }
+
+    public ShipInfo GetShipItem(string shipID) 
+    {
+        // As there are no duplicates storing ship identifiers through string, hangar will only store id for simplification.
+        // Only will fetch and store ship info of vessels that are either in use or unlocked.
+
+        return hangarCurrentSave.hangarShips.Where(x => x.stringID == shipID).First();
     }
 }
 

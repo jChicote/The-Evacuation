@@ -8,8 +8,8 @@ public interface IStatHandler {
 }
 
 public interface IWeaponStats {
-    List<WeaponInfo> GetForwardLoadout();
-    List<WeaponInfo> GetTurrentLoadout();
+    List<string> GetForwardLoadout();
+    List<string> GetTurrentLoadout();
 }
 
 public interface IShipData
@@ -62,12 +62,12 @@ public class StatHandler : MonoBehaviour, IStatHandler, IWeaponStats, IShipData,
         //TODO: Subscribe UI items
     }
 
-    public List<WeaponInfo> GetForwardLoadout()
+    public List<string> GetForwardLoadout()
     {
         return shipInfo.forwardWeapons;
     }
 
-    public List<WeaponInfo> GetTurrentLoadout()
+    public List<string> GetTurrentLoadout()
     {
         return shipInfo.turrentWeapons;
     }

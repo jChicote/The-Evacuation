@@ -7,10 +7,10 @@ using TMPro;
 
 public interface IInventoryCell
 {
-    void SetData(string stringID, string title, Sprite cellThumbnail, string cellPrice, EquipmentType type);
+    void SetData(string stringID, string title, Sprite cellThumbnail, string cellPrice, EquipmentType type, IInfoPanel panel);
 }
 
-public abstract class InventoryListCell : MonoBehaviour
+public abstract class InventoryListCell : MonoBehaviour, IInventoryCell
 {
     [Header("Cell Attributes")]
     public TextMeshProUGUI cellTitle;
@@ -20,20 +20,22 @@ public abstract class InventoryListCell : MonoBehaviour
     // Information view for item listing
     protected GameObject informationView;
     protected EquipmentType equipmentType;
+    protected IInfoPanel infoPanelInterface;
 
     protected string equipmentID;
 
-    public void SetData(string stringID, string title, Sprite cellThumbnail, string cellPrice, EquipmentType type)
+    public void SetData(string stringID, string title, Sprite cellThumbnail, string cellPrice, EquipmentType type, IInfoPanel panel)
     {
         this.equipmentID = stringID;
         this.cellTitle.text = title;
         this.cellThumbnail.sprite = cellThumbnail;
         this.cellPrice.text = cellPrice;
         this.equipmentType = type;
+        this.infoPanelInterface = panel;
     }
 
-    public void RevealInformation()
+    public virtual void RevealInformation()
     {
-
+        infoPanelInterface.SetInfoPanel(equipmentID);
     }
 }

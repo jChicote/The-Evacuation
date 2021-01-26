@@ -36,8 +36,8 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
     public float maxHandling;
 
     // Weapoon Loadouts
-    public List<WeaponInfo> forwardWeapons;
-    public List<WeaponInfo> turrentWeapons;
+    public List<string> forwardWeapons;
+    public List<string> turrentWeapons;
 
     public void SetData(string stringID, string name, float price, float maxHealth, float maxShield, float maxSpeed, float maxHandling, int forwardWeaponSize, int turrentWeaponSize)
     {
@@ -50,17 +50,17 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
         this.maxSpeed = maxSpeed;
         this.maxHandling = maxHandling;
 
-        this.forwardWeapons = new List<WeaponInfo>(new WeaponInfo[forwardWeaponSize]);
-        PopulateListToNull(forwardWeapons);
-        this.turrentWeapons = new List<WeaponInfo>(new WeaponInfo[turrentWeaponSize]);
-        PopulateListToNull(turrentWeapons);
+        this.forwardWeapons = new List<string>(new string[forwardWeaponSize]);
+        PopulateListToDefault(forwardWeapons);
+        this.turrentWeapons = new List<string>(new string[turrentWeaponSize]);
+        PopulateListToDefault(turrentWeapons);
     }
 
-    private void PopulateListToNull(List<WeaponInfo> list)
+    private void PopulateListToDefault(List<string> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
-            list[i] = null;
+            list[i] = "";
         }
     }
 
@@ -81,27 +81,29 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
     /// <summary>
     /// Allocates weapons to their their position if existent.
     /// </summary>
-    private void AllocateWeaponToList(string weaponID, int indexPosition, List<WeaponInfo> weaponList)
+    private void AllocateWeaponToList(string weaponID, int indexPosition, List<string> weaponList)
     {
         HangarInventory inventory = SessionData.instance.hangarCurrentSave;
-        WeaponInfo extractedWeapon = null;
+        string extractedWeaponID = "";
 
         for (int i = 0; i < inventory.hangarWeapons.Count; i++)
         {
-            if(extractedWeapon == null)
+            if(extractedWeaponID == "")
             {
                 if (inventory.hangarWeapons[i].stringID.Equals(weaponID) && !inventory.hangarWeapons[i].isAttached)
                 {
-                    extractedWeapon = inventory.hangarWeapons[i];
+                    extractedWeaponID = inventory.hangarWeapons[i].stringID;
+                    inventory.hangarWeapons[i].isAttached = true;
                 }
             }
         }
 
         // Check if array search turned up with a result.
-        if (extractedWeapon == null) return;
-           
-        extractedWeapon.isAttached = true;
-        weaponList[indexPosition] = extractedWeapon;
+        if (extractedWeaponID != "")
+        {
+            //extractedWeaponID.isAttached = true;
+            weaponList[indexPosition] = extractedWeaponID;
+        }
     }
 
     //TODO: Consider changing the weapons to rely on a string reference to the unique weapon in the inventory (UTTILISE HASHING)
@@ -112,21 +114,21 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
             if (forwardWeapons[indexPosition] == null) return;
 
             HangarInventory inventory = SessionData.instance.hangarCurrentSave;
-            WeaponInfo extractedWeapon = null;
+            string extractedWeaponID = null;
 
             for (int i = 0; i < inventory.hangarWeapons.Count; i++)
             {
-                if (extractedWeapon == null)
+                if (extractedWeaponID == "")
                 {
-                    if (inventory.hangarWeapons[i].stringID.Equals(forwardWeapons[indexPosition].stringID) && !inventory.hangarWeapons[i].isAttached)
+                    if (inventory.hangarWeapons[i].stringID.Equals(forwardWeapons[indexPosition]) && !inventory.hangarWeapons[i].isAttached)
                     {
-                        extractedWeapon = inventory.hangarWeapons[i];
+                        extractedWeaponID = inventory.hangarWeapons[i].stringID;
+                        inventory.hangarWeapons[i].isAttached = false;
                     }
                 }
             }
 
-            extractedWeapon.isAttached = false;
-            forwardWeapons[indexPosition] = null;
+            forwardWeapons[indexPosition] = "";
         }
     }
 }
