@@ -18,7 +18,7 @@ public class WeaponInfo : ObjectInfo
         this.weaponType = weaponType;
 
         //Code ID combination is: # + ObjectName + count
-        this.stringID = stringID;
+        this.stringID = CreateUniqueID(name);
         this.name = name;
         this.price = price;
         this.damage = damage;
@@ -26,6 +26,11 @@ public class WeaponInfo : ObjectInfo
         this.fireRate = fireRate;
         this.life = life;
         this.spread = spread;
+    }
+
+    private string CreateUniqueID(string name)
+    {
+        return name + System.DateTime.Today.ToString() + Random.Range(0, 500);
     }
 }
 

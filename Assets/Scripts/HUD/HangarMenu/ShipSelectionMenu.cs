@@ -18,11 +18,13 @@ public interface IShipAssign
     /// <param name="stringID"></param>
     /// <returns></returns>
     bool AssignItem(string stringID);
+    void RemoveItem(string stringID);
 }
 
 public interface ICheckShipSlot
 {
     bool CheckSlotAvailability();
+    bool CheckInEquipmentSlot(string equipmentID);
 }
 
 public interface IInfoPanel
@@ -45,6 +47,12 @@ public class ShipSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign, IChe
 
     public string shipID;
     public Sprite defaultSprite;
+
+    public void InitialiseMenu()
+    {
+        // Temporary for now
+        shipID = SessionData.instance.hangarCurrentSave.hangarShips[0].stringID;
+    }
 
     public void PopulateInventoryList()
     {
@@ -70,7 +78,7 @@ public class ShipSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign, IChe
                     IInventoryCell cellInterface = spawnedInstance.GetComponent<IInventoryCell>();
                     cellInterface.SetData(info.stringID, info.name, defaultSprite, info.price.ToString(), EquipmentType.ForwardWeapon, this);
                     IEquipmentCell equipmentInterface = spawnedInstance.GetComponent<IEquipmentCell>();
-                    equipmentInterface.SetCell(this);
+                    equipmentInterface.SetCell(this, this, false);
 
                     inventoryCells.Add(spawnedInstance);
                 }
@@ -88,7 +96,7 @@ public class ShipSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign, IChe
             {
                 GameObject emptyCell = GameManager.Instance.uiSettings.emptyListCell;
                 GameObject spawnedEmpty = Instantiate(emptyCell, contentView.transform);
-                inventoryCells.Add(emptyCell);
+                inventoryCells.Add(spawnedEmpty);
             }
             else
             {
@@ -98,7 +106,7 @@ public class ShipSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign, IChe
                 IInventoryCell cellInterface = spawnedInstance.GetComponent<IInventoryCell>();
                 cellInterface.SetData(info.stringID, info.name, null, info.price.ToString(), equipmentType, this);
                 IEquipmentCell equipmentInterface = spawnedInstance.GetComponent<IEquipmentCell>();
-                equipmentInterface.SetCell(this);
+                equipmentInterface.SetCell(this, this, true);
 
                 inventoryCells.Add(spawnedInstance);
             }
@@ -109,10 +117,14 @@ public class ShipSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign, IChe
     {
         if (inventoryCells.Count == 0) return;
 
-        foreach (GameObject cell in inventoryCells)
+        for (int i=0; i < inventoryCells.Count; i++)
         {
-            DestroyImmediate(cell);
+            GameObject item = inventoryCells[i];
+            inventoryCells[i] = null;
+            Destroy(item);
         }
+
+        inventoryCells.Clear();
     }
 
     public bool AssignItem(string equipmentID)
@@ -123,42 +135,40 @@ public class ShipSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign, IChe
         
         if(equipmentType == EquipmentType.ForwardWeapon)
         {
-            int availableIndex = 0;
-            bool isAvailable = false;
-
-            for (int i = 0; i < selectedShip.forwardWeapons.Count; i++)
-            {
-                if (selectedShip.forwardWeapons[i] == null && !isAvailable)
-                {
-                    availableIndex = i;
-                    isAvailable = true;
-                }
-            }
-
-            selectedShip.AssignWeapons(WeaponConfiguration.Forward, equipmentID, availableIndex);
+            selectedShip.AssignWeapons(WeaponConfiguration.Forward, equipmentID);
         }
 
         if(equipmentType == EquipmentType.TurrentWeapon)
         {
-            int availableIndex = 0;
-            bool isAvailable = false;
-
-            for (int i = 0; i < selectedShip.turrentWeapons.Count; i++)
-            {
-                if (selectedShip.forwardWeapons[i] == null && !isAvailable)
-                {
-                    availableIndex = i;
-                    isAvailable = true;
-                }
-            }
-
-            selectedShip.AssignWeapons(WeaponConfiguration.Forward, equipmentID, availableIndex);
+            selectedShip.AssignWeapons(WeaponConfiguration.Turrent, equipmentID);
         }
+
+        ClearInventoryList();
+        PopulateInventoryList();
 
 
         return false;
     }
 
+    public void RemoveItem(string equipmentID)
+    {
+        // Get the selected ship
+        List<ShipInfo> hangarShips = SessionData.instance.hangarCurrentSave.GetHangarShips();
+        ShipInfo selectedShip = hangarShips.Where(x => x.stringID == shipID).First();
+
+        if (equipmentType == EquipmentType.ForwardWeapon)
+        {
+            selectedShip.RemoveWeapon(WeaponConfiguration.Forward, equipmentID);
+        }
+
+        if (equipmentType == EquipmentType.TurrentWeapon)
+        {
+            selectedShip.RemoveWeapon(WeaponConfiguration.Turrent, equipmentID);
+        }
+
+        ClearInventoryList();
+        PopulateInventoryList();
+    }
 
     public bool CheckSlotAvailability()
     {
@@ -168,6 +178,21 @@ public class ShipSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign, IChe
         {
             return info.forwardWeapons.Where(x => x == "").First() == "";
         } else
+        {
+            return true;
+        }
+    }
+
+    public bool CheckInEquipmentSlot(string equipmentID)
+    {
+        ShipInfo info = SessionData.instance.hangarCurrentSave.hangarShips.Where(x => x.stringID == this.shipID).First();
+
+        if (equipmentType == EquipmentType.ForwardWeapon)
+        {
+            if (info.forwardWeapons.Count == 0) return false;
+            return info.forwardWeapons.Where(x => x == equipmentID).First() == equipmentID;
+        }
+        else
         {
             return true;
         }

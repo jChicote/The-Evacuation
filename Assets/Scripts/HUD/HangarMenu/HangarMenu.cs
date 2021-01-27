@@ -51,6 +51,7 @@ public class HangarMenu : MonoBehaviour
         equipmentMenu.SetActive(true);
 
         ShipSelectionMenu menu = equipmentMenu.GetComponent<ShipSelectionMenu>();
+        menu.InitialiseMenu();
         menu.PopulateInventoryList();
     }
 
