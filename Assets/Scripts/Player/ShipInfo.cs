@@ -8,16 +8,11 @@ public interface IAssignWeapon
     /// <summary>
     /// Called to assign weapons to the specified loadout position.
     /// </summary>
-    /// <param name="weaponConfig"></param>
-    /// <param name="weaponID"></param>
-    /// <param name="indexPosition"></param>
     void AssignWeapons(WeaponConfiguration weaponConfig, string weaponID);
 
     /// <summary>
     /// Called to remove the weapons from the specified loadout and index.
     /// </summary>
-    /// <param name="weaponConfig"></param>
-    /// <param name="indexPosition"></param>
     void RemoveWeapon(WeaponConfiguration weaponConfig, string stringID);
 }
 
@@ -56,6 +51,10 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
         PopulateListToDefault(turrentWeapons);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="list"></param>
     private void PopulateListToDefault(List<string> list)
     {
         for (int i = 0; i < list.Count; i++)
@@ -68,12 +67,10 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
     {
         if (weaponConfig == WeaponConfiguration.Forward)
         {
-            //RemoveWeapon(weaponConfig, weaponID);
             AllocateWeaponToList(weaponID, forwardWeapons);
         }
         else if (weaponConfig == WeaponConfiguration.Turrent)
         {
-            //RemoveWeapon(weaponConfig, weaponID);
             AllocateWeaponToList(weaponID, turrentWeapons);
         }
     }
@@ -107,14 +104,16 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void RemoveWeapon(WeaponConfiguration weaponConfig, string stringID)
     {
-        int indexPosition;
         HangarInventory inventory = SessionData.instance.hangarCurrentSave;
 
         if (weaponConfig == WeaponConfiguration.Forward)
         {
-            indexPosition = GetEquipmentPosition(forwardWeapons, stringID);
+            int indexPosition = GetEquipmentPosition(forwardWeapons, stringID);
             forwardWeapons[indexPosition] = "";
 
             // Changes info in weapon hangar to be unattached
@@ -122,7 +121,7 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
         } 
         else
         {
-            indexPosition = GetEquipmentPosition(turrentWeapons, stringID);
+            int indexPosition = GetEquipmentPosition(turrentWeapons, stringID);
             turrentWeapons[indexPosition] = "";
 
             // Changes info in weapon hangar to be unattached
@@ -130,6 +129,9 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private int GetFirstEmptySlot(List<string> weaponList)
     {
         int availableIndex = 100000;
@@ -147,6 +149,9 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
         return availableIndex;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private int GetEquipmentPosition(List<string> list, string equipmentID)
     {
         int locatedIndex = 100000;
@@ -162,6 +167,21 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
         }
 
         return locatedIndex;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public List<string> GetWeaponsList(WeaponConfiguration configuration)
+    {
+        if (configuration == WeaponConfiguration.Forward)
+        {
+            return forwardWeapons;
+        }
+        else
+        {
+            return turrentWeapons;
+        }
     }
 }
 

@@ -38,7 +38,7 @@ public class HangarMenu : MonoBehaviour
 
         shipMenu.SetActive(true);
 
-        ShipSelectionMenu menu = shipMenu.GetComponent<ShipSelectionMenu>();
+        IEquipmentMenu menu = shipMenu.GetComponent<IEquipmentMenu>();
         menu.PopulateInventoryList();
     }
 
@@ -50,7 +50,7 @@ public class HangarMenu : MonoBehaviour
 
         equipmentMenu.SetActive(true);
 
-        ShipSelectionMenu menu = equipmentMenu.GetComponent<ShipSelectionMenu>();
+        IEquipmentMenu menu = equipmentMenu.GetComponent<IEquipmentMenu>();
         menu.InitialiseMenu();
         menu.PopulateInventoryList();
     }

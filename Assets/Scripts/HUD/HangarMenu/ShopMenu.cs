@@ -21,6 +21,8 @@ public class ShopMenu : MonoBehaviour, IShopMenu
     [Header("Test Items")]
     public WeaponAsset[] testWeaponsList;
 
+    public List<GameObject> shopCells;
+
     public void InitialiseMenu()
     {
 
@@ -29,13 +31,30 @@ public class ShopMenu : MonoBehaviour, IShopMenu
     public void PopulateWeaponList()
     {
         GameObject cellPrefab = GameManager.Instance.uiSettings.prototypeShopCell;
+        GameObject spawnedCell;
 
-        foreach (WeaponAsset info in testWeaponsList)
+        foreach (WeaponAsset asset in GameManager.Instance.weaponSettings.turrentWeapons)
         {
-            Debug.Log("Instances created");
-            GameObject spawnedInstance = Instantiate(cellPrefab, shopPanel.transform);
-            IShopInsertData cellInserter = spawnedInstance.GetComponent<IShopInsertData>();
-            cellInserter.InsertInformation(info.name, "stub description", info.price, 1, info.weaponPrefab.GetComponent<IImageExtract>().ExtractImage());
+            spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
+            IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
+            cellInserter.InsertInformation(asset.name, "stub description", asset.price, 1, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage());
+            shopCells.Add(spawnedCell);
+        }
+
+        foreach (WeaponAsset asset in GameManager.Instance.weaponSettings.laserWeapon)
+        {
+            spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
+            IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
+            cellInserter.InsertInformation(asset.name, "stub description", asset.price, 1, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage());
+            shopCells.Add(spawnedCell);
+        }
+
+        foreach (WeaponAsset asset in GameManager.Instance.weaponSettings.launcherWeapons)
+        {
+            spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
+            IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
+            cellInserter.InsertInformation(asset.name, "stub description", asset.price, 1, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage());
+            shopCells.Add(spawnedCell);
         }
     }
 

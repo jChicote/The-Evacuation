@@ -130,6 +130,24 @@ public class SessionData : MonoBehaviour
         return hangarCurrentSave.hangarWeapons.Where(x => x.stringID == weaponID).First();
     }
 
+    public int GetWeaponInstanceCount(string name)
+    {
+        int count =  hangarCurrentSave.hangarWeapons.Where(x => x.name == name).Count();
+        return count;
+    }
+
+    public void RemoveWeaponInstance(string name)
+    {
+        WeaponInfo removedObject = hangarCurrentSave.hangarWeapons.Where(x => x.name == name && x.isAttached == false).First();
+        hangarCurrentSave.hangarWeapons.Remove(removedObject);
+    }
+
+    public void AddWeaponInstance(WeaponAsset asset)
+    {
+        WeaponInfo info = asset.ConvertToWeaponInfo();
+        hangarCurrentSave.hangarWeapons.Add(info);
+    }
+
     public ShipInfo GetShipItem(string shipID) 
     {
         // As there are no duplicates storing ship identifiers through string, hangar will only store id for simplification.

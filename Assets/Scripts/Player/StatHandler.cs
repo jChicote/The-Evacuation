@@ -30,6 +30,7 @@ public interface IShipShields
     void SetShipShields(float newShields);
 }
 
+
 public class StatHandler : MonoBehaviour, IStatHandler, IWeaponStats, IShipData, IShipHealth, IShipShields
 {
     [Header("Primary Hit Points")]

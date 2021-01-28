@@ -14,16 +14,16 @@ public class WeaponSettings : ScriptableObject
     /// <summary>
     /// Retrieves the weapon from different assortment of lists.
     /// </summary>
-    public WeaponAsset RetrieveFromSettings(WeaponType type, string stringID)
+    public WeaponAsset RetrieveFromSettings(WeaponType type, string name)
     {
         switch (type)
         {
             case WeaponType.Turrent:
-                return SearchThroughList(GameManager.Instance.weaponSettings.turrentWeapons, stringID);
+                return SearchThroughList(GameManager.Instance.weaponSettings.turrentWeapons, name);
             case WeaponType.Laser:
-                return SearchThroughList(GameManager.Instance.weaponSettings.laserWeapon, stringID);
+                return SearchThroughList(GameManager.Instance.weaponSettings.laserWeapon, name);
             case WeaponType.Launcher:
-                return SearchThroughList(GameManager.Instance.weaponSettings.launcherWeapons, stringID);
+                return SearchThroughList(GameManager.Instance.weaponSettings.launcherWeapons, name);
         }
 
         return null;
@@ -32,11 +32,11 @@ public class WeaponSettings : ScriptableObject
     /// <summary>
     /// Retrieves asset from specified asset list.
     /// </summary>
-    private WeaponAsset SearchThroughList(List<WeaponAsset> assetList, string stringID)
+    private WeaponAsset SearchThroughList(List<WeaponAsset> assetList, string name)
     {
         foreach (WeaponAsset asset in assetList)
         {
-            if (asset.stringID == stringID)
+            if (asset.name == name)
             {
                 return asset;
             }
