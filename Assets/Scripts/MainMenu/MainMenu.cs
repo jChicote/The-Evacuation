@@ -7,6 +7,11 @@ public class MainMenu : MonoBehaviour
     public GameObject mainMenu;
     public GameObject hangarMenu;
 
+    public void Start()
+    {
+        hangarMenu.GetComponent<HangarMenu>().InitialiseHangar();
+    }
+
     public void OnPlay()
     {
         ISceneLoad sceneLoad = GameManager.Instance.sceneLoader.GetComponent<ISceneLoad>();

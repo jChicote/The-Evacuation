@@ -28,6 +28,8 @@ public interface ICheckShipSlot
 public interface IInfoPanel
 {
     void SetInfoPanel(string equipmentID);
+
+    void SetInfoPanel(WeaponType type, string name);
 }
 
 public interface IEquipmentMenu
@@ -50,7 +52,7 @@ public class EquipmentSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign,
     [Space]
     public List<GameObject> inventoryCells;
 
-    private string shipID;
+    public string shipID;
     public Sprite defaultSprite;
 
     // Sub Presenters
@@ -58,7 +60,6 @@ public class EquipmentSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign,
 
     public void InitialiseMenu()
     {
-        // Temporary for now
         shipID = SessionData.instance.hangarCurrentSave.hangarShips[0].stringID;
 
         cellPopulator = gameObject.AddComponent<EquipmentCellPopulator>();
@@ -74,7 +75,8 @@ public class EquipmentSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign,
 
         GameObject cellPrefab = GameManager.Instance.uiSettings.prototypeEquipmentCell;
         List<ShipInfo> hangarShips = SessionData.instance.hangarCurrentSave.GetHangarShips();
-        ShipInfo selectedShip = hangarShips.Where(x => x.stringID == shipID).First();
+        //ShipInfo selectedShip = hangarShips.Where(x => x.stringID == shipID).First();
+        ShipInfo selectedShip = hangarShips[0];
 
         if (equipmentType == EquipmentType.ForwardWeapon)
         {
@@ -99,11 +101,13 @@ public class EquipmentSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign,
         
         if(equipmentType == EquipmentType.ForwardWeapon)
         {
+            if (selectedShip.CheckIsFull(WeaponConfiguration.Forward)) return false;
             selectedShip.AssignWeapons(WeaponConfiguration.Forward, equipmentID);
         }
 
         if(equipmentType == EquipmentType.TurrentWeapon)
         {
+            if (selectedShip.CheckIsFull(WeaponConfiguration.Turrent)) return false;
             selectedShip.AssignWeapons(WeaponConfiguration.Turrent, equipmentID);
         }
 
@@ -136,17 +140,16 @@ public class EquipmentSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign,
     /// <summary>
     /// Returns true if the ship has an empty available equipment slot for population.
     /// </summary>
-    /// <returns></returns>
     public bool CheckSlotAvailability()
     {
         ShipInfo info = SessionData.instance.hangarCurrentSave.hangarShips.Where(x => x.stringID == this.shipID).First();
 
         if (equipmentType == EquipmentType.ForwardWeapon)
         {
-            return info.forwardWeapons.Where(x => x == "").First() == "";
+            return !info.CheckIsFull(WeaponConfiguration.Forward); //TODO: Later collapse into info function only
         } else
         {
-            return info.turrentWeapons.Where(x => x == "").First() == "";
+            return !info.CheckIsFull(WeaponConfiguration.Turrent);
         }
     }
 
@@ -180,6 +183,11 @@ public class EquipmentSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign,
         informationPanel.SetActive(true);
         InformationPanel infoPanel = informationPanel.GetComponent<InformationPanel>();
         infoPanel.SetPanelInfo(info.name, asset.description, defaultSprite);
+    }
+
+    public void SetInfoPanel(WeaponType type, string name)
+    {
+
     }
 
     /// <summary>

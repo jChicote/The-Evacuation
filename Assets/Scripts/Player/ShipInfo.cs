@@ -183,6 +183,21 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
             return turrentWeapons;
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool CheckIsFull(WeaponConfiguration configuration)
+    {
+        if (configuration == WeaponConfiguration.Forward)
+        {
+            return forwardWeapons.Where(x => x == "").Count() == 0;
+        }
+        else
+        {
+            return forwardWeapons.Where(x => x == "").Count() == 0;
+        }
+    }
 }
 
 public enum WeaponConfiguration

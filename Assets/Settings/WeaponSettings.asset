@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: WeaponSettings
   m_EditorClassIdentifier: 
   turrentWeapons:
-  - stringID: '#167456'
-    name: Mini Turrent
+  - stringID: 
+    name: Smith - Mini Turrent
     price: 2000
+    equipmentType: 0
     defaultData:
       weaponType: 0
       damage: 1
@@ -27,31 +28,102 @@ MonoBehaviour:
       for starters....
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
     objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
+  - stringID: 
+    name: Meson - Nano RailGun MK I
+    price: 2500
+    equipmentType: 0
+    defaultData:
+      weaponType: 0
+      damage: 1
+      speed: 20
+      fireRate: 0.1
+      life: 5
+      spread: 1
+    description: 'Even as it''s load type is synonymous with many physical weapons
+      of its class and of old. The Meson nano railgun is known for it''s high power
+      deliver at a reasonable cost. '
+    weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
+    objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
   laserWeapon:
   - stringID: 
-    name: 
-    price: 0
+    name: Mirai Alpha NX I
+    price: 15000
+    equipmentType: 0
     defaultData:
-      weaponType: 0
-      damage: 0
-      speed: 0
-      fireRate: 0
-      life: 0
-      spread: 0
-    description: 
-    weaponPrefab: {fileID: 0}
-    objectThumbnail: {fileID: 0}
+      weaponType: 1
+      damage: 10
+      speed: 500
+      fireRate: 3
+      life: 2
+      spread: 1
+    description: It's name is synonymous with low cost, but the once great company
+      of the 21st century during the Imeprian wars are branded to represent it's
+      effective power at a reasonable low cost for fighters.
+    weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
+    objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
+  - stringID: 
+    name: Mirai Alpha NX II
+    price: 20000
+    equipmentType: 0
+    defaultData:
+      weaponType: 1
+      damage: 25
+      speed: 700
+      fireRate: 2
+      life: 3
+      spread: 1
+    description: A step up to its younger brother. The Mirai Alpha NX II was created
+      to fight off the Carina invaders a decade ago. However competition over many
+      manufacturers saw it's value drop.
+    weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
+    objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
+  - stringID: 
+    name: Mirai Beta I
+    price: 2000
+    equipmentType: 0
+    defaultData:
+      weaponType: 1
+      damage: 10
+      speed: 500
+      fireRate: 3
+      life: 6
+      spread: 1
+    description: Created to compete with the mid range laser competition. The beta
+      is another in the Mirai family to offer official cobat power over its alpha
+      class. A little pricier, the Beta I is currently used by the Terran police
+      for territory defense.
+    weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
+    objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
   launcherWeapons:
   - stringID: 
-    name: 
-    price: 0
+    name: 'TX6A - Launcher '
+    price: 25000
+    equipmentType: 0
     defaultData:
-      weaponType: 0
-      damage: 0
-      speed: 0
-      fireRate: 0
-      life: 0
-      spread: 0
-    description: 
-    weaponPrefab: {fileID: 0}
-    objectThumbnail: {fileID: 0}
+      weaponType: 2
+      damage: 50
+      speed: 6
+      fireRate: 5
+      life: 20
+      spread: 1
+    description: Creatd by the United Terran Alliance Manufacturers, the TX6A is
+      standard amongst planatary defnse forces. Despite being a little slow on the
+      launch rate, it was favourable for its cost and formidable when in large numbers.
+    weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
+    objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
+  - stringID: 
+    name: 'TXMJ - Stairway '
+    price: 40000
+    equipmentType: 0
+    defaultData:
+      weaponType: 2
+      damage: 50
+      speed: 12
+      fireRate: 10
+      life: 10
+      spread: 5
+    description: Creatd by the United Terran Alliance Manufacturers, the TXMJ harkens
+      back to the alliance's days as Earth United Nations Forces. It fires in series
+      for each shot creating a stairways of missile fire.
+    weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
+    objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}

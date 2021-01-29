@@ -22,4 +22,9 @@ public class HangarInventoryCell : InventoryListCell
     {
         Debug.Log("Sold Item");
     }
+
+    public override void RevealInformation()
+    {
+        infoPanelInterface.SetInfoPanel(this.equipmentID);
+    }
 }

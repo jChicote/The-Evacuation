@@ -18,18 +18,19 @@ public class ShopMenu : MonoBehaviour, IShopMenu
 
     public GameObject shopPanel;
 
-    [Header("Test Items")]
-    public WeaponAsset[] testWeaponsList;
-
     public List<GameObject> shopCells;
 
-    public void InitialiseMenu()
-    {
+    private IInfoPanel informationPanel;
 
+    public void InitialiseMenu(IInfoPanel informationPanel)
+    {
+        this.informationPanel = informationPanel;
     }
 
     public void PopulateWeaponList()
     {
+        ClearList();
+
         GameObject cellPrefab = GameManager.Instance.uiSettings.prototypeShopCell;
         GameObject spawnedCell;
 
@@ -37,7 +38,7 @@ public class ShopMenu : MonoBehaviour, IShopMenu
         {
             spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
             IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
-            cellInserter.InsertInformation(asset.name, "stub description", asset.price, 1, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage());
+            cellInserter.InsertInformation(asset.name, WeaponType.Turrent, "stub description", asset.price, 1, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage(), informationPanel);
             shopCells.Add(spawnedCell);
         }
 
@@ -45,7 +46,7 @@ public class ShopMenu : MonoBehaviour, IShopMenu
         {
             spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
             IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
-            cellInserter.InsertInformation(asset.name, "stub description", asset.price, 1, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage());
+            cellInserter.InsertInformation(asset.name, WeaponType.Laser, "stub description", asset.price, 1, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage(), informationPanel);
             shopCells.Add(spawnedCell);
         }
 
@@ -53,16 +54,30 @@ public class ShopMenu : MonoBehaviour, IShopMenu
         {
             spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
             IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
-            cellInserter.InsertInformation(asset.name, "stub description", asset.price, 1, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage());
+            cellInserter.InsertInformation(asset.name, WeaponType.Launcher, "stub description", asset.price, 1, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage(), informationPanel);
             shopCells.Add(spawnedCell);
         }
     }
 
-    private int CheckInventoryCount(string assetID)
+    public int CheckInventoryCount(string assetID)
     {
 
 
         return 0;
+    }
+
+    private void ClearList()
+    {
+        if (shopCells.Count == 0) return;
+
+        for (int i = 0; i < shopCells.Count; i++)
+        {
+            GameObject item = shopCells[i];
+            shopCells[i] = null;
+            Destroy(item);
+        }
+
+        shopCells.Clear();
     }
 
     public void PopulateShipList()

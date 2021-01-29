@@ -6,7 +6,7 @@ using TMPro;
 
 public interface IShopInsertData
 {
-    void InsertInformation(string name, string description, float price, int inventoryCount, Sprite thumbnail);
+    void InsertInformation(string name, WeaponType type, string description, float price, int inventoryCount, Sprite thumbnail, IInfoPanel infoPanel);
 }
 
 public class ShopListCell : MonoBehaviour, IShopInsertData
@@ -25,19 +25,25 @@ public class ShopListCell : MonoBehaviour, IShopInsertData
 
     // Collapse info
     public Sprite thumbnail;
+    public WeaponType type;
     public string name;
     public float price;
     public int inventoryCount;
+    private bool isActionsVisible = false;
+
+    private IInfoPanel informationPanel;
 
     public string description;
 
-    public void InsertInformation(string name, string description, float price, int inventoryCount, Sprite thumbnail)
+    public void InsertInformation(string name, WeaponType type, string description, float price, int inventoryCount, Sprite thumbnail, IInfoPanel infoPanel)
     {
         this.name = name;
+        this.type = type;
         this.description = description;
         this.price = price;
         this.inventoryCount = inventoryCount;
         this.thumbnail = thumbnail;
+        this.informationPanel = infoPanel;
 
         PopulateCell();
     }
@@ -57,7 +63,20 @@ public class ShopListCell : MonoBehaviour, IShopInsertData
 
     public void PurchaseItem()
     {
-        Debug.Log("Purchased Item");
+        WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(type, name);
+        SessionData.instance.AddWeaponInstance(asset);
+    }
+
+    public void RevealActionGroup()
+    {
+        isActionsVisible = !isActionsVisible;
+        actionGroup.SetActive(isActionsVisible);
+    }
+
+    public void RevealInformation()
+    {
+        Debug.Log(informationPanel);
+        informationPanel.SetInfoPanel(this.type, this.name);
     }
 }
 
