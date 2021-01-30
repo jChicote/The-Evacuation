@@ -39,6 +39,7 @@ public class ShopMenu : MonoBehaviour, IShopMenu
             spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
             IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
             cellInserter.InsertInformation(asset.name, WeaponType.Turrent, "stub description", asset.price, 1, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage(), informationPanel);
+            cellInserter.SetColor();
             shopCells.Add(spawnedCell);
         }
 
@@ -47,6 +48,7 @@ public class ShopMenu : MonoBehaviour, IShopMenu
             spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
             IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
             cellInserter.InsertInformation(asset.name, WeaponType.Laser, "stub description", asset.price, 1, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage(), informationPanel);
+            cellInserter.SetColor();
             shopCells.Add(spawnedCell);
         }
 
@@ -55,6 +57,7 @@ public class ShopMenu : MonoBehaviour, IShopMenu
             spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
             IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
             cellInserter.InsertInformation(asset.name, WeaponType.Launcher, "stub description", asset.price, 1, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage(), informationPanel);
+            cellInserter.SetColor();
             shopCells.Add(spawnedCell);
         }
     }

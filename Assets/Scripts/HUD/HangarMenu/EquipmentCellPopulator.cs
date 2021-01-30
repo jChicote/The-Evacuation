@@ -32,6 +32,7 @@ public class EquipmentCellPopulator : MonoBehaviour
                 GameObject spawnedInstance = Instantiate(cellPrefab, contentView.transform);
                 IInventoryCell cellInterface = spawnedInstance.GetComponent<IInventoryCell>();
                 cellInterface.SetData(info.stringID, info.name, null, info.price.ToString(), EquipmentType.ForwardWeapon, infoPanel);
+                cellInterface.SetColor();
                 IEquipmentCell equipmentInterface = spawnedInstance.GetComponent<IEquipmentCell>();
                 equipmentInterface.SetCell(slotChecker, assigner, false);
 

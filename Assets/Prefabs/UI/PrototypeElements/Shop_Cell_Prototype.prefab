@@ -829,6 +829,7 @@ MonoBehaviour:
   itemPrice: {fileID: 7740916489900215608}
   availableCount: {fileID: 8836348816537437903}
   cellImage: {fileID: 1350291317923280031}
+  cellBackgroundImage: {fileID: 7926505638835903050}
   actionGroup: {fileID: 5968801547143741163}
   informationButton: {fileID: 7641636278913972020}
   purchaseButton: {fileID: 8326356671243944926}

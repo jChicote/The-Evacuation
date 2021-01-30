@@ -19,4 +19,32 @@ public class UISettings : ScriptableObject
 
     [Space]
     public GameObject emptyListCell;
+
+    [Header("Color Configurations")]
+    public Color redColor;
+    public Color blueColor;
+    public Color greenColor;
+    public Color greyColor;
+
+    public Color GetSpecifiedColor(CellColor color)
+    {
+        switch (color)
+        {
+            case CellColor.Red:
+                return redColor;
+            case CellColor.Green:
+                return greenColor;
+            case CellColor.Blue:
+                return blueColor;
+        }
+
+        return greenColor;
+    }
 }
+
+public enum CellColor
+{
+    Red,
+    Green,
+    Blue
+} 

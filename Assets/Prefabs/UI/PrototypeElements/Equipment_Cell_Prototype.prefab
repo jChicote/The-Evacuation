@@ -1011,6 +1011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellTitle: {fileID: 8007343284855451897}
   cellThumbnail: {fileID: 6458881454898034107}
+  cellBackgroundImage: {fileID: 2761241311741720277}
   cellPrice: {fileID: 3754681203443083808}
   actionGroup: {fileID: 5333678717085342256}
   informationButton: {fileID: 3305800182874323370}

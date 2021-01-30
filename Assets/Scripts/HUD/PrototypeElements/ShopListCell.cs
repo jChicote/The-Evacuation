@@ -7,6 +7,7 @@ using TMPro;
 public interface IShopInsertData
 {
     void InsertInformation(string name, WeaponType type, string description, float price, int inventoryCount, Sprite thumbnail, IInfoPanel infoPanel);
+    void SetColor();
 }
 
 public class ShopListCell : MonoBehaviour, IShopInsertData
@@ -16,6 +17,7 @@ public class ShopListCell : MonoBehaviour, IShopInsertData
     public TextMeshProUGUI itemPrice;
     public TextMeshProUGUI availableCount;
     public Image cellImage;
+    public Image cellBackgroundImage;
 
     [Header("Action UI")]
     public GameObject actionGroup;
@@ -46,6 +48,27 @@ public class ShopListCell : MonoBehaviour, IShopInsertData
         this.informationPanel = infoPanel;
 
         PopulateCell();
+    }
+
+    public void SetColor()
+    {
+        Color cellColor;
+
+        switch (type)
+        {
+            case WeaponType.Turrent:
+                cellColor = GameManager.Instance.uiSettings.GetSpecifiedColor(CellColor.Red);
+                cellBackgroundImage.color = cellColor;
+                break;
+            case WeaponType.Laser:
+                cellColor = GameManager.Instance.uiSettings.GetSpecifiedColor(CellColor.Green);
+                cellBackgroundImage.color = cellColor;
+                break;
+            case WeaponType.Launcher:
+                cellColor = GameManager.Instance.uiSettings.GetSpecifiedColor(CellColor.Blue);
+                cellBackgroundImage.color = cellColor;
+                break;
+        }
     }
 
     private void PopulateCell()

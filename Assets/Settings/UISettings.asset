@@ -19,3 +19,7 @@ MonoBehaviour:
   prototypeEquipmentCell: {fileID: 7733453777284122658, guid: 4ac63db632f70f342a77b7a936486f01, type: 3}
   prototypeInventoryCell: {fileID: 6096301403271185055, guid: 7847f226b78565440bca78bb65e716cf, type: 3}
   emptyListCell: {fileID: 5028912154705828124, guid: 036bd4ddbbe1a1f4da4a6e8d02b58648, type: 3}
+  redColor: {r: 0.7075472, g: 0, b: 0, a: 0.6392157}
+  blueColor: {r: 0, g: 0.10932264, b: 0.745283, a: 0.7647059}
+  greenColor: {r: 0, g: 0.6981132, b: 0.020328702, a: 0.84313726}
+  greyColor: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 0.72156864}
