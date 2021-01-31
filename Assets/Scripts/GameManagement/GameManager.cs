@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UserInterfaces;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,7 +19,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Loading Screen UI")]
     public GameObject LoadingScreen;
-
     [HideInInspector] public MainMenu mainMenuUI = null;
     [HideInInspector] public SceneController sceneController;
     public SceneLoader sceneLoader;
@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        SessionData.instance.Load();
         ShowMainMenu();
     }
 
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour
         if (mainMenuUI != null) return;
 
         mainMenuUI = Instantiate(uiSettings.mainMenuPrefab, transform.position, Quaternion.identity).GetComponent<MainMenu>();
+        mainMenuUI.InitialiseMainMenu();
     }
 
     /// <summary>

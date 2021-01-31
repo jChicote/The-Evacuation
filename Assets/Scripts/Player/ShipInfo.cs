@@ -34,7 +34,7 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
     public List<string> forwardWeapons;
     public List<string> turrentWeapons;
 
-    public void SetData(string stringID, string name, float price, float maxHealth, float maxShield, float maxSpeed, float maxHandling, int forwardWeaponSize, int turrentWeaponSize)
+    public void SetData(string stringID, string name, int price, float maxHealth, float maxShield, float maxSpeed, float maxHandling, int forwardWeaponSize, int turrentWeaponSize)
     {
         this.stringID = stringID;
         this.name = name;

@@ -77,7 +77,7 @@ public class ObjectInfo
     public string stringID;
     //public string uniqueID; //This is an id that is uniquly assigned to this object - BUT WILL BE IGNORED FOR NOW
     public string name;
-    public float price;
+    public int price;
 
     [HideInInspector] 
     public EquipmentType equipmentType;

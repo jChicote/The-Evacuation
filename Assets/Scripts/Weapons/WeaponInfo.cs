@@ -13,7 +13,7 @@ public class WeaponInfo : ObjectInfo
     public int spread;
     public bool isAttached = false;
 
-    public void SetData(WeaponType weaponType, string stringID, string name, float price, float damage, float speed, float fireRate, float life, int spread)
+    public void SetData(WeaponType weaponType, string stringID, string name, int price, float damage, float speed, float fireRate, float life, int spread)
     {
         this.weaponType = weaponType;
 

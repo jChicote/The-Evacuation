@@ -11,55 +11,59 @@ public interface IInventoryCell
     void SetColor();
 }
 
-public abstract class InventoryListCell : MonoBehaviour, IInventoryCell
+namespace UserInterfaces
 {
-    [Header("Cell Attributes")]
-    public TextMeshProUGUI cellTitle;
-    public Image cellThumbnail;
-    public Image cellBackgroundImage;
-    public TextMeshProUGUI cellPrice;
-
-    // Information view for item listing
-    protected GameObject informationView;
-    protected EquipmentType equipmentType;
-    protected IInfoPanel infoPanelInterface;
-
-    protected string equipmentID;
-
-    public void SetData(string stringID, string title, Sprite cellThumbnail, string cellPrice, EquipmentType type, IInfoPanel panel)
+    public abstract class InventoryListCell : MonoBehaviour, IInventoryCell
     {
-        this.equipmentID = stringID;
-        this.cellTitle.text = title;
-        this.cellThumbnail.sprite = cellThumbnail;
-        this.cellPrice.text = cellPrice;
-        this.equipmentType = type;
-        this.infoPanelInterface = panel;
-    }
+        [Header("Cell Attributes")]
+        public TextMeshProUGUI cellTitle;
+        public Image cellThumbnail;
+        public Image cellBackgroundImage;
+        public TextMeshProUGUI cellPrice;
 
-    public virtual void RevealInformation()
-    {
-        infoPanelInterface.SetInfoPanel(equipmentID);
-    }
+        // Information view for item listing
+        protected GameObject informationView;
+        protected EquipmentType equipmentType;
+        protected IInfoPanel infoPanelInterface;
 
-    public void SetColor()
-    {
-        WeaponType type = SessionData.instance.GetWeaponItem(equipmentID).weaponType;
-        Color cellColor;
+        protected string equipmentID;
 
-        switch (type)
+        public void SetData(string stringID, string title, Sprite cellThumbnail, string cellPrice, EquipmentType type, IInfoPanel panel)
         {
-            case WeaponType.Turrent:
-                cellColor = GameManager.Instance.uiSettings.GetSpecifiedColor(CellColor.Red);
-                cellBackgroundImage.color = cellColor;
-                break;
-            case WeaponType.Laser:
-                cellColor = GameManager.Instance.uiSettings.GetSpecifiedColor(CellColor.Green);
-                cellBackgroundImage.color = cellColor;
-                break;
-            case WeaponType.Launcher:
-                cellColor = GameManager.Instance.uiSettings.GetSpecifiedColor(CellColor.Blue);
-                cellBackgroundImage.color = cellColor;
-                break;
+            this.equipmentID = stringID;
+            this.cellTitle.text = title;
+            this.cellThumbnail.sprite = cellThumbnail;
+            this.cellPrice.text = cellPrice;
+            this.equipmentType = type;
+            this.infoPanelInterface = panel;
+        }
+
+        public virtual void RevealInformation()
+        {
+            infoPanelInterface.SetInfoPanel(equipmentID);
+        }
+
+        public void SetColor()
+        {
+            WeaponType type = SessionData.instance.GetWeaponItem(equipmentID).weaponType;
+            Color cellColor;
+
+            switch (type)
+            {
+                case WeaponType.Turrent:
+                    cellColor = GameManager.Instance.uiSettings.GetSpecifiedColor(CellColor.Red);
+                    cellBackgroundImage.color = cellColor;
+                    break;
+                case WeaponType.Laser:
+                    cellColor = GameManager.Instance.uiSettings.GetSpecifiedColor(CellColor.Green);
+                    cellBackgroundImage.color = cellColor;
+                    break;
+                case WeaponType.Launcher:
+                    cellColor = GameManager.Instance.uiSettings.GetSpecifiedColor(CellColor.Blue);
+                    cellBackgroundImage.color = cellColor;
+                    break;
+            }
         }
     }
+
 }

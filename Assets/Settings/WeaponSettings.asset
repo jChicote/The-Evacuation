@@ -63,7 +63,7 @@ MonoBehaviour:
     objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
   - stringID: 
     name: Mirai Alpha NX II
-    price: 20000
+    price: 25000
     equipmentType: 0
     defaultData:
       weaponType: 1
@@ -79,7 +79,7 @@ MonoBehaviour:
     objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
   - stringID: 
     name: Mirai Beta I
-    price: 2000
+    price: 40000
     equipmentType: 0
     defaultData:
       weaponType: 1
@@ -97,7 +97,7 @@ MonoBehaviour:
   launcherWeapons:
   - stringID: 
     name: 'TX6A - Launcher '
-    price: 25000
+    price: 30000
     equipmentType: 0
     defaultData:
       weaponType: 2
@@ -113,7 +113,7 @@ MonoBehaviour:
     objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
   - stringID: 
     name: 'TXMJ - Stairway '
-    price: 40000
+    price: 80000
     equipmentType: 0
     defaultData:
       weaponType: 2

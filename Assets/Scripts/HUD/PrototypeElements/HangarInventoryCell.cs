@@ -3,28 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HangarInventoryCell : InventoryListCell
+namespace UserInterfaces
 {
-    [Header("Action UI")]
-    public GameObject actionGroup;
-    public Button informationButton;
-    public Button sellButton;
-
-    private bool isActionsVisible = false;
-
-    public void RevealActionGroup()
+    public class HangarInventoryCell : InventoryListCell
     {
-        isActionsVisible = !isActionsVisible;
-        actionGroup.SetActive(isActionsVisible);
+        [Header("Action UI")]
+        public GameObject actionGroup;
+        public Button informationButton;
+        public Button sellButton;
+
+        private bool isActionsVisible = false;
+
+        public void RevealActionGroup()
+        {
+            isActionsVisible = !isActionsVisible;
+            actionGroup.SetActive(isActionsVisible);
+        }
+
+        public void SellItem()
+        {
+            Debug.Log("Sold Item");
+        }
+
+        public override void RevealInformation()
+        {
+            infoPanelInterface.SetInfoPanel(this.equipmentID);
+        }
     }
 
-    public void SellItem()
-    {
-        Debug.Log("Sold Item");
-    }
-
-    public override void RevealInformation()
-    {
-        infoPanelInterface.SetInfoPanel(this.equipmentID);
-    }
 }

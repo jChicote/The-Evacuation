@@ -28,9 +28,9 @@ public class ShipListCell : MonoBehaviour
         cellThumbnail.sprite = imageThumbnail;
     }
 
-    public void OpenCell()
+    public void OpenSelectedShip()
     {
-
+        Debug.Log("Ship pressed triggered");
     }
     
 }

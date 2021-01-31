@@ -14,4 +14,9 @@ public class ShipMenu : MonoBehaviour
     public GameObject selectionView;
 
 
+    public void InitialiseMenu()
+    {
+
+    }
+
 }

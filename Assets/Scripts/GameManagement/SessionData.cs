@@ -1,9 +1,11 @@
+using System;
 using System.Linq;
 using System.Collections;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System.IO;
 
 
@@ -16,6 +18,9 @@ public class SessionData : MonoBehaviour
 
     public HangarInventory hangarCurrentSave;
     public UserStatus userStatus;
+
+    [Header("Data Events")]
+    public UnityEvent OnUserTransaction; 
 
     // Contains variables that relate to the active variables used for the game
     [Header("Session State")]
@@ -32,8 +37,6 @@ public class SessionData : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        Load();
     }
 
     /// <summary>
@@ -47,6 +50,7 @@ public class SessionData : MonoBehaviour
 
         // 2. Write saved instances
         newGameSave.SaveHangar(hangarCurrentSave);
+        newGameSave.SaveUserStatus(userStatus);
 
         // 3. Serialise file and Save
         string jsonData = JsonUtility.ToJson(newGameSave, false);
@@ -73,9 +77,11 @@ public class SessionData : MonoBehaviour
 
             // 2. Read saved instances
             hangarCurrentSave = saveState.GetHangarSave();
+            userStatus = saveState.GetUserStatus();
 
-            if (hangarCurrentSave == null)
+            if (hangarCurrentSave == null || saveState.userStatus == null)
             {
+                Debug.LogWarning("Detecting missing or data loss");
                 SetupDefaultPlayer();
             }
         }
@@ -106,6 +112,9 @@ public class SessionData : MonoBehaviour
 
         // 3. Save to global
         hangarCurrentSave = hangarSaveState;
+
+        UserStatus newuser = new UserStatus();
+        userStatus = newuser;
     }
 
     /// <summary>
@@ -157,13 +166,14 @@ public class SessionData : MonoBehaviour
     }
 }
 
+[System.Serializable]
 public class UserStatus
 {
-    public int userLevel;
-    public int credits;
+    public int userLevel = 0;
+    public int credits = 4000;
 
-    public int goalsCollected;
-    public int totalKills;
-    public int peopleSaved;
+    public int goalsCollected = 0;
+    public int totalKills = 0;
+    public int peopleSaved = 0;
 
 }
