@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+public interface IHangarActions
+{
+    void RevealInventory();
+    void RevealShop();
+    void RevealShips();
+    void RevealEquipmentMenu();
+}
+
 namespace UserInterfaces
 {
-    public class HangarMenu : MonoBehaviour, IInfoPanel
+    public class HangarMenu : MonoBehaviour, IInfoPanel, IHangarActions
     {
         public GameObject shopMenu;
         public GameObject inventoryMenu;
@@ -23,6 +31,9 @@ namespace UserInterfaces
 
             ShopMenu shop = shopMenu.GetComponent<ShopMenu>();
             shop.InitialiseMenu(this);
+
+            IShipMenu shipInterface = shipMenu.GetComponent<IShipMenu>();
+            shipInterface.InitialiseMenu(this);
 
             SessionData.instance.OnUserTransaction.AddListener(UpdateCreditInfo);
             UpdateCreditInfo();
@@ -57,8 +68,8 @@ namespace UserInterfaces
 
             shipMenu.SetActive(true);
 
-            IEquipmentMenu menu = shipMenu.GetComponent<IEquipmentMenu>();
-            menu.PopulateInventoryList();
+            IShipMenu menu = shipMenu.GetComponent<IShipMenu>();
+            menu.OpenMenu();
         }
 
         public void RevealEquipmentMenu()
@@ -70,7 +81,6 @@ namespace UserInterfaces
             equipmentMenu.SetActive(true);
 
             IEquipmentMenu menu = equipmentMenu.GetComponent<IEquipmentMenu>();
-            // menu.InitialiseMenu();
             menu.PopulateInventoryList();
         }
 

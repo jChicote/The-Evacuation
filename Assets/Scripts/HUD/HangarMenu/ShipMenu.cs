@@ -1,22 +1,101 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UserInterfaces;
 
 public interface IShipSelection
 {
-    void ShowSelection();
+    void LoadMenuSelection(string shipID);
+    void OpenMessagePopup(string shipID, ShipPopupOptions options);
 }
 
-public class ShipMenu : MonoBehaviour
+public interface IShipMenu
 {
-    public GameObject selectionView;
+    void InitialiseMenu(IHangarActions hangarActions);
+    void OpenMenu();
 
+}
 
-    public void InitialiseMenu()
+namespace UserInterfaces
+{
+    public class ShipMenu : MonoBehaviour, IShipSelection, IShipMenu
     {
+        public GameObject selectionView;
+        public GameObject contentView;
+        public GameObject equipmentMenu;
 
+        public GameObject messagePanel;
+
+        public List<GameObject> cellList;
+
+        private IHangarActions hangarActions;
+        private IShipMessagePopup shipPopup;
+
+        public void InitialiseMenu(IHangarActions hangarActions)
+        {
+            this.hangarActions = hangarActions;
+            shipPopup = messagePanel.GetComponent<IShipMessagePopup>();
+            shipPopup.InitialisePopup(this);
+        }
+
+        public void OpenMenu()
+        {
+            PopulateCellList();
+        }
+
+        public void PopulateCellList()
+        {
+            ClearList();
+
+            GameObject shipCellprefab = GameManager.Instance.uiSettings.prototypeShipCell;
+            GameObject cellInstance;
+            IShipCell shipCell;
+
+            foreach (ShipAsset asset in GameManager.Instance.playerSettings.shipsList)
+            {
+                cellInstance = Instantiate(shipCellprefab, contentView.transform);
+                shipCell = cellInstance.GetComponent<IShipCell>();
+                shipCell.SetCell(this, hangarActions, asset.stringID, asset.image);
+                cellList.Add(cellInstance);
+            }
+        }
+
+        public void ClearList()
+        {
+            if (cellList.Count == 0) return;
+
+            for (int i = 0; i < cellList.Count; i++)
+            {
+                GameObject item = cellList[i];
+                cellList[i] = null;
+                Destroy(item);
+            }
+
+            cellList.Clear();
+        }
+
+        public void LoadMenuSelection(string shipID)
+        {
+            IEquipmentMenu menu = equipmentMenu.GetComponent<IEquipmentMenu>();
+            equipmentMenu.SetActive(true);
+
+            menu.OpenMenu(shipID);
+        }
+
+        public void OpenMessagePopup(string shipID, ShipPopupOptions options)
+        {
+            messagePanel.SetActive(true);
+
+            if (options == ShipPopupOptions.Locked)
+            {
+                shipPopup.ShowLockedPopup(shipID);
+            }
+            else if (options == ShipPopupOptions.Purchase)
+            {
+                shipPopup.ShowPurchasePopup(shipID);
+            }
+        }
     }
 
 }

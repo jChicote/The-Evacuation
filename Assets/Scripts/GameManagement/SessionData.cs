@@ -104,11 +104,8 @@ public class SessionData : MonoBehaviour
         List<WeaponInfo> weaponList = new List<WeaponInfo>();
         weaponList.Add(GameManager.Instance.weaponSettings.turrentWeapons[0].ConvertToWeaponInfo());
 
-        List<ShipInfo> shipList = new List<ShipInfo>();
-        shipList.Add(GameManager.Instance.playerSettings.shipsList[0].ConvertToShipInfo());
-
         hangarSaveState.UpdateHangarWeapons(weaponList);
-        hangarSaveState.UpdateHangarShips(shipList);
+        hangarSaveState.ResetAllShips();
 
         // 3. Save to global
         hangarCurrentSave = hangarSaveState;

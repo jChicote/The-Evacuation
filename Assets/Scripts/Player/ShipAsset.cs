@@ -9,9 +9,13 @@ using UnityEngine;
 public class ShipAsset : ObjectInfo
 {
     // Ship asset is not stored directly into session but is referred from the scriptable object
+    [TextArea(5, 15)]
+    public string description;
+    public int requiredLevel;
 
     [Header("Data")]
     public ShipStats stats;
+    public Sprite image;
 
     [Header("Prefab")]
     public GameObject shipPrefab;

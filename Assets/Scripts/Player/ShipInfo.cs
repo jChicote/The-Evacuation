@@ -23,6 +23,7 @@ public interface IAssignWeapon
 public class ShipInfo : ObjectInfo, IAssignWeapon
 {
     // This class is a more lightweight configuration made for storage on device locally and does not draw from settings.
+    public bool isUnlocked = false;
 
     // Core Stats
     public float maxHealth;
@@ -197,6 +198,11 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
         {
             return forwardWeapons.Where(x => x == "").Count() == 0;
         }
+    }
+
+    public void UnlockShip(bool state)
+    {
+        isUnlocked = state;
     }
 }
 

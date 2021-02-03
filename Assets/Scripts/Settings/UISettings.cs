@@ -19,12 +19,16 @@ public class UISettings : ScriptableObject
 
     [Space]
     public GameObject emptyListCell;
+    public GameObject emptyShipCell;
 
     [Header("Color Configurations")]
     public Color redColor;
     public Color blueColor;
     public Color greenColor;
     public Color greyColor;
+
+    [Header("UI Shaders")]
+    public Material greyscaleMat;
 
     public Color GetSpecifiedColor(CellColor color)
     {

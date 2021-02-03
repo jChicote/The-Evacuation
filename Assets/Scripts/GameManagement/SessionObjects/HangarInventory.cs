@@ -30,5 +30,16 @@ public class HangarInventory
     {
         return hangarShips;
     }
+
+    public void ResetAllShips()
+    {
+        // Resets vessels to all preset unlocked states
+        hangarShips.Clear();
+
+        foreach(ShipAsset asset in GameManager.Instance.playerSettings.shipsList)
+        {
+            hangarShips.Add(asset.ConvertToShipInfo());
+        }
+    }
 }
 

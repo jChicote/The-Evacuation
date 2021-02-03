@@ -35,6 +35,7 @@ public interface IInfoPanel
 public interface IEquipmentMenu
 {
     void InitialiseMenu();
+    void OpenMenu(string shipID);
     void PopulateInventoryList();
     EquipmentType GetCurrentType();
 }
@@ -61,13 +62,15 @@ namespace UserInterfaces
 
         public void InitialiseMenu()
         {
-            Debug.Log(SessionData.instance.hangarCurrentSave.hangarShips.Count);
-            shipID = SessionData.instance.hangarCurrentSave.hangarShips[0].stringID;
-
-
-
             cellPopulator = gameObject.AddComponent<EquipmentCellPopulator>();
             cellPopulator.IntialisePopulator(this, contentView, this, this, this);
+        }
+
+        public void OpenMenu(string shipID)
+        {
+            this.shipID = shipID;
+            Debug.Log(shipID);
+            shipImage.sprite = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == shipID).First().image;
         }
 
         /// <summary>
@@ -80,7 +83,7 @@ namespace UserInterfaces
             GameObject cellPrefab = GameManager.Instance.uiSettings.prototypeEquipmentCell;
             List<ShipInfo> hangarShips = SessionData.instance.hangarCurrentSave.GetHangarShips();
             //ShipInfo selectedShip = hangarShips.Where(x => x.stringID == shipID).First();
-            ShipInfo selectedShip = hangarShips[0];
+            ShipInfo selectedShip = hangarShips.Where(x => x.stringID == shipID).First();
 
             if (equipmentType == EquipmentType.ForwardWeapon)
             {
