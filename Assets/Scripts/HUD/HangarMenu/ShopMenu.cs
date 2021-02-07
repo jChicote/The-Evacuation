@@ -9,8 +9,8 @@ public interface IShopMenu
 
 public interface IShopTransaction
 {
-    void MakePurchase(string name, WeaponType type, int purchaseCost);
-    void MakeSale(string name, int sellPrice);
+    void MakePurchase(string universalID, WeaponType type, int purchaseCost);
+    void MakeSale(string universalID, int sellPrice);
 }
 
 namespace UserInterfaces
@@ -23,12 +23,14 @@ namespace UserInterfaces
         // This directly interfaces with the settings to populate the list
         // This should mainly interface with the scriptable settings for default items.
 
-
+        [Header("Menu Attributes")]
         public GameObject shopPanel;
         public GameObject purchaseErrorPanel;
 
+        [Space]
         public List<GameObject> shopCells;
 
+        //Interfaces
         private IInfoPanel informationPanel;
 
         public void InitialiseMenu(IInfoPanel informationPanel)
@@ -36,42 +38,44 @@ namespace UserInterfaces
             this.informationPanel = informationPanel;
         }
 
+        /// <summary>
+        /// Populates the menu list.
+        /// </summary>
         public void PopulateWeaponList()
         {
             ClearList();
 
+            // Collapse into shop list cell
+            foreach (WeaponAsset turrentAsset in GameManager.Instance.weaponSettings.turrentWeapons)
+            {
+                CreateCell(turrentAsset);
+            }
+
+            foreach (WeaponAsset laserAsset in GameManager.Instance.weaponSettings.laserWeapon)
+            {
+                CreateCell(laserAsset);
+            }
+
+            foreach (WeaponAsset launcherAsset in GameManager.Instance.weaponSettings.launcherWeapons)
+            {
+                CreateCell(launcherAsset);
+            }
+        }
+
+        /// <summary>
+        ///  Responsible for creating template shop cells to be populated by weapon asset.
+        /// </summary>
+        private void CreateCell(WeaponAsset asset)
+        {
             GameObject cellPrefab = GameManager.Instance.uiSettings.prototypeShopCell;
             GameObject spawnedCell;
 
-            foreach (WeaponAsset asset in GameManager.Instance.weaponSettings.turrentWeapons)
-            {
-                spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
-                IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
-                cellInserter.InsertInformation(asset.name, WeaponType.Turrent, "stub description", asset.price, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage());
-                cellInserter.PassInterfaces(informationPanel, this);
-                cellInserter.SetColor();
-                shopCells.Add(spawnedCell);
-            }
-
-            foreach (WeaponAsset asset in GameManager.Instance.weaponSettings.laserWeapon)
-            {
-                spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
-                IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
-                cellInserter.InsertInformation(asset.name, WeaponType.Laser, "stub description", asset.price, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage());
-                cellInserter.PassInterfaces(informationPanel, this);
-                cellInserter.SetColor();
-                shopCells.Add(spawnedCell);
-            }
-
-            foreach (WeaponAsset asset in GameManager.Instance.weaponSettings.launcherWeapons)
-            {
-                spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
-                IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
-                cellInserter.InsertInformation(asset.name, WeaponType.Launcher, "stub description", asset.price, asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage());
-                cellInserter.PassInterfaces(informationPanel, this);
-                cellInserter.SetColor();
-                shopCells.Add(spawnedCell);
-            }
+            spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
+            IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
+            cellInserter.InsertInformation(asset);
+            cellInserter.PassInterfaces(informationPanel, this);
+            cellInserter.SetColor();
+            shopCells.Add(spawnedCell);
         }
 
         private void ClearList()
@@ -88,15 +92,10 @@ namespace UserInterfaces
             shopCells.Clear();
         }
 
-        public void PopulateShipList()
-        {
-
-        }
-
         /// <summary>
         /// Processes purchases made in the shop.
         /// </summary>
-        public void MakePurchase(string name, WeaponType type, int purchaseCost)
+        public void MakePurchase(string universalID, WeaponType type, int purchaseCost)
         {
             UserStatus userStatus = SessionData.instance.userStatus;
 
@@ -107,7 +106,7 @@ namespace UserInterfaces
             }
 
             userStatus.credits -= purchaseCost;
-            WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(type, name);
+            WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(type, universalID);
             SessionData.instance.AddWeaponInstance(asset);
             SessionData.instance.OnUserTransaction.Invoke();
         }
@@ -115,10 +114,10 @@ namespace UserInterfaces
         /// <summary>
         /// Processes sales made in the shop.
         /// </summary>
-        public void MakeSale(string name, int sellPrice)
+        public void MakeSale(string universalID, int sellPrice)
         {
             SessionData.instance.userStatus.credits += sellPrice;
-            SessionData.instance.RemoveWeaponInstance(name);
+            SessionData.instance.RemoveWeaponInstance(universalID);
             SessionData.instance.OnUserTransaction.Invoke();
         }
     }

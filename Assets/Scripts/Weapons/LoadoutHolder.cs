@@ -19,7 +19,7 @@ public class LoadoutHolder : MonoBehaviour
     {
         // Grab asset from the scriptable object
         WeaponInfo info = SessionData.instance.GetWeaponItem(weaponID);
-        WeaponAsset weaponAsset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.stringID);
+        WeaponAsset weaponAsset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.universalID);
 
         if (weaponAsset == null) return null;
 

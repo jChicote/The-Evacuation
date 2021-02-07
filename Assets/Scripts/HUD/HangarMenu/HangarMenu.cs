@@ -15,12 +15,16 @@ namespace UserInterfaces
 {
     public class HangarMenu : MonoBehaviour, IInfoPanel, IHangarActions
     {
+        [Header("Hangar Menues")]
+        public GameObject mainMenu;
+
+        [Space]
         public GameObject shopMenu;
         public GameObject inventoryMenu;
         public GameObject shipMenu;
         public GameObject equipmentMenu;
 
-        [Space]
+        [Header("Menu Attributes")]
         public GameObject informationPanel;
         public TextMeshProUGUI creditText;
 
@@ -87,13 +91,13 @@ namespace UserInterfaces
         /// <summary>
         /// Sets the information on the information panel based on the information set on both the info and assets.
         /// </summary>
-        public void SetInfoPanel(WeaponType type, string name)
+        public void SetInfoPanel(WeaponType type, string universalID)
         {
-            WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(type, name);
+            WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(type, universalID);
 
             informationPanel.SetActive(true);
             InformationPanel infoPanel = informationPanel.GetComponent<InformationPanel>();
-            infoPanel.SetPanelInfo(name, asset.description, null);
+            infoPanel.SetPanelInfo(asset.name, asset.description, null);
         }
 
         /// <summary>
@@ -102,7 +106,7 @@ namespace UserInterfaces
         public void SetInfoPanel(string equipmentID)
         {
             WeaponInfo info = SessionData.instance.GetWeaponItem(equipmentID);
-            WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.name);
+            WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.universalID);
 
             informationPanel.SetActive(true);
             InformationPanel infoPanel = informationPanel.GetComponent<InformationPanel>();
@@ -117,6 +121,7 @@ namespace UserInterfaces
 
         public void HideHangarMenu()
         {
+            mainMenu.SetActive(true);
             gameObject.SetActive(false);
         }
     }

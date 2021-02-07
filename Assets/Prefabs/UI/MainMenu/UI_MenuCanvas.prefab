@@ -431,7 +431,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -22, y: 22.92}
+  m_AnchoredPosition: {x: -22, y: 22.920044}
   m_SizeDelta: {x: 708.93, y: 331.9}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &4191268549762257377
@@ -1756,7 +1756,7 @@ GameObject:
   - component: {fileID: 8190589467138363574}
   - component: {fileID: 7039954095155948461}
   m_Layer: 5
-  m_Name: EquipmentSelectionView
+  m_Name: EquipmentView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5384,7 +5384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1148784164657866480
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5464,6 +5464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e8d52c692269e41886d0c5439f4964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenu: {fileID: 6552525122912890336}
   shopMenu: {fileID: 2830449592498193553}
   inventoryMenu: {fileID: 4780928090016926688}
   shipMenu: {fileID: 1517330443545250129}
@@ -8791,7 +8792,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -22.329956, y: 22.01001}
+  m_AnchoredPosition: {x: -22.330078, y: 22.01001}
   m_SizeDelta: {x: 845.4, y: 324.42}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &8731665989326538166

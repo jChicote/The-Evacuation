@@ -136,15 +136,15 @@ public class SessionData : MonoBehaviour
         return hangarCurrentSave.hangarWeapons.Where(x => x.stringID == weaponID).First();
     }
 
-    public int GetWeaponInstanceCount(string name)
+    public int GetWeaponInstanceCount(string universalID)
     {
-        int count =  hangarCurrentSave.hangarWeapons.Where(x => x.name == name).Count();
+        int count =  hangarCurrentSave.hangarWeapons.Where(x => x.name == universalID).Count();
         return count;
     }
 
-    public void RemoveWeaponInstance(string name)
+    public void RemoveWeaponInstance(string universalID)
     {
-        WeaponInfo removedObject = hangarCurrentSave.hangarWeapons.Where(x => x.name == name && x.isAttached == false).First();
+        WeaponInfo removedObject = hangarCurrentSave.hangarWeapons.Where(x => x.universalID == universalID && x.isAttached == false).First();
         hangarCurrentSave.hangarWeapons.Remove(removedObject);
     }
 

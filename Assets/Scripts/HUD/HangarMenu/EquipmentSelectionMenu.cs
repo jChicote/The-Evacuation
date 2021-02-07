@@ -29,7 +29,7 @@ public interface IInfoPanel
 {
     void SetInfoPanel(string equipmentID);
 
-    void SetInfoPanel(WeaponType type, string name);
+    void SetInfoPanel(WeaponType type, string universalID);
 }
 
 public interface IEquipmentMenu
@@ -186,7 +186,7 @@ namespace UserInterfaces
         public void SetInfoPanel(string equipmentID)
         {
             WeaponInfo info = SessionData.instance.GetWeaponItem(equipmentID);
-            WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.name);
+            WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.universalID);
 
             informationPanel.SetActive(true);
             InformationPanel infoPanel = informationPanel.GetComponent<InformationPanel>();

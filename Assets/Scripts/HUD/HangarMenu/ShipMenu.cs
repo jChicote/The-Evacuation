@@ -21,14 +21,17 @@ namespace UserInterfaces
 {
     public class ShipMenu : MonoBehaviour, IShipSelection, IShipMenu
     {
+        [Header("Menu Attribute4s")]
         public GameObject selectionView;
         public GameObject contentView;
         public GameObject equipmentMenu;
 
+        [Space]
         public GameObject messagePanel;
-
+        [Space]
         public List<GameObject> cellList;
 
+        // Interfaces
         private IHangarActions hangarActions;
         private IShipMessagePopup shipPopup;
 

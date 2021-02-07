@@ -7,6 +7,7 @@ public class UISettings : ScriptableObject
 {
     [Header("UI Menus")]
     public GameObject mainMenuPrefab;
+    public GameObject selectionMenuPrefab;
 
     [Header("UI HUD")]
     public GameObject mobileUIHUDPrefab;
@@ -16,6 +17,9 @@ public class UISettings : ScriptableObject
     public GameObject prototypeShipCell;
     public GameObject prototypeEquipmentCell;
     public GameObject prototypeInventoryCell;
+
+    [Space]
+    public GameObject prototypeSelectionCell;
 
     [Space]
     public GameObject emptyListCell;

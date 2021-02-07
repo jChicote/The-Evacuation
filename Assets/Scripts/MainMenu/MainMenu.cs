@@ -8,16 +8,24 @@ namespace UserInterfaces
     {
         public GameObject mainMenu;
         public GameObject hangarMenu;
+        public GameObject selectionMenu;
+
+        private IShipSelectionMenu selectionMenuInterface;
 
         public void InitialiseMainMenu()
         {
             hangarMenu.GetComponent<HangarMenu>().InitialiseHangar();
+
+            selectionMenu = Instantiate(GameManager.Instance.uiSettings.selectionMenuPrefab);
+            selectionMenuInterface = selectionMenu.GetComponent<IShipSelectionMenu>();
+            selectionMenuInterface.InitialiseMenu(this.gameObject);
         }
 
         public void OnPlay()
         {
-            ISceneLoad sceneLoad = GameManager.Instance.sceneLoader.GetComponent<ISceneLoad>();
-            sceneLoad.LoadLevel(1);
+            selectionMenu.SetActive(true);
+            selectionMenuInterface.PopulateMenu();
+            this.gameObject.SetActive(false);
         }
 
         public void RevealHanger()

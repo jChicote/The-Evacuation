@@ -800,6 +800,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerShip_01
       objectReference: {fileID: 0}
+    - target: {fileID: 4413370118639381924, guid: 1f1fe562a11991d4eaace466e6d38aa6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4413370118639381925, guid: 1f1fe562a11991d4eaace466e6d38aa6, type: 3}
       propertyPath: m_RootOrder
       value: 5

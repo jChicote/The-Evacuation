@@ -20,19 +20,21 @@ public class SceneController : MonoBehaviour
         gameManager.sceneController = this;
 
         //OnGameplayStart.AddListener(PrepareScene);
+        PrepareScene();
     }
 
     /// <summary>
     /// Manages the sequential creation of important scene objects.
     /// </summary>
-    /*private void PrepareScene()
+    private void PrepareScene()
     {
-        LoadSceneCamera();
+        //LoadSceneCamera();
         LoadHUD();
 
         //Load Entities
+        SpawnPlayer();
         SpawnEntities();
-    }*/
+    }
 
     /// <summary>
     /// Loads game HUD UI.
@@ -42,9 +44,20 @@ public class SceneController : MonoBehaviour
     }
 
     /// <summary>
+    /// Spawns the selected player into the scene.
+    /// </summary>
+    public void SpawnPlayer()
+    {
+        SessionData sessionData = SessionData.instance;
+        ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == sessionData.selectedShip.stringID).First();
+        Instantiate(asset.shipPrefab, transform.position, Quaternion.identity);
+    }
+
+    /// <summary>
     /// Spawns the team AI entities from the spawn managers.
     /// </summary>
     public void SpawnEntities()
     {
+
     }
 }

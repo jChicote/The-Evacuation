@@ -51,12 +51,12 @@ namespace PlayerSystems
 
             if (forwardWeaponLoadout.Length != 0 && shipInfo.forwardWeapons != null && shipInfo.forwardWeapons.Count != 0)
             {
-                setuphandler.SetupForwardWeapons(weapons, shipInfo.forwardWeapons, forwardWeaponLoadout);
+                setuphandler.SetupForwardWeapons(ref weapons, shipInfo.forwardWeapons, forwardWeaponLoadout);
             }
-            
+
             if (turrentWeaponLoadout.Length != 0 && shipInfo.turrentWeapons != null && shipInfo.turrentWeapons.Count != 0)
             {
-                setuphandler.SetupTurrentWeapons(weapons, shipInfo.turrentWeapons, turrentWeaponLoadout);
+                setuphandler.SetupTurrentWeapons(ref weapons, shipInfo.turrentWeapons, turrentWeaponLoadout);
             }
         }
 

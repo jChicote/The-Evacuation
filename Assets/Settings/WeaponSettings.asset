@@ -17,6 +17,7 @@ MonoBehaviour:
     name: Smith - Mini Turrent
     price: 2000
     equipmentType: 0
+    universalID: '#1528'
     defaultData:
       weaponType: 0
       damage: 1
@@ -32,6 +33,7 @@ MonoBehaviour:
     name: Meson - Nano RailGun MK I
     price: 2500
     equipmentType: 0
+    universalID: '#1839'
     defaultData:
       weaponType: 0
       damage: 1
@@ -49,6 +51,7 @@ MonoBehaviour:
     name: Mirai Alpha NX I
     price: 15000
     equipmentType: 0
+    universalID: '#6237'
     defaultData:
       weaponType: 1
       damage: 10
@@ -65,6 +68,7 @@ MonoBehaviour:
     name: Mirai Alpha NX II
     price: 25000
     equipmentType: 0
+    universalID: '#9674'
     defaultData:
       weaponType: 1
       damage: 25
@@ -81,6 +85,7 @@ MonoBehaviour:
     name: Mirai Beta I
     price: 40000
     equipmentType: 0
+    universalID: '#3759'
     defaultData:
       weaponType: 1
       damage: 10
@@ -99,6 +104,7 @@ MonoBehaviour:
     name: 'TX6A - Launcher '
     price: 30000
     equipmentType: 0
+    universalID: '#2893'
     defaultData:
       weaponType: 2
       damage: 50
@@ -115,6 +121,7 @@ MonoBehaviour:
     name: 'TXMJ - Stairway '
     price: 80000
     equipmentType: 0
+    universalID: '#1794'
     defaultData:
       weaponType: 2
       damage: 50

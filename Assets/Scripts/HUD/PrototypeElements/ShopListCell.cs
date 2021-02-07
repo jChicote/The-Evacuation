@@ -6,7 +6,7 @@ using TMPro;
 
 public interface IShopInsertData
 {
-    void InsertInformation(string name, WeaponType type, string description, int price, Sprite thumbnail);
+    void InsertInformation(WeaponAsset asset);
     void PassInterfaces(IInfoPanel infoPanel, IShopTransaction shopTransaction);
     void SetColor();
 }
@@ -28,9 +28,10 @@ namespace UserInterfaces
         public Button purchaseButton;
         public Button sellButton;
 
-        // Collapse info
+        // cell characteristics
         public Sprite thumbnail;
         public WeaponType type;
+        public string universalID;
         public string name;
         public int price;
         public int inventoryCount;
@@ -41,13 +42,14 @@ namespace UserInterfaces
 
         public string description;
 
-        public void InsertInformation(string name, WeaponType type, string description, int price, Sprite thumbnail)
+        public void InsertInformation(WeaponAsset asset)
         {
-            this.name = name;
-            this.type = type;
-            this.description = description;
-            this.price = price;
-            this.thumbnail = thumbnail;
+            this.name = asset.name;
+            this.universalID = asset.universalID;
+            this.type = asset.defaultData.weaponType;
+            this.description = asset.description;
+            this.price = asset.price;
+            this.thumbnail = asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage();
 
             PopulateCell();
         }
@@ -83,18 +85,18 @@ namespace UserInterfaces
         {
             cellTitle.text = name;
             itemPrice.text = "$" + price;
-            availableCount.text = "Inventory: " + SessionData.instance.GetWeaponInstanceCount(name);
+            availableCount.text = "Inventory: " + SessionData.instance.GetWeaponInstanceCount(universalID);
             cellImage.sprite = thumbnail;
         }
 
         public void SellItem()
         {
-            shopTransaction.MakeSale(name, price);
+            shopTransaction.MakeSale(universalID, price);
         }
 
         public void PurchaseItem()
         {
-            shopTransaction.MakePurchase(name, type, price);
+            shopTransaction.MakePurchase(universalID, type, price);
         }
 
         public void RevealActionGroup()
@@ -106,7 +108,7 @@ namespace UserInterfaces
         public void RevealInformation()
         {
             Debug.Log(informationPanel);
-            informationPanel.SetInfoPanel(this.type, this.name);
+            informationPanel.SetInfoPanel(this.type, this.universalID);
         }
     }
 

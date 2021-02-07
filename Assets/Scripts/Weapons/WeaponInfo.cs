@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class WeaponInfo : ObjectInfo
 {
+    public string universalID;
+
     public WeaponType weaponType;
     public float damage;
     public float speed;
@@ -13,12 +15,13 @@ public class WeaponInfo : ObjectInfo
     public int spread;
     public bool isAttached = false;
 
-    public void SetData(WeaponType weaponType, string stringID, string name, int price, float damage, float speed, float fireRate, float life, int spread)
+    public void SetData(WeaponType weaponType, string universalID, string name, int price, float damage, float speed, float fireRate, float life, int spread)
     {
         this.weaponType = weaponType;
 
         //Code ID combination is: # + ObjectName + count
         this.stringID = CreateUniqueID(name);
+        this.universalID = universalID;
         this.name = name;
         this.price = price;
         this.damage = damage;
