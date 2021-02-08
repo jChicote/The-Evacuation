@@ -26,6 +26,10 @@ public class SessionData : MonoBehaviour
     [Header("Session State")]
     public ShipInfo selectedShip;
 
+    //Data Handlers (The game's 'model' handling interfacing with the data)
+    public WeaponDataServicer weaponServicer;
+    public ShipDataServicer shipServicer;
+
     private void Awake()
     {
         if (instance == null)
@@ -37,6 +41,9 @@ public class SessionData : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        weaponServicer = new WeaponDataServicer();
+       // shipServicer = new ShipDataServicer();
     }
 
     /// <summary>
@@ -127,31 +134,6 @@ public class SessionData : MonoBehaviour
         Debug.Log("Finihsed Reset");
 
         SetupDefaultPlayer();
-    }
-
-    public WeaponInfo GetWeaponItem(string weaponID)
-    {
-        // To limit the clunckiness of passing weapon info around, each vessel will instead store only the string reference.
-
-        return hangarCurrentSave.hangarWeapons.Where(x => x.stringID == weaponID).First();
-    }
-
-    public int GetWeaponInstanceCount(string universalID)
-    {
-        int count =  hangarCurrentSave.hangarWeapons.Where(x => x.name == universalID).Count();
-        return count;
-    }
-
-    public void RemoveWeaponInstance(string universalID)
-    {
-        WeaponInfo removedObject = hangarCurrentSave.hangarWeapons.Where(x => x.universalID == universalID && x.isAttached == false).First();
-        hangarCurrentSave.hangarWeapons.Remove(removedObject);
-    }
-
-    public void AddWeaponInstance(WeaponAsset asset)
-    {
-        WeaponInfo info = asset.ConvertToWeaponInfo();
-        hangarCurrentSave.hangarWeapons.Add(info);
     }
 
     public ShipInfo GetShipItem(string shipID) 

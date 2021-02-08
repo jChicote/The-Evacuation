@@ -45,31 +45,45 @@ namespace UserInterfaces
         {
             ClearList();
 
+            GameObject cellPrefab = GameManager.Instance.uiSettings.prototypeShopCell;
+            GameObject spawnedCell = null;
+
             // Collapse into shop list cell
             foreach (WeaponAsset turrentAsset in GameManager.Instance.weaponSettings.turrentWeapons)
             {
-                CreateCell(turrentAsset);
+                CreateCell(turrentAsset, cellPrefab, spawnedCell);
             }
 
             foreach (WeaponAsset laserAsset in GameManager.Instance.weaponSettings.laserWeapon)
             {
-                CreateCell(laserAsset);
+                CreateCell(laserAsset, cellPrefab, spawnedCell);
             }
 
             foreach (WeaponAsset launcherAsset in GameManager.Instance.weaponSettings.launcherWeapons)
             {
-                CreateCell(launcherAsset);
+                CreateCell(launcherAsset, cellPrefab, spawnedCell);
+            }
+        }
+
+        /// <summary>
+        /// Updates the shop list when changes in the hangar or data are made.
+        /// </summary>
+        private void UpdateShopList()
+        {
+            IUpdateCell cellUpdator;
+
+            foreach (GameObject cell in shopCells)
+            {
+                cellUpdator = cell.GetComponent<IUpdateCell>();
+                cellUpdator.UpdateCell();
             }
         }
 
         /// <summary>
         ///  Responsible for creating template shop cells to be populated by weapon asset.
         /// </summary>
-        private void CreateCell(WeaponAsset asset)
+        private void CreateCell(WeaponAsset asset, GameObject cellPrefab, GameObject spawnedCell)
         {
-            GameObject cellPrefab = GameManager.Instance.uiSettings.prototypeShopCell;
-            GameObject spawnedCell;
-
             spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
             IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
             cellInserter.InsertInformation(asset);
@@ -82,11 +96,12 @@ namespace UserInterfaces
         {
             if (shopCells.Count == 0) return;
 
+            GameObject itemToDelete;
             for (int i = 0; i < shopCells.Count; i++)
             {
-                GameObject item = shopCells[i];
+                itemToDelete = shopCells[i];
                 shopCells[i] = null;
-                Destroy(item);
+                Destroy(itemToDelete);
             }
 
             shopCells.Clear();
@@ -107,8 +122,10 @@ namespace UserInterfaces
 
             userStatus.credits -= purchaseCost;
             WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(type, universalID);
-            SessionData.instance.AddWeaponInstance(asset);
+            SessionData.instance.weaponServicer.AddWeaponInstance(asset);
             SessionData.instance.OnUserTransaction.Invoke();
+
+            UpdateShopList();
         }
 
         /// <summary>
@@ -117,8 +134,18 @@ namespace UserInterfaces
         public void MakeSale(string universalID, int sellPrice)
         {
             SessionData.instance.userStatus.credits += sellPrice;
-            SessionData.instance.RemoveWeaponInstance(universalID);
+            SessionData.instance.weaponServicer.RemoveWeaponInstance(universalID);
             SessionData.instance.OnUserTransaction.Invoke();
+
+            UpdateShopList();
+        }
+
+        /// <summary>
+        /// Ensures to clear the list before closing menu (prevent possible memory leaks or holding objects in memory after disuse).
+        /// </summary>
+        public void ExitingMenu()
+        {
+            ClearList();
         }
     }
 

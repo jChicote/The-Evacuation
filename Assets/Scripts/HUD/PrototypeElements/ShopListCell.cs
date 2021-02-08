@@ -13,7 +13,15 @@ public interface IShopInsertData
 
 namespace UserInterfaces
 {
-    public class ShopListCell : MonoBehaviour, IShopInsertData
+    public interface IUpdateCell
+    {
+        /// <summary>
+        /// Called when the cell information needs to be updated if there is a change in the list.
+        /// </summary>
+        void UpdateCell();
+    }
+
+    public class ShopListCell : MonoBehaviour, IShopInsertData, IUpdateCell
     {
         [Header("Cell Information")]
         public TextMeshProUGUI cellTitle;
@@ -28,38 +36,51 @@ namespace UserInterfaces
         public Button purchaseButton;
         public Button sellButton;
 
-        // cell characteristics
-        public Sprite thumbnail;
+        // Cell characteristics
         public WeaponType type;
         public string universalID;
-        public string name;
         public int price;
-        public int inventoryCount;
         private bool isActionsVisible = false;
 
+        // Interfaces
         private IInfoPanel informationPanel;
         private IShopTransaction shopTransaction;
 
-        public string description;
-
+        /// <summary>
+        /// Inserts information to the cell.
+        /// </summary>
         public void InsertInformation(WeaponAsset asset)
         {
-            this.name = asset.name;
             this.universalID = asset.universalID;
             this.type = asset.defaultData.weaponType;
-            this.description = asset.description;
             this.price = asset.price;
-            this.thumbnail = asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage();
 
-            PopulateCell();
+            cellTitle.text = asset.name;
+            itemPrice.text = "$" + price;
+            availableCount.text = "Inventory: " + SessionData.instance.weaponServicer.GetAvailableWeaponInstanceCount(universalID);
+            cellImage.sprite = asset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage();
         }
 
+        /// <summary>
+        /// Called when the cell information needs to be updated if there is a change in the list.
+        /// </summary>
+        public void UpdateCell()
+        {
+            availableCount.text = "Inventory: " + SessionData.instance.weaponServicer.GetAvailableWeaponInstanceCount(universalID);
+        }
+
+        /// <summary>
+        /// Passes interfaces used for the cell.
+        /// </summary>
         public void PassInterfaces(IInfoPanel infoPanel, IShopTransaction shopTransaction)
         {
             this.informationPanel = infoPanel;
             this.shopTransaction = shopTransaction;
         }
 
+        /// <summary>
+        /// Sets the appropriate color for the weapon type of this weapon cell.
+        /// </summary>
         public void SetColor()
         {
             Color cellColor;
@@ -81,45 +102,37 @@ namespace UserInterfaces
             }
         }
 
-        private void PopulateCell()
-        {
-            cellTitle.text = name;
-            itemPrice.text = "$" + price;
-            availableCount.text = "Inventory: " + SessionData.instance.GetWeaponInstanceCount(universalID);
-            cellImage.sprite = thumbnail;
-        }
-
+        /// <summary>
+        /// Triggers the menu call for transaction of the weapon from the hangar.
+        /// </summary>
         public void SellItem()
         {
             shopTransaction.MakeSale(universalID, price);
         }
 
+        /// <summary>
+        /// Called to trigger weapon purchase in the shop's transactor.
+        /// </summary>
         public void PurchaseItem()
         {
             shopTransaction.MakePurchase(universalID, type, price);
         }
 
+        /// <summary>
+        /// Reveals the action group button when cell is clicked or triggered.
+        /// </summary>
         public void RevealActionGroup()
         {
             isActionsVisible = !isActionsVisible;
             actionGroup.SetActive(isActionsVisible);
         }
 
+        /// <summary>
+        /// Reveals the information panel to present the information about this cell.
+        /// </summary>
         public void RevealInformation()
         {
-            Debug.Log(informationPanel);
             informationPanel.SetInfoPanel(this.type, this.universalID);
         }
     }
-
-    public struct CellInformation
-    {
-        public Image thumbnail;
-        public string name;
-        public float price;
-        public int inventoryCount;
-
-        public string description;
-    }
-
 }

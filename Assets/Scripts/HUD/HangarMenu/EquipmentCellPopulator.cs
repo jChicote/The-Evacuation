@@ -78,7 +78,7 @@ namespace UserInterfaces
             }
             else
             {
-                WeaponInfo info = SessionData.instance.GetWeaponItem(identifier);
+                WeaponInfo info = SessionData.instance.weaponServicer.GetWeaponItem(identifier);
                 GameObject spawnedInstance = Instantiate(cellPrefab, contentView.transform);
 
                 IInventoryCell cellInterface = spawnedInstance.GetComponent<IInventoryCell>();

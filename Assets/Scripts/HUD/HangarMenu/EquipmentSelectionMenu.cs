@@ -44,8 +44,6 @@ namespace UserInterfaces
 {
     public class EquipmentSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign, ICheckShipSlot, IInfoPanel, IEquipmentMenu
     {
-        public EquipmentType equipmentType;
-
         [Header("Content Attributes")]
         public Image shipImage;
         public GameObject contentView;
@@ -54,8 +52,8 @@ namespace UserInterfaces
         [Space]
         public List<GameObject> inventoryCells;
 
-        public string shipID;
-        public Sprite defaultSprite;
+        private EquipmentType equipmentType;
+        private string shipID;
 
         // Sub Presenters
         private EquipmentCellPopulator cellPopulator;
@@ -69,7 +67,6 @@ namespace UserInterfaces
         public void OpenMenu(string shipID)
         {
             this.shipID = shipID;
-            Debug.Log(shipID);
             shipImage.sprite = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == shipID).First().image;
         }
 
@@ -80,21 +77,28 @@ namespace UserInterfaces
         {
             ClearInventoryList();
 
-            GameObject cellPrefab = GameManager.Instance.uiSettings.prototypeEquipmentCell;
-            List<ShipInfo> hangarShips = SessionData.instance.hangarCurrentSave.GetHangarShips();
-            //ShipInfo selectedShip = hangarShips.Where(x => x.stringID == shipID).First();
-            ShipInfo selectedShip = hangarShips.Where(x => x.stringID == shipID).First();
-
             if (equipmentType == EquipmentType.ForwardWeapon)
             {
-                cellPopulator.PopulateEquipmentSlots(inventoryCells, selectedShip, cellPrefab, EquipmentType.ForwardWeapon);
-                cellPopulator.CreateInventoryCell(cellPrefab, inventoryCells);
+                ShowEquipment(EquipmentType.ForwardWeapon);
             }
             else if (equipmentType == EquipmentType.TurrentWeapon)
             {
-                cellPopulator.PopulateEquipmentSlots(inventoryCells, selectedShip, cellPrefab, EquipmentType.TurrentWeapon);
-                cellPopulator.CreateInventoryCell(cellPrefab, inventoryCells);
+                ShowEquipment(EquipmentType.TurrentWeapon);
             }
+        }
+
+        /// <summary>
+        /// Called to show equipment through the sub presenter
+        /// </summary>
+        /// <param name="equipmentType"></param>
+        private void ShowEquipment(EquipmentType equipmentType)
+        {
+            GameObject cellPrefab = GameManager.Instance.uiSettings.prototypeEquipmentCell;
+            List<ShipInfo> hangarShips = SessionData.instance.hangarCurrentSave.GetHangarShips();
+            ShipInfo selectedShip = hangarShips.Where(x => x.stringID == shipID).First();
+
+            cellPopulator.PopulateEquipmentSlots(inventoryCells, selectedShip, cellPrefab, equipmentType);
+            cellPopulator.CreateInventoryCell(cellPrefab, inventoryCells);
         }
 
         /// <summary>
@@ -185,17 +189,17 @@ namespace UserInterfaces
         /// </summary>
         public void SetInfoPanel(string equipmentID)
         {
-            WeaponInfo info = SessionData.instance.GetWeaponItem(equipmentID);
+            WeaponInfo info = SessionData.instance.weaponServicer.GetWeaponItem(equipmentID);
             WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.universalID);
 
             informationPanel.SetActive(true);
             InformationPanel infoPanel = informationPanel.GetComponent<InformationPanel>();
-            infoPanel.SetPanelInfo(info.name, asset.description, defaultSprite);
+            infoPanel.SetPanelInfo(info.name, asset.description, asset.spriteThumbnail);
         }
 
         public void SetInfoPanel(WeaponType type, string name)
         {
-
+            // Currently Empty
         }
 
         /// <summary>
@@ -205,11 +209,12 @@ namespace UserInterfaces
         {
             if (inventoryCells.Count == 0) return;
 
+            GameObject itemToDelete;
             for (int i = 0; i < inventoryCells.Count; i++)
             {
-                GameObject item = inventoryCells[i];
+                itemToDelete = inventoryCells[i];
                 inventoryCells[i] = null;
-                Destroy(item);
+                Destroy(itemToDelete);
             }
 
             inventoryCells.Clear();
@@ -260,6 +265,14 @@ namespace UserInterfaces
         public EquipmentType GetCurrentType()
         {
             return equipmentType;
+        }
+
+        /// <summary>
+        /// Ensures to clear the list before closing menu (prevent possible memory leaks or holding objects in memory after disuse).
+        /// </summary>
+        public void ExitingMenu()
+        {
+            ClearInventoryList();
         }
     }
 }

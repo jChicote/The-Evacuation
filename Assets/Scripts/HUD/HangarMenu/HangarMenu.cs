@@ -105,7 +105,7 @@ namespace UserInterfaces
         /// </summary>
         public void SetInfoPanel(string equipmentID)
         {
-            WeaponInfo info = SessionData.instance.GetWeaponItem(equipmentID);
+            WeaponInfo info = SessionData.instance.weaponServicer.GetWeaponItem(equipmentID);
             WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.universalID);
 
             informationPanel.SetActive(true);

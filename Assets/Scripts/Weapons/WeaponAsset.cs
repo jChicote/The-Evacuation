@@ -16,7 +16,7 @@ public class WeaponAsset : ObjectInfo
     public GameObject weaponPrefab;
 
     [Header("Thumbanil")]
-    public Sprite objectThumbnail;
+    public Sprite spriteThumbnail;
 
     public WeaponInfo ConvertToWeaponInfo()
     {

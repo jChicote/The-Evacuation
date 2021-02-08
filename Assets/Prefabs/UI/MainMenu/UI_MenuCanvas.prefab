@@ -1756,7 +1756,7 @@ GameObject:
   - component: {fileID: 8190589467138363574}
   - component: {fileID: 7039954095155948461}
   m_Layer: 5
-  m_Name: EquipmentView
+  m_Name: EquipmentSelection_Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1798,13 +1798,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b6197717f3a5584486b9eb808fbd828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentType: 0
   shipImage: {fileID: 8493591427033929701}
   contentView: {fileID: 7779156080006753431}
   informationPanel: {fileID: 2880774993697915210}
   inventoryCells: []
-  shipID: Smith - Mini Turrent29/01/2021 12:00:00 AM192
-  defaultSprite: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
 --- !u!1 &2298790822933259387
 GameObject:
   m_ObjectHideFlags: 0
@@ -6159,6 +6156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 6552525122912890336}
   hangarMenu: {fileID: 6190333537096145219}
+  selectionMenu: {fileID: 0}
 --- !u!222 &8478002079647465159
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7170,6 +7168,30 @@ MonoBehaviour:
       - m_Target: {fileID: 6540614960959544532}
         m_TargetAssemblyTypeName: HangarMenu, Assembly-CSharp
         m_MethodName: RevealShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4303192774615746668}
+        m_TargetAssemblyTypeName: UserInterfaces.ShipMenu, Assembly-CSharp
+        m_MethodName: ExitingMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7039954095155948461}
+        m_TargetAssemblyTypeName: UserInterfaces.EquipmentSelectionMenu, Assembly-CSharp
+        m_MethodName: ExitingMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8384,6 +8406,30 @@ MonoBehaviour:
       - m_Target: {fileID: 6540614960959544532}
         m_TargetAssemblyTypeName: UserInterfaces.HangarMenu, Assembly-CSharp
         m_MethodName: RevealShips
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 651339978158999640}
+        m_TargetAssemblyTypeName: UserInterfaces.ShopMenu, Assembly-CSharp
+        m_MethodName: ExitingMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7039954095155948461}
+        m_TargetAssemblyTypeName: UserInterfaces.EquipmentSelectionMenu, Assembly-CSharp
+        m_MethodName: ExitingMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

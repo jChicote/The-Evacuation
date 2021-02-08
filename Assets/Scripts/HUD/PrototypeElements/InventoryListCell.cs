@@ -45,7 +45,7 @@ namespace UserInterfaces
 
         public void SetColor()
         {
-            WeaponType type = SessionData.instance.GetWeaponItem(equipmentID).weaponType;
+            WeaponType type = SessionData.instance.weaponServicer.GetWeaponItem(equipmentID).weaponType;
             Color cellColor;
 
             switch (type)

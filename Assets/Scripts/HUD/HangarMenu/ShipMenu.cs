@@ -35,6 +35,9 @@ namespace UserInterfaces
         private IHangarActions hangarActions;
         private IShipMessagePopup shipPopup;
 
+        /// <summary>
+        /// Initialises the ship's menu
+        /// </summary>
         public void InitialiseMenu(IHangarActions hangarActions)
         {
             this.hangarActions = hangarActions;
@@ -47,6 +50,9 @@ namespace UserInterfaces
             PopulateCellList();
         }
 
+        /// <summary>
+        /// Called to populate the cell list
+        /// </summary>
         public void PopulateCellList()
         {
             ClearList();
@@ -68,16 +74,20 @@ namespace UserInterfaces
         {
             if (cellList.Count == 0) return;
 
+            GameObject itemToDelete;
             for (int i = 0; i < cellList.Count; i++)
             {
-                GameObject item = cellList[i];
+                itemToDelete = cellList[i];
                 cellList[i] = null;
-                Destroy(item);
+                Destroy(itemToDelete);
             }
 
             cellList.Clear();
         }
 
+        /// <summary>
+        /// Loads the menu selection when a successful ship selection is made
+        /// </summary>
         public void LoadMenuSelection(string shipID)
         {
             IEquipmentMenu menu = equipmentMenu.GetComponent<IEquipmentMenu>();
@@ -86,6 +96,9 @@ namespace UserInterfaces
             menu.OpenMenu(shipID);
         }
 
+        /// <summary>
+        /// Called to reveal message popup during transaction or locked content triggers made during interaction
+        /// </summary>
         public void OpenMessagePopup(string shipID, ShipPopupOptions options)
         {
             messagePanel.SetActive(true);
@@ -98,6 +111,14 @@ namespace UserInterfaces
             {
                 shipPopup.ShowPurchasePopup(shipID);
             }
+        }
+
+        /// <summary>
+        /// Ensures to clear the list before closing menu (prevent possible memory leaks or holding objects in memory after disuse).
+        /// </summary>
+        public void ExitingMenu()
+        {
+            ClearList();
         }
     }
 
