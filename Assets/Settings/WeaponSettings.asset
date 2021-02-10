@@ -22,13 +22,13 @@ MonoBehaviour:
       weaponType: 0
       damage: 1
       speed: 8
-      fireRate: 1
+      fireRate: 0.5
       life: 12
       spread: 1
     description: Everyone starts off somewhere. This does the job and is dirt cheap
       for starters....
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
-    objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
+    spriteThumbnail: {fileID: 0}
   - stringID: 
     name: Meson - Nano RailGun MK I
     price: 2500
@@ -45,7 +45,7 @@ MonoBehaviour:
       of its class and of old. The Meson nano railgun is known for it''s high power
       deliver at a reasonable cost. '
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
-    objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
+    spriteThumbnail: {fileID: 0}
   laserWeapon:
   - stringID: 
     name: Mirai Alpha NX I
@@ -63,7 +63,7 @@ MonoBehaviour:
       of the 21st century during the Imeprian wars are branded to represent it's
       effective power at a reasonable low cost for fighters.
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
-    objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
+    spriteThumbnail: {fileID: 0}
   - stringID: 
     name: Mirai Alpha NX II
     price: 25000
@@ -80,7 +80,7 @@ MonoBehaviour:
       to fight off the Carina invaders a decade ago. However competition over many
       manufacturers saw it's value drop.
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
-    objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
+    spriteThumbnail: {fileID: 0}
   - stringID: 
     name: Mirai Beta I
     price: 40000
@@ -98,7 +98,7 @@ MonoBehaviour:
       class. A little pricier, the Beta I is currently used by the Terran police
       for territory defense.
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
-    objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
+    spriteThumbnail: {fileID: 0}
   launcherWeapons:
   - stringID: 
     name: 'TX6A - Launcher '
@@ -116,7 +116,7 @@ MonoBehaviour:
       standard amongst planatary defnse forces. Despite being a little slow on the
       launch rate, it was favourable for its cost and formidable when in large numbers.
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
-    objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
+    spriteThumbnail: {fileID: 0}
   - stringID: 
     name: 'TXMJ - Stairway '
     price: 80000
@@ -133,4 +133,4 @@ MonoBehaviour:
       back to the alliance's days as Earth United Nations Forces. It fires in series
       for each shot creating a stairways of missile fire.
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
-    objectThumbnail: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
+    spriteThumbnail: {fileID: 0}

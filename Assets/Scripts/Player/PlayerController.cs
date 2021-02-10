@@ -48,6 +48,9 @@ namespace PlayerSystems
             InitiateWeapons();
         }
 
+        /// <summary>
+        /// Initialises ship stats using the servicer to retrieve data.
+        /// </summary>
         private void InitiateShipStatHandler()
         {
             IStatHandler statHandler = this.GetComponent<IStatHandler>();

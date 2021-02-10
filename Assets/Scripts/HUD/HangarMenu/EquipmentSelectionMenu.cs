@@ -48,11 +48,14 @@ namespace UserInterfaces
         public Image shipImage;
         public GameObject contentView;
         public GameObject informationPanel;
+        public Button forwardButton;
+        public Button turrentButton;
 
         [Space]
         public List<GameObject> inventoryCells;
 
         private EquipmentType equipmentType;
+        private ShipDataServicer shipDataServicer;
         private string shipID;
 
         // Sub Presenters
@@ -62,6 +65,8 @@ namespace UserInterfaces
         {
             cellPopulator = gameObject.AddComponent<EquipmentCellPopulator>();
             cellPopulator.IntialisePopulator(this, contentView, this, this, this);
+
+            shipDataServicer = SessionData.instance.shipServicer;
         }
 
         public void OpenMenu(string shipID)
@@ -94,8 +99,7 @@ namespace UserInterfaces
         private void ShowEquipment(EquipmentType equipmentType)
         {
             GameObject cellPrefab = GameManager.Instance.uiSettings.prototypeEquipmentCell;
-            List<ShipInfo> hangarShips = SessionData.instance.hangarCurrentSave.GetHangarShips();
-            ShipInfo selectedShip = hangarShips.Where(x => x.stringID == shipID).First();
+            ShipInfo selectedShip = shipDataServicer.GetShipItem(shipID);
 
             cellPopulator.PopulateEquipmentSlots(inventoryCells, selectedShip, cellPrefab, equipmentType);
             cellPopulator.CreateInventoryCell(cellPrefab, inventoryCells);
@@ -106,9 +110,7 @@ namespace UserInterfaces
         /// </summary>
         public bool AssignItem(string equipmentID)
         {
-            // Get the selected ship
-            List<ShipInfo> hangarShips = SessionData.instance.hangarCurrentSave.GetHangarShips();
-            ShipInfo selectedShip = hangarShips.Where(x => x.stringID == shipID).First();
+            ShipInfo selectedShip = shipDataServicer.GetShipItem(shipID);
 
             if (equipmentType == EquipmentType.ForwardWeapon)
             {
@@ -131,9 +133,7 @@ namespace UserInterfaces
         /// </summary>
         public void RemoveItem(string equipmentID)
         {
-            // Get the selected ship
-            List<ShipInfo> hangarShips = SessionData.instance.hangarCurrentSave.GetHangarShips();
-            ShipInfo selectedShip = hangarShips.Where(x => x.stringID == shipID).First();
+            ShipInfo selectedShip = shipDataServicer.GetShipItem(shipID);
 
             if (equipmentType == EquipmentType.ForwardWeapon)
             {
@@ -153,7 +153,7 @@ namespace UserInterfaces
         /// </summary>
         public bool CheckSlotAvailability()
         {
-            ShipInfo info = SessionData.instance.hangarCurrentSave.hangarShips.Where(x => x.stringID == this.shipID).First();
+            ShipInfo info = shipDataServicer.GetShipItem(shipID);
 
             if (equipmentType == EquipmentType.ForwardWeapon)
             {
@@ -170,7 +170,7 @@ namespace UserInterfaces
         /// </summary>
         public bool CheckInEquipmentSlot(string equipmentID)
         {
-            ShipInfo info = SessionData.instance.hangarCurrentSave.hangarShips.Where(x => x.stringID == this.shipID).First();
+            ShipInfo info = shipDataServicer.GetShipItem(shipID);
 
             if (equipmentType == EquipmentType.ForwardWeapon)
             {

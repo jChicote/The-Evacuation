@@ -9,9 +9,9 @@ namespace Weapons
         [Header("Projectile")]
         public GameObject projectileShell;
 
-        public override void FireWeapon() {}
+        public override void FireWeapon(LoadoutPosition currentLoadoutPosition) {}
 
-        public override void InitialiseWeapon(WeaponInfo data) {}
+        public override void InitialiseWeapon(WeaponInfo data, IMovementAccessors movementAccessors) {}
 
     }
 }

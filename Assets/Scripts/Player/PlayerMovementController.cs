@@ -8,14 +8,19 @@ public interface IMovement
     void CalculateMovement(Vector2 startPos, Vector2 currentPos);
 }
 
-public class PlayerMovementController : MonoBehaviour, IMovement
+public interface IMovementAccessors
+{
+    float CurrentShipSpeed { get; }
+}
+
+public class PlayerMovementController : MonoBehaviour, IMovement, IMovementAccessors
 {
     // Interfaces 
     private ICheckPaused pauseChecker;
 
     // Physics and Motion
     public Rigidbody2D playerRB;
-    public float currentSpeed;
+    private float currentSpeed;
     public float angleRotation;
     public Vector3 currentVelocity;
     public Vector3 currentDirection;
@@ -32,6 +37,11 @@ public class PlayerMovementController : MonoBehaviour, IMovement
         playerRB = this.GetComponent<Rigidbody2D>();
 
         this.shipInfo = this.GetComponent<IShipData>().GetShipStats();
+    }
+
+    float IMovementAccessors.CurrentShipSpeed
+    {
+        get { return currentSpeed; }
     }
 
     private void FixedUpdate()

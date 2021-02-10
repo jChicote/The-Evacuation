@@ -9,6 +9,11 @@ public interface IWeaponController
     void ActivateWeapons(bool isFiring);
 }
 
+public interface IWeaponLoadoutSelector
+{
+    void ChooseLoadoutPosition(LoadoutPosition position);
+}
+
 
 namespace PlayerSystems
 {
@@ -25,6 +30,9 @@ namespace PlayerSystems
         private ICheckPaused pauseChecker;
         private List<IWeapon> weapons;
 
+        // Weapon loadout firing configuration
+        private LoadoutPosition loadoutPosition;
+
         // Bool Checks
         private bool isFiring = false;
 
@@ -34,6 +42,7 @@ namespace PlayerSystems
         public void InitialiseWeaponController()
         {
             pauseChecker = this.GetComponent<ICheckPaused>();
+            loadoutPosition = LoadoutPosition.Fixed;
 
             IShipData shipDataInterface = this.GetComponent<IShipData>();
             ShipInfo shipInfo = shipDataInterface.GetShipStats();
@@ -91,7 +100,7 @@ namespace PlayerSystems
 
             foreach (IWeapon weapon in weapons)
             {
-                weapon.FireWeapon();
+                weapon.FireWeapon(loadoutPosition);
             }
         }
     }

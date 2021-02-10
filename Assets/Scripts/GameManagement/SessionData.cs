@@ -16,7 +16,6 @@ public class SessionData : MonoBehaviour
 
     public static SessionData instance = null;
 
-    public HangarInventory hangarCurrentSave;
     public UserStatus userStatus;
 
     [Header("Data Events")]
@@ -43,7 +42,7 @@ public class SessionData : MonoBehaviour
         }
 
         weaponServicer = new WeaponDataServicer();
-       // shipServicer = new ShipDataServicer();
+        shipServicer = new ShipDataServicer();
     }
 
     /// <summary>
@@ -54,9 +53,13 @@ public class SessionData : MonoBehaviour
         // This can be called multiple times throughout the session.
         // 1. Create new game save
         GameSaveState newGameSave = new GameSaveState();
+        HangarInventory hangarInventory = new HangarInventory();
+
+        hangarInventory.hangarShips = shipServicer.GetHangarShips();
+        hangarInventory.hangarWeapons = weaponServicer.GetHangarWeapons();
 
         // 2. Write saved instances
-        newGameSave.SaveHangar(hangarCurrentSave);
+        newGameSave.SaveHangar(hangarInventory);
         newGameSave.SaveUserStatus(userStatus);
 
         // 3. Serialise file and Save
@@ -83,7 +86,9 @@ public class SessionData : MonoBehaviour
             Debug.Log("State has been loaded");
 
             // 2. Read saved instances
-            hangarCurrentSave = saveState.GetHangarSave();
+            HangarInventory hangarCurrentSave = saveState.GetHangarSave();
+            shipServicer.SetHangarShips(hangarCurrentSave.hangarShips);
+            weaponServicer.SetHangarShips(hangarCurrentSave.hangarWeapons);
             userStatus = saveState.GetUserStatus();
 
             if (hangarCurrentSave == null || saveState.userStatus == null)
@@ -105,17 +110,18 @@ public class SessionData : MonoBehaviour
     {
         Debug.LogWarning("No game save state or data was found. Creating a new default state");
 
-        HangarInventory hangarSaveState = new HangarInventory();
+        //HangarInventory hangarSaveState = new HangarInventory();
 
         // 2. Load default items
         List<WeaponInfo> weaponList = new List<WeaponInfo>();
         weaponList.Add(GameManager.Instance.weaponSettings.turrentWeapons[0].ConvertToWeaponInfo());
 
-        hangarSaveState.UpdateHangarWeapons(weaponList);
-        hangarSaveState.ResetAllShips();
+        //hangarSaveState.UpdateHangarWeapons(weaponList);
+        weaponServicer.SetHangarShips(weaponList);
+        shipServicer.ResetAllShips();
 
         // 3. Save to global
-        hangarCurrentSave = hangarSaveState;
+        //hangarCurrentSave = hangarSaveState;
 
         UserStatus newuser = new UserStatus();
         userStatus = newuser;
@@ -134,14 +140,6 @@ public class SessionData : MonoBehaviour
         Debug.Log("Finihsed Reset");
 
         SetupDefaultPlayer();
-    }
-
-    public ShipInfo GetShipItem(string shipID) 
-    {
-        // As there are no duplicates storing ship identifiers through string, hangar will only store id for simplification.
-        // Only will fetch and store ship info of vessels that are either in use or unlocked.
-
-        return hangarCurrentSave.hangarShips.Where(x => x.stringID == shipID).First();
     }
 }
 

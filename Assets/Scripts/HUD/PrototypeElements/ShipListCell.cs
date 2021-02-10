@@ -34,7 +34,7 @@ namespace UserInterfaces
 
         private void PopulateCell()
         {
-            ShipInfo info = SessionData.instance.GetShipItem(stringID);
+            ShipInfo info = SessionData.instance.shipServicer.GetShipItem(stringID);
             if(info.isUnlocked)
             {
                 cellThumbnail.sprite = imageThumbnail;
@@ -43,7 +43,7 @@ namespace UserInterfaces
 
         public void OpenSelectedShip()
         {
-            ShipInfo info = SessionData.instance.GetShipItem(stringID);
+            ShipInfo info = SessionData.instance.shipServicer.GetShipItem(stringID);
             ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == stringID).First();
             if (info.isUnlocked)
             {

@@ -7,11 +7,28 @@ public class WeaponDataServicer
 {
     // Responisble for handling logic associated with weapon organisation in data and 
     // retruieval of data items from arrays.
-    private SessionData instance;
+
+    private List<WeaponInfo> hangarWeapons;
 
     public WeaponDataServicer()
+    { 
+        hangarWeapons = new List<WeaponInfo>();
+    }
+
+    /// <summary>
+    /// Sets the hangar weapons. Preferably after initialisation or loading
+    /// </summary>
+    public void SetHangarShips(List<WeaponInfo> loadedWeapons)
     {
-        this.instance = SessionData.instance;
+        this.hangarWeapons = loadedWeapons;
+    }
+
+    /// <summary>
+    /// Accessor for hangar weapons
+    /// </summary>
+    public List<WeaponInfo> GetHangarWeapons()
+    {
+        return hangarWeapons;
     }
 
     /// <summary>
@@ -21,7 +38,7 @@ public class WeaponDataServicer
     {
         // To limit the clunckiness of passing weapon info around, each vessel will instead store only the string reference.
 
-        return instance.hangarCurrentSave.hangarWeapons.Where(x => x.stringID == weaponID).First();
+        return hangarWeapons.Where(x => x.stringID == weaponID).First();
     }
 
     /// <summary>
@@ -29,8 +46,7 @@ public class WeaponDataServicer
     /// </summary>
     public int GetAvailableWeaponInstanceCount(string universalID)
     {
-        int count = instance.hangarCurrentSave.hangarWeapons.Where(x => x.universalID == universalID && x.isAttached == false).Count();
-        return count;
+        return hangarWeapons.Where(x => x.universalID == universalID && x.isAttached == false).Count();
     }
 
     /// <summary>
@@ -38,8 +54,7 @@ public class WeaponDataServicer
     /// </summary>
     public void RemoveWeaponInstance(string universalID)
     {
-        WeaponInfo removedObject = instance.hangarCurrentSave.hangarWeapons.Where(x => x.universalID == universalID && x.isAttached == false).First();
-        instance.hangarCurrentSave.hangarWeapons.Remove(removedObject);
+        hangarWeapons.Remove(hangarWeapons.Where(x => x.universalID == universalID && x.isAttached == false).First());
     }
 
     /// <summary>
@@ -47,7 +62,6 @@ public class WeaponDataServicer
     /// </summary>
     public void AddWeaponInstance(WeaponAsset asset)
     {
-        WeaponInfo info = asset.ConvertToWeaponInfo();
-        instance.hangarCurrentSave.hangarWeapons.Add(info);
+        hangarWeapons.Add(asset.ConvertToWeaponInfo());
     }
 }

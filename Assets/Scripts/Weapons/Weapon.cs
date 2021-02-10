@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface IWeapon
 {
-    void InitialiseWeapon(WeaponInfo data);
-    void FireWeapon();
+    void InitialiseWeapon(WeaponInfo data, IMovementAccessors movementAccessors);
+    void FireWeapon(LoadoutPosition currentLoadoutPosition);
     void ConfigureWeaponPositioning(LoadoutPosition loadoutType);
 }
 
@@ -26,13 +26,14 @@ namespace Weapons
         protected WeaponInfo weaponData;
 
         // Modifiable
+        protected LoadoutPosition loadoutPositionType;
         protected bool isReloading = false;
         protected bool isPaused = false;
         protected float timeTillNextFire = 0;
 
-        public abstract void InitialiseWeapon(WeaponInfo data);
+        public abstract void InitialiseWeapon(WeaponInfo data, IMovementAccessors movementAccessors);
 
-        public abstract void FireWeapon();
+        public abstract void FireWeapon(LoadoutPosition currentLoadoutPosition);
 
         protected virtual void ReloadWeapon() { }
 
@@ -46,7 +47,9 @@ namespace Weapons
             {
                 weaponRenderer.enabled = false;
                 firingPoint = transform;
-            }  
+            }
+
+            this.loadoutPositionType = loadoutType;
         }
 
         /// <summary>

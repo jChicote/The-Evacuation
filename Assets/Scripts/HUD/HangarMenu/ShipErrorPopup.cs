@@ -45,7 +45,7 @@ namespace UserInterfaces
 
         public void BuyShip()
         {
-            ShipInfo info = SessionData.instance.GetShipItem(shipID);
+            ShipInfo info = SessionData.instance.shipServicer.GetShipItem(shipID);
             info.isUnlocked = true;
             HideMessageBox();
             shipMenu.OpenMenu();

@@ -53,7 +53,7 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
     }
 
     /// <summary>
-    /// 
+    /// Called to populate a weapon list to default empty values.
     /// </summary>
     /// <param name="list"></param>
     private void PopulateListToDefault(List<string> list)
@@ -64,6 +64,9 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
         }
     }
 
+    /// <summary>
+    /// Called to assign weapons to the specified weapon configuration.
+    /// </summary>
     public void AssignWeapons(WeaponConfiguration weaponConfig, string weaponID)
     {
         if (weaponConfig == WeaponConfiguration.Forward)
@@ -81,18 +84,18 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
     /// </summary>
     private void AllocateWeaponToList(string weaponID, List<string> weaponList)
     {
-        HangarInventory inventory = SessionData.instance.hangarCurrentSave;
+        List<WeaponInfo> hangarWeapons = SessionData.instance.weaponServicer.GetHangarWeapons();
         int indexPosition = GetFirstEmptySlot(weaponList);
         string extractedWeaponID = "";
 
-        for (int i = 0; i < inventory.hangarWeapons.Count; i++)
+        for (int i = 0; i < hangarWeapons.Count; i++)
         {
             if(extractedWeaponID == "")
             {
-                if (inventory.hangarWeapons[i].stringID.Equals(weaponID) && !inventory.hangarWeapons[i].isAttached)
+                if (hangarWeapons[i].stringID.Equals(weaponID) && !hangarWeapons[i].isAttached)
                 {
-                    extractedWeaponID = inventory.hangarWeapons[i].stringID;
-                    inventory.hangarWeapons[i].isAttached = true;
+                    extractedWeaponID = hangarWeapons[i].stringID;
+                    hangarWeapons[i].isAttached = true;
                 }
             }
         }
@@ -110,7 +113,7 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
     /// </summary>
     public void RemoveWeapon(WeaponConfiguration weaponConfig, string stringID)
     {
-        HangarInventory inventory = SessionData.instance.hangarCurrentSave;
+        List<WeaponInfo> hangarWeapons = SessionData.instance.weaponServicer.GetHangarWeapons();
 
         if (weaponConfig == WeaponConfiguration.Forward)
         {
@@ -118,7 +121,7 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
             forwardWeapons[indexPosition] = "";
 
             // Changes info in weapon hangar to be unattached
-            inventory.hangarWeapons.Where(x => x.stringID == stringID).First().isAttached = false;
+            hangarWeapons.Where(x => x.stringID == stringID).First().isAttached = false;
         } 
         else
         {
@@ -126,12 +129,12 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
             turrentWeapons[indexPosition] = "";
 
             // Changes info in weapon hangar to be unattached
-            inventory.hangarWeapons.Where(x => x.stringID == stringID).First().isAttached = false;
+            hangarWeapons.Where(x => x.stringID == stringID).First().isAttached = false;
         }
     }
 
     /// <summary>
-    /// 
+    /// Determines the index of the first available slot.
     /// </summary>
     private int GetFirstEmptySlot(List<string> weaponList)
     {
@@ -151,7 +154,7 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
     }
 
     /// <summary>
-    /// 
+    /// Gets the equipment position in the list.
     /// </summary>
     private int GetEquipmentPosition(List<string> list, string equipmentID)
     {
@@ -171,7 +174,7 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
     }
 
     /// <summary>
-    /// 
+    /// Gets the weapon ships from the ship based on the specified configuration.
     /// </summary>
     public List<string> GetWeaponsList(WeaponConfiguration configuration)
     {
@@ -186,7 +189,7 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
     }
 
     /// <summary>
-    /// 
+    /// Checks if all weapon arrays are full.
     /// </summary>
     public bool CheckIsFull(WeaponConfiguration configuration)
     {
@@ -196,7 +199,7 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
         }
         else
         {
-            return forwardWeapons.Where(x => x == "").Count() == 0;
+            return turrentWeapons.Where(x => x == "").Count() == 0;
         }
     }
 

@@ -26,7 +26,7 @@ public class LoadoutHolder : MonoBehaviour
         //Spawn and Initialise Weapon
         GameObject weapon = Instantiate(weaponAsset.weaponPrefab, transform);
         IWeapon weaponInterface = weapon.GetComponent<IWeapon>();
-        weaponInterface.InitialiseWeapon(info);
+        weaponInterface.InitialiseWeapon(info, transform.root.gameObject.GetComponent<IMovementAccessors>());
         weaponInterface.ConfigureWeaponPositioning(loadoutType);
 
         return weaponInterface;

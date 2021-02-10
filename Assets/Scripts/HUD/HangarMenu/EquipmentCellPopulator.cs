@@ -27,7 +27,7 @@ namespace UserInterfaces
         /// </summary>
         public void CreateInventoryCell(GameObject cellPrefab, List<GameObject> inventoryCells)
         {
-            foreach (WeaponInfo info in SessionData.instance.hangarCurrentSave.hangarWeapons)
+            foreach (WeaponInfo info in SessionData.instance.weaponServicer.GetHangarWeapons())
             {
                 if (!info.isAttached)
                 {

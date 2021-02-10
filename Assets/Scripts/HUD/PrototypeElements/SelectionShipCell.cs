@@ -25,7 +25,7 @@ namespace UserInterfaces
         {
             this.shipID = shipID;
             SessionData sessionData = SessionData.instance;
-            ShipInfo info = sessionData.GetShipItem(shipID);
+            ShipInfo info = sessionData.shipServicer.GetShipItem(shipID);
 
             this.isUnlocked = info.isUnlocked;
             SetThumbnail(spriteThumbnail);
@@ -60,7 +60,7 @@ namespace UserInterfaces
 
         private void LoadSelectionToData()
         {
-            ShipInfo info = SessionData.instance.GetShipItem(shipID);
+            ShipInfo info = SessionData.instance.shipServicer.GetShipItem(shipID);
             SessionData.instance.selectedShip = info;
         }
 
