@@ -18,20 +18,20 @@ public interface IShipData
     ShipInfo GetShipStats();
 }
 
-public interface IShipHealth
+public interface IHealthAccessors
 {
     float GetShipHealth();
     void SetShipHealth(float newHealth);
 }
 
-public interface IShipShields 
+public interface IShieldAccessors 
 {
     float GetShipShields();
     void SetShipShields(float newShields);
 }
 
 
-public class StatHandler : MonoBehaviour, IStatHandler, IWeaponStats, IShipData, IShipHealth, IShipShields
+public class StatHandler : MonoBehaviour, IStatHandler, IWeaponStats, IShipData, IHealthAccessors, IShieldAccessors
 {
     [Header("Primary Hit Points")]
     public float currentHealth = 100;

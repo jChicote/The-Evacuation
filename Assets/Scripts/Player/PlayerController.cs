@@ -55,6 +55,8 @@ namespace PlayerSystems
         {
             IStatHandler statHandler = this.GetComponent<IStatHandler>();
             statHandler.InitialiseStats(SessionData.instance.selectedShip);
+            PlayerHeathComponent heathComponent = this.GetComponent<PlayerHeathComponent>();
+            heathComponent.InitialiseHealth(SessionData.instance.selectedShip.maxHealth);
         }
 
         /// <summary>
@@ -68,7 +70,6 @@ namespace PlayerSystems
             {
                 Debug.Log("Is ported to mobile");
                 BeginMobileInputSystem();
-
             }
             else
             {
@@ -121,6 +122,8 @@ namespace PlayerSystems
         {
             PlayerWeaponController playerWeapons = this.GetComponent<PlayerWeaponController>();
             playerWeapons.InitialiseWeaponController();
+            IDamageable damager = this.GetComponent<IDamageable>();
+            damager.InitialiseComponent();
         }
 
         public void OnPause()

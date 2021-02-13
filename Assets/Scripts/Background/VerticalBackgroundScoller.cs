@@ -16,6 +16,8 @@ public class VerticalBackgroundScoller : MonoBehaviour
 
     public Transform cameraTransform;
 
+    private HorizontalSubScroller subScroller;
+
     private int bottomIndex;
     private int topIndex;
 
@@ -46,11 +48,15 @@ public class VerticalBackgroundScoller : MonoBehaviour
         verticalLayerDepth = verticalLayers.Length;
         bottomIndex = 0;
         topIndex = verticalLayers.Length - 1;
+
+        subScroller = this.GetComponent<HorizontalSubScroller>();
+        subScroller.InitialiseScroller(verticalLayers, cameraViewSize, paralaxSpeed);
     }
 
     private void FixedUpdate()
     {
         ScrollVertically();
+        RunSubHorizontaqlScoller();
     }
 
     /// <summary>
@@ -58,7 +64,7 @@ public class VerticalBackgroundScoller : MonoBehaviour
     /// </summary>
     private void RunSubHorizontaqlScoller()
     {
-
+        subScroller.RunScrollHorizontally();
     }
 
     /// <summary>
@@ -69,7 +75,6 @@ public class VerticalBackgroundScoller : MonoBehaviour
         deltaY = cameraTransform.position.y - lastCameraVertPos;
         transform.position += Vector3.up * (deltaY * paralaxSpeed);
         lastCameraVertPos = cameraTransform.position.y;
-
 
         if (cameraTransform.position.y < (verticalLayers[bottomIndex].position.y + 3))
         {

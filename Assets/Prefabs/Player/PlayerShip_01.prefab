@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 4413370118639381919}
   - component: {fileID: 4413370118639381921}
   - component: {fileID: 4413370118639381916}
+  - component: {fileID: 3270603104976091689}
   - component: {fileID: -4144502830590983027}
   m_Layer: 0
   m_Name: PlayerShip_01
@@ -422,12 +423,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   currentShield: 0
-  statModifier:
+  shipInfo:
+    stringID: 
+    name: 
+    price: 0
+    equipmentType: 0
+    isUnlocked: 0
+    maxHealth: 0
+    maxSheild: 0
+    maxSpeed: 0
+    maxHandling: 0
+    forwardWeapons: []
+    turrentWeapons: []
+  shipModifier:
     speedModifier: 0
     shieldModifier: 0
     healthModifier: 0
     fireRateModifier: 0
     damageModifier: 0
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnShieldChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4413370118639381923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,11 +514,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRB: {fileID: 0}
-  currentSpeed: 0
   angleRotation: 0
   currentVelocity: {x: 0, y: 0, z: 0}
   currentDirection: {x: 0, y: 0, z: 0}
-  maxVelocity: 5
+  shipInfo:
+    stringID: 
+    name: 
+    price: 0
+    equipmentType: 0
+    isUnlocked: 0
+    maxHealth: 0
+    maxSheild: 0
+    maxSpeed: 0
+    maxHandling: 0
+    forwardWeapons: []
+    turrentWeapons: []
 --- !u!114 &4413370118639381916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,6 +545,18 @@ MonoBehaviour:
   - {fileID: 4413370117540032272}
   turrentWeaponLoadout:
   - {fileID: 4413370117135389251}
+--- !u!114 &3270603104976091689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4413370118639381924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de99e43d86835641a33bfe27bb4c51a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-4144502830590983027
 MonoBehaviour:
   m_ObjectHideFlags: 0
