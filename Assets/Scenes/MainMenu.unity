@@ -377,9 +377,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b886e6fa013034f8de593406dbd2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hangarCurrentSave:
-    hangarWeapons: []
-    hangarShips: []
   userStatus:
     userLevel: 0
     credits: 4000
