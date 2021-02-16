@@ -1,22 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class ScoreSystem : MonoBehaviour
+public interface IScoreEventAssigner
 {
+    ScoreEvent GetScoreEvent();
+}
+
+public class ScoreSystem : MonoBehaviour, IScoreEventAssigner
+{
+    [Header("Score Update Event")]
+    public ScoreEvent OnScoreUpdate = new ScoreEvent();
+
     private ScoreData scoreData;
 
     private Timer hitTimer;
 
-    public void InitialiseScoreSystem()
+    public void InitialiseScoreSystem(ScoreData scoreData)
     {
+        this.scoreData = scoreData;
+
+        OnScoreUpdate.Invoke(this.scoreData);
+
         hitTimer = this.GetComponent<Timer>();
         hitTimer.SetTimer(5f);
     }
 
-    public void SetLevelBeginData()
+    /// <summary>
+    /// Assigns method listener for score broadcast
+    /// </summary>
+    public ScoreEvent GetScoreEvent()
     {
-
+        return OnScoreUpdate;
     }
 
     /// <summary>
@@ -34,7 +50,8 @@ public class ScoreSystem : MonoBehaviour
     /// </summary>
     public void IncrementKIllCount(int killValue)
     {
-
+        scoreData.totalKills++;
+        OnScoreUpdate.Invoke(this.scoreData);
     }
 
     /// <summary>
@@ -42,7 +59,8 @@ public class ScoreSystem : MonoBehaviour
     /// </summary>
     public void IncrementDeathCount()
     {
-
+        scoreData.totalDeaths++;
+        OnScoreUpdate.Invoke(this.scoreData);
     }
 
     /// <summary>
@@ -50,15 +68,17 @@ public class ScoreSystem : MonoBehaviour
     /// </summary>
     public void IncrementRescueCount()
     {
-
+        scoreData.totalRescued++;
+        OnScoreUpdate.Invoke(this.scoreData);
     }
 
     /// <summary>
     /// Increments the score amount after kill
     /// </summary>
-    public void IncrementScoreAmount()
+    public void IncrementScoreAmount(int amount)
     {
-
+        scoreData.earnedScore += amount;
+        OnScoreUpdate.Invoke(this.scoreData);
     }
 
     /// <summary>
@@ -67,6 +87,8 @@ public class ScoreSystem : MonoBehaviour
     public void ResetHitCount()
     {
         hitTimer.enabled = false;
+        scoreData.hitCount = 0;
+        OnScoreUpdate.Invoke(this.scoreData);
     }
 
     /// <summary>
@@ -74,9 +96,13 @@ public class ScoreSystem : MonoBehaviour
     /// </summary>
     public void ResetScore()
     {
-        
+        scoreData.earnedScore = 0;
+        OnScoreUpdate.Invoke(this.scoreData);
     }
 }
+
+[System.Serializable]
+public class ScoreEvent : UnityEvent<ScoreData> { }
 
 [System.Serializable]
 public struct ScoreData
@@ -93,4 +119,35 @@ public struct ScoreData
     public int maxRescuable;
 
     public int hitCount;
+}
+
+[System.Serializable]
+public class LevelData
+{
+    // Level characteristics
+    public bool isCompleted;
+    public string levelID;
+    public string levelName;
+
+    // Level Constants
+    public int totalRescuee;
+    public float baseDifficulty;
+    public float levelDuration;
+
+    // Level Status
+    public int topScore;
+    public int totalRescued;
+
+    public ScoreData ConvertToScoreData()
+    {
+        ScoreData newData = new ScoreData();
+        newData.maxRescuable = totalRescuee;
+        return newData;
+    }
+
+    public void UpdateLevelScore(ScoreData scoreData)
+    {
+        topScore = scoreData.earnedScore;
+        totalRescued = scoreData.totalRescued;
+    }
 }

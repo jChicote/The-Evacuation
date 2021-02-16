@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Events;
+using UserInterfaces.HUD;
 
 public class SceneController : MonoBehaviour
 {
@@ -12,6 +13,13 @@ public class SceneController : MonoBehaviour
 
     [Header("User Interfaces")]
     public PauseScreen pauseMenu;
+    public PlayerHUDManager playerHUD;
+
+    [Header("Scene Managers & Systems")]
+    public ScoreSystem scoreSystem;
+
+    [Space]
+    [SerializeField] private LevelData levelData;
 
     // Start is called before the first frame update
     private void Awake()
@@ -20,7 +28,16 @@ public class SceneController : MonoBehaviour
         gameManager.sceneController = this;
 
         //OnGameplayStart.AddListener(PrepareScene);
+        LoadLevelData();
         PrepareScene();
+    }
+
+    private void LoadLevelData()
+    {
+        // Currently we are loading directly from defaults 
+        // In the future this should be transferred to a session data setup
+
+        levelData = GameManager.Instance.levelSettings.defaultLevelData.Where(x => x.levelID == "#00091").First();
     }
 
     /// <summary>
@@ -41,6 +58,10 @@ public class SceneController : MonoBehaviour
     /// </summary>
     private void LoadHUD()
     {
+        scoreSystem.InitialiseScoreSystem(levelData.ConvertToScoreData());
+        playerHUD.InitialiseHud(scoreSystem.GetComponent<IScoreEventAssigner>());
+        scoreSystem.IncrementScoreAmount(100);
+
     }
 
     /// <summary>

@@ -6,7 +6,7 @@ namespace UserInterfaces.HUD
 {
     public interface IHudInitialiser
     {
-        void InitialiseHud();
+        void InitialiseHud(IScoreEventAssigner scoreAssigner);
     }
 
     public interface IHudAccessors
@@ -25,9 +25,12 @@ namespace UserInterfaces.HUD
         [SerializeField] private VitalityBarComponent healthBar;
         [SerializeField] private VitalityBarComponent shieldBar;
 
-        public void InitialiseHud()
-        {
+        [Space]
+        [SerializeField] private ScoreBox scoreBox;
 
+        public void InitialiseHud(IScoreEventAssigner scoreAssigner)
+        {
+            scoreBox.InitialiseScorebox(scoreAssigner);
         }
 
         /// <summary>
