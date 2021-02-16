@@ -16,7 +16,7 @@ namespace UserInterfaces.HUD
 
     }
 
-    public class PlayerHUDManager : MonoBehaviour, IHudInitialiser, IHudAccessors
+    public class PlayerHUDManager : MonoBehaviour, IHudInitialiser, IHudAccessors, IPausable
     {
         public GameObject vitalComponents;
         public GameObject centalComponents;
@@ -26,11 +26,14 @@ namespace UserInterfaces.HUD
         [SerializeField] private VitalityBarComponent shieldBar;
 
         [Space]
-        [SerializeField] private ScoreBox scoreBox;
+        [SerializeField] private GameObject[] scoreLabel;
 
         public void InitialiseHud(IScoreEventAssigner scoreAssigner)
         {
-            scoreBox.InitialiseScorebox(scoreAssigner);
+            foreach (GameObject label in scoreLabel)
+            {
+                label.GetComponent<IScoreTextUpdater>().SetScoreListener(scoreAssigner);
+            }
         }
 
         /// <summary>
@@ -47,6 +50,18 @@ namespace UserInterfaces.HUD
         public IVitalityBar GetShieldBar()
         {
             return shieldBar.GetComponent<IVitalityBar>();
+        }
+
+        public void OnPause()
+        {
+            vitalComponents.SetActive(false);
+            centalComponents.SetActive(false);
+        }
+
+        public void OnUnpause()
+        {
+            vitalComponents.SetActive(true);
+            centalComponents.SetActive(true);
         }
     }
 }

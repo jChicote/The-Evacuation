@@ -13,7 +13,11 @@ namespace Weapons
 
         private void FixedUpdate()
         {
-            if (isPaused) return;
+            if (isPaused)
+            {
+                projectileRB.velocity = Vector2.zero;
+                return;
+            }
 
             projectileRB.velocity = transform.up * speed;
 

@@ -61,6 +61,7 @@ public class SceneController : MonoBehaviour
         scoreSystem.InitialiseScoreSystem(levelData.ConvertToScoreData());
         playerHUD.InitialiseHud(scoreSystem.GetComponent<IScoreEventAssigner>());
         scoreSystem.IncrementScoreAmount(100);
+        scoreSystem.ForceLabelUpdate();
 
     }
 

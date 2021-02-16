@@ -82,6 +82,14 @@ public class ScoreSystem : MonoBehaviour, IScoreEventAssigner
     }
 
     /// <summary>
+    /// Manual updator on all label UI
+    /// </summary>
+    public void ForceLabelUpdate()
+    {
+        OnScoreUpdate.Invoke(this.scoreData); ;
+    }
+
+    /// <summary>
     /// Resets the hit count after timer has completed
     /// </summary>
     public void ResetHitCount()

@@ -720,7 +720,9 @@ MonoBehaviour:
   centalComponents: {fileID: 1073930463}
   healthBar: {fileID: 511444321}
   shieldBar: {fileID: 742410285}
-  scoreBox: {fileID: 1158482253}
+  scoreLabel:
+  - {fileID: 1158482249}
+  - {fileID: 736929957}
 --- !u!1 &348892530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1542,6 +1544,7 @@ GameObject:
   - component: {fileID: 736929958}
   - component: {fileID: 736929960}
   - component: {fileID: 736929959}
+  - component: {fileID: 736929961}
   m_Layer: 5
   m_Name: Rescue_Box
   m_TagString: Untagged
@@ -1607,6 +1610,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736929957}
   m_CullTransparentMesh: 1
+--- !u!114 &736929961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736929957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95740426b074444469aee8a62f016f59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  labelText: {fileID: 348892532}
 --- !u!1 &742410283
 GameObject:
   m_ObjectHideFlags: 0
@@ -2218,7 +2234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a816a8f4c0537f4468af53e1b056e26d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 1088890454}
+  labelText: {fileID: 1088890454}
 --- !u!1 &1243378019
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,20 +6,25 @@ using TMPro;
 
 namespace UserInterfaces.HUD
 {
-    public interface IScoreText
+    public interface IScoreTextUpdater
     {
+        void SetScoreListener(IScoreEventAssigner eventAssigner);
         void UpdateScoreText(ScoreData scoreData);
     }
 
-    public class ScoreBox : MonoBehaviour, IScoreText
+    public class ScoreLabel : LabelBox, IScoreTextUpdater
     {
-        public TextMeshProUGUI scoreText;
-
-        public void InitialiseScorebox(IScoreEventAssigner eventAssigner)
+        public override void InitialiseLUILabel()
         {
+            labelText.text = "0";
+        }
 
+        /// <summary>
+        /// Sets interface method to listen to score updates.
+        /// </summary>
+        public void SetScoreListener(IScoreEventAssigner eventAssigner)
+        {
             // assigns method action to score event
-            Debug.LogWarning("Called Warning");
             eventAssigner.GetScoreEvent().AddListener(UpdateScoreText);
         }
 
@@ -28,9 +33,8 @@ namespace UserInterfaces.HUD
         /// </summary>
         public void UpdateScoreText(ScoreData scoreData)
         {
-            Debug.LogWarning("Was Called");
-            scoreText.text = scoreData.earnedScore.ToString();
+            Debug.Log(scoreData);
+            labelText.text = scoreData.earnedScore.ToString();
         }
     }
-
 }
