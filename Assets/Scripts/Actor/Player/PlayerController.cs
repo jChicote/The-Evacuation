@@ -57,6 +57,8 @@ namespace PlayerSystems
             statHandler.InitialiseStats(SessionData.instance.selectedShip);
             PlayerHeathComponent heathComponent = this.GetComponent<PlayerHeathComponent>();
             heathComponent.InitialiseHealth(SessionData.instance.selectedShip.maxHealth);
+            PlayerShieldComponent shieldComponent = this.GetComponent<PlayerShieldComponent>();
+            shieldComponent.InitialiseShield(SessionData.instance.selectedShip.maxSheild);
         }
 
         /// <summary>

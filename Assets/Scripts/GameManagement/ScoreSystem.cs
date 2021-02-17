@@ -41,6 +41,7 @@ public class ScoreSystem : MonoBehaviour, IScoreEventAssigner
     public void IncrementHitCount()
     {
         hitTimer.enabled = true;
+        OnScoreUpdate.Invoke(this.scoreData);
         hitTimer.ResetTimer();
         hitTimer.StartTimer();
     }

@@ -6,7 +6,7 @@ namespace UserInterfaces.HUD
 {
     public interface IHudInitialiser
     {
-        void InitialiseHud(IScoreEventAssigner scoreAssigner);
+        void InitialiseHud(IScoreEventAssigner scoreAssigner, LevelData levelData);
     }
 
     public interface IHudAccessors
@@ -24,16 +24,19 @@ namespace UserInterfaces.HUD
         [Space]
         [SerializeField] private VitalityBarComponent healthBar;
         [SerializeField] private VitalityBarComponent shieldBar;
+        [SerializeField] private GameTimerBar gameTimerBar;
 
         [Space]
         [SerializeField] private GameObject[] scoreLabel;
 
-        public void InitialiseHud(IScoreEventAssigner scoreAssigner)
+        public void InitialiseHud(IScoreEventAssigner scoreAssigner, LevelData levelData)
         {
             foreach (GameObject label in scoreLabel)
             {
                 label.GetComponent<IScoreTextUpdater>().SetScoreListener(scoreAssigner);
             }
+
+            gameTimerBar.InitialiseTimerBar(levelData.levelDuration);
         }
 
         /// <summary>

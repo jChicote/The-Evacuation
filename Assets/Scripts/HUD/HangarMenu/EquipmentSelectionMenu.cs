@@ -75,6 +75,7 @@ namespace UserInterfaces
             shipImage.sprite = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == shipID).First().image;
         }
 
+
         /// <summary>
         /// Called to the inventory list for UI and presentation.
         /// </summary>

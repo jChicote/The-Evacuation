@@ -13,8 +13,8 @@ namespace UserInterfaces.HUD
 
     public class VitalityBarComponent : MonoBehaviour, IVitalityBar
     {
-        public RectTransform barRect;
-        public Image barFill;
+        [SerializeField] private RectTransform barRect;
+        [SerializeField] private Image barFill;
 
         private float maxValue;
         private float currentValue;
@@ -28,8 +28,11 @@ namespace UserInterfaces.HUD
 
         public void SetBarValue(float amount)
         {
+            if ((amount / maxValue) < 0) return;
+
             currentValue = (amount / maxValue) * barRect.rect.width;
-            barFill.rectTransform.right = Vector3.right * (barRect.rect.width - currentValue);
+            // Calculates the length by modifying the rightmost offset of the bar's transform
+            barFill.rectTransform.offsetMax = new Vector2(-(barRect.rect.width - currentValue), barFill.rectTransform.offsetMax.y);
         }
     }
 }

@@ -42,6 +42,6 @@ MonoBehaviour:
     levelName: Test Level
     totalRescuee: 0
     baseDifficulty: 0
-    levelDuration: 0
+    levelDuration: 10
     topScore: 0
     totalRescued: 0

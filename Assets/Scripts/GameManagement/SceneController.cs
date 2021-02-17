@@ -7,6 +7,7 @@ using UserInterfaces.HUD;
 
 public class SceneController : MonoBehaviour
 {
+    // Public Events
     public UnityEvent OnGameplayStart;
     public UnityEvent OnPlayerRespawn;
     public UnityEvent OnPlayerDeath;
@@ -40,6 +41,10 @@ public class SceneController : MonoBehaviour
         levelData = GameManager.Instance.levelSettings.defaultLevelData.Where(x => x.levelID == "#00091").First();
     }
 
+    // ================================
+    // Environment Setup
+    // ================================
+
     /// <summary>
     /// Manages the sequential creation of important scene objects.
     /// </summary>
@@ -50,7 +55,7 @@ public class SceneController : MonoBehaviour
 
         //Load Entities
         SpawnPlayer();
-        SpawnEntities();
+        SpawnEnemyEntities();
     }
 
     /// <summary>
@@ -59,11 +64,15 @@ public class SceneController : MonoBehaviour
     private void LoadHUD()
     {
         scoreSystem.InitialiseScoreSystem(levelData.ConvertToScoreData());
-        playerHUD.InitialiseHud(scoreSystem.GetComponent<IScoreEventAssigner>());
+        playerHUD.InitialiseHud(scoreSystem.GetComponent<IScoreEventAssigner>(), levelData);
         scoreSystem.IncrementScoreAmount(100);
         scoreSystem.ForceLabelUpdate();
 
     }
+
+    // ================================
+    // Entity Loaders
+    // ================================
 
     /// <summary>
     /// Spawns the selected player into the scene.
@@ -78,7 +87,7 @@ public class SceneController : MonoBehaviour
     /// <summary>
     /// Spawns the team AI entities from the spawn managers.
     /// </summary>
-    public void SpawnEntities()
+    public void SpawnEnemyEntities()
     {
 
     }
