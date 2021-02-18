@@ -54,4 +54,8 @@ public class DesktopInputManager : MonoBehaviour, IDesktopInput
         Debug.Log(value.isPressed);
         playerWeapons.ActivateWeapons(value.isPressed);
     }
+
+    // Needed for presenting GUI options for disabling
+    //
+    private void OnGUI() { }
 }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UserInterfaces;
+using UserInterface;
 
 public interface IShipSelection
 {
@@ -17,7 +17,7 @@ public interface IShipMenu
 
 }
 
-namespace UserInterfaces
+namespace UserInterface
 {
     public class ShipMenu : MonoBehaviour, IShipSelection, IShipMenu
     {

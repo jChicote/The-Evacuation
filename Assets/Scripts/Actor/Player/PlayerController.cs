@@ -16,7 +16,7 @@ public interface ICheckPaused
 
 public interface IPlayerInitialiser
 {
-    void InitialisePlayer();
+    void InitialisePlayer(SceneController sceneController);
 }
 
 namespace PlayerSystems
@@ -26,19 +26,15 @@ namespace PlayerSystems
         public UnityEngine.InputSystem.PlayerInput playerInput;
         public bool isPaused = false;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            InitialisePlayer();
-        }
+        // ================================
+        // Initialisers
+        // ================================
 
         /// <summary>
         /// Initialises classes systems to the player
         /// </summary>
-        public void InitialisePlayer()
+        public void InitialisePlayer(SceneController sceneController)
         {
-            Debug.Log("Is initialising player");
-
             // Initialises and sets primary data for vessel
             InitiateShipStatHandler();
 
@@ -46,6 +42,8 @@ namespace PlayerSystems
             InitiateInputSystem();
             InitiateMovement();
             InitiateWeapons();
+
+            sceneController.OnGameCompletion.AddListener(RemoveInputSystems);
         }
 
         /// <summary>
@@ -128,6 +126,10 @@ namespace PlayerSystems
             damager.InitialiseComponent();
         }
 
+        // ================================
+        // Pausers and Checkers
+        // ================================
+
         public void OnPause()
         {
             isPaused = true;
@@ -141,6 +143,23 @@ namespace PlayerSystems
         public bool CheckIsPaused()
         {
             return isPaused;
+        }
+
+        // ================================
+        // Game Completion
+        // ================================
+
+        /// <summary>
+        /// Called to disable input control in the event of game events or game completion
+        /// </summary>
+        public void RemoveInputSystems()
+        {
+            Debug.LogWarning("Lockout Triggered");
+            DesktopInputManager desktopinput = this.GetComponent<DesktopInputManager>();
+            Destroy(desktopinput);
+
+            MobileInputManager mobileInput = this.GetComponent<MobileInputManager>();
+            Destroy(mobileInput);
         }
     }
 }

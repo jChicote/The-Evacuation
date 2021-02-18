@@ -139,18 +139,21 @@ public class LevelData
     public string levelName;
 
     // Level Constants
-    public int totalRescuee;
+    public int maxRescuable;
     public float baseDifficulty;
     public float levelDuration;
+    public int allowedLives;
 
     // Level Status
     public int topScore;
     public int totalRescued;
+    public int totalKills;
+    public int totalLives;
 
     public ScoreData ConvertToScoreData()
     {
         ScoreData newData = new ScoreData();
-        newData.maxRescuable = totalRescuee;
+        newData.maxRescuable = maxRescuable;
         return newData;
     }
 

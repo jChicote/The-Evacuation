@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Events;
-using UserInterfaces.HUD;
+using UserInterface.HUD;
+using PlayerSystems;
 
 public class SceneController : MonoBehaviour
 {
@@ -11,10 +12,12 @@ public class SceneController : MonoBehaviour
     public UnityEvent OnGameplayStart;
     public UnityEvent OnPlayerRespawn;
     public UnityEvent OnPlayerDeath;
+    public UnityEvent OnGameCompletion;
 
     [Header("User Interfaces")]
     public PauseScreen pauseMenu;
     public PlayerHUDManager playerHUD;
+    [SerializeField] private GameCompletionHUD completionHUD;
 
     [Header("Scene Managers & Systems")]
     public ScoreSystem scoreSystem;
@@ -22,13 +25,19 @@ public class SceneController : MonoBehaviour
     [Space]
     [SerializeField] private LevelData levelData;
 
+    // ================================
+    // Setters and Initialisers
+    // ================================
+
     // Start is called before the first frame update
     private void Awake()
     {
         GameManager gameManager = GameManager.Instance;
         gameManager.sceneController = this;
 
-        //OnGameplayStart.AddListener(PrepareScene);
+        OnGameCompletion = new UnityEvent();
+        OnGameCompletion.AddListener(RevealGameCompletionHUD);
+
         LoadLevelData();
         PrepareScene();
     }
@@ -42,7 +51,7 @@ public class SceneController : MonoBehaviour
     }
 
     // ================================
-    // Environment Setup
+    // UI and Systems
     // ================================
 
     /// <summary>
@@ -64,10 +73,16 @@ public class SceneController : MonoBehaviour
     private void LoadHUD()
     {
         scoreSystem.InitialiseScoreSystem(levelData.ConvertToScoreData());
-        playerHUD.InitialiseHud(scoreSystem.GetComponent<IScoreEventAssigner>(), levelData);
+        playerHUD.InitialiseHud(scoreSystem.GetComponent<IScoreEventAssigner>(), levelData, this);
         scoreSystem.IncrementScoreAmount(100);
         scoreSystem.ForceLabelUpdate();
 
+    }
+
+    public void RevealGameCompletionHUD()
+    {
+        completionHUD.gameObject.SetActive(true);
+        completionHUD.InitialiseGameCompletionHUD(levelData);
     }
 
     // ================================
@@ -81,7 +96,8 @@ public class SceneController : MonoBehaviour
     {
         SessionData sessionData = SessionData.instance;
         ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == sessionData.selectedShip.stringID).First();
-        Instantiate(asset.shipPrefab, transform.position, Quaternion.identity);
+        IPlayerInitialiser playerInitialiser = Instantiate(asset.shipPrefab, transform.position, Quaternion.identity).GetComponent<IPlayerInitialiser>();
+        playerInitialiser.InitialisePlayer(this);
     }
 
     /// <summary>

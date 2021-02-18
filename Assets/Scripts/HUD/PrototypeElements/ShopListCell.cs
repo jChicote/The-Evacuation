@@ -11,7 +11,7 @@ public interface IShopInsertData
     void SetColor();
 }
 
-namespace UserInterfaces
+namespace UserInterface
 {
     public interface IUpdateCell
     {

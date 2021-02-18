@@ -8,7 +8,7 @@ public interface ILoadSettings
     void SaveSettings();
 }
 
-namespace UserInterfaces
+namespace UserInterface
 {
     public class SettingsMenu : MonoBehaviour
     {

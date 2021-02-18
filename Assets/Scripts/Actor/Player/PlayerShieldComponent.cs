@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UserInterfaces.HUD;
+using UserInterface.HUD;
 
 namespace PlayerSystems
 {

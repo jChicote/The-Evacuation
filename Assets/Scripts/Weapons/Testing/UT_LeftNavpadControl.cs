@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UserInterfaces.Touch;
+using UserInterface.Touch;
 
 public class UT_LeftNavpadControl : MonoBehaviour
 {

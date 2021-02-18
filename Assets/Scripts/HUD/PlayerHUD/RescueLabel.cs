@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UserInterfaces.HUD
+namespace UserInterface.HUD
 {
     public class RescueLabel : LabelBox, IScoreTextUpdater
     {

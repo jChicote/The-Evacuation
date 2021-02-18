@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UserInterfaces.HUD
+namespace UserInterface.HUD
 {
     public interface IHudInitialiser
     {
-        void InitialiseHud(IScoreEventAssigner scoreAssigner, LevelData levelData);
+        void InitialiseHud(IScoreEventAssigner scoreAssigner, LevelData levelData, SceneController sceneController);
     }
 
     public interface IHudAccessors
@@ -29,14 +29,14 @@ namespace UserInterfaces.HUD
         [Space]
         [SerializeField] private GameObject[] scoreLabel;
 
-        public void InitialiseHud(IScoreEventAssigner scoreAssigner, LevelData levelData)
+        public void InitialiseHud(IScoreEventAssigner scoreAssigner, LevelData levelData, SceneController sceneController)
         {
             foreach (GameObject label in scoreLabel)
             {
                 label.GetComponent<IScoreTextUpdater>().SetScoreListener(scoreAssigner);
             }
 
-            gameTimerBar.InitialiseTimerBar(levelData.levelDuration);
+            gameTimerBar.InitialiseTimerBar(sceneController, levelData.levelDuration);
         }
 
         /// <summary>

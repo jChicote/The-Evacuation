@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace UserInterfaces.Touch
+namespace UserInterface.Touch
 {
     public class PressAndHoldEvent : Button
     {

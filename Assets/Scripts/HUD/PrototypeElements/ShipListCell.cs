@@ -10,7 +10,7 @@ public interface IShipCell
 
 }
 
-namespace UserInterfaces
+namespace UserInterface
 {
     public class ShipListCell : MonoBehaviour, IShipCell
     {

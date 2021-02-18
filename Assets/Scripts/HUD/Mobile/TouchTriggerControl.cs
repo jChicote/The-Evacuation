@@ -9,7 +9,7 @@ public interface IWeaponButton
     bool CheckIsHolding();
 }
 
-namespace UserInterfaces.Touch
+namespace UserInterface.Touch
 {
     public class TouchTriggerControl : MonoBehaviour
     {

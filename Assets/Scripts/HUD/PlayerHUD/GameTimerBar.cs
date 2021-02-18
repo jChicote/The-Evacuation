@@ -2,19 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UserInterfaces.HUD
+namespace UserInterface.HUD
 {
     public interface IGameTimerBar
     {
-        void InitialiseTimerBar(float maxTime);
+        void InitialiseTimerBar(SceneController sceneController, float maxTime);
     }
 
     public class GameTimerBar : VitalityBarComponent, IGameTimerBar
     {
         [SerializeField] private Timer gameTimer;
+        private SceneController sceneController;
 
-        public void InitialiseTimerBar(float maxTime)
+        public void InitialiseTimerBar(SceneController sceneController, float maxTime)
         {
+            this.sceneController = sceneController;
             InitialiseBar(maxTime);
             gameTimer.SetTimer(maxTime);
             gameTimer.StartTimer();
@@ -28,6 +30,7 @@ namespace UserInterfaces.HUD
         public void TriggerGameEndState()
         {
             Debug.LogWarning("Game Has Ended!!!!!!!!!!");
+            sceneController.OnGameCompletion.Invoke();
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UserInterfaces
+namespace UserInterface
 {
     public class MainMenu : MonoBehaviour
     {

@@ -8,7 +8,7 @@ public interface IEquipmentCell
     void SetCell(ICheckShipSlot slotChecker, IShipAssign assigner, bool isAttached);
 }
 
-namespace UserInterfaces
+namespace UserInterface
 {
     public class ShipInventoryCell : InventoryListCell, IEquipmentCell
     {
