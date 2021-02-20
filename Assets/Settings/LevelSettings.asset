@@ -16,32 +16,44 @@ MonoBehaviour:
   - isCompleted: 0
     levelID: '#96281'
     levelName: Level 1
-    totalRescuee: 0
+    maxRescuable: 0
     baseDifficulty: 0
     levelDuration: 0
+    allowedLives: 0
     topScore: 0
     totalRescued: 0
+    totalKills: 0
+    totalLives: 0
   - isCompleted: 0
     levelID: '#91275'
     levelName: Level 2
-    totalRescuee: 0
+    maxRescuable: 0
     baseDifficulty: 0
     levelDuration: 0
+    allowedLives: 0
     topScore: 0
     totalRescued: 0
+    totalKills: 0
+    totalLives: 0
   - isCompleted: 0
     levelID: '#95715'
     levelName: Level 3
-    totalRescuee: 0
+    maxRescuable: 0
     baseDifficulty: 0
     levelDuration: 0
+    allowedLives: 0
     topScore: 0
     totalRescued: 0
+    totalKills: 0
+    totalLives: 0
   - isCompleted: 0
     levelID: '#00091'
     levelName: Test Level
-    totalRescuee: 0
+    maxRescuable: 0
     baseDifficulty: 0
-    levelDuration: 10
+    levelDuration: 360
+    allowedLives: 0
     topScore: 0
     totalRescued: 0
+    totalKills: 0
+    totalLives: 0

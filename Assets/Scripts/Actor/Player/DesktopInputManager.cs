@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using PlayerSystems;
 
 public interface IDesktopInput
 {
@@ -51,7 +52,7 @@ public class DesktopInputManager : MonoBehaviour, IDesktopInput
 
     private void OnAttack(InputValue value)
     {
-        Debug.Log(value.isPressed);
+        //Debug.Log(value.isPressed);
         playerWeapons.ActivateWeapons(value.isPressed);
     }
 

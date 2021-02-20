@@ -83,7 +83,7 @@ public class SessionData : MonoBehaviour
         {
             // 1. Fetch from path
             GameSaveState saveState = JsonUtility.FromJson<GameSaveState>(File.ReadAllText(jsonPath));
-            Debug.Log("State has been loaded");
+            //Debug.Log("State has been loaded");
 
             // 2. Read saved instances
             HangarInventory hangarCurrentSave = saveState.GetHangarSave();

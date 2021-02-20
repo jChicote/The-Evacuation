@@ -115,7 +115,6 @@ namespace UserInterface
 
         public void UpdateCreditInfo()
         {
-            Debug.Log(SessionData.instance.userStatus.credits.ToString());
             creditText.text = SessionData.instance.userStatus.credits.ToString();
         }
 

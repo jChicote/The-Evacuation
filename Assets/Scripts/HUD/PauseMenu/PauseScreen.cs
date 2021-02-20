@@ -38,8 +38,6 @@ public class PauseScreen : MonoBehaviour
 
             if(pausableItem != null)
             {
-                Debug.Log("had ipausable");
-                Debug.Log(pausableItem.ToString());
                 pausableItem.OnPause();
             }
         }

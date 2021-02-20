@@ -55,7 +55,7 @@ namespace UserInterface
 
         private void TriggerSelectSound()
         {
-            Debug.Log("Sound Triggered");
+            //Debug.Log("Sound Triggered");
         }
 
         private void LoadSelectionToData()
