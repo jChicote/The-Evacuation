@@ -26,6 +26,7 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
     public bool isUnlocked = false;
 
     // Core Stats
+    public int rescueCapacity;
     public float maxHealth;
     public float maxSheild;
     public float maxSpeed;
@@ -35,12 +36,13 @@ public class ShipInfo : ObjectInfo, IAssignWeapon
     public List<string> forwardWeapons;
     public List<string> turrentWeapons;
 
-    public void SetData(string stringID, string name, int price, float maxHealth, float maxShield, float maxSpeed, float maxHandling, int forwardWeaponSize, int turrentWeaponSize)
+    public void SetData(string stringID, string name, int price, int rescueCapacity, float maxHealth, float maxShield, float maxSpeed, float maxHandling, int forwardWeaponSize, int turrentWeaponSize)
     {
         this.stringID = stringID;
         this.name = name;
         this.price = price;
 
+        this.rescueCapacity = rescueCapacity;
         this.maxHealth = maxHealth;
         this.maxHealth = maxShield;
         this.maxSpeed = maxSpeed;

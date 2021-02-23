@@ -1344,6 +1344,7 @@ GameObject:
   - component: {fileID: 606963436}
   - component: {fileID: 606963439}
   - component: {fileID: 606963438}
+  - component: {fileID: 606963443}
   - component: {fileID: 606963442}
   m_Layer: 0
   m_Name: Transform_Platform
@@ -1452,8 +1453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e2fa1b0d1e03b4999abefa9585348c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  captureCircle: {fileID: 1563664578}
-  captureLine: {fileID: 499858524}
   timer: {fileID: 606963442}
 --- !u!114 &606963439
 MonoBehaviour:
@@ -1532,6 +1531,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &606963443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606963434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67dc07ca1f0c1144c996061277f0bdca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  captureCircle: {fileID: 1563664578}
+  captureLine: {fileID: 499858524}
 --- !u!1 &629182455
 GameObject:
   m_ObjectHideFlags: 0
@@ -4581,6 +4594,8 @@ MonoBehaviour:
     totalRescued: 0
     totalKills: 0
     totalLives: 0
+  inhabitedSatellites:
+  - {fileID: 1136238745}
 --- !u!4 &1654843424
 Transform:
   m_ObjectHideFlags: 0

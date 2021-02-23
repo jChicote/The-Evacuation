@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine.Events;
 using UserInterface.HUD;
 using PlayerSystems;
+using Level.Collections;
 
 public class SceneController : MonoBehaviour
 {
@@ -22,12 +23,11 @@ public class SceneController : MonoBehaviour
     [Header("Scene Managers & Systems")]
     public ScoreSystem scoreSystem;
 
+    // Serielised Inspector Fields
     [Space]
     [SerializeField] private LevelData levelData;
+    [SerializeField] private GameObject[] inhabitedSatellites;
 
-    // ================================
-    // Setters and Initialisers
-    // ================================
 
     // Start is called before the first frame update
     private void Awake()
@@ -50,9 +50,6 @@ public class SceneController : MonoBehaviour
         levelData = GameManager.Instance.levelSettings.defaultLevelData.Where(x => x.levelID == "#00091").First();
     }
 
-    // ================================
-    // UI and Systems
-    // ================================
 
     /// <summary>
     /// Manages the sequential creation of important scene objects.
@@ -65,6 +62,7 @@ public class SceneController : MonoBehaviour
         //Load Entities
         SpawnPlayer();
         SpawnEnemyEntities();
+        LoadInhabitedSatellites();
     }
 
     /// <summary>
@@ -85,14 +83,10 @@ public class SceneController : MonoBehaviour
         completionHUD.InitialiseGameCompletionHUD(levelData);
     }
 
-    // ================================
-    // Entity Loaders
-    // ================================
-
     /// <summary>
     /// Spawns the selected player into the scene.
     /// </summary>
-    public void SpawnPlayer()
+    private void SpawnPlayer()
     {
         SessionData sessionData = SessionData.instance;
         ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == sessionData.selectedShip.stringID).First();
@@ -103,8 +97,21 @@ public class SceneController : MonoBehaviour
     /// <summary>
     /// Spawns the team AI entities from the spawn managers.
     /// </summary>
-    public void SpawnEnemyEntities()
+    private void SpawnEnemyEntities()
     {
 
+    }
+    
+    /// <summary>
+    /// Called to Load / Initialise island or ship related satellites of inhabitants.
+    /// </summary>
+    private void LoadInhabitedSatellites()
+    {
+        IAbstractInhabitants abstractInhabitants;
+        foreach (GameObject satellite in inhabitedSatellites)
+        {
+            abstractInhabitants = satellite.GetComponent<IAbstractInhabitants>();
+            abstractInhabitants.InitialiseIsland(scoreSystem);
+        }
     }
 }

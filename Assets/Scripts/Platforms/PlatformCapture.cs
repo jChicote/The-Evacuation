@@ -1,7 +1,7 @@
 using UnityEngine;
 using PlayerSystems;
 
-namespace TransportSystems
+namespace Level.TransportSystems
 {
     // Summary:
     //      This interfaces defines the abstracted calls externally for this class.
@@ -19,21 +19,19 @@ namespace TransportSystems
         // Interface variables
         private ITransportPlatform platform;
         private IAutoLandingManoeuvre shipLandingManoeuvre;
-        private IShipPositionLocator shipPositionLocator;
+        private ICaptureRenderer captureRenderer;
 
         // Inspector Accessible Fields
-        [SerializeField] private Transform captureCircle;
-        [SerializeField] private LineRenderer captureLine;
         [SerializeField] private Timer timer;
 
         // Fields
-        private float scaleValue;
         private bool isCaptured = false;
         private bool isPaused = false;
         private bool isActive = false;
 
         public void InitialiseCaptureSystem(ITransportPlatform transporterPlatform)
         {
+            captureRenderer = this.GetComponent<ICaptureRenderer>();
             platform = transporterPlatform;
             timer.SetTimer(4);
         }
@@ -44,23 +42,25 @@ namespace TransportSystems
 
             if (isCaptured)
             {
-                PerformPlatformRescueTransfer();
+                TriggerPlatformRescue();
                 RunShipLandingGuidance();
             }
             else
             {
-                ShrinkCaptureCircle();
-                PositionCaptureLine();
-                timer.RunTimer();
+                captureRenderer.ShrinkCaptureCircle();
+                captureRenderer.PositionCaptureLine();
             }
         }
 
-
-        private void PerformPlatformRescueTransfer()
+        private void TriggerPlatformRescue()
         {
             if (shipLandingManoeuvre.CheckHasLanded())
             {
                 platform.EnablePlatformTransport();
+
+                // This is only required to be called once
+                // as the platform handles its transferal operation
+                isActive = false;
             }
         }
         
@@ -72,16 +72,22 @@ namespace TransportSystems
             }
         }
 
-        private void ShrinkCaptureCircle()
+        private void BeginCapture(IShipPositionLocator shipPositionLocator)
         {
-            scaleValue = Mathf.Lerp(captureCircle.localScale.x, 0, Time.fixedDeltaTime);
-            captureCircle.localScale = new Vector2(scaleValue, scaleValue);
+            captureRenderer.BeginRenderingCaptureVisual(shipPositionLocator);
+            timer.StartTimer();
+
+            isActive = true;
+            isCaptured = false;
         }
 
-        private void PositionCaptureLine()
+        private void StopCapture()
         {
-            captureLine.SetPosition(0, new Vector2(0, 0));
-            captureLine.SetPosition(1, transform.InverseTransformPoint(shipPositionLocator.GetShipPosition()));
+            shipLandingManoeuvre = null;
+            isActive = false;
+
+            timer.ResetTimer();
+            captureRenderer.StopRenderingCaptureVisual();
         }
 
         /// <summary>
@@ -90,17 +96,9 @@ namespace TransportSystems
         public void SetActionsOnTimerCompletion()
         {
             shipLandingManoeuvre.LockMovement();
-            ResetCaptureVisuals();
+            captureRenderer.StopRenderingCaptureVisual();
+
             isCaptured = true;
-        }
-
-        private void ResetCaptureVisuals()
-        {
-            captureCircle.gameObject.SetActive(false);
-            captureCircle.localScale = new Vector2(1, 1);
-            scaleValue = 1;
-
-            captureLine.gameObject.SetActive(false); 
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -108,26 +106,16 @@ namespace TransportSystems
             if (!collision.CompareTag("Player")) return;
 
             shipLandingManoeuvre = collision.gameObject.GetComponent<IAutoLandingManoeuvre>();
-            shipPositionLocator = collision.gameObject.GetComponent<IShipPositionLocator>();
+            IShipPositionLocator shipPositionLocator = collision.gameObject.GetComponent<IShipPositionLocator>();
 
-            ShrinkCaptureCircle();
-            captureCircle.gameObject.SetActive(true);
-            PositionCaptureLine();
-            captureLine.gameObject.SetActive(true);
-
-            isActive = true;
+            BeginCapture(shipPositionLocator);
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
             if (!collision.CompareTag("Player")) return;
 
-            shipLandingManoeuvre = null;
-            shipPositionLocator = null;
-            isActive = false;
-
-            timer.ResetTimer();
-            ResetCaptureVisuals();
+            StopCapture();
         }
 
         /// <summary>
@@ -135,8 +123,8 @@ namespace TransportSystems
         /// </summary>
         public void EndCapture()
         {
-            platform.EndPlatoformTransport();
-            ResetCaptureVisuals();
+            platform.EndPlatformTransport();
+            captureRenderer.StopRenderingCaptureVisual();
 
             isCaptured = false;
             isActive = false;

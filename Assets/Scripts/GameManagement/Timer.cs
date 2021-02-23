@@ -48,6 +48,11 @@ public class Timer: MonoBehaviour, IPausable
         canTick = true;
     }
 
+    public void StopTimer()
+    {
+        canTick = false;
+    }
+
     /// <summary>
     /// Called to perform ticking behaviours of the timer
     /// </summary>
@@ -76,11 +81,8 @@ public class Timer: MonoBehaviour, IPausable
     {
         timeLeft = startingTime;
         canTick = false;
+        isCompleted = false;
     }
-
-    // ###################################################################
-    // Pausible Methods
-    // ###################################################################
 
     public void OnPause()
     {

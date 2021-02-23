@@ -69,7 +69,16 @@ public class ScoreSystem : MonoBehaviour, IScoreEventAssigner
     /// </summary>
     public void IncrementRescueCount()
     {
+        // Increment on the rescue count can only take place
+        //  directly on the drop ship.
+
         scoreData.totalRescued++;
+        OnScoreUpdate.Invoke(this.scoreData);
+    }
+
+    public void UpdateCabinRescueCount(int rescuedInTransportCount)
+    {
+        scoreData.cabinTransporterCount = rescuedInTransportCount;
         OnScoreUpdate.Invoke(this.scoreData);
     }
 
@@ -126,6 +135,7 @@ public struct ScoreData
     // Rescure related variables
     public int totalRescued;
     public int maxRescuable;
+    public int cabinTransporterCount;
 
     public int hitCount;
 }

@@ -28,6 +28,7 @@ public class ShipAsset : ObjectInfo
             stringID,
             name,
             price,
+            stats.maxRescueCapacity,
             stats.maxHealth,
             stats.maxSheild,
             stats.maxSpeed,
@@ -47,6 +48,7 @@ public class ShipStats
     [Tooltip("A copy is necessary as the struct is what is passed into ship prefabs")]
     public string shipID;
 
+    public int maxRescueCapacity = 5;
     public float maxHealth = 100;
     public float maxSheild = 100;
 

@@ -1,18 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Level.Collections;
 
-public class DropoffPlatform : MonoBehaviour
+namespace Level.TransportSystems
 {
-    // Start is called before the first frame update
-    void Start()
+    public class DropoffPlatform : BasePlatform
     {
-        
+        public override void InitialisePlatform(IRescueInhabitant islandInhabitants)
+        {
+            this.islandInhabitants = islandInhabitants;
+
+            ICapture captureSystem = this.GetComponent<PlatformCapture>();
+            captureSystem.InitialiseCaptureSystem(this);
+        }
+
+        public override void RunTransfer()
+        {
+            islandInhabitants.DropOffIndividual();
+        }
+
+        public override void EnablePlatformTransport()
+        {
+            base.EndPlatformTransport();
+        }
+
+        public override void EndPlatformTransport()
+        {
+            base.EndPlatformTransport();
+        }
+
+        public override void OnPause()
+        {
+            base.OnPause();
+        }
+
+        public override void OnUnpause()
+        {
+            base.OnUnpause();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
