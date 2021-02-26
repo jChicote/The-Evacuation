@@ -5,12 +5,20 @@ using Level.TransportSystems;
 
 namespace PlayerSystems
 {
-    public interface ITransportToCabin
+    public interface IPlayerCabin
     {
-
+        void AddToShipCabin();
+        void DepartFromShipCabin();
+        bool CheckAtMaxCapacity();
+        bool CheckIsEmpty();
     }
 
-    public class PlayerRescueSystem : MonoBehaviour
+    public interface IShipPlatformTranslator
+    {
+        void StickToPlatform(Vector3 platformPosition);
+    }
+
+    public class PlayerRescueSystem : MonoBehaviour, IShipPlatformTranslator, IPlayerCabin
     {
         private ICapture endTransport;
         private IStatHandler statHandler;
@@ -18,6 +26,19 @@ namespace PlayerSystems
         public void InitialiseRescueSsytem()
         {
             statHandler = this.GetComponent<IStatHandler>();
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Platform"))
+            {
+                endTransport = this.GetComponent<ICapture>();
+            }
+        }
+
+        public void StickToPlatform(Vector3 platformPosition)
+        {
+            transform.position = platformPosition;
         }
 
         public void EndTransport()
@@ -30,20 +51,22 @@ namespace PlayerSystems
 
         public void AddToShipCabin()
         {
-
+            statHandler.RescueCabinCount++;
         }
 
         public void DepartFromShipCabin()
         {
-
+            statHandler.RescueCabinCount--;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        public bool CheckAtMaxCapacity()
         {
-            if (collision.CompareTag("Platform"))
-            {
-                endTransport = this.GetComponent<ICapture>();
-            }
+            return statHandler.RescueCabinCount == statHandler.CabinCapacity;
+        }
+
+        public bool CheckIsEmpty()
+        {
+            return statHandler.RescueCabinCount == 0;
         }
     }
 }

@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public interface IStatHandler {
+public interface IStatHandler : IStatRescue {
     void InitialiseStats(ShipInfo shipInfo);
+}
+
+public interface IStatRescue
+{
+    int RescueCabinCount { get; set; }
+    int CabinCapacity { get; }
 }
 
 public interface IWeaponStats {
@@ -45,6 +51,9 @@ public class StatHandler : MonoBehaviour, IStatHandler, IWeaponStats, IShipData,
     public ShipHitPoint OnHealthChanged;
     public ShipHitPoint OnShieldChanged;
 
+    // Fields
+    private int rescueCabinCount = 0;
+
     public void InitialiseStats(ShipInfo shipInfo)
     {
         this.shipInfo = shipInfo;
@@ -61,6 +70,18 @@ public class StatHandler : MonoBehaviour, IStatHandler, IWeaponStats, IShipData,
         OnShieldChanged = new ShipHitPoint();
 
         //TODO: Subscribe UI items
+    }
+
+    // Accessors
+    public int RescueCabinCount
+    {
+        get { return rescueCabinCount; }
+        set { rescueCabinCount = value; }
+    }
+
+    public int CabinCapacity
+    {
+        get { return shipInfo.rescueCapacity;  }
     }
 
     public List<string> GetForwardLoadout()

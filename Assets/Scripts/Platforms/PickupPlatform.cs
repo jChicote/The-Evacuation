@@ -1,16 +1,9 @@
 using UnityEngine;
 using Level.Collections;
+using PlayerSystems;
 
 namespace Level.TransportSystems
 {
-    // Summary:
-    //      This interface defines the enablers calls for controlling the transfer behavior.
-    public interface ITransportPlatform
-    {
-        void EnablePlatformTransport();
-        void EndPlatformTransport();
-    }
-
     // Summary:
     //      The PickupPlatform is the child of the BasePlatform and is responsible
     //      for pickup related actions, preferably found on islands.
@@ -26,6 +19,11 @@ namespace Level.TransportSystems
 
         public override void RunTransfer()
         {
+            base.RunTransfer();
+
+            if (playerCabin.CheckAtMaxCapacity()) 
+                return;
+
             islandInhabitants.PickupIndividual();
         }
 

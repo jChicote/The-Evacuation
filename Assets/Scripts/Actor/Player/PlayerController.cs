@@ -30,9 +30,6 @@ namespace PlayerSystems
         // Initialisers
         // ================================
 
-        /// <summary>
-        /// Initialises classes systems to the player
-        /// </summary>
         public void InitialisePlayer(SceneController sceneController)
         {
             // Initialises and sets primary data for vessel
@@ -42,13 +39,11 @@ namespace PlayerSystems
             InitiateInputSystem();
             InitiateMovement();
             InitiateWeapons();
+            InitialiseShipRescueCabin();
 
             sceneController.OnGameCompletion.AddListener(RemoveInputSystems);
         }
 
-        /// <summary>
-        /// Initialises ship stats using the servicer to retrieve data.
-        /// </summary>
         private void InitiateShipStatHandler()
         {
             IStatHandler statHandler = this.GetComponent<IStatHandler>();
@@ -59,9 +54,6 @@ namespace PlayerSystems
             shieldComponent.InitialiseShield(SessionData.instance.selectedShip.maxSheild);
         }
 
-        /// <summary>
-        /// Intiailises player related input classes
-        /// </summary>
         public void InitiateInputSystem()
         {
             playerInput = this.GetComponent<UnityEngine.InputSystem.PlayerInput>();
@@ -109,9 +101,6 @@ namespace PlayerSystems
             deskTopInput.InitialiseDesktop();
         }
 
-        /// <summary>
-        /// Initialises movement related classes.
-        /// </summary>
         public void InitiateMovement()
         {
             PlayerMovementController playerMovement = this.GetComponent<PlayerMovementController>();
@@ -124,6 +113,12 @@ namespace PlayerSystems
             playerWeapons.InitialiseWeaponController();
             IDamageable damager = this.GetComponent<IDamageable>();
             damager.InitialiseComponent();
+        }
+
+        private void InitialiseShipRescueCabin()
+        {
+            PlayerRescueSystem rescueSystem = this.GetComponent<PlayerRescueSystem>();
+            rescueSystem.InitialiseRescueSsytem();
         }
 
         // ================================

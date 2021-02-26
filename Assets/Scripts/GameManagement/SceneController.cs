@@ -108,10 +108,23 @@ public class SceneController : MonoBehaviour
     private void LoadInhabitedSatellites()
     {
         IAbstractInhabitants abstractInhabitants;
+        ICarrierInitialiser carrierInitialiser = null;
         foreach (GameObject satellite in inhabitedSatellites)
         {
             abstractInhabitants = satellite.GetComponent<IAbstractInhabitants>();
             abstractInhabitants.InitialiseIsland(scoreSystem);
+
+            carrierInitialiser = satellite.GetComponent<ICarrierInitialiser>();
         }
+
+        Debug.Log(carrierInitialiser);
+        InitialiseCarrier(carrierInitialiser);
+    }
+
+    private void InitialiseCarrier(ICarrierInitialiser carrierInitialiser)
+    {
+        if (carrierInitialiser == null) return;
+
+        carrierInitialiser.InitialiseCarrier();
     }
 }

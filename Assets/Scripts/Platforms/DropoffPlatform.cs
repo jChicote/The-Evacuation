@@ -1,5 +1,6 @@
 using UnityEngine;
 using Level.Collections;
+using PlayerSystems;
 
 namespace Level.TransportSystems
 {
@@ -15,6 +16,11 @@ namespace Level.TransportSystems
 
         public override void RunTransfer()
         {
+            base.RunTransfer();
+
+            if (playerCabin.CheckIsEmpty())
+                return;
+
             islandInhabitants.DropOffIndividual();
         }
 

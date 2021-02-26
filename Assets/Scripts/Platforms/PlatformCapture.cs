@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using PlayerSystems;
 
@@ -17,17 +18,25 @@ namespace Level.TransportSystems
     public class PlatformCapture : MonoBehaviour, IPausable, ICapture
     {
         // Interface variables
-        private ITransportPlatform platform;
-        private IAutoLandingManoeuvre shipLandingManoeuvre;
-        private ICaptureRenderer captureRenderer;
+        public ITransportPlatform platform;
+        public IAutoLandingManoeuvre shipLandingManoeuvre;
+        public ICaptureRenderer captureRenderer;
+        public IShipPlatformTranslator shipTranslate;
+        public IShipPositionLocator shipPositionLocator;
+
+        private CaptureState captureState = null;
 
         // Inspector Accessible Fields
         [SerializeField] private Timer timer;
 
         // Fields
-        private bool isCaptured = false;
         private bool isPaused = false;
-        private bool isActive = false;
+
+        // Accessors
+        public Timer CaptureTimer
+        {
+           get { return timer;  }
+        }
 
         public void InitialiseCaptureSystem(ITransportPlatform transporterPlatform)
         {
@@ -38,54 +47,22 @@ namespace Level.TransportSystems
 
         private void FixedUpdate()
         {
-            if (!isActive || isPaused) return;
+            if (isPaused) return;
 
-            if (isCaptured)
-            {
-                TriggerPlatformRescue();
-                RunShipLandingGuidance();
-            }
-            else
-            {
-                captureRenderer.ShrinkCaptureCircle();
-                captureRenderer.PositionCaptureLine();
-            }
+            if (captureState != null)
+                captureState.RunState();
         }
 
-        private void TriggerPlatformRescue()
+        public void TransitionState(CaptureState state)
         {
-            if (shipLandingManoeuvre.CheckHasLanded())
-            {
-                platform.EnablePlatformTransport();
-
-                // This is only required to be called once
-                // as the platform handles its transferal operation
-                isActive = false;
-            }
-        }
-        
-        private void RunShipLandingGuidance()
-        {
-            if (!shipLandingManoeuvre.CheckHasLanded())
-            {
-                shipLandingManoeuvre.AutoLand(this.transform);
-            }
+            this.captureState = state;
+            this.captureState.SetCaptureContext(this);
+            this.captureState.InitState();
         }
 
-        private void BeginCapture(IShipPositionLocator shipPositionLocator)
+        private void ResetCaptureSystem()
         {
-            captureRenderer.BeginRenderingCaptureVisual(shipPositionLocator);
-            timer.StartTimer();
-
-            isActive = true;
-            isCaptured = false;
-        }
-
-        private void StopCapture()
-        {
-            shipLandingManoeuvre = null;
-            isActive = false;
-
+            captureState = null;
             timer.ResetTimer();
             captureRenderer.StopRenderingCaptureVisual();
         }
@@ -97,8 +74,7 @@ namespace Level.TransportSystems
         {
             shipLandingManoeuvre.LockMovement();
             captureRenderer.StopRenderingCaptureVisual();
-
-            isCaptured = true;
+            TransitionState(new GuideState());
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -106,16 +82,18 @@ namespace Level.TransportSystems
             if (!collision.CompareTag("Player")) return;
 
             shipLandingManoeuvre = collision.gameObject.GetComponent<IAutoLandingManoeuvre>();
-            IShipPositionLocator shipPositionLocator = collision.gameObject.GetComponent<IShipPositionLocator>();
+            shipTranslate = collision.gameObject.GetComponent<IShipPlatformTranslator>();
+            shipPositionLocator = collision.gameObject.GetComponent<IShipPositionLocator>();
 
-            BeginCapture(shipPositionLocator);
+            platform.LoadPlayerCabin(collision.gameObject.GetComponent<IPlayerCabin>());
+            TransitionState(new TrackingState());
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
             if (!collision.CompareTag("Player")) return;
 
-            StopCapture();
+            ResetCaptureSystem();
         }
 
         /// <summary>
@@ -124,10 +102,7 @@ namespace Level.TransportSystems
         public void EndCapture()
         {
             platform.EndPlatformTransport();
-            captureRenderer.StopRenderingCaptureVisual();
-
-            isCaptured = false;
-            isActive = false;
+            ResetCaptureSystem();
         }
 
         public void OnPause()
