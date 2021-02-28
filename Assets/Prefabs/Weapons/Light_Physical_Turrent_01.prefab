@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 13
+  m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: 8e95c8e7528df174aa38ec177df629f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -96,7 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e70161c82998f14f80a559dcfb61f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stringID: 
   weaponRenderer: {fileID: 4243531612786880444}
   firingPoint: {fileID: 8573864348456318478}
   projectileShell: {fileID: 8389416922106746612, guid: 01c4259b9ac9b574ebd50b82c759294a, type: 3}

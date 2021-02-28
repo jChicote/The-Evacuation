@@ -49,7 +49,7 @@ MonoBehaviour:
   - isCompleted: 0
     levelID: '#00091'
     levelName: Test Level
-    maxRescuable: 0
+    maxRescuable: 10
     baseDifficulty: 0
     levelDuration: 360
     allowedLives: 0

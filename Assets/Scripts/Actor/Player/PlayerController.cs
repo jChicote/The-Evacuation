@@ -23,8 +23,8 @@ namespace PlayerSystems
 {
     public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, ICheckPaused
     {
-        public UnityEngine.InputSystem.PlayerInput playerInput;
-        public bool isPaused = false;
+        private UnityEngine.InputSystem.PlayerInput playerInput;
+        private bool isPaused = false;
 
         // ================================
         // Initialisers

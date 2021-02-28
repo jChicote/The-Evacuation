@@ -25,6 +25,7 @@ namespace Level.Collections
         public void DropOffIndividual()
         {
             inhabitantCount++;
+            scoreSystem.IncrementRescueCount();
         }
 
         public void PickupIndividual()

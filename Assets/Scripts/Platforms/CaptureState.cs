@@ -56,6 +56,7 @@ namespace Level.TransportSystems
     {
         public override void InitState()
         {
+            platformCapture.shipTranslate.AttachToPlatform();
             platformCapture.platform.EnablePlatformTransport();
         }
 
@@ -63,6 +64,13 @@ namespace Level.TransportSystems
         {
             platformCapture.shipTranslate.StickToPlatform(platformCapture.transform.position);
         }
+    }
+
+    public class DepartedState : CaptureState
+    {
+        public override void InitState() { }
+
+        public override void RunState() { }
     }
 }
 

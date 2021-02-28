@@ -15,25 +15,36 @@ namespace PlayerSystems
 
     public interface IShipPlatformTranslator
     {
+        void AttachToPlatform();
         void StickToPlatform(Vector3 platformPosition);
     }
 
-    public class PlayerRescueSystem : MonoBehaviour, IShipPlatformTranslator, IPlayerCabin
+    public interface IShipToPlatformAction
+    {
+        void DetachFromPlatform();
+    }
+
+    public class PlayerRescueSystem : MonoBehaviour, IShipPlatformTranslator, IPlayerCabin, IShipToPlatformAction
     {
         private ICapture endTransport;
         private IStatHandler statHandler;
+        private IWeaponLoadoutSelector loadoutSelector;
 
         public void InitialiseRescueSsytem()
         {
             statHandler = this.GetComponent<IStatHandler>();
+            loadoutSelector = this.GetComponent<IWeaponLoadoutSelector>();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("Platform"))
-            {
-                endTransport = this.GetComponent<ICapture>();
-            }
+            // Must check on both parent and children object if rigidbody is combining colliders
+            if (!collision.CompareTag("Platform")) return;
+            
+            endTransport = collision.gameObject.GetComponent<ICapture>();
+                
+            if (endTransport == null)
+                endTransport = collision.gameObject.GetComponentInChildren<ICapture>();
         }
 
         public void StickToPlatform(Vector3 platformPosition)
@@ -41,10 +52,16 @@ namespace PlayerSystems
             transform.position = platformPosition;
         }
 
-        public void EndTransport()
+        public void AttachToPlatform()
+        {
+            loadoutSelector.ChooseLoadoutPosition(LoadoutPosition.Pivot);
+        }
+
+        public void DetachFromPlatform()
         {
             if (endTransport == null) return;
 
+            loadoutSelector.ChooseLoadoutPosition(LoadoutPosition.Forward);
             endTransport.EndCapture();
             endTransport = null;
         }

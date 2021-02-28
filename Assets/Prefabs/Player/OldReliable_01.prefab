@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: -4144502830590983027}
   - component: {fileID: 7188504509091920555}
   m_Layer: 0
-  m_Name: PlayerShip_01
+  m_Name: OldReliable_01
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -436,8 +436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce9e96902c41d74582bc27510321236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
-  isPaused: 0
 --- !u!114 &2484082738970065172
 MonoBehaviour:
   m_ObjectHideFlags: 0

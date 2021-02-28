@@ -26,6 +26,7 @@ namespace PlayerSystems
         void TakeOff();
         bool CheckHasLanded();
         void LockMovement();
+        void UnlockMovement();
     }
 
     // Summary:
@@ -85,37 +86,25 @@ namespace PlayerSystems
             RunRotation();
         }
 
-        /// <summary>
-        /// Calcualtes the movement of the player.
-        /// </summary>
         public void CalculateMovement(Vector2 startPos, Vector2 currentPos)
         {
             currentSpeed = shipInfo.maxSpeed * (Vector3.Magnitude(startPos - currentPos) / maxRadiusTransform);
             currentDirection = (currentPos - startPos).normalized;
             currentVelocity = currentDirection * currentSpeed;
 
-            CalculateRotation();
+            CalculateLocalRotation();
         }
 
-        /// <summary>
-        /// Calculates the local rotation of the player.
-        /// </summary>
-        private void CalculateRotation()
+        private void CalculateLocalRotation()
         {
             angleRotation = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg - 90;
         }
 
-        /// <summary>
-        /// Performs the movement actions.
-        /// </summary>
         private void RunMovement()
         {
             playerRB.velocity = currentVelocity;
         }
 
-        /// <summary>
-        /// Performs the player's rotation.
-        /// </summary>
         private void RunRotation()
         {
             gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleRotation));
@@ -140,14 +129,7 @@ namespace PlayerSystems
             playerRB.velocity = Vector2.zero;
             transform.position = Vector3.MoveTowards(transform.position, landingPosition.position, 0.05f);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, landingPosition.rotation, 6f);
-
-            if (transform.position == landingPosition.position && transform.rotation == landingPosition.rotation)
-            {
-                hasLanded = true;
-            } else
-            {
-                hasLanded = false;
-            }
+            hasLanded = transform.position == landingPosition.position && transform.rotation == landingPosition.rotation;
         }
 
         public Vector2 GetShipPosition()
@@ -163,6 +145,11 @@ namespace PlayerSystems
         public void LockMovement()
         {
             isMovementLocked = true;
+        }
+
+        public void UnlockMovement()
+        {
+            isMovementLocked = false;
         }
 
         public void TakeOff()

@@ -35,7 +35,6 @@ namespace Level.Collections
         {
             if (isPaused) return;
 
-
             carrierVelocity = Vector2.right * carrierSpeed;
             carrierRB.velocity = carrierVelocity;
         }

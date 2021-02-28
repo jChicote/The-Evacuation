@@ -30,12 +30,11 @@ public interface IHealthAccessors
     void SetShipHealth(float newHealth);
 }
 
-public interface IShieldAccessors 
+public interface IShieldAccessors
 {
     float GetShipShields();
     void SetShipShields(float newShields);
 }
-
 
 public class StatHandler : MonoBehaviour, IStatHandler, IWeaponStats, IShipData, IHealthAccessors, IShieldAccessors
 {

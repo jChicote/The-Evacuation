@@ -18,15 +18,15 @@ namespace Level.TransportSystems
         {
             base.RunTransfer();
 
-            if (playerCabin.CheckIsEmpty())
-                return;
+            if (playerCabin.CheckIsEmpty()) return;
 
             islandInhabitants.DropOffIndividual();
+            playerCabin.DepartFromShipCabin();
         }
 
         public override void EnablePlatformTransport()
         {
-            base.EndPlatformTransport();
+            base.EnablePlatformTransport();
         }
 
         public override void EndPlatformTransport()

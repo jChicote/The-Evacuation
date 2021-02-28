@@ -9,29 +9,28 @@ public interface IWeaponController
     void ActivateWeapons(bool isFiring);
 }
 
-public interface IWeaponLoadoutSelector
-{
-    void ChooseLoadoutPosition(LoadoutPosition position);
-}
-
-
 namespace PlayerSystems
 {
+    public interface IWeaponLoadoutSelector
+    {
+        void ChooseLoadoutPosition(LoadoutPosition positionType);
+    }
+
     /// <summary>
     /// Responsible for handling weapons fire and interfacing with weapons
     /// </summary>
-    public class PlayerWeaponController : MonoBehaviour, IWeaponController
+    public class PlayerWeaponController : MonoBehaviour, IWeaponController, IWeaponLoadoutSelector
     {
         [Header("Weapon Loadout")]
-        public LoadoutHolder[] forwardWeaponLoadout;
-        public LoadoutHolder[] turrentWeaponLoadout;
+        [SerializeField] private LoadoutHolder[] forwardWeaponLoadout;
+        [SerializeField] private LoadoutHolder[] turrentWeaponLoadout;
 
         // Interfaces
         private ICheckPaused pauseChecker;
         private List<IWeapon> weapons;
 
         // Weapon loadout firing configuration
-        private LoadoutPosition loadoutPosition;
+        private LoadoutPosition loadoutPosition = LoadoutPosition.Forward;
 
         // Bool Checks
         private bool isFiring = false;
@@ -42,12 +41,20 @@ namespace PlayerSystems
         public void InitialiseWeaponController()
         {
             pauseChecker = this.GetComponent<ICheckPaused>();
-            loadoutPosition = LoadoutPosition.Fixed;
+            loadoutPosition = LoadoutPosition.Forward;
 
             IShipData shipDataInterface = this.GetComponent<IShipData>();
             ShipInfo shipInfo = shipDataInterface.GetShipStats();
 
             SetupWeapons(shipInfo);
+        }
+
+        private void FixedUpdate()
+        {
+            if (pauseChecker.CheckIsPaused()) return;
+            if (!isFiring) return;
+
+            FireWeapons();
         }
 
         /// <summary>
@@ -69,27 +76,6 @@ namespace PlayerSystems
             }
         }
 
-        // Update is called once per frame
-        private void FixedUpdate()
-        {
-            if (pauseChecker.CheckIsPaused()) return;
-            if (!isFiring) return;
-
-            FireWeapons();
-        }
-
-        /// <summary>
-        /// Connects with the input system and activates the weapons on trigger.
-        /// </summary>
-        /// <param name="isFiring"></param>
-        public void ActivateWeapons(bool isFiring)
-        {
-            this.isFiring = isFiring;
-        }
-
-        /// <summary>
-        /// Fires the weapons.
-        /// </summary>
         private void FireWeapons()
         {
             if (weapons.Count == 0)
@@ -102,6 +88,24 @@ namespace PlayerSystems
             {
                 weapon.FireWeapon(loadoutPosition);
             }
+        }
+
+        /// <summary>
+        /// Connects with the input system and activates the weapons on trigger.
+        /// </summary>
+        /// <param name="isFiring"></param>
+        public void ActivateWeapons(bool isFiring)
+        {
+            this.isFiring = isFiring;
+        }
+
+        /// <summary>
+        /// Sets the loadout position on all weapons in ship
+        /// </summary>
+        /// <param name="positionType">Active position type either forward or pivot</param>
+        public void ChooseLoadoutPosition(LoadoutPosition positionType)
+        {
+            loadoutPosition = positionType;
         }
     }
 }

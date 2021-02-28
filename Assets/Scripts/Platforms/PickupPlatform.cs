@@ -21,10 +21,10 @@ namespace Level.TransportSystems
         {
             base.RunTransfer();
 
-            if (playerCabin.CheckAtMaxCapacity()) 
-                return;
+            if (playerCabin.CheckAtMaxCapacity()) return;
 
             islandInhabitants.PickupIndividual();
+            playerCabin.AddToShipCabin();
         }
 
         // This class should only be called once to be enabled.

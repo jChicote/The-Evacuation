@@ -15,8 +15,9 @@ namespace Weapons
             for (int i = 0; i < holders.Length; i++)
             {
                 //Check if in bounds
-                if (CheckInBounds(i, forwardWeapon.Count)) 
+                if (CheckInBounds(i, forwardWeapon.Count))
                 {
+                    //holders[i].SetWeapon(forwardWeapon[i])
                     weapons.Add(holders[i].SetWeapon(forwardWeapon[i]));
                 }
             }
@@ -30,10 +31,8 @@ namespace Weapons
             for (int i = 0; i < holders.Length; i++)
             {
                 //Check if in bounds
-                if (CheckInBounds(i, turrentWeapon.Count))
-                {
+                if (!CheckInBounds(i, turrentWeapon.Count))
                     weapons.Add(holders[i].SetWeapon(turrentWeapon[i]));
-                }
             }
         }
 

@@ -26,7 +26,7 @@ namespace PlayerSystems
             if (weaponAsset == null) return null;
 
             //Spawn and Initialise Weapon
-            GameObject weapon = Instantiate(weaponAsset.weaponPrefab, transform);
+            weapon = Instantiate(weaponAsset.weaponPrefab, transform);
             IWeapon weaponInterface = weapon.GetComponent<IWeapon>();
             weaponInterface.InitialiseWeapon(info, transform.root.gameObject.GetComponent<IMovementAccessors>());
             weaponInterface.ConfigureWeaponPositioning(loadoutType);
@@ -47,7 +47,7 @@ public class Loadout
 
 public enum LoadoutPosition
 {
-    Fixed,
+    Forward,
     Pivot
 }
 

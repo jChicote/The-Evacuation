@@ -14,6 +14,7 @@ public class DesktopInputManager : MonoBehaviour, IDesktopInput
     private ICheckPaused pauseChecker;
     private IMovement playerMovement;
     private IWeaponController playerWeapons;
+    private IShipToPlatformAction shipDetacher;
 
     private Vector2 centerPosition;
     private Vector2 currentMousePosition;
@@ -23,6 +24,7 @@ public class DesktopInputManager : MonoBehaviour, IDesktopInput
         playerMovement = this.GetComponent<IMovement>();
         playerWeapons = this.GetComponent<IWeaponController>();
         pauseChecker = this.GetComponent<ICheckPaused>();
+        shipDetacher = this.GetComponent<IShipToPlatformAction>();
         centerPosition = new Vector2();
         centerPosition.x = Screen.width / 2;
         centerPosition.y = Screen.height / 2;
@@ -54,6 +56,11 @@ public class DesktopInputManager : MonoBehaviour, IDesktopInput
     {
         //Debug.Log(value.isPressed);
         playerWeapons.ActivateWeapons(value.isPressed);
+    }
+
+    private void OnDetach(InputValue value)
+    {
+        shipDetacher.DetachFromPlatform();
     }
 
     // Needed for presenting GUI options for disabling

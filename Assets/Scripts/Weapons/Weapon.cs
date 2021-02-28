@@ -42,7 +42,7 @@ namespace Weapons
         /// <param name="loadoutType"></param>
         public void ConfigureWeaponPositioning(LoadoutPosition loadoutType)
         {
-            if (loadoutType == LoadoutPosition.Fixed)
+            if (loadoutType == LoadoutPosition.Forward)
             {
                 weaponRenderer.enabled = false;
                 firingPoint = transform;

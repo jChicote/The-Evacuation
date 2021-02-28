@@ -48,9 +48,7 @@ namespace Level.TransportSystems
         private void FixedUpdate()
         {
             if (isPaused) return;
-
-            if (captureState != null)
-                captureState.RunState();
+            if (captureState != null) captureState.RunState();
         }
 
         public void TransitionState(CaptureState state)
@@ -84,8 +82,8 @@ namespace Level.TransportSystems
             shipLandingManoeuvre = collision.gameObject.GetComponent<IAutoLandingManoeuvre>();
             shipTranslate = collision.gameObject.GetComponent<IShipPlatformTranslator>();
             shipPositionLocator = collision.gameObject.GetComponent<IShipPositionLocator>();
-
             platform.LoadPlayerCabin(collision.gameObject.GetComponent<IPlayerCabin>());
+
             TransitionState(new TrackingState());
         }
 
@@ -101,6 +99,7 @@ namespace Level.TransportSystems
         /// </summary>
         public void EndCapture()
         {
+            shipLandingManoeuvre.UnlockMovement();
             platform.EndPlatformTransport();
             ResetCaptureSystem();
         }

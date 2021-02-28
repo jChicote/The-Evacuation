@@ -68,6 +68,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""Detach"",
+                    ""type"": ""Button"",
+                    ""id"": ""9c866548-0c6b-4941-ad06-9b780c342c85"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -103,6 +111,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d93506a-bc0d-4f26-a489-f72b7281d767"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Detach"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -117,6 +136,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Desktop_Movement = m_Desktop.FindAction("Movement", throwIfNotFound: true);
         m_Desktop_Pause = m_Desktop.FindAction("Pause", throwIfNotFound: true);
         m_Desktop_Attack = m_Desktop.FindAction("Attack", throwIfNotFound: true);
+        m_Desktop_Detach = m_Desktop.FindAction("Detach", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -202,6 +222,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Desktop_Movement;
     private readonly InputAction m_Desktop_Pause;
     private readonly InputAction m_Desktop_Attack;
+    private readonly InputAction m_Desktop_Detach;
     public struct DesktopActions
     {
         private @PlayerInput m_Wrapper;
@@ -209,6 +230,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Desktop_Movement;
         public InputAction @Pause => m_Wrapper.m_Desktop_Pause;
         public InputAction @Attack => m_Wrapper.m_Desktop_Attack;
+        public InputAction @Detach => m_Wrapper.m_Desktop_Detach;
         public InputActionMap Get() { return m_Wrapper.m_Desktop; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -227,6 +249,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Attack.started -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAttack;
+                @Detach.started -= m_Wrapper.m_DesktopActionsCallbackInterface.OnDetach;
+                @Detach.performed -= m_Wrapper.m_DesktopActionsCallbackInterface.OnDetach;
+                @Detach.canceled -= m_Wrapper.m_DesktopActionsCallbackInterface.OnDetach;
             }
             m_Wrapper.m_DesktopActionsCallbackInterface = instance;
             if (instance != null)
@@ -240,6 +265,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @Detach.started += instance.OnDetach;
+                @Detach.performed += instance.OnDetach;
+                @Detach.canceled += instance.OnDetach;
             }
         }
     }
@@ -253,5 +281,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnDetach(InputAction.CallbackContext context);
     }
 }
