@@ -9,10 +9,11 @@ namespace PlayerSystems
     /// </summary>
     public class LoadoutHolder : MonoBehaviour
     {
-        public int loadoutNum;
-        public LoadoutPosition loadoutType;
-        public Loadout weaponLoadout;
-        public GameObject weapon;
+        // Inspector accessible fields
+        [SerializeField] private LoadoutPosition loadoutType;
+
+        // Fields
+        private GameObject weapon;
 
         /// <summary>
         /// Is given a loadout configuration which then loads the weapon.
@@ -30,6 +31,8 @@ namespace PlayerSystems
             IWeapon weaponInterface = weapon.GetComponent<IWeapon>();
             weaponInterface.InitialiseWeapon(info, transform.root.gameObject.GetComponent<IMovementAccessors>());
             weaponInterface.ConfigureWeaponPositioning(loadoutType);
+
+            Debug.Log(weapon.name + ", " + weaponInterface + ", " + loadoutType);
 
             return weaponInterface;
         }

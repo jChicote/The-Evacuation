@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using PlayerSystems;
+using Weapons;
 
 public interface IDesktopInput
 {
@@ -36,6 +37,21 @@ public class DesktopInputManager : MonoBehaviour, IDesktopInput
 
         currentMousePosition = value.Get<Vector2>();
         playerMovement.CalculateMovement(centerPosition, currentMousePosition);
+
+        DirectWeaponRotatorsToPoint(value);
+    }
+
+    /// <summary>
+    /// Called to provide pointer locations of input to rotators.
+    /// </summary>
+    private void DirectWeaponRotatorsToPoint(InputValue value)
+    {
+        // Seperate functionality and does not attach itself to any event action.
+
+        for (int i = 0; i < playerWeapons.GetWeaponRotators().Length; i++)
+        {
+            playerWeapons.GetWeaponRotators()[i].ProvidePointerLocation(value.Get<Vector2>());
+        }
     }
 
     private void OnPause(InputValue value)

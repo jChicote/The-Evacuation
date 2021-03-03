@@ -31,8 +31,9 @@ namespace Weapons
             for (int i = 0; i < holders.Length; i++)
             {
                 //Check if in bounds
-                if (!CheckInBounds(i, turrentWeapon.Count))
+                if (CheckInBounds(i, turrentWeapon.Count))
                     weapons.Add(holders[i].SetWeapon(turrentWeapon[i]));
+                Debug.Log("Has been created");
             }
         }
 

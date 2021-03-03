@@ -8,6 +8,7 @@ namespace Weapons
     public class Turrent : ProjectileWeapon
     {
         private IMovementAccessors movementAccessors;
+        private Transform weaponTransform;
 
         /// <summary>
         /// Initialises the weapon on start.
@@ -16,7 +17,22 @@ namespace Weapons
         {
             this.weaponData = data;
             this.movementAccessors = movementAccessors;
-            Debug.Log(movementAccessors);
+            this.weaponTransform = this.transform;
+        }
+
+        public override void RotateWeaponToPosition(LoadoutPosition currentLoadoutPosition)
+        {
+            if (loadoutPositionType != currentLoadoutPosition) return;
+
+            Vector3 positionRelative = lastPointedPosition - transform.position;
+            float pointedAngle = Mathf.Atan2(positionRelative.y, positionRelative.x) * Mathf.Rad2Deg - 90;
+            Debug.Log(pointedAngle);
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, pointedAngle));
+            //Vector3 newDir = Vector3.RotateTowards(transform.up, lastPointedPosition - transform.position, Time.deltaTime, 0);
+
+            //Rotates at the lower left corner as center
+            //Debug.Log(lastPointedPosition - transform.position);
+            //transform.rotation = Quaternion.LookRotation(Vector3.forward, lastPointedPosition - transform.position);
         }
 
         /// <summary>
@@ -36,7 +52,13 @@ namespace Weapons
             {
                 timeTillNextFire -= Time.fixedDeltaTime;
             }
-            
+        }
+
+        public override void ProvidePointerLocation(Vector2 pointerPosition)
+        {
+            // Rotates the weapon on it's local position to the direction of the pointer input.
+
+            lastPointedPosition = Camera.main.ScreenToWorldPoint(pointerPosition);
         }
     }
 }

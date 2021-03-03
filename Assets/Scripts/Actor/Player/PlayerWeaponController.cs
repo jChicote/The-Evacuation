@@ -7,6 +7,7 @@ public interface IWeaponController
 {
     void InitialiseWeaponController();
     void ActivateWeapons(bool isFiring);
+    IWeaponRotator[] GetWeaponRotators();
 }
 
 namespace PlayerSystems
@@ -28,6 +29,7 @@ namespace PlayerSystems
         // Interfaces
         private ICheckPaused pauseChecker;
         private List<IWeapon> weapons;
+        private IWeaponRotator[] weaponRotators;
 
         // Weapon loadout firing configuration
         private LoadoutPosition loadoutPosition = LoadoutPosition.Forward;
@@ -52,6 +54,7 @@ namespace PlayerSystems
         private void FixedUpdate()
         {
             if (pauseChecker.CheckIsPaused()) return;
+            if (loadoutPosition == LoadoutPosition.Pivot) RotatePivotWeapons();
             if (!isFiring) return;
 
             FireWeapons();
@@ -66,13 +69,25 @@ namespace PlayerSystems
             weapons = new List<IWeapon>();
 
             if (forwardWeaponLoadout.Length != 0 && shipInfo.forwardWeapons != null && shipInfo.forwardWeapons.Count != 0)
-            {
                 setuphandler.SetupForwardWeapons(ref weapons, shipInfo.forwardWeapons, forwardWeaponLoadout);
-            }
 
             if (turrentWeaponLoadout.Length != 0 && shipInfo.turrentWeapons != null && shipInfo.turrentWeapons.Count != 0)
-            {
                 setuphandler.SetupTurrentWeapons(ref weapons, shipInfo.turrentWeapons, turrentWeaponLoadout);
+
+            CollectAllWeaponRotators(weapons.Count);
+        }
+
+        private void CollectAllWeaponRotators(int arraySize)
+        {
+            weaponRotators = new IWeaponRotator[arraySize];
+            weaponRotators = this.GetComponentsInChildren<IWeaponRotator>();
+        }
+
+        private void RotatePivotWeapons()
+        {
+            for (int i = 0; i < weaponRotators.Length; i++)
+            {
+                weaponRotators[i].RotateWeaponToPosition(loadoutPosition);
             }
         }
 
@@ -106,6 +121,11 @@ namespace PlayerSystems
         public void ChooseLoadoutPosition(LoadoutPosition positionType)
         {
             loadoutPosition = positionType;
+        }
+
+        public IWeaponRotator[] GetWeaponRotators()
+        {
+            return weaponRotators;
         }
     }
 }

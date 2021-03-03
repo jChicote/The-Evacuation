@@ -15,17 +15,24 @@ public interface IImageExtract
 
 namespace Weapons
 {
-    public abstract class Weapon : MonoBehaviour, IWeapon, IPausable, IImageExtract
+
+    public interface IWeaponRotator
+    {
+        void ProvidePointerLocation(Vector2 pointerPosition);
+        void RotateWeaponToPosition(LoadoutPosition currentLoadoutPosition);
+    }
+
+    public abstract class Weapon : MonoBehaviour, IWeapon, IPausable, IImageExtract, IWeaponRotator
     {
         // Public Members
         public SpriteRenderer weaponRenderer;
         public Transform firingPoint;
 
-        // Weapon Data
+        // Fields
         protected WeaponInfo weaponData;
-
-        // Modifiable
         protected LoadoutPosition loadoutPositionType;
+        protected Vector3 weaponToPointerDirection;
+        protected Vector3 lastPointedPosition;
         protected bool isReloading = false;
         protected bool isPaused = false;
         protected float timeTillNextFire = 0;
@@ -35,6 +42,10 @@ namespace Weapons
         public abstract void FireWeapon(LoadoutPosition currentLoadoutPosition);
 
         protected virtual void ReloadWeapon() { }
+
+        public virtual void RotateWeaponToPosition(LoadoutPosition currentLoadoutPosition) { }
+
+        public virtual void ProvidePointerLocation(Vector2 pointerPosition) { }
 
         /// <summary>
         /// Configures the weapons appearance and position based on loadout type.
@@ -70,7 +81,6 @@ namespace Weapons
             isPaused = false;
         }
     }
-
 }
 
 [System.Serializable]
