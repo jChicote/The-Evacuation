@@ -25,17 +25,19 @@ namespace Weapons
     public abstract class Weapon : MonoBehaviour, IWeapon, IPausable, IImageExtract, IWeaponRotator
     {
         // Public Members
-        public SpriteRenderer weaponRenderer;
-        public Transform firingPoint;
+        [SerializeField] protected SpriteRenderer weaponRenderer;
+        [SerializeField] protected Transform firingPoint;
 
         // Fields
+        protected Transform weaponTransform;
         protected WeaponInfo weaponData;
         protected LoadoutPosition loadoutPositionType;
-        protected Vector3 weaponToPointerDirection;
+        protected Vector3 relativeWeaponDirectionToPoint;
         protected Vector3 lastPointedPosition;
         protected bool isReloading = false;
         protected bool isPaused = false;
         protected float timeTillNextFire = 0;
+        protected float pointedAngle = 0;
 
         public abstract void InitialiseWeapon(WeaponInfo data, IMovementAccessors movementAccessors);
 
@@ -43,7 +45,14 @@ namespace Weapons
 
         protected virtual void ReloadWeapon() { }
 
-        public virtual void RotateWeaponToPosition(LoadoutPosition currentLoadoutPosition) { }
+        public virtual void RotateWeaponToPosition(LoadoutPosition currentLoadoutPosition)
+        {
+            if (loadoutPositionType != currentLoadoutPosition) return;
+
+            relativeWeaponDirectionToPoint = lastPointedPosition - transform.position;
+            pointedAngle = Mathf.Atan2(relativeWeaponDirectionToPoint.y, relativeWeaponDirectionToPoint.x) * Mathf.Rad2Deg - 90;
+            weaponTransform.rotation = Quaternion.Euler(0, 0, pointedAngle);
+        }
 
         public virtual void ProvidePointerLocation(Vector2 pointerPosition) { }
 
