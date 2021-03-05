@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using UserInterface;
+using Evacuation.UserInterface;
 
 public class GameManager : MonoBehaviour
 {

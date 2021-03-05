@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Events;
-using UserInterface.HUD;
-using PlayerSystems;
-using Level.Collections;
+using Evacuation.UserInterface.HUD;
+using Evacuation.PlayerSystems;
+using Evacuation.UserInterface.LocationMarker;
+using Evacuation.Level.Collections;
 
 public class SceneController : MonoBehaviour
 {
@@ -22,12 +23,15 @@ public class SceneController : MonoBehaviour
 
     [Header("Scene Managers & Systems")]
     public ScoreSystem scoreSystem;
+    [SerializeField] private GameObject locationManagerObject;
 
     // Serielised Inspector Fields
     [Space]
     [SerializeField] private LevelData levelData;
     [SerializeField] private GameObject[] inhabitedSatellites;
 
+    // Fields
+    public  IMarkerManager markerManager;
 
     // Start is called before the first frame update
     private void Awake()
@@ -49,7 +53,6 @@ public class SceneController : MonoBehaviour
 
         levelData = GameManager.Instance.levelSettings.defaultLevelData.Where(x => x.levelID == "#00091").First();
     }
-
 
     /// <summary>
     /// Manages the sequential creation of important scene objects.
@@ -74,7 +77,8 @@ public class SceneController : MonoBehaviour
         playerHUD.InitialiseHud(scoreSystem.GetComponent<IScoreEventAssigner>(), levelData, this);
         scoreSystem.IncrementScoreAmount(100);
         scoreSystem.ForceLabelUpdate();
-
+        markerManager = locationManagerObject.GetComponent<IMarkerManager>();
+        markerManager.InitialiseMarkerManager();
     }
 
     public void RevealGameCompletionHUD()

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class ShieldComponent : MonoBehaviour
 {
     protected bool isShieldRegenerating = false;

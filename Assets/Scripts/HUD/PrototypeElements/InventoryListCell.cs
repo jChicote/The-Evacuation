@@ -11,7 +11,7 @@ public interface IInventoryCell
     void SetColor();
 }
 
-namespace UserInterface
+namespace Evacuation.UserInterface
 {
     public abstract class InventoryListCell : MonoBehaviour, IInventoryCell
     {

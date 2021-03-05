@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PlayerSystems;
+using Evacuation.PlayerSystems;
 
-namespace Weapons
+namespace Evacuation.Weapons
 {
     public class ProjectileWeapon : Weapon
     {

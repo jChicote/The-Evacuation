@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Level.Collections;
-using PlayerSystems;
+using Evacuation.Level.Collections;
+using Evacuation.PlayerSystems;
+using Evacuation.UserInterface.LocationMarker;
 
-namespace Level.TransportSystems
+namespace Evacuation.Level.TransportSystems
 {
     // Summary:
     //      This interface defines the enablers calls for controlling the transfer behavior.
@@ -20,13 +21,14 @@ namespace Level.TransportSystems
         // Interfaces
         public IRescueInhabitant islandInhabitants;
         public IPlayerCabin playerCabin;
+        protected IMarkerManager pointMarkerManager;
 
         // Inspector Accessible Fields
         [SerializeField] protected Transform landingPoint;
-        //[SerializeField] protected IRescueInhabitant islandInhabitants;
 
         // Fields
         protected bool canTransport;
+
 
         public abstract void InitialisePlatform(IRescueInhabitant islandInhabitants);
 

@@ -1,5 +1,5 @@
 
-namespace Level.TransportSystems
+namespace Evacuation.Level.TransportSystems
 {
     public abstract class CaptureState
     {

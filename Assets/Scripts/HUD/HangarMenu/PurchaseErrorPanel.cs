@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace UserInterface
+namespace Evacuation.UserInterface
 {
     /// <summary>
     /// Responsible for handling the actions of the purchase panel on the shop menu.

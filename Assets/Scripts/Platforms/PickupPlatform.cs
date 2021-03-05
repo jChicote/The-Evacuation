@@ -1,8 +1,8 @@
 using UnityEngine;
-using Level.Collections;
-using PlayerSystems;
+using Evacuation.Level.Collections;
+using Evacuation.PlayerSystems;
 
-namespace Level.TransportSystems
+namespace Evacuation.Level.TransportSystems
 {
     // Summary:
     //      The PickupPlatform is the child of the BasePlatform and is responsible
@@ -13,6 +13,7 @@ namespace Level.TransportSystems
         {
             this.islandInhabitants = islandInhabitants;
 
+            GameManager.Instance.sceneController.markerManager.GenerateLocationMarker(this.transform);
             ICapture captureSystem = this.GetComponent<ICapture>();
             captureSystem.InitialiseCaptureSystem(this);
         }

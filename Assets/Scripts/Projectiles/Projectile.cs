@@ -7,7 +7,7 @@ public interface IProjectile
     void InitialiseProjectile(float speed, float damage, float life);
 }
 
-namespace Weapons
+namespace Evacuation.Weapons
 {
     public abstract class Projectile : MonoBehaviour, IProjectile, IPausable
     {

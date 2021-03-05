@@ -8,11 +8,11 @@ public interface IDamageable
     void OnDamage(float damage);
 }
 
-namespace PlayerSystems
+namespace Evacuation.PlayerSystems
 {
     public class PlayerDamageManager : MonoBehaviour, IDamageable
     {
-//private IHealthAccessors healthAccessors;
+        //private IHealthAccessors healthAccessors;
         private PlayerHeathComponent healthComponent;
 
         public void InitialiseComponent()

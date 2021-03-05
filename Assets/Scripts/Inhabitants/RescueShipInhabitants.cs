@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Level.TransportSystems;
+using Evacuation.Level.TransportSystems;
 
-namespace Level.Collections
+namespace Evacuation.Level.Collections
 {
     public class RescueShipInhabitants : MonoBehaviour, IAbstractInhabitants, IRescueInhabitant
     {

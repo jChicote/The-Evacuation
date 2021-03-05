@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using PlayerSystems;
-using Weapons;
+using Evacuation.PlayerSystems;
+using Evacuation.Weapons;
 
 public interface IDesktopInput
 {

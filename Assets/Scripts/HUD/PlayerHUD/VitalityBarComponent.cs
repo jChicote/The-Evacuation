@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UserInterface.HUD
+namespace Evacuation.UserInterface.HUD
 {
     public interface IVitalityBar
     {

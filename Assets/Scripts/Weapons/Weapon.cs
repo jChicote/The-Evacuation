@@ -1,5 +1,5 @@
 using UnityEngine;
-using PlayerSystems;
+using Evacuation.PlayerSystems;
 
 public interface IWeapon
 {
@@ -13,7 +13,7 @@ public interface IImageExtract
     Sprite ExtractImage();
 }
 
-namespace Weapons
+namespace Evacuation.Weapons
 {
 
     public interface IWeaponRotator

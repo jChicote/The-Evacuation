@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Weapons
+namespace Evacuation.Weapons
 {
     public class Bullet : Projectile
     {

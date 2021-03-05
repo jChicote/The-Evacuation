@@ -40,7 +40,7 @@ public interface IEquipmentMenu
     EquipmentType GetCurrentType();
 }
 
-namespace UserInterface 
+namespace Evacuation.UserInterface 
 {
     public class EquipmentSelectionMenu : MonoBehaviour, IIdentifyShip, IShipAssign, ICheckShipSlot, IInfoPanel, IEquipmentMenu
     {

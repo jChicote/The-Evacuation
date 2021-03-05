@@ -11,7 +11,7 @@ public interface IShopInsertData
     void SetColor();
 }
 
-namespace UserInterface
+namespace Evacuation.UserInterface
 {
     public interface IUpdateCell
     {

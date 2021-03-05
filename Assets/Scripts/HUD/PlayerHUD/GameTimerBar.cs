@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UserInterface.HUD
+namespace Evacuation.UserInterface.HUD
 {
     public interface IGameTimerBar
     {

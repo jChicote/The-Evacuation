@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace UserInterface.Touch
+namespace Evacuation.UserInterface.Touch
 {
     public class PressAndHoldEvent : Button
     {

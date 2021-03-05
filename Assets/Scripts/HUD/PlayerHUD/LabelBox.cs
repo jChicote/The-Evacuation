@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace UserInterface.HUD
+namespace Evacuation.UserInterface.HUD
 {
     public abstract class LabelBox : MonoBehaviour
     {

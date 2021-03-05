@@ -11,7 +11,7 @@ public interface IHangarActions
     void RevealEquipmentMenu();
 }
 
-namespace UserInterface
+namespace Evacuation.UserInterface
 {
     public class HangarMenu : MonoBehaviour, IInfoPanel, IHangarActions
     {

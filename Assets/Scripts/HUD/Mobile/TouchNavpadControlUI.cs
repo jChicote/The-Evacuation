@@ -10,7 +10,7 @@ public interface ITouchLeftNavpadControl
     void HidePad();
 }
 
-namespace UserInterface.Touch
+namespace Evacuation.UserInterface.Touch
 {
     public class TouchNavpadControlUI : MonoBehaviour, ITouchLeftNavpadControl
     {

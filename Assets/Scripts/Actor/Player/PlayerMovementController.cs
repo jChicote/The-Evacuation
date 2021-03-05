@@ -1,7 +1,6 @@
 using UnityEngine;
 
-
-namespace PlayerSystems
+namespace Evacuation.PlayerSystems
 {
     // Summary:
     //      This defines the input-system realted interface for reference to vector positions on inputs.

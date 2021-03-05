@@ -13,7 +13,7 @@ public interface IShopTransaction
     void MakeSale(string universalID, int sellPrice);
 }
 
-namespace UserInterface
+namespace Evacuation.UserInterface
 {
     public class ShopMenu : MonoBehaviour, IShopMenu, IShopTransaction
     {

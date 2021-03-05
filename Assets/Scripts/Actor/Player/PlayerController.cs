@@ -19,7 +19,7 @@ public interface IPlayerInitialiser
     void InitialisePlayer(SceneController sceneController);
 }
 
-namespace PlayerSystems
+namespace Evacuation.PlayerSystems
 {
     public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, ICheckPaused
     {

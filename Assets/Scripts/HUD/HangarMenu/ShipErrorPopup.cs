@@ -11,7 +11,7 @@ public interface IShipMessagePopup
     void ShowLockedPopup(string shipID);
 }
 
-namespace UserInterface
+namespace Evacuation.UserInterface
 {
     /// <summary>
     /// Responsible for handling the popup actions associated with the ship menu.

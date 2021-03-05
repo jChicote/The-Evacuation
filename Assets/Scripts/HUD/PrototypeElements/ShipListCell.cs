@@ -10,7 +10,7 @@ public interface IShipCell
 
 }
 
-namespace UserInterface
+namespace Evacuation.UserInterface
 {
     public class ShipListCell : MonoBehaviour, IShipCell
     {

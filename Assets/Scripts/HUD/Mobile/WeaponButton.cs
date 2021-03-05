@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UserInterface.Touch
+namespace Evacuation.UserInterface.Touch
 {
     public class WeaponButton : PressAndHoldEvent, IWeaponButton
     {

@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UserInterface.HUD;
+using Evacuation.UserInterface.HUD;
 
-namespace PlayerSystems
+namespace Evacuation.PlayerSystems
 {
     public class PlayerShieldComponent : ShieldComponent
     {

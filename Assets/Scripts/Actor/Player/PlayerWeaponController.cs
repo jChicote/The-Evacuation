@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Weapons;
+using Evacuation.Weapons;
 
 public interface IWeaponController
 {
@@ -10,7 +10,7 @@ public interface IWeaponController
     IWeaponRotator[] GetWeaponRotators();
 }
 
-namespace PlayerSystems
+namespace Evacuation.PlayerSystems
 {
     public interface IWeaponLoadoutSelector
     {
