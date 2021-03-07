@@ -14,16 +14,14 @@ namespace Evacuation.UserInterface.LocationMarker
     public interface IMarkerManager
     {
         void InitialiseMarkerManager();
-        void GenerateLocationMarker(Transform platformTransform);
+        void GenerateLocationMarker(Transform platformTransform, MarkerType markerType);
     }
 
     public class LocationMarkerManager : MonoBehaviour, IPausable, IMarkerConstraints, IMarkerManager
     {
-        public GameObject markerPrefab;
-
         // Constants
-        private readonly float screenWidth = Screen.width;
-        private readonly float screenHeight = Screen.height;
+        private float screenWidth;
+        private float screenHeight;
 
         // Fields
         private Transform cameraTransform;
@@ -45,22 +43,29 @@ namespace Evacuation.UserInterface.LocationMarker
         {
             this.cameraTransform = Camera.main.transform;
             this.rectTransform = this.GetComponent<RectTransform>();
+
+            //screenWidth = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 1, 0)).x;
+            //screenHeight = Camera.main.ScreenToWorldPoint(new Vector3(1, Screen.height, 0)).y;
+
+            screenWidth = Screen.width;
+            screenHeight = Screen.height;
+
+            SetScreenConstraints();
         }
 
         private void SetScreenConstraints()
         {
             // TODO: adjust for dynamic resolution
-            rightConstraint = cameraTransform.position.x + ((screenWidth / 2) - 5);
-            leftConstraint = cameraTransform.position.x - ((screenWidth / 2) + 5);
-            topConstraint = cameraTransform.position.y + ((screenHeight / 2) - 2);
-            bottomConstraint = cameraTransform.position.y - ((screenHeight / 2) + 2);
+            rightConstraint = screenWidth - 80;
+            leftConstraint = 50;
+            topConstraint =  screenHeight - 80;
+            bottomConstraint = 50;
         }
 
         private void FixedUpdate()
         {
             if (isPaused) return;
 
-            SetScreenConstraints();
             UpdateMarkerCollection();
         }
 
@@ -77,26 +82,28 @@ namespace Evacuation.UserInterface.LocationMarker
             locationMarkers = new ILocationMarker[tempArray.Count];
 
             for (int i = 0; i < tempArray.Count; i++)
-            {
                 locationMarkers[i] = tempArray[i];
-            }
         }
 
-        public void GenerateLocationMarker(Transform platformTransform)
+        private void CopyAllItemsFromArray(List<ILocationMarker> tempArray)
         {
-            Debug.Log(" Marker was generated ");
+            if (locationMarkers == null) return;
 
-            GameObject generatedInstance = Instantiate(markerPrefab, this.transform);
+            for (int i = 0; i < locationMarkers.Length; i++)
+                tempArray.Add(locationMarkers[i]);
+        }
+
+        public void GenerateLocationMarker(Transform platformTransform, MarkerType markerType)
+        {
+            UISettings settings = GameManager.Instance.uiSettings;
+            GameObject generatedInstance = Instantiate(settings.markerPrefab, this.transform);
             ILocationMarker markerInterface = generatedInstance.GetComponent<ILocationMarker>();
             markerInterface.InitialiseMarker(platformTransform, rectTransform);
             markerInterface.SetMarkerConstraints(this);
+            markerInterface.SetMarkerIconType(markerType);
 
             List<ILocationMarker> tempArray = new List<ILocationMarker>();
-
-            for (int i = 0; i < tempArray.Count; i++)
-                tempArray.Add(locationMarkers[i]);
-
-
+            CopyAllItemsFromArray(tempArray);
             tempArray.Add(markerInterface);
             UpdateArrayCollection(tempArray);
         }
@@ -115,12 +122,5 @@ namespace Evacuation.UserInterface.LocationMarker
         {
             isPaused = false;
         }
-    }
-
-    public enum MarkerType
-    {
-        Island,
-        RescueShip,
-        Enemy
     }
 }

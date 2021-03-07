@@ -1,6 +1,7 @@
 using UnityEngine;
 using Evacuation.Level.Collections;
 using Evacuation.PlayerSystems;
+using Evacuation.UserInterface.LocationMarker;
 
 namespace Evacuation.Level.TransportSystems
 {
@@ -13,7 +14,7 @@ namespace Evacuation.Level.TransportSystems
         {
             this.islandInhabitants = islandInhabitants;
 
-            GameManager.Instance.sceneController.markerManager.GenerateLocationMarker(this.transform);
+            GameManager.Instance.sceneController.markerManager.GenerateLocationMarker(this.transform, MarkerType.Island);
             ICapture captureSystem = this.GetComponent<ICapture>();
             captureSystem.InitialiseCaptureSystem(this);
         }

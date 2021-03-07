@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Evacuation.UserInterface.LocationMarker;
 
 [CreateAssetMenu(menuName = "Settings/UI Settings")]
 public class UISettings : ScriptableObject
@@ -48,6 +49,17 @@ public class UISettings : ScriptableObject
 
         return greenColor;
     }
+
+    [Header("Locator Position Marker Types")]
+    public GameObject markerPrefab;
+    public MarkerSprites[] markerTypes;
+}
+
+[System.Serializable]
+public struct MarkerSprites
+{
+    public MarkerType type;
+    public Sprite sprite;
 }
 
 public enum CellColor

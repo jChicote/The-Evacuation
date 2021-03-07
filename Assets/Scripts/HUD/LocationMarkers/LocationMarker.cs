@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ namespace Evacuation.UserInterface.LocationMarker
     {
         void InitialiseMarker(Transform locationTransform, RectTransform parentCanvasTransform);
         void SetMarkerConstraints(IMarkerConstraints markerConstraints);
+        void SetMarkerIconType(MarkerType markerType);
         void RunMarker();
     }
 
@@ -40,8 +42,6 @@ namespace Evacuation.UserInterface.LocationMarker
 
         private bool CheckWithinConstraint()
         {
-            Debug.Log(locationTargetTransform.position);
-
             return locationTargetTransform.position.x < markerConstraints.RightConstraint 
                 && locationTargetTransform.position.x > markerConstraints.LeftConstraint 
                 && locationTargetTransform.position.y < markerConstraints.TopConstraint 
@@ -52,12 +52,13 @@ namespace Evacuation.UserInterface.LocationMarker
         {
             markerWorldPosition = locationTargetTransform.position;
 
-            //if (markerWorldPosition.x > markerConstraints.RightConstraint) markerWorldPosition.x = markerConstraints.RightConstraint;
-            //if (markerWorldPosition.x < markerConstraints.LeftConstraint) markerWorldPosition.x = markerConstraints.LeftConstraint;
-            //if (markerWorldPosition.y > markerConstraints.TopConstraint) markerWorldPosition.y = markerConstraints.TopConstraint;
-            //if (markerWorldPosition.y < markerConstraints.BottomConstraint) markerWorldPosition.y = markerConstraints.BottomConstraint;
+            scaledScreenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, markerWorldPosition);
 
-            scaledScreenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, scaledScreenPosition);
+            if (scaledScreenPosition.x > markerConstraints.RightConstraint) scaledScreenPosition.x = markerConstraints.RightConstraint;
+            if (scaledScreenPosition.x < markerConstraints.LeftConstraint) scaledScreenPosition.x = markerConstraints.LeftConstraint;
+            if (scaledScreenPosition.y > markerConstraints.TopConstraint) scaledScreenPosition.y = markerConstraints.TopConstraint;
+            if (scaledScreenPosition.y < markerConstraints.BottomConstraint) scaledScreenPosition.y = markerConstraints.BottomConstraint;
+
             scaledScreenPosition.x = parentCanvasTransform.rect.width * (scaledScreenPosition.x / Screen.width);
             scaledScreenPosition.y = parentCanvasTransform.rect.height * (scaledScreenPosition.y / Screen.height);
         }
@@ -68,7 +69,6 @@ namespace Evacuation.UserInterface.LocationMarker
 
             DetermineWorldPosition();
             markerRectTransform.anchoredPosition = scaledScreenPosition;
-            Debug.Log("marker position = " + parentCanvasTransform.anchoredPosition);
         }
 
         public void SetMarkerConstraints(IMarkerConstraints markerConstraints)
@@ -79,7 +79,7 @@ namespace Evacuation.UserInterface.LocationMarker
         public void RunMarker()
         {
             if (isPaused) return;
-            Debug.Log(markerWorldPosition.x + " , " + markerConstraints.RightConstraint);
+
             RenderMarkerPointer();
 
             /*if (!CheckWithinConstraint())
@@ -90,6 +90,14 @@ namespace Evacuation.UserInterface.LocationMarker
             {
                 markerImage.enabled = false;
             }*/
+        }
+
+        public void SetMarkerIconType(MarkerType markerType)
+        {
+            UISettings uiSettings = GameManager.Instance.uiSettings;
+            activeSprite = uiSettings.markerTypes.Where(x => x.type == markerType).First().sprite;
+            inactiveSprite = uiSettings.markerTypes.Where(x => x.type == MarkerType.Inactive).First().sprite;
+            markerImage.sprite = activeSprite;
         }
 
         public void OnPause()
@@ -103,4 +111,11 @@ namespace Evacuation.UserInterface.LocationMarker
         }
     }
 
+    public enum MarkerType
+    {
+        Island,
+        RescueShip,
+        Enemy,
+        Inactive
+    }
 }
