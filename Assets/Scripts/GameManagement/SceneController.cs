@@ -7,6 +7,7 @@ using Evacuation.UserInterface.HUD;
 using Evacuation.PlayerSystems;
 using Evacuation.UserInterface.LocationMarker;
 using Evacuation.Level.Collections;
+using Evacuation.Actor.EnemySystems;
 
 public class SceneController : MonoBehaviour
 {
@@ -31,12 +32,14 @@ public class SceneController : MonoBehaviour
     [SerializeField] private GameObject[] inhabitedSatellites;
 
     // Fields
-    public  IMarkerManager markerManager;
+    private GameManager gameManager;
+    public IMarkerManager markerManager;
+    private IActorTracker actorTracker;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        GameManager gameManager = GameManager.Instance;
+        gameManager = GameManager.Instance;
         gameManager.sceneController = this;
 
         OnGameCompletion = new UnityEvent();
@@ -94,8 +97,12 @@ public class SceneController : MonoBehaviour
     {
         SessionData sessionData = SessionData.instance;
         ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == sessionData.selectedShip.stringID).First();
-        IPlayerInitialiser playerInitialiser = Instantiate(asset.shipPrefab, transform.position, Quaternion.identity).GetComponent<IPlayerInitialiser>();
+        GameObject player = Instantiate(asset.shipPrefab, transform.position, Quaternion.identity);
+        IPlayerInitialiser playerInitialiser = player.GetComponent<IPlayerInitialiser>();
         playerInitialiser.InitialisePlayer(this);
+
+        actorTracker = Instantiate(GameManager.Instance.levelSettings.sceneActorTrackerPrefab, transform.position, Quaternion.identity).GetComponent<IActorTracker>();
+        actorTracker.RegisterFriendlyEntity(player);
     }
 
     /// <summary>
@@ -103,7 +110,15 @@ public class SceneController : MonoBehaviour
     /// </summary>
     private void SpawnEnemyEntities()
     {
+        // Test spawn
+        GameObject spawnedDroid = Instantiate(gameManager.enemySettings.droidSentryPrefab, transform.position, Quaternion.identity);
 
+        IAssignSceneActorTracker assignTracker = spawnedDroid.GetComponent<IAssignSceneActorTracker>();
+        assignTracker.SetSceneActorTracker(actorTracker);
+        actorTracker.RegisterEnemyEntity(spawnedDroid);
+
+        IEnemyController enemyController = spawnedDroid.GetComponent<IEnemyController>();
+        enemyController.InitialiseController();
     }
     
     /// <summary>

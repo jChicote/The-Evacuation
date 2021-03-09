@@ -7,4 +7,8 @@ public class LevelSettings : ScriptableObject
 {
     [Header("Default Setting")]
     public LevelData[] defaultLevelData;
+
+    // Tracker
+    [Space]
+    public GameObject sceneActorTrackerPrefab;
 }

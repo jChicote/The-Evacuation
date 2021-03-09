@@ -57,3 +57,4 @@ MonoBehaviour:
     totalRescued: 0
     totalKills: 0
     totalLives: 0
+  sceneActorTrackerPrefab: {fileID: 2317415828587022393, guid: c1d8b4bf42fccbc4082a172504aaeb4d, type: 3}

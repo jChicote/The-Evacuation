@@ -47,6 +47,7 @@ MonoBehaviour:
   weaponSettings: {fileID: 11400000, guid: 00740a9519e627b4697a699e851f40fd, type: 2}
   playerSettings: {fileID: 11400000, guid: 90fb246c96cd7ef4a834be1b2f6e056f, type: 2}
   levelSettings: {fileID: 11400000, guid: 49e19a9c4a97aed489a4e9c36629725d, type: 2}
+  enemySettings: {fileID: 11400000, guid: f6a9a07232cea4244a6ba483c00beb64, type: 2}
   OnMainMenu:
     m_PersistentCalls:
       m_Calls: []

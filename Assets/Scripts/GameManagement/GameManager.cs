@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public WeaponSettings weaponSettings;
     public PlayerSettings playerSettings;
     public LevelSettings levelSettings;
+    public EnemySettings enemySettings;
 
     [Header("Player Events")]
     public UnityEvent OnMainMenu;
