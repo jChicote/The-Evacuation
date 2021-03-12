@@ -47,7 +47,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Movement"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""f5a03672-9395-413e-aa12-e41bf70abe68"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -76,19 +76,71 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""60652993-9f9e-4543-8ffe-50e7b5d20f8d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""99b15358-73eb-43dc-939c-b7f607231ba7"",
-                    ""path"": ""<Mouse>/position"",
+                    ""name"": ""Keyboard"",
+                    ""id"": ""d228e72d-e603-43ad-a600-50c898518590"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""9c0b2cc6-872d-41f8-97dd-3198b0bd701d"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""5a7c2c45-67df-40c4-a866-a8f4739d16ce"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""675e0eb5-aa8b-4576-bc72-757c13e93d2d"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""86383fed-29a0-4e41-9a70-b1ddf0a6d907"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -122,6 +174,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Detach"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""57a4c43d-285a-428a-9e1c-8a3f6519aa6b"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -137,6 +200,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Desktop_Pause = m_Desktop.FindAction("Pause", throwIfNotFound: true);
         m_Desktop_Attack = m_Desktop.FindAction("Attack", throwIfNotFound: true);
         m_Desktop_Detach = m_Desktop.FindAction("Detach", throwIfNotFound: true);
+        m_Desktop_Aim = m_Desktop.FindAction("Aim", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -223,6 +287,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Desktop_Pause;
     private readonly InputAction m_Desktop_Attack;
     private readonly InputAction m_Desktop_Detach;
+    private readonly InputAction m_Desktop_Aim;
     public struct DesktopActions
     {
         private @PlayerInput m_Wrapper;
@@ -231,6 +296,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Pause => m_Wrapper.m_Desktop_Pause;
         public InputAction @Attack => m_Wrapper.m_Desktop_Attack;
         public InputAction @Detach => m_Wrapper.m_Desktop_Detach;
+        public InputAction @Aim => m_Wrapper.m_Desktop_Aim;
         public InputActionMap Get() { return m_Wrapper.m_Desktop; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -252,6 +318,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Detach.started -= m_Wrapper.m_DesktopActionsCallbackInterface.OnDetach;
                 @Detach.performed -= m_Wrapper.m_DesktopActionsCallbackInterface.OnDetach;
                 @Detach.canceled -= m_Wrapper.m_DesktopActionsCallbackInterface.OnDetach;
+                @Aim.started -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAim;
             }
             m_Wrapper.m_DesktopActionsCallbackInterface = instance;
             if (instance != null)
@@ -268,6 +337,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Detach.started += instance.OnDetach;
                 @Detach.performed += instance.OnDetach;
                 @Detach.canceled += instance.OnDetach;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
             }
         }
     }
@@ -282,5 +354,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnDetach(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
     }
 }

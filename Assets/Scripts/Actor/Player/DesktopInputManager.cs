@@ -19,6 +19,7 @@ public class DesktopInputManager : MonoBehaviour, IDesktopInput
 
     private Vector2 centerPosition;
     private Vector2 currentMousePosition;
+    private Vector2 currentAimPosition;
     
     public void InitialiseDesktop()
     {
@@ -31,12 +32,25 @@ public class DesktopInputManager : MonoBehaviour, IDesktopInput
         centerPosition.y = Screen.height / 2;
     }
 
+    // Summary:
+    // Provides movement vectors based on 2-Dimensional keyboard movement normalised before processing.
+    // Movement vectors provided are the net directions relative to a fixed center.
     private void OnMovement(InputValue value)
     {
         if (pauseChecker.CheckIsPaused()) return;
 
+        playerMovement.SetTriggerIsHeld(value.Get<Vector2>() != Vector2.zero);
         currentMousePosition = value.Get<Vector2>();
         playerMovement.CalculateMovement(centerPosition, currentMousePosition);
+    }
+
+
+    // Summary:
+    // Stores the aim position of the present position of the mouse within the game view.
+    private void OnAim(InputValue value)
+    {
+        currentAimPosition = value.Get<Vector2>();
+        playerMovement.CalculateLocalRotation(centerPosition, currentAimPosition);
 
         DirectWeaponRotatorsToPoint(value);
     }

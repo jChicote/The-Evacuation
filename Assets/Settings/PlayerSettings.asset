@@ -22,9 +22,10 @@ MonoBehaviour:
     requiredLevel: 0
     stats:
       shipID: '#132'
+      maxRescueCapacity: 5
       maxHealth: 100
       maxSheild: 100
-      maxSpeed: 8
+      maxSpeed: 18
       maxHandling: 6
       forwardSize: 1
       turrentSize: 1
@@ -39,6 +40,7 @@ MonoBehaviour:
     requiredLevel: 2
     stats:
       shipID: '#169'
+      maxRescueCapacity: 5
       maxHealth: 100
       maxSheild: 100
       maxSpeed: 8
@@ -56,6 +58,7 @@ MonoBehaviour:
     requiredLevel: 6
     stats:
       shipID: '#275'
+      maxRescueCapacity: 5
       maxHealth: 100
       maxSheild: 100
       maxSpeed: 8
@@ -73,6 +76,7 @@ MonoBehaviour:
     requiredLevel: 10
     stats:
       shipID: '#345'
+      maxRescueCapacity: 5
       maxHealth: 100
       maxSheild: 100
       maxSpeed: 8

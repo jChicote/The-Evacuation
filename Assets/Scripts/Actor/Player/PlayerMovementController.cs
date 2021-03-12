@@ -8,6 +8,8 @@ namespace Evacuation.PlayerSystems
     {
         void InitialiseMovement();
         void CalculateMovement(Vector2 startPos, Vector2 currentPos);
+        void CalculateLocalRotation(Vector2 centerPos, Vector2 currentPos);
+        void SetTriggerIsHeld(bool isHeld);
     }
 
     // Summary:
@@ -45,16 +47,18 @@ namespace Evacuation.PlayerSystems
 
         // Fields
         private Rigidbody2D playerRB;
-        private Vector3 currentVelocity;
-        private Vector3 currentDirection;
+        private Vector2 targetVelocity = Vector2.zero;
+        private Vector2 currentVelocity = Vector2.zero;
+        private Vector2 currentDirection = Vector2.zero;
         private ShipInfo shipInfo;
 
         private float currentSpeed;
         private float angleRotation;
         private bool hasLanded = false;
         private bool isMovementLocked = false;
+        private bool isTriggerHeld = false;
 
-        private float maxRadiusTransform = 450f / 2; //DEFAULT VALUES FROM UI Joystick
+        //private float maxRadiusTransform = 450f / 2; //DEFAULT VALUES FROM UI Joystick
 
         // Accessors
         float IMovementAccessors.CurrentShipSpeed
@@ -68,6 +72,7 @@ namespace Evacuation.PlayerSystems
             playerRB = this.GetComponent<Rigidbody2D>();
 
             this.shipInfo = this.GetComponent<IShipData>().GetShipStats();
+            currentSpeed = shipInfo.maxSpeed; 
         }
 
         private void FixedUpdate()
@@ -87,20 +92,27 @@ namespace Evacuation.PlayerSystems
 
         public void CalculateMovement(Vector2 startPos, Vector2 currentPos)
         {
-            currentSpeed = shipInfo.maxSpeed * (Vector3.Magnitude(startPos - currentPos) / maxRadiusTransform);
-            currentDirection = (currentPos - startPos).normalized;
-            currentVelocity = currentDirection * currentSpeed;
+            if (!isTriggerHeld) return;
 
-            CalculateLocalRotation();
+            //currentSpeed = shipInfo.maxSpeed * (Vector3.Magnitude(startPos - currentPos) / maxRadiusTransform);
+            currentSpeed = shipInfo.maxSpeed;
+
+            targetVelocity = currentPos * currentSpeed;
         }
 
-        private void CalculateLocalRotation()
+        public void CalculateLocalRotation(Vector2 centerPos, Vector2 currentPos)
         {
+            currentDirection = (currentPos - centerPos).normalized;
             angleRotation = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg - 90;
         }
 
         private void RunMovement()
         {
+            if (!isTriggerHeld)
+                currentVelocity = Vector2.Lerp(currentVelocity, Vector3.zero, 0.03f);
+            else
+                currentVelocity = Vector2.Lerp(currentVelocity, targetVelocity, 0.07f);
+
             playerRB.velocity = currentVelocity;
         }
 
@@ -119,7 +131,6 @@ namespace Evacuation.PlayerSystems
             return true;
         }
 
-
         /// <summary>
         /// Called to land the vessel autonomously whilst controls are locked out.
         /// </summary>
@@ -129,6 +140,11 @@ namespace Evacuation.PlayerSystems
             transform.position = Vector3.MoveTowards(transform.position, landingPosition.position, 0.05f);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, landingPosition.rotation, 6f);
             hasLanded = transform.position == landingPosition.position && transform.rotation == landingPosition.rotation;
+        }
+
+        public void SetTriggerIsHeld(bool isHeld)
+        {
+            isTriggerHeld = isHeld;
         }
 
         public Vector2 GetShipPosition()
