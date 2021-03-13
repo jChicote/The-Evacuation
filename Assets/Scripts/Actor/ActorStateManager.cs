@@ -7,11 +7,11 @@ namespace Evacuation.Actor
     public interface IStateManager 
     {
         void IntialiseStateManager();
-        void AddState<T>();
+        void AddState<T>() where T : BaseComponentState;
         void RemoveState();
     }
 
-    public abstract class ActorStateManager : MonoBehaviour
+    public abstract class ActorStateManager : MonoBehaviour, IStateManager
     {
         public virtual void IntialiseStateManager() { }
 

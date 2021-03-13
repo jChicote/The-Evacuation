@@ -4,12 +4,7 @@ using UnityEngine;
 
 namespace Evacuation.Actor.EnemySystems
 {
-    /// <summary>
-    /// This state enables for enemies to follow target smoothly tracking in the direction
-    /// of the player's position. This is suitable when the player is undocked from a 
-    /// capture platform.
-    /// </summary>
-    public class EnemyFollowState : BaseComponentState
+    public class EnemyOrbitState : BaseComponentState
     {
         // Interfaces
         protected IEnemyTargetingSystem targetingSystem;
@@ -19,7 +14,11 @@ namespace Evacuation.Actor.EnemySystems
         protected Rigidbody2D enemyRB;
         protected Transform shipTransform;
         protected Vector2 shipDirection;
+        private Vector2 shipToTargetVelocity;
+        private Vector2 shipForce;
         protected float shipSpeed;
+        private float shipOrbitalForce;
+        private float radiusToTarget = 9;
 
         public override void BeginState()
         {
@@ -37,20 +36,24 @@ namespace Evacuation.Actor.EnemySystems
             RunStateUpdate();
         }
 
-        private void SwitchToOrbitalMovement()
+        private void SwitchToFollowState()
         {
             if (stateManager == null) return;
-            if (Vector3.Distance(targetingSystem.GetTargetTransform().position, shipTransform.position) > 5) return;
+            if (Vector3.Distance(targetingSystem.GetTargetTransform().position, shipTransform.position) < 10) return;
 
-            Debug.Log(stateManager);
-
-            stateManager.AddState<EnemyOrbitState>();
+            stateManager.AddState<EnemyFollowState>();
         }
 
-        protected virtual void CalculateDirection()
+        protected virtual void CalculateRepelVelocity()
         {
-            shipDirection = targetingSystem.GetTargetTransform().position - shipTransform.position;
+            //shipToTargetVelocity = targetingSystem.GetTargetTransform().position - shipTransform.position;
+            //shipToTargetVelocity *= 2;
+            // shipOrbitalForce = Mathf.Sqrt((2 * 23) / radiusToTarget);
+            //shipForce = shipTransform.position.normalized * shipOrbitalForce;
             //angleRotation = Mathf.Atan2(shipDirection.y, shipDirection.x) * Mathf.Rad2Deg - 90;
+
+            shipTransform.RotateAround(targetingSystem.GetTargetTransform().position, Vector3.forward, 100 * Time.unscaledDeltaTime);
+
         }
 
         protected virtual void CalculateSpeed()
@@ -61,17 +64,18 @@ namespace Evacuation.Actor.EnemySystems
 
         protected virtual void SetMovement()
         {
+            Debug.Log(shipForce);
             enemyRB.velocity = shipDirection.normalized * shipSpeed;
         }
 
 
         public override void RunStateUpdate()
         {
-            CalculateDirection();
+            CalculateRepelVelocity();
             CalculateSpeed();
             SetMovement();
 
-            SwitchToOrbitalMovement();
+            SwitchToFollowState();
         }
     }
 }

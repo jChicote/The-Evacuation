@@ -4,12 +4,6 @@ using UnityEngine;
 
 namespace Evacuation.Actor.EnemySystems
 {
-    public interface IStateManager
-    {
-        void InitialiseStateManager();
-        void AddState<T>();
-        void RemoveState(BaseComponentState state);
-    }
 
     public class EnemyStateManager : ActorStateManager
     {
