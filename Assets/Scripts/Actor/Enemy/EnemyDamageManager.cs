@@ -1,19 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Evacuation.Actor;
 
-namespace Evacuation.PlayerSystems
+namespace Evacuation.Actor.EnemySystems
 {
-    public class PlayerDamageManager : ActorDamageManager
+    public class EnemyDamageManager : ActorDamageManager
     {
-        //private IHealthAccessors healthAccessors;
-        private PlayerHeathComponent healthComponent;
+        private EnemyHealthComponent healthComponent;
 
         public override void InitialiseComponent()
         {
-           // healthAccessors = this.GetComponent<IHealthAccessors>();
-            healthComponent = this.GetComponent<PlayerHeathComponent>();
+            // healthAccessors = this.GetComponent<IHealthAccessors>();
+            healthComponent = this.GetComponent<EnemyHealthComponent>();
         }
 
         public override void OnDamage(float damage)
