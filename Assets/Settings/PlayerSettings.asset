@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 008f04e09dac2744d95b17f35bc750c7, type: 3}
+  m_Name: PlayerSettings
+  m_EditorClassIdentifier: 
+  shipsList:
+  - stringID: '#132'
+    name: Old Reliable
+    price: 0
+    equipmentType: 0
+    description: Everyone starts off somewhere. This does the job and is dirt cheap
+      for starters....
+    requiredLevel: 0
+    stats:
+      shipID: '#132'
+      maxRescueCapacity: 5
+      maxHealth: 100
+      maxSheild: 100
+      maxSpeed: 18
+      maxHandling: 6
+      forwardSize: 1
+      turrentSize: 1
+    image: {fileID: 21300000, guid: 5de19ea59899d41458464ae328b38e48, type: 3}
+    shipPrefab: {fileID: 4413370118639381924, guid: 1f1fe562a11991d4eaace466e6d38aa6, type: 3}
+  - stringID: '#169'
+    name: Old Reliable
+    price: 0
+    equipmentType: 0
+    description: Everyone starts off somewhere. This does the job and is dirt cheap
+      for starters....
+    requiredLevel: 2
+    stats:
+      shipID: '#169'
+      maxRescueCapacity: 5
+      maxHealth: 100
+      maxSheild: 100
+      maxSpeed: 8
+      maxHandling: 6
+      forwardSize: 2
+      turrentSize: 2
+    image: {fileID: 21300000, guid: 5de19ea59899d41458464ae328b38e48, type: 3}
+    shipPrefab: {fileID: 4413370118639381924, guid: 1f1fe562a11991d4eaace466e6d38aa6, type: 3}
+  - stringID: '#275'
+    name: Old Reliable
+    price: 0
+    equipmentType: 0
+    description: Everyone starts off somewhere. This does the job and is dirt cheap
+      for starters....
+    requiredLevel: 6
+    stats:
+      shipID: '#275'
+      maxRescueCapacity: 5
+      maxHealth: 100
+      maxSheild: 100
+      maxSpeed: 8
+      maxHandling: 6
+      forwardSize: 2
+      turrentSize: 2
+    image: {fileID: 21300000, guid: 5de19ea59899d41458464ae328b38e48, type: 3}
+    shipPrefab: {fileID: 4413370118639381924, guid: 1f1fe562a11991d4eaace466e6d38aa6, type: 3}
+  - stringID: '#345'
+    name: Old Reliable
+    price: 0
+    equipmentType: 0
+    description: Everyone starts off somewhere. This does the job and is dirt cheap
+      for starters....
+    requiredLevel: 10
+    stats:
+      shipID: '#345'
+      maxRescueCapacity: 5
+      maxHealth: 100
+      maxSheild: 100
+      maxSpeed: 8
+      maxHandling: 6
+      forwardSize: 2
+      turrentSize: 2
+    image: {fileID: 21300000, guid: 5de19ea59899d41458464ae328b38e48, type: 3}
+    shipPrefab: {fileID: 4413370118639381924, guid: 1f1fe562a11991d4eaace466e6d38aa6, type: 3}
