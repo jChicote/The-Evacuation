@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Evacuation.UserInterface;
+using Evacuation.Session;
+using Evacuation.Settings;
 
 public class GameManager : MonoBehaviour
 {

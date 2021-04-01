@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Evacuation.Actor;
+using Evacuation.Session;
 
 namespace Evacuation.UserInterface
 {
@@ -51,7 +53,7 @@ namespace Evacuation.UserInterface
             switch (equipmentType)
             {
                 case EquipmentType.ForwardWeapon:
-                    foreach (string identifier in selectedShip.forwardWeapons)
+                    foreach (string identifier in selectedShip.fixedWeapons)
                     {
                         SpawnEquipmentCell(identifier, cellPrefab, inventoryCells);
                     }

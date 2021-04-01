@@ -1,5 +1,5 @@
 using UnityEngine;
-using Evacuation.PlayerSystems;
+using Evacuation.Actor.PlayerSystems;
 
 public interface IWeapon
 {
@@ -95,9 +95,8 @@ namespace Evacuation.Weapons
 [System.Serializable]
 public class ObjectInfo
 {
-    public string stringID;
-    //public string uniqueID; //This is an id that is uniquly assigned to this object - BUT WILL BE IGNORED FOR NOW
     public string name;
+    public string stringID;
     public int price;
 
     [HideInInspector] 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Evacuation.Actor;
 
 /// <summary>
 /// A class with fields generalising characteristics of the object but NOT used for stoage.
@@ -41,22 +42,23 @@ public class ShipAsset : ObjectInfo
 }
 
 [System.Serializable]
-public class ShipStats
+public class ShipStats : BaseStats
 {
-    // TODO: Make this class redundant
+    public int maxRescueCapacity = 5;
 
+    [Header("Weapon Loadouts")]
+    public int forwardSize;
+    public int turrentSize;
+}
+
+public class BaseStats
+{
     [Tooltip("A copy is necessary as the struct is what is passed into ship prefabs")]
     public string shipID;
-
-    public int maxRescueCapacity = 5;
     public float maxHealth = 100;
     public float maxSheild = 100;
 
     [Header("Movement")]
     public float maxSpeed = 20;
     public float maxHandling = 0;
-
-    [Header("Weapon Loadouts")]
-    public int forwardSize;
-    public int turrentSize;
 }

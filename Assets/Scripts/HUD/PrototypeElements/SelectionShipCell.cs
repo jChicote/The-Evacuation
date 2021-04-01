@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Evacuation.Session;
+using Evacuation.Actor;
 
 namespace Evacuation.UserInterface
 {

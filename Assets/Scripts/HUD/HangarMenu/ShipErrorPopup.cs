@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Evacuation.Actor;
+using Evacuation.Session;
 
 public interface IShipMessagePopup
 {

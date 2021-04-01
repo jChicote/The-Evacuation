@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Evacuation.Actor;
 
-
-[System.Serializable]
-public class HangarInventory
+namespace Evacuation.Session
 {
-    public List<WeaponInfo> hangarWeapons = new List<WeaponInfo>();
-    public List<ShipInfo> hangarShips = new List<ShipInfo>();
+    [System.Serializable]
+    public class HangarInventory
+    {
+        public List<WeaponInfo> hangarWeapons = new List<WeaponInfo>();
+        public List<ShipInfo> hangarShips = new List<ShipInfo>();
+    }
 }
 

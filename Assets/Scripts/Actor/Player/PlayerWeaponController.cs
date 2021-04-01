@@ -10,7 +10,7 @@ public interface IWeaponController
     IWeaponRotator[] GetWeaponRotators();
 }
 
-namespace Evacuation.PlayerSystems
+namespace Evacuation.Actor.PlayerSystems
 {
     public interface IWeaponLoadoutSelector
     {
@@ -28,13 +28,11 @@ namespace Evacuation.PlayerSystems
 
         // Interfaces
         private ICheckPaused pauseChecker;
-        private List<IWeapon> weapons;
         private IWeaponRotator[] weaponRotators;
 
-        // Weapon loadout firing configuration
+        // Fields
         private LoadoutPosition loadoutPosition = LoadoutPosition.Forward;
-
-        // Bool Checks
+        private List<IWeapon> weapons;
         private bool isFiring = false;
 
         /// <summary>
@@ -45,8 +43,8 @@ namespace Evacuation.PlayerSystems
             pauseChecker = this.GetComponent<ICheckPaused>();
             loadoutPosition = LoadoutPosition.Forward;
 
-            IShipData shipDataInterface = this.GetComponent<IShipData>();
-            ShipInfo shipInfo = shipDataInterface.GetShipStats();
+            IPlayerStats shipWeaponStats = this.GetComponent<IPlayerStats>();
+            ShipInfo shipInfo = shipWeaponStats.GetShipStats();
 
             SetupWeapons(shipInfo);
         }
@@ -68,8 +66,8 @@ namespace Evacuation.PlayerSystems
             WeaponSetupHandler setuphandler = new WeaponSetupHandler();
             weapons = new List<IWeapon>();
 
-            if (forwardWeaponLoadout.Length != 0 && shipInfo.forwardWeapons != null && shipInfo.forwardWeapons.Count != 0)
-                setuphandler.SetupForwardWeapons(ref weapons, shipInfo.forwardWeapons, forwardWeaponLoadout);
+            if (forwardWeaponLoadout.Length != 0 && shipInfo.fixedWeapons != null && shipInfo.fixedWeapons.Count != 0)
+                setuphandler.SetupForwardWeapons(ref weapons, shipInfo.fixedWeapons, forwardWeaponLoadout);
 
             if (turrentWeaponLoadout.Length != 0 && shipInfo.turrentWeapons != null && shipInfo.turrentWeapons.Count != 0)
                 setuphandler.SetupTurrentWeapons(ref weapons, shipInfo.turrentWeapons, turrentWeaponLoadout);

@@ -13,3 +13,16 @@ MonoBehaviour:
   m_Name: EnemySettings
   m_EditorClassIdentifier: 
   droidSentryPrefab: {fileID: 8024996226159274337, guid: 40ae88ece4a19fc418aac05b7c87df23, type: 3}
+  enemyList:
+  - name: Droid Sentry
+    stringID: 
+    price: 0
+    equipmentType: 0
+    enemyStats:
+      shipID: 
+      maxHealth: 100
+      maxSheild: 100
+      maxSpeed: 20
+      maxHandling: 0
+      weaponSize: 1
+    enemyPrefab: {fileID: 8024996226159274337, guid: 40ae88ece4a19fc418aac05b7c87df23, type: 3}

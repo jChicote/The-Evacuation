@@ -41,14 +41,20 @@ namespace Evacuation.Weapons
         /// Responsible for calculating the damage inflicted to the colliding object.
         /// </summary>
         /// <param name="damageInstance"></param>
-        public override void InflictDamagte(IDamageable damageInstance)
+        public override void InflictDamage(IDamageable damageInstance)
         {
-            base.InflictDamagte(damageInstance);
+            base.InflictDamage(damageInstance);
+
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log("Collided with soemthing");
+            if (collision.CompareTag(this.tag)) return;
+
+            IDamageable damageable = collision.GetComponent<IDamageable>();
+            if (damageable == null) return;
+
+            InflictDamage(damageable);
         }
     }
 }

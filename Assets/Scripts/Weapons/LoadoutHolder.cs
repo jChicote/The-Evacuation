@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Evacuation.Session;
 
-namespace Evacuation.PlayerSystems
+namespace Evacuation.Actor.PlayerSystems
 {
     /// <summary>
     /// Placed within loadout position that both sets and gets the weapon in the loadout

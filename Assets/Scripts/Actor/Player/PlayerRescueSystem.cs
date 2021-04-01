@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Evacuation.Level.TransportSystems;
 
-namespace Evacuation.PlayerSystems
+namespace Evacuation.Actor.PlayerSystems
 {
     public interface IPlayerCabin
     {

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
-using Evacuation.PlayerSystems;
+using Evacuation.Actor.PlayerSystems;
+using Evacuation.Weapons;
 
 namespace Evacuation.Level.TransportSystems
 {
@@ -78,6 +79,7 @@ namespace Evacuation.Level.TransportSystems
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (!collision.CompareTag("Player")) return;
+            if (collision.GetComponent<IProjectile>() != null) return;
 
             shipLandingManoeuvre = collision.gameObject.GetComponent<IAutoLandingManoeuvre>();
             shipTranslate = collision.gameObject.GetComponent<IShipPlatformTranslator>();
