@@ -1614,7 +1614,7 @@ GameObject:
   - component: {fileID: 798976715}
   - component: {fileID: 798976716}
   m_Layer: 0
-  m_Name: SpawnManager
+  m_Name: Droid_Spawn_Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

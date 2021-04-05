@@ -44,7 +44,7 @@ namespace Evacuation.Weapons
         public override void InflictDamage(IDamageable damageInstance)
         {
             base.InflictDamage(damageInstance);
-
+            Destroy(gameObject);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
