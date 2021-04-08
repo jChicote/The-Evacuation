@@ -1612,6 +1612,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 798976715}
+  - component: {fileID: 798976717}
   - component: {fileID: 798976716}
   m_Layer: 0
   m_Name: Droid_Spawn_Manager
@@ -1643,9 +1644,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 798976714}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9990d4583ba6fd24db52babee4a228a0, type: 3}
+  m_Script: {fileID: 11500000, guid: ca6e4e32392961e47a4ae131b664289d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  electedPatterns: 01000000020000000300000004000000
+  patternRuntimeLength: 0
+  selectedPattern: 0
+--- !u!114 &798976717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798976714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af37ba3164073644390da83b74e72891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityPrefab: {fileID: 8024996226159274337, guid: 40ae88ece4a19fc418aac05b7c87df23, type: 3}
+  spawnIntervalTime: 3
 --- !u!1 &827644554
 GameObject:
   m_ObjectHideFlags: 0

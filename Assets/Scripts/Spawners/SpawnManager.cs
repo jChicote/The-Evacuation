@@ -11,6 +11,7 @@ namespace Evacuation.Level.SpawnManagement
     {
         // Inspector Accessible Fields
         [SerializeField] protected GameObject entityPrefab;
+        [SerializeField] protected float spawnIntervalTime;
 
         // Fields
         protected SimpleTimer timer;
@@ -18,25 +19,23 @@ namespace Evacuation.Level.SpawnManagement
 
         public virtual void InitialiseManager() 
         {
-
+            timer = new SimpleTimer(spawnIntervalTime, Time.deltaTime);
         }
 
         private void FixedUpdate()
         {
             if (isPaused) return;
+            timer.TickTimer();
             SpawnEntity();
         }
 
         public virtual void SpawnEntity() 
         {
-            if (timer.CheckTimeIsUp())
-            {
-                // Create Object
-                timer.ResetTimer();
-            }
+            if (!timer.CheckTimeIsUp()) return;
+            timer.ResetTimer();
         }
 
-        public virtual void GloballyClearAllEnemies() { }
+        public virtual void GloballyClearAllEntities() { }
 
         public void OnPause()
         {
@@ -49,33 +48,3 @@ namespace Evacuation.Level.SpawnManagement
         }
     }
 }
-
-public class SimpleTimer
-{
-    private float intervalLength;
-    private float timeLeft;
-    private float deltaTime;
-
-    public SimpleTimer(float intervalLength, float deltaTime)
-    {
-        this.intervalLength = intervalLength;
-        this.timeLeft = intervalLength;
-        this.deltaTime = deltaTime;
-    }
-
-    public void TickTimer()
-    {
-        timeLeft -= deltaTime;
-    }
-
-    public bool CheckTimeIsUp()
-    {
-        return timeLeft <= 0;
-    }
-
-    public void ResetTimer()
-    {
-        timeLeft = intervalLength;
-    }
-}
-
