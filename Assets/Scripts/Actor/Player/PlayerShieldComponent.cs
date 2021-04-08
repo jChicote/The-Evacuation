@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Evacuation.UserInterface.HUD;
 
-namespace Evacuation.PlayerSystems
+namespace Evacuation.Actor.PlayerSystems
 {
     public class PlayerShieldComponent : ShieldComponent
     {

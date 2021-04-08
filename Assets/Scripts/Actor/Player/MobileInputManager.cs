@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine.InputSystem.EnhancedTouch;
-using Evacuation.PlayerSystems;
+using Evacuation.Actor.PlayerSystems;
 
 public interface IMobileInput
 {

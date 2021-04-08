@@ -10,13 +10,11 @@ namespace Evacuation.Actor.EnemySystems
 
         public override void InitialiseComponent()
         {
-            // healthAccessors = this.GetComponent<IHealthAccessors>();
             healthComponent = this.GetComponent<EnemyHealthComponent>();
         }
 
         public override void OnDamage(float damage)
         {
-            Debug.Log("Damage at: " + damage);
             if (healthComponent.IsActive())
             {
                 float newHealth = healthComponent.CalculateDamagedHealth(damage);

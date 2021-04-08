@@ -3,6 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Evacuation.Session;
+using Evacuation.Actor;
 using TMPro;
 
 public interface IIdentifyShip
@@ -175,8 +177,8 @@ namespace Evacuation.UserInterface
 
             if (equipmentType == EquipmentType.ForwardWeapon)
             {
-                if (info.forwardWeapons.Count == 0) return false;
-                return info.forwardWeapons.Where(x => x == equipmentID).First() == equipmentID;
+                if (info.fixedWeapons.Count == 0) return false;
+                return info.fixedWeapons.Where(x => x == equipmentID).First() == equipmentID;
             }
             else
             {

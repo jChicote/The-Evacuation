@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Evacuation.PlayerSystems;
+using Evacuation.Actor.PlayerSystems;
 
 namespace Evacuation.Weapons
 {
@@ -17,6 +17,7 @@ namespace Evacuation.Weapons
             this.weaponData = data;
             this.movementAccessors = movementAccessors;
             this.weaponTransform = this.transform;
+            this.tag = transform.root.tag;
         }
 
         /// <summary>
@@ -31,6 +32,7 @@ namespace Evacuation.Weapons
             {
                 IProjectile projectile = Instantiate(projectileShell, firingPoint.position, firingPoint.rotation).GetComponent<IProjectile>();
                 projectile.InitialiseProjectile(weaponData.speed + movementAccessors.CurrentShipSpeed, weaponData.damage, weaponData.life); //TODO: Include ship speed when firing
+                projectile.SetTag(gameObject.tag);
                 timeTillNextFire = weaponData.fireRate;
             } else
             {

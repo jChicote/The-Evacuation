@@ -2,30 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class GameSaveState
+namespace Evacuation.Session
 {
-    public HangarInventory hangarSave;
-    public UserStatus userStatus;
-
-    public HangarInventory GetHangarSave()
+    [System.Serializable]
+    public class GameSaveState
     {
-        return hangarSave;
-    }
+        public HangarInventory hangarSave;
+        public UserStatus userStatus;
 
-    public UserStatus GetUserStatus()
-    {
-        return userStatus;
-    }
+        public HangarInventory GetHangarSave()
+        {
+            return hangarSave;
+        }
 
-    public void SaveHangar(HangarInventory hangar)
-    {
-        this.hangarSave = hangar;
-    }
+        public UserStatus GetUserStatus()
+        {
+            return userStatus;
+        }
 
-    public void SaveUserStatus(UserStatus userStatus)
-    {
-        this.userStatus = userStatus;
-    }
+        public void SaveHangar(HangarInventory hangar)
+        {
+            this.hangarSave = hangar;
+        }
 
+        public void SaveUserStatus(UserStatus userStatus)
+        {
+            this.userStatus = userStatus;
+        }
+    }
 }

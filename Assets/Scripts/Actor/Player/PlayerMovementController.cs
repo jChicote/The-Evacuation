@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Evacuation.PlayerSystems
+namespace Evacuation.Actor.PlayerSystems
 {
     // Summary:
     //      This defines the input-system realted interface for reference to vector positions on inputs.
@@ -71,7 +71,7 @@ namespace Evacuation.PlayerSystems
             pauseChecker = this.GetComponent<ICheckPaused>();
             playerRB = this.GetComponent<Rigidbody2D>();
 
-            this.shipInfo = this.GetComponent<IShipData>().GetShipStats();
+            this.shipInfo = this.GetComponent<IPlayerStats>().GetShipStats();
             currentSpeed = shipInfo.maxSpeed; 
         }
 

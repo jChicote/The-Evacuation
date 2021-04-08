@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Evacuation.Actor;
 
-namespace Evacuation.PlayerSystems
+namespace Evacuation.Actor.PlayerSystems
 {
     public class PlayerDamageManager : ActorDamageManager
     {

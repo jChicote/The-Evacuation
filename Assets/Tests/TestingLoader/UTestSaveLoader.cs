@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UTestSaveLoader : MonoBehaviour
+namespace Evacuation.Session
 {
-    public bool isRunning = false;
-
-    // Update is called once per frame
-    void Update()
+    public class UTestSaveLoader : MonoBehaviour
     {
-        if (!isRunning) return;
+        public bool isRunning = false;
 
-        SessionData.instance.Save();
-        isRunning = false;
+        // Update is called once per frame
+        void Update()
+        {
+            if (!isRunning) return;
+
+            SessionData.instance.Save();
+            isRunning = false;
+        }
     }
 }

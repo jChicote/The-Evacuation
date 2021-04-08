@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Evacuation.Session;
 
 public interface IPausable
 {
@@ -19,7 +20,7 @@ public interface IPlayerInitialiser
     void InitialisePlayer(SceneController sceneController);
 }
 
-namespace Evacuation.PlayerSystems
+namespace Evacuation.Actor.PlayerSystems
 {
     public class PlayerController : MonoBehaviour, IPlayerInitialiser, IPausable, ICheckPaused
     {

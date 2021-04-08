@@ -43,9 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35bc6cf50f3d071478ab7876cf394e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadoutNum: 0
   loadoutType: 1
-  weapon: {fileID: 0}
 --- !u!1 &4413370117540032274
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,9 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35bc6cf50f3d071478ab7876cf394e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadoutNum: 0
   loadoutType: 0
-  weapon: {fileID: 0}
 --- !u!1 &4413370117846878781
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +348,7 @@ GameObject:
   - component: {fileID: -5508536796910335470}
   - component: {fileID: -4144502830590983027}
   - component: {fileID: 7188504509091920555}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OldReliable_01
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -451,8 +447,8 @@ MonoBehaviour:
   currentHealth: 100
   currentShield: 0
   shipInfo:
-    stringID: 
     name: 
+    stringID: 
     price: 0
     equipmentType: 0
     isUnlocked: 0
@@ -461,7 +457,7 @@ MonoBehaviour:
     maxSheild: 0
     maxSpeed: 0
     maxHandling: 0
-    forwardWeapons: []
+    fixedWeapons: []
     turrentWeapons: []
   shipModifier:
     speedModifier: 0

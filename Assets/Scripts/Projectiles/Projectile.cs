@@ -5,6 +5,7 @@ using UnityEngine;
 public interface IProjectile
 {
     void InitialiseProjectile(float speed, float damage, float life);
+    void SetTag(string tag);
 }
 
 namespace Evacuation.Weapons
@@ -13,10 +14,10 @@ namespace Evacuation.Weapons
     {
         public Rigidbody2D projectileRB;
 
+        // Fields
         protected float speed;
         protected float damage;
         protected float life;
-
         protected bool isPaused = false;
 
         public virtual void InitialiseProjectile(float speed, float damage, float life)
@@ -31,9 +32,14 @@ namespace Evacuation.Weapons
             life -= Time.fixedDeltaTime;
         }
 
-        public virtual void InflictDamagte(IDamageable damageInstance)
+        public virtual void InflictDamage(IDamageable damageInstance)
         {
             damageInstance.OnDamage(damage);
+        }
+
+        public void SetTag(string tag)
+        {
+            this.tag = tag;
         }
 
         public void OnPause()

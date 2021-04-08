@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 8389416922106746608}
   - component: {fileID: 8389416922106746609}
   - component: {fileID: 8389416922106746614}
+  - component: {fileID: -3483251644584421589}
   - component: {fileID: 8389416922106746615}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pellet_Projectile_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,6 +106,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!58 &-3483251644584421589
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8389416922106746612}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.12
 --- !u!114 &8389416922106746615
 MonoBehaviour:
   m_ObjectHideFlags: 0
