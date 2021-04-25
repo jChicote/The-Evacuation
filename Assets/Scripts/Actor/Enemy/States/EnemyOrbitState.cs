@@ -22,7 +22,7 @@ namespace Evacuation.Actor.EnemySystems
         protected float shipSpeed;
 
         // Inspector Accessible Fields
-        [SerializeField] private float radialOrbitDist = 5f;
+        [SerializeField] private float radialOrbitDist = 7f;
         [SerializeField] private float detachDist = 10f;
 
         Vector2 radialPoint = Vector2.zero;
@@ -46,7 +46,7 @@ namespace Evacuation.Actor.EnemySystems
         private void SwitchToFollowState()
         {
             if (stateManager == null) return;
-            if (Vector3.Distance(targetingSystem.GetTargetTransform().position, shipTransform.position) < detachDist) return;
+            if (Vector3.Distance(targetingSystem.GetTargetTransform().position, shipTransform.position) > 8) return;
 
             stateManager.AddState<EnemyFollowState>();
         }
@@ -57,7 +57,7 @@ namespace Evacuation.Actor.EnemySystems
             pointB = targetingSystem.GetTargetTransform().position;
             abMagnitude = Vector3.Magnitude(pointA - pointB);
             radialPoint = new Vector2(pointB.x + (radialOrbitDist * (pointA.y - pointB.y)) / abMagnitude, pointB.y + (radialOrbitDist * (pointB.x - pointA.x)) / abMagnitude);
-            radialVelocity = (shipTransform.position - targetingSystem.GetTargetTransform().position).normalized * 5f;
+            radialVelocity = (shipTransform.position - targetingSystem.GetTargetTransform().position).normalized * 9f;
             drivingDirection = radialPoint - (Vector2)shipTransform.position;
 
             shipVelocity = (drivingDirection + radialVelocity).normalized * shipSpeed;

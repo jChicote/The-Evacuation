@@ -7,6 +7,9 @@ namespace Evacuation.Level.SpawnManagement
 {
     public class DroidSpawnManager : SpawnManager
     {
+        // Inspector Accessible Fields
+        [SerializeField] protected float maximumEntityCount;
+
         // Fields
         protected GameManager gameManager;
         protected SceneController sceneController;
@@ -22,21 +25,34 @@ namespace Evacuation.Level.SpawnManagement
             base.InitialiseManager();
             gameManager = GameManager.Instance;
             sceneController = gameManager.sceneController;
+            spawnPositioner = this.GetComponent<SpawnPositioner>();
         }
 
         public override void SpawnEntity()
         {
+            if (entityCount > maximumEntityCount) return;
+
             base.SpawnEntity();
-            /*GameObject spawnedDroid = Instantiate(gameManager.enemySettings.droidSentryPrefab, transform.position, Quaternion.identity);
 
-            IAssignSceneActorTracker assignTracker = spawnedDroid.GetComponent<IAssignSceneActorTracker>();
+            GameObject spawnedDroid = Instantiate(gameManager.enemySettings.droidSentryPrefab, transform.position, Quaternion.identity);
+            IStatePatternSetter patternSetter = spawnedDroid.GetComponent<IStatePatternSetter>();
+
+            InitialiseEntity(spawnedDroid);
+            spawnPositioner.PositionEntity(spawnedDroid, patternSetter);
+            spawnedDroid.SetActive(true);
+
+            entityCount++;
+        }
+
+        public void InitialiseEntity(GameObject entity)
+        {
+            IAssignSceneActorTracker assignTracker = entity.GetComponent<IAssignSceneActorTracker>();
             assignTracker.SetSceneActorTracker(sceneController.ActorTracker);
-            sceneController.ActorTracker.RegisterEnemyEntity(spawnedDroid);
+            sceneController.ActorTracker.RegisterEnemyEntity(entity);
 
-            IEnemyController enemyController = spawnedDroid.GetComponent<IEnemyController>();
-            enemyController.InitialiseController();*/
-
-            //spawnPositioner.PositionEntity(spawnedDroid, enemyController);
+            IEnemyController enemyController = entity.GetComponent<IEnemyController>();
+            enemyController.InitialiseController();
+            entity.SetActive(false);
         }
 
         public override void GloballyClearAllEntities()

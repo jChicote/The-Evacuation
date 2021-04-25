@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using Evacuation.Level.SpawnManagement;
 
-namespace Evacuation.Actor.EnemySystems
+namespace Evacuation.Actor.EnemySystems.DroidSystems
 {
     public class DroidSentryEnemyController : BaseEnemyController
     {
@@ -35,14 +35,14 @@ namespace Evacuation.Actor.EnemySystems
         private void InitialiseMovementSystems()
         {                                           
             EnemyStateManager stateManager = this.GetComponent<EnemyStateManager>();
-            //stateManager.AddState<EnemyFollowState>();
-            //EnemyMovementController movementController = this.GetComponent<EnemyMovementController>();
+            stateManager.AddState<EnemyFollowState>();
+            EnemyMovementController movementController = this.GetComponent<EnemyMovementController>();
         }
 
         private void InitialiseWeaponSystems()
         {
             //EnemyWeaponController weaponController = this.GetComponent<EnemyWeaponController>();
-            EnemyDamageManager damageManager = this.GetComponent<EnemyDamageManager>();
+            EnemyDamageController damageManager = this.GetComponent<EnemyDamageController>();
             damageManager.InitialiseComponent();
         }
 

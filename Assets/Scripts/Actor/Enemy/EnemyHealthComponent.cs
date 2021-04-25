@@ -3,28 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using Evacuation.Actor;
 
-public class EnemyHealthComponent : HealthComponent
+namespace Evacuation.Actor.EnemySystems
 {
-    private IHealthAccessors healthAccessors;
 
-    public override void InitialiseHealth(float maxHealth) 
+    public class EnemyHealthComponent : HealthComponent
     {
-        healthAccessors = this.GetComponent<IHealthAccessors>();
+        private IHealthAccessors healthAccessors;
+        protected IStateManager stateManager;
+
+        public override void InitialiseHealth(float maxHealth)
+        {
+            healthAccessors = this.GetComponent<IHealthAccessors>();
+            stateManager = this.GetComponent<IStateManager>();
+        }
+
+        public override void SetHealthUpdate(float healthValue)
+        {
+            if (healthValue <= 90) //test
+            {
+                stateManager.AddState<EnemyDeathState>();
+            }
+
+            healthAccessors.SetShipHealth(healthValue);
+            //Debug.Log("Enemy Health At: " + healthValue);
+        }
+
+        public override float GetShipHealth()
+        {
+            return healthAccessors.GetShipHealth();
+        }
+
+        public override bool IsActive()
+        {
+            return healthAccessors.GetShipHealth() > 0;
+        }
     }
 
-    public override void SetHealthUpdate(float healthValue) 
-    {
-        healthAccessors.SetShipHealth(healthValue);
-        Debug.Log("Enemy Health At: " + healthValue);
-    }
-
-    public float CalculateDamagedHealth(float damage)
-    {
-        return healthAccessors.GetShipHealth() - damage;
-    }
-
-    public bool IsActive()
-    {
-        return healthAccessors.GetShipHealth() > 0;
-    }
 }

@@ -27,21 +27,20 @@ namespace Evacuation.Level.SpawnManagement
 
         private void FixedUpdate()
         {
-            print(Camera.main.orthographicSize);
-            Debug.Log(Screen.height * 1.0 / Screen.width * 1.0);
+            //print(Camera.main.orthographicSize);
+            //Debug.Log(Screen.height * 1.0 / Screen.width * 1.0);
 
-            float width = Camera.main.orthographicSize * Camera.main.aspect;
+            //float width = Camera.main.orthographicSize * Camera.main.aspect;
 
-            Debug.DrawLine(Camera.main.transform.position, new Vector3(width, 0) + Camera.main.transform.position);
-            Debug.DrawLine(Camera.main.transform.position, new Vector3(0, (width) * (float)(Screen.height * 1.0 / Screen.width * 1.0), 0) + Camera.main.transform.position, Color.blue);
-            // patternTimer.TickTimer();
+           // Debug.DrawLine(Camera.main.transform.position, new Vector3(width, 0) + Camera.main.transform.position);
+            //Debug.DrawLine(Camera.main.transform.position, new Vector3(0, (width) * (float)(Screen.height * 1.0 / Screen.width * 1.0), 0) + Camera.main.transform.position, Color.blue);
+            //patternTimer.TickTimer();
         }
 
         public void PositionEntity(GameObject spawnedEntity, IStatePatternSetter patternSetter)
         {
-            // Position when landed
-
-            // POsition when in flight
+            Vector3 newPos = DeterminePosition();
+            spawnedEntity.transform.position = newPos;
         }
 
         private void SelectPattern()
@@ -56,13 +55,16 @@ namespace Evacuation.Level.SpawnManagement
         {
             bool willSpawnRight = Random.Range(0, 100) >= 50;
             Camera cameraMain = Camera.main;
+            float width = Camera.main.orthographicSize * Camera.main.aspect;
+            float height = width * (float)(Screen.height * 1.0 / Screen.width * 1.0);
 
             if (willSpawnRight)
             {
-                //Vector3 spawnPos = cameraMain.transform.position.x + Random.Range(cameraMain.aspect, sessionReference.rightLimit + 1)
+                return new Vector3(width + Random.Range(1, 10), height + Random.Range(1, 10)) + Camera.main.transform.position;
+            } else
+            {
+                return new Vector3(height + Random.Range(1, 10), height + Random.Range(1, 10)) - Camera.main.transform.position;
             }
-
-            return Vector3.one;
         }
 
         private void OnDrawGizmos()

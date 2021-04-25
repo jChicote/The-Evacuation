@@ -21,6 +21,8 @@ namespace Evacuation.Actor.EnemySystems
         protected Vector2 shipDirection;
         protected float shipSpeed;
 
+        [SerializeField] private float orbitDistance = 5;
+
         public override void BeginState()
         {
             shipTransform = transform;
@@ -40,9 +42,9 @@ namespace Evacuation.Actor.EnemySystems
         private void SwitchToOrbitalMovement()
         {
             if (stateManager == null) return;
-            if (Vector3.Distance(targetingSystem.GetTargetTransform().position, shipTransform.position) > 5) return;
+            if (Vector3.Distance(targetingSystem.GetTargetTransform().position, shipTransform.position) < 8) return;
 
-            Debug.Log(stateManager);
+            //Debug.Log("Changing to Orbit State");
 
             stateManager.AddState<EnemyOrbitState>();
         }

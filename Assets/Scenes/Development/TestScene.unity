@@ -1649,7 +1649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   electedPatterns: 01000000020000000300000004000000
   patternRuntimeLength: 0
-  selectedPattern: 0
+  defaultPattern: 0
 --- !u!114 &798976717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1664,6 +1664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityPrefab: {fileID: 8024996226159274337, guid: 40ae88ece4a19fc418aac05b7c87df23, type: 3}
   spawnIntervalTime: 3
+  maximumEntityCount: 1
 --- !u!1 &827644554
 GameObject:
   m_ObjectHideFlags: 0
