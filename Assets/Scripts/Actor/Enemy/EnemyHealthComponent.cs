@@ -25,7 +25,6 @@ namespace Evacuation.Actor.EnemySystems
             }
 
             healthAccessors.SetShipHealth(healthValue);
-            //Debug.Log("Enemy Health At: " + healthValue);
         }
 
         public override float GetShipHealth()

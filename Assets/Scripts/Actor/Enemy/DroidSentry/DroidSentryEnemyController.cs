@@ -13,7 +13,7 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
 
         // Fields
         private EnemyInfo enemyInfo;
-        private EnemyStateManager stateManager;
+        private IStateManager stateManager;
 
         public override void InitialiseController()
         {
@@ -34,21 +34,21 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
 
         private void InitialiseMovementSystems()
         {                                           
-            EnemyStateManager stateManager = this.GetComponent<EnemyStateManager>();
+            IStateManager stateManager = this.GetComponent<IStateManager>();
             stateManager.AddState<EnemyFollowState>();
-            EnemyMovementController movementController = this.GetComponent<EnemyMovementController>();
+            //EnemyMovementController movementController = this.GetComponent<EnemyMovementController>();
         }
 
         private void InitialiseWeaponSystems()
         {
-            //EnemyWeaponController weaponController = this.GetComponent<EnemyWeaponController>();
-            EnemyDamageController damageManager = this.GetComponent<EnemyDamageController>();
+            EnemyWeaponController weaponController = this.GetComponent<EnemyWeaponController>();
+            IDamageable damageManager = this.GetComponent<IDamageable>();
             damageManager.InitialiseComponent();
         }
 
         private void InitialiseVitality()
         {
-            EnemyHealthComponent healthComponent = this.GetComponent<EnemyHealthComponent>();
+            IHealthComponent healthComponent = this.GetComponent<IHealthComponent>();
             healthComponent.InitialiseHealth(enemyInfo.maxHealth);
         }
 

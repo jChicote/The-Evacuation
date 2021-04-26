@@ -44,8 +44,6 @@ namespace Evacuation.Actor.EnemySystems
             if (stateManager == null) return;
             if (Vector3.Distance(targetingSystem.GetTargetTransform().position, shipTransform.position) < 8) return;
 
-            //Debug.Log("Changing to Orbit State");
-
             stateManager.AddState<EnemyOrbitState>();
         }
 
