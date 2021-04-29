@@ -62,6 +62,7 @@ namespace Evacuation.Actor.EnemySystems
         protected virtual void SetMovement()
         {
             enemyRB.velocity = shipDirection.normalized * shipSpeed;
+            //shipTransform.position = new Vector3(shipTransform.position.x, shipTransform.position.y, 0);
         }
 
 

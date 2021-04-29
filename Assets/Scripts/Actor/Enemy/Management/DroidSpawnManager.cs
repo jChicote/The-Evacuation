@@ -34,7 +34,7 @@ namespace Evacuation.Level.SpawnManagement
 
             base.SpawnEntity();
 
-            GameObject spawnedDroid = Instantiate(gameManager.enemySettings.droidSentryPrefab, transform.position, Quaternion.identity);
+            GameObject spawnedDroid = Instantiate(gameManager.enemySettings.droidSentryPrefab, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
             IStatePatternSetter patternSetter = spawnedDroid.GetComponent<IStatePatternSetter>();
 
             InitialiseEntity(spawnedDroid);
