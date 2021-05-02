@@ -22,8 +22,8 @@ namespace Evacuation.Actor.EnemySystems
         protected float shipSpeed;
 
         // Inspector Accessible Fields
-        [SerializeField] private float radialOrbitDist = 5f;
-        [SerializeField] private float detachDist = 10f;
+        [SerializeField] private float radialOrbitDist = 7f;
+        [SerializeField] private float exclusionDist = 10f;
 
         Vector2 radialPoint = Vector2.zero;
 
@@ -34,6 +34,7 @@ namespace Evacuation.Actor.EnemySystems
             targetingSystem = this.GetComponent<IEnemyTargetingSystem>();
             stateManager = this.GetComponent<IStateManager>();
             targetingSystem.SelectNearestTarget();
+
         }
 
         private void FixedUpdate()
@@ -46,21 +47,28 @@ namespace Evacuation.Actor.EnemySystems
         private void SwitchToFollowState()
         {
             if (stateManager == null) return;
-            if (Vector3.Distance(targetingSystem.GetTargetTransform().position, shipTransform.position) < detachDist) return;
 
-            stateManager.AddState<EnemyFollowState>();
+            // Checks whether the distance to target is outside the exclusion perimeter of the target
+            if (Vector2.Distance(targetingSystem.GetTargetTransform().position, shipTransform.position) > exclusionDist)
+            {
+                stateManager.AddState<EnemyFollowState>();
+            }
+
+            
         }
 
         protected virtual void CalculateOrbitalVelocity()
         {
-            pointA = shipTransform.position;
-            pointB = targetingSystem.GetTargetTransform().position;
+            //print(shipTransform.position.z);
+            pointA = (Vector2)shipTransform.position;
+            pointB = (Vector2)targetingSystem.GetTargetTransform().position;
             abMagnitude = Vector3.Magnitude(pointA - pointB);
             radialPoint = new Vector2(pointB.x + (radialOrbitDist * (pointA.y - pointB.y)) / abMagnitude, pointB.y + (radialOrbitDist * (pointB.x - pointA.x)) / abMagnitude);
-            radialVelocity = (shipTransform.position - targetingSystem.GetTargetTransform().position).normalized * 5f;
+            radialVelocity = (shipTransform.position - targetingSystem.GetTargetTransform().position).normalized * 9f;
             drivingDirection = radialPoint - (Vector2)shipTransform.position;
 
             shipVelocity = (drivingDirection + radialVelocity).normalized * shipSpeed;
+            //print(shipTransform.position.z);
 
             //Debug.DrawRay(targetingSystem.GetTargetTransform().position, radialVelocity);
             //Debug.DrawRay(shipTransform.position, tangentialVelocity, Color.red);
@@ -91,7 +99,7 @@ namespace Evacuation.Actor.EnemySystems
 
         private void OnDrawGizmos()
         {
-            Gizmos.DrawWireSphere(targetingSystem.GetTargetTransform().position, detachDist);
+            Gizmos.DrawWireSphere(targetingSystem.GetTargetTransform().position, exclusionDist);
             //Gizmos.color = Color.blue;
             //Gizmos.DrawWireSphere(radialPoint, 1f);
         }

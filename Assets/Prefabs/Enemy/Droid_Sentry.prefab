@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4228689478832086979}
   - component: {fileID: 5255613686498423476}
   - component: {fileID: 4100357366219163239}
+  - component: {fileID: 2509678051316062865}
   - component: {fileID: 2259540412470295614}
-  - component: {fileID: 6750557240094559687}
   - component: {fileID: 8024996226159274340}
   - component: {fileID: 8024996226159274341}
   - component: {fileID: 8024996226159274342}
@@ -93,19 +93,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   currentShield: 0
-  shipInfo:
-    name: 
-    stringID: 
-    price: 0
-    equipmentType: 0
-    isUnlocked: 0
-    rescueCapacity: 0
-    maxHealth: 0
-    maxSheild: 0
-    maxSpeed: 0
-    maxHandling: 0
-    fixedWeapons: []
-    turrentWeapons: []
   shipModifier:
     speedModifier: 1
     shieldModifier: 1
@@ -118,6 +105,32 @@ MonoBehaviour:
   OnShieldChanged:
     m_PersistentCalls:
       m_Calls: []
+  enemyInfo:
+    name: 
+    stringID: 
+    price: 0
+    equipmentType: 0
+    isUnlocked: 0
+    rescueCapacity: 0
+    maxHealth: 0
+    maxSheild: 0
+    maxSpeed: 0
+    maxHandling: 0
+    fixedWeapons: []
+    turrentWeapons: []
+    weaponList: []
+--- !u!114 &2509678051316062865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8024996226159274337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e27e4bfbbcc25704b8fdd5edb663c4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2259540412470295614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,18 +141,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7625ff1d3a7f0954eb6e9ed78132ff56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6750557240094559687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8024996226159274337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e27e4bfbbcc25704b8fdd5edb663c4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8024996226159274340
@@ -154,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8658cef71f7af94687cedcba7a93c65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  referenceID: 
 --- !u!114 &8024996226159274341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +176,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8024996226159274337}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89afee9f914621d4a8d1bef31e4734fd, type: 3}
   m_Name: 
@@ -228,6 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8024996226824593796}
   - component: {fileID: 8024996226824593819}
+  - component: {fileID: 8180703261341983979}
   m_Layer: 7
   m_Name: Droid_Sentry_Sprite
   m_TagString: Untagged
@@ -300,3 +303,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8180703261341983979
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8024996226824593797}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0194b278a3bcd8f4f9e35d6524e88778, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

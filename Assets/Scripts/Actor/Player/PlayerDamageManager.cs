@@ -5,7 +5,7 @@ using Evacuation.Actor;
 
 namespace Evacuation.Actor.PlayerSystems
 {
-    public class PlayerDamageManager : ActorDamageManager
+    public class PlayerDamageManager : ActorDamageController
     {
         //private IHealthAccessors healthAccessors;
         private PlayerHeathComponent healthComponent;

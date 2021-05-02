@@ -37,6 +37,9 @@ public class SceneController : MonoBehaviour
     public IMarkerManager markerManager;
     private IActorTracker actorTracker;
 
+    // Accessors
+    public IActorTracker ActorTracker {  get { return actorTracker; } }
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -68,7 +71,7 @@ public class SceneController : MonoBehaviour
 
         //Load Entities
         SpawnPlayer();
-        SpawnEnemyEntities();
+        //SpawnEnemyEntities();
         LoadInhabitedSatellites();
     }
 

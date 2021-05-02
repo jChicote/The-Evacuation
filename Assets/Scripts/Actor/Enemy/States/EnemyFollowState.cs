@@ -21,6 +21,8 @@ namespace Evacuation.Actor.EnemySystems
         protected Vector2 shipDirection;
         protected float shipSpeed;
 
+        [SerializeField] private float detectionDist = 6;
+
         public override void BeginState()
         {
             shipTransform = transform;
@@ -28,6 +30,8 @@ namespace Evacuation.Actor.EnemySystems
             targetingSystem = this.GetComponent<IEnemyTargetingSystem>();
             stateManager = this.GetComponent<IStateManager>();
             targetingSystem.SelectNearestTarget();
+
+            //print("8: " + transform.position.z);
         }
 
         private void FixedUpdate()
@@ -40,16 +44,20 @@ namespace Evacuation.Actor.EnemySystems
         private void SwitchToOrbitalMovement()
         {
             if (stateManager == null) return;
-            if (Vector3.Distance(targetingSystem.GetTargetTransform().position, shipTransform.position) > 5) return;
 
-            Debug.Log(stateManager);
-
-            stateManager.AddState<EnemyOrbitState>();
+            // Checks whether the distance to target is within the detection radius
+            if (Vector2.Distance(targetingSystem.GetTargetTransform().position, shipTransform.position) < detectionDist)
+            {
+                stateManager.AddState<EnemyOrbitState>();
+            }
         }
 
         protected virtual void CalculateDirection()
         {
-            shipDirection = targetingSystem.GetTargetTransform().position - shipTransform.position;
+            // print(shipTransform.position.z);
+            //print("9: " + transform.position.z);
+            shipDirection = (Vector2)targetingSystem.GetTargetTransform().position - (Vector2)shipTransform.position;
+            
             //angleRotation = Mathf.Atan2(shipDirection.y, shipDirection.x) * Mathf.Rad2Deg - 90;
         }
 
@@ -62,6 +70,7 @@ namespace Evacuation.Actor.EnemySystems
         protected virtual void SetMovement()
         {
             enemyRB.velocity = shipDirection.normalized * shipSpeed;
+            //shipTransform.position = new Vector3(shipTransform.position.x, shipTransform.position.y, 0);
         }
 
 

@@ -387,16 +387,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   selectedShip:
-    stringID: 
     name: 
+    stringID: 
     price: 0
     equipmentType: 0
     isUnlocked: 0
+    rescueCapacity: 0
     maxHealth: 0
     maxSheild: 0
     maxSpeed: 0
     maxHandling: 0
-    forwardWeapons: []
+    fixedWeapons: []
     turrentWeapons: []
 --- !u!4 &378726840
 Transform:

@@ -10,7 +10,7 @@ public interface IDamageable
 
 namespace Evacuation.Actor
 {
-    public class ActorDamageManager : MonoBehaviour, IDamageable
+    public class ActorDamageController : MonoBehaviour, IDamageable
     {
         public virtual void InitialiseComponent() { }
 
