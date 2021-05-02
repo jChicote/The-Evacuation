@@ -13,7 +13,7 @@ namespace Evacuation.Level.SpawnManagement
         // Fields
         protected GameManager gameManager;
         protected SceneController sceneController;
-        protected SpawnPositioner spawnPositioner;
+        protected ISpawnPositioner spawnPositioner;
 
         private void Start()
         {
@@ -25,7 +25,7 @@ namespace Evacuation.Level.SpawnManagement
             base.InitialiseManager();
             gameManager = GameManager.Instance;
             sceneController = gameManager.sceneController;
-            spawnPositioner = this.GetComponent<SpawnPositioner>();
+            spawnPositioner = this.GetComponent<ISpawnPositioner>();
         }
 
         public override void SpawnEntity()

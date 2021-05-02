@@ -5,7 +5,12 @@ using Evacuation.Actor.EnemySystems;
 
 namespace Evacuation.Level.SpawnManagement
 {
-    public class SpawnPositioner : MonoBehaviour
+    public interface ISpawnPositioner
+    {
+        void PositionEntity(GameObject spawnedEntity, IStatePatternSetter patternSetter);
+    }
+
+    public class SpawnPositioner : MonoBehaviour, ISpawnPositioner
     {
         // Inspector Accessible Fields
         [SerializeField] protected SpawnPattern[] electedPatterns;
@@ -39,7 +44,7 @@ namespace Evacuation.Level.SpawnManagement
 
         public void PositionEntity(GameObject spawnedEntity, IStatePatternSetter patternSetter)
         {
-            Vector3 newPos = DeterminePosition();
+            Vector2 newPos = DeterminePosition();
             spawnedEntity.transform.position = newPos;
         }
 
@@ -51,7 +56,7 @@ namespace Evacuation.Level.SpawnManagement
             patternTimer.ResetTimer();
         }
 
-        private Vector3 DeterminePosition()
+        private Vector2 DeterminePosition()
         {
             bool willSpawnRight = Random.Range(0, 100) >= 50;
             Camera cameraMain = Camera.main;
@@ -60,10 +65,10 @@ namespace Evacuation.Level.SpawnManagement
 
             if (willSpawnRight)
             {
-                return new Vector3(width + Random.Range(1, 10), height + Random.Range(1, 10)) + Camera.main.transform.position;
+                return new Vector2(width + Random.Range(1, 10), height + Random.Range(1, 10)) + (Vector2)Camera.main.transform.position;
             } else
             {
-                return new Vector3(height + Random.Range(1, 10), height + Random.Range(1, 10)) - Camera.main.transform.position;
+                return new Vector2(height + Random.Range(1, 10), height + Random.Range(1, 10)) - (Vector2)Camera.main.transform.position;
             }
         }
 

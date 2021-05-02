@@ -18,9 +18,13 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
         public override void InitialiseController()
         {
             InitialiseStats();
+            //print("4: " + transform.position.z);
             InitialiseVitality();
+            //print("5: " + transform.position.z);
             InitialiseMovementSystems();
+            //print("6: " + transform.position.z);
             InitialiseWeaponSystems();
+            //print("7: " + transform.position.z);
         }
 
         private void InitialiseStats()
