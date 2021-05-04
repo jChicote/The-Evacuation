@@ -18,13 +18,9 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
         public override void InitialiseController()
         {
             InitialiseStats();
-            //print("4: " + transform.position.z);
             InitialiseVitality();
-            //print("5: " + transform.position.z);
             InitialiseMovementSystems();
-            //print("6: " + transform.position.z);
             InitialiseWeaponSystems();
-            //print("7: " + transform.position.z);
         }
 
         private void InitialiseStats()
@@ -33,14 +29,14 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
 
             EnemyStatHandler statHandler = this.GetComponent<EnemyStatHandler>();
             statHandler.InitialiseStats(enemyInfo);
-
         }
 
         private void InitialiseMovementSystems()
         {                                           
             IStateManager stateManager = this.GetComponent<IStateManager>();
             stateManager.AddState<EnemyFollowState>();
-            //EnemyMovementController movementController = this.GetComponent<EnemyMovementController>();
+            IMovementController movementController = this.GetComponent<IMovementController>();
+            movementController.InitialiseController();
         }
 
         private void InitialiseWeaponSystems()
