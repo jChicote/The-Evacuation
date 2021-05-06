@@ -9,6 +9,7 @@ using Evacuation.UserInterface.LocationMarker;
 using Evacuation.Level.Collections;
 using Evacuation.Actor.EnemySystems;
 using Evacuation.Session;
+using Evacuation.Cinematics;
 
 public class SceneController : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class SceneController : MonoBehaviour
     [Header("Scene Managers & Systems")]
     public ScoreSystem scoreSystem;
     [SerializeField] private GameObject locationManagerObject;
+    [SerializeField] private CinematicManager cinematicManager;
 
     // Serielised Inspector Fields
     [Space]
@@ -39,6 +41,7 @@ public class SceneController : MonoBehaviour
 
     // Accessors
     public IActorTracker ActorTracker {  get { return actorTracker; } }
+    public CinematicManager CinematicManager { get { return cinematicManager; } }
 
     // Start is called before the first frame update
     private void Awake()

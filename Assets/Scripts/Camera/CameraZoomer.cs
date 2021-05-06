@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-namespace Evacuation.CameraUtil
+namespace Evacuation.Cinematics.CameraUtil
 {
 
     public interface ICameraZoom
@@ -16,12 +16,14 @@ namespace Evacuation.CameraUtil
     {
         // Inspector Accesisble Fields
         [SerializeField] private float defaultZoom;
-        [SerializeField] private float interpolateDuration;
+        [Range(0, 1)]
+        [SerializeField] private float interpolationStep;
 
         // Fields
         private CinemachineVirtualCamera mainCamera;
         private float targetZoom;
         private float currentZoom;
+        private float timeStep = 0;
         private bool isPaused = false;
         public bool isAtTargetZoom = true;
 
@@ -41,22 +43,27 @@ namespace Evacuation.CameraUtil
 
         private void LerpToTargetZoom()
         {
-            currentZoom = Mathf.Lerp(currentZoom, defaultZoom, interpolateDuration);
+            currentZoom = Mathf.Lerp(currentZoom, targetZoom, interpolationStep);
+            timeStep += interpolationStep * Time.deltaTime;
             mainCamera.m_Lens.OrthographicSize = currentZoom;
-            //print(currentZoom);
+            print(currentZoom + ", " + timeStep);
 
-            if (currentZoom == targetZoom) isAtTargetZoom = true;
+            if (System.Math.Round(currentZoom, 1) >= targetZoom - 0.1f) isAtTargetZoom = true;
         }
 
         public void SetTargetZoom(float zoomValue)
         {
             targetZoom = zoomValue;
+            timeStep = 0;
+            //print("targetz zoom at: " + zoomValue);
             isAtTargetZoom = false;
         }
 
         public void SetToDefaultZoom()
         {
             targetZoom = defaultZoom;
+            timeStep = 0;
+            print("Default zoom at: " + defaultZoom);
             isAtTargetZoom = false;
         }
 

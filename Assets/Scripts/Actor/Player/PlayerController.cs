@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Evacuation.Session;
+using Cinemachine;
+using Evacuation.Cinematics;
 
 public interface IPausable
 {
@@ -37,6 +39,7 @@ namespace Evacuation.Actor.PlayerSystems
             InitiateShipStatHandler();
 
             // Initialises and activates related handlers and controls
+            AssignPlayerCameraToManager();
             InitiateInputSystem();
             InitiateMovement();
             InitiateWeapons();
@@ -120,6 +123,13 @@ namespace Evacuation.Actor.PlayerSystems
         {
             PlayerRescueSystem rescueSystem = this.GetComponent<PlayerRescueSystem>();
             rescueSystem.InitialiseRescueSsytem();
+        }
+
+        private void AssignPlayerCameraToManager()
+        {
+            SceneController sceneController = GameManager.Instance.sceneController;
+            CinematicManager cinematicManager = sceneController.CinematicManager;
+            cinematicManager.PrimaryCamera = this.GetComponentInChildren<CinemachineVirtualCamera>();
         }
 
         // ================================
