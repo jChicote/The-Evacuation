@@ -9,6 +9,7 @@ namespace Evacuation.Actor.EnemySystems
         // Interfaces
         protected IEnemyTargetingSystem targetingSystem;
         protected IStateManager stateManager;
+        protected IMovementController movementController;
 
         // Fields
         protected Rigidbody2D enemyRB;
@@ -33,14 +34,13 @@ namespace Evacuation.Actor.EnemySystems
             enemyRB = this.GetComponent<Rigidbody2D>();
             targetingSystem = this.GetComponent<IEnemyTargetingSystem>();
             stateManager = this.GetComponent<IStateManager>();
+            movementController = this.GetComponent<IMovementController>();
             targetingSystem.SelectNearestTarget();
-
         }
 
         private void FixedUpdate()
         {
             if (isPaused) return;
-
             RunStateUpdate();
         }
 
@@ -53,22 +53,18 @@ namespace Evacuation.Actor.EnemySystems
             {
                 stateManager.AddState<EnemyFollowState>();
             }
-
-            
         }
 
         protected virtual void CalculateOrbitalVelocity()
         {
-            //print(shipTransform.position.z);
-            pointA = (Vector2)shipTransform.position;
-            pointB = (Vector2)targetingSystem.GetTargetTransform().position;
+            pointA = shipTransform.position;
+            pointB = targetingSystem.GetTargetTransform().position;
             abMagnitude = Vector3.Magnitude(pointA - pointB);
             radialPoint = new Vector2(pointB.x + (radialOrbitDist * (pointA.y - pointB.y)) / abMagnitude, pointB.y + (radialOrbitDist * (pointB.x - pointA.x)) / abMagnitude);
             radialVelocity = (shipTransform.position - targetingSystem.GetTargetTransform().position).normalized * 9f;
             drivingDirection = radialPoint - (Vector2)shipTransform.position;
 
             shipVelocity = (drivingDirection + radialVelocity).normalized * shipSpeed;
-            //print(shipTransform.position.z);
 
             //Debug.DrawRay(targetingSystem.GetTargetTransform().position, radialVelocity);
             //Debug.DrawRay(shipTransform.position, tangentialVelocity, Color.red);
@@ -82,17 +78,11 @@ namespace Evacuation.Actor.EnemySystems
             shipSpeed = 7f;
         }
 
-        protected virtual void SetMovement()
-        {
-            enemyRB.velocity = shipVelocity;
-        }
-
-
         public override void RunStateUpdate()
         {
             CalculateOrbitalVelocity();
             CalculateSpeed();
-            SetMovement();
+            movementController.SetMovement(shipVelocity);
 
             SwitchToFollowState();
         }
@@ -100,8 +90,6 @@ namespace Evacuation.Actor.EnemySystems
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(targetingSystem.GetTargetTransform().position, exclusionDist);
-            //Gizmos.color = Color.blue;
-            //Gizmos.DrawWireSphere(radialPoint, 1f);
         }
     }
 }

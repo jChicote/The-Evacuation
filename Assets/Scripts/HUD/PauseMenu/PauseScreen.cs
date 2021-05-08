@@ -28,17 +28,20 @@ public class PauseScreen : MonoBehaviour
     /// </summary>
     public void OnPause()
     {
-        IPausable pausableItem;
+        IPausable[] pausableItems;
 
         GameObject[] pausableObjects = FindObjectsOfType<GameObject>();
         
         foreach(GameObject item in pausableObjects)
         {
-            pausableItem = item.GetComponent<IPausable>();
+            pausableItems = item.GetComponents<IPausable>();
 
-            if(pausableItem != null)
+            foreach (IPausable pausible in pausableItems)
             {
-                pausableItem.OnPause();
+                if (pausible != null)
+                {
+                    pausible.OnPause();
+                }
             }
         }
 
@@ -52,16 +55,19 @@ public class PauseScreen : MonoBehaviour
     {
         Debug.Log("Resumed");
 
-        IPausable pausableItem;
+        IPausable[] pausableItems;
 
         GameObject[] pausableObjects = FindObjectsOfType<GameObject>();
         foreach (GameObject item in pausableObjects)
         {
-            pausableItem = item.GetComponent<IPausable>();
+            pausableItems = item.GetComponents<IPausable>();
 
-            if (pausableItem != null)
+            foreach (IPausable pausible in pausableItems)
             {
-                pausableItem.OnUnpause();
+                if (pausible != null)
+                {
+                    pausible.OnUnpause();
+                }
             }
         }
 

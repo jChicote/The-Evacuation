@@ -20,6 +20,7 @@ namespace Evacuation.Actor
 
         public void OnPause()
         {
+            print("Is Called");
             isPaused = true;
         }
 

@@ -154,7 +154,7 @@ MonoBehaviour:
   m_ScreenY: 0.5
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
-  m_SoftZoneWidth: 0.8
+  m_SoftZoneWidth: 0.7988839
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
   m_BiasY: 0
@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 4413370118602623878}
   - component: {fileID: 4413370118602623879}
   - component: {fileID: 4413370118602623876}
+  - component: {fileID: 1990079848122498176}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -326,6 +327,21 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 0}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!114 &1990079848122498176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4413370118602623881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 185753a118bf0ba4392724951c589c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultZoom: 5
+  interpolationStep: 0.042
+  isAtTargetZoom: 1
 --- !u!1 &4413370118639381924
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,7 +461,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 100
-  currentShield: 0
+  currentShield: 1
+  shipModifier:
+    speedModifier: 0
+    shieldModifier: 0
+    healthModifier: 0
+    fireRateModifier: 0
+    damageModifier: 0
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnShieldChanged:
+    m_PersistentCalls:
+      m_Calls: []
   shipInfo:
     name: 
     stringID: 
@@ -459,18 +487,6 @@ MonoBehaviour:
     maxHandling: 0
     fixedWeapons: []
     turrentWeapons: []
-  shipModifier:
-    speedModifier: 0
-    shieldModifier: 0
-    healthModifier: 0
-    fireRateModifier: 0
-    damageModifier: 0
-  OnHealthChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  OnShieldChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &4413370118639381923
 MonoBehaviour:
   m_ObjectHideFlags: 0

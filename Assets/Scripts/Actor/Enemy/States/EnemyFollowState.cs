@@ -14,6 +14,7 @@ namespace Evacuation.Actor.EnemySystems
         // Interfaces
         protected IEnemyTargetingSystem targetingSystem;
         protected IStateManager stateManager;
+        protected IMovementController movementController;
 
         // Fields
         protected Rigidbody2D enemyRB;
@@ -29,9 +30,8 @@ namespace Evacuation.Actor.EnemySystems
             enemyRB = this.GetComponent<Rigidbody2D>();
             targetingSystem = this.GetComponent<IEnemyTargetingSystem>();
             stateManager = this.GetComponent<IStateManager>();
+            movementController = this.GetComponent<IMovementController>();
             targetingSystem.SelectNearestTarget();
-
-            //print("8: " + transform.position.z);
         }
 
         private void FixedUpdate()
@@ -54,8 +54,6 @@ namespace Evacuation.Actor.EnemySystems
 
         protected virtual void CalculateDirection()
         {
-            // print(shipTransform.position.z);
-            //print("9: " + transform.position.z);
             shipDirection = (Vector2)targetingSystem.GetTargetTransform().position - (Vector2)shipTransform.position;
             
             //angleRotation = Mathf.Atan2(shipDirection.y, shipDirection.x) * Mathf.Rad2Deg - 90;
@@ -67,18 +65,11 @@ namespace Evacuation.Actor.EnemySystems
             shipSpeed = 7f;
         }
 
-        protected virtual void SetMovement()
-        {
-            enemyRB.velocity = shipDirection.normalized * shipSpeed;
-            //shipTransform.position = new Vector3(shipTransform.position.x, shipTransform.position.y, 0);
-        }
-
-
         public override void RunStateUpdate()
         {
             CalculateDirection();
             CalculateSpeed();
-            SetMovement();
+            movementController.SetMovement(shipDirection.normalized * shipSpeed);
 
             SwitchToOrbitalMovement();
         }

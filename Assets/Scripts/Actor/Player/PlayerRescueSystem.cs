@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Evacuation.Level.TransportSystems;
+using Evacuation.Cinematics.CameraUtil;
 
 namespace Evacuation.Actor.PlayerSystems
 {
@@ -30,10 +31,13 @@ namespace Evacuation.Actor.PlayerSystems
         private IStatHandler statHandler;
         private IWeaponLoadoutSelector loadoutSelector;
 
+        private ICameraZoom cameraZoom;
+
         public void InitialiseRescueSsytem()
         {
             statHandler = this.GetComponent<IStatHandler>();
             loadoutSelector = this.GetComponent<IWeaponLoadoutSelector>();
+            cameraZoom = this.GetComponentInChildren<ICameraZoom>();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -55,12 +59,14 @@ namespace Evacuation.Actor.PlayerSystems
         public void AttachToPlatform()
         {
             loadoutSelector.ChooseLoadoutPosition(LoadoutPosition.Pivot);
+            cameraZoom.SetTargetZoom(6.5f);
         }
 
         public void DetachFromPlatform()
         {
             if (endTransport == null) return;
 
+            cameraZoom.SetToDefaultZoom();
             loadoutSelector.ChooseLoadoutPosition(LoadoutPosition.Forward);
             endTransport.EndCapture();
             endTransport = null;
