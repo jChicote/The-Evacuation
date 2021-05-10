@@ -46,7 +46,6 @@ namespace Evacuation.Cinematics.CameraUtil
             currentZoom = Mathf.Lerp(currentZoom, targetZoom, interpolationStep);
             timeStep += interpolationStep * Time.deltaTime;
             mainCamera.m_Lens.OrthographicSize = currentZoom;
-            print(currentZoom + ", " + timeStep);
 
             if (System.Math.Round(currentZoom, 1) >= targetZoom - 0.1f) isAtTargetZoom = true;
         }
@@ -63,7 +62,7 @@ namespace Evacuation.Cinematics.CameraUtil
         {
             targetZoom = defaultZoom;
             timeStep = 0;
-            print("Default zoom at: " + defaultZoom);
+            //print("Default zoom at: " + defaultZoom);
             isAtTargetZoom = false;
         }
 

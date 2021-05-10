@@ -17,7 +17,6 @@ namespace Evacuation.Actor.EnemySystems
         protected IMovementController movementController;
 
         // Fields
-        protected Rigidbody2D enemyRB;
         protected Transform shipTransform;
         protected Vector2 shipDirection;
         protected float shipSpeed;
@@ -27,7 +26,6 @@ namespace Evacuation.Actor.EnemySystems
         public override void BeginState()
         {
             shipTransform = transform;
-            enemyRB = this.GetComponent<Rigidbody2D>();
             targetingSystem = this.GetComponent<IEnemyTargetingSystem>();
             stateManager = this.GetComponent<IStateManager>();
             movementController = this.GetComponent<IMovementController>();

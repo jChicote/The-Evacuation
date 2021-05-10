@@ -10,9 +10,9 @@ namespace Evacuation.Actor.EnemySystems
         protected IEnemyTargetingSystem targetingSystem;
         protected IStateManager stateManager;
         protected IMovementController movementController;
+        private IWeaponController weaponController;
 
         // Fields
-        protected Rigidbody2D enemyRB;
         protected Transform shipTransform;
         protected Vector2 shipVelocity;
         private Vector2 pointA;
@@ -31,8 +31,8 @@ namespace Evacuation.Actor.EnemySystems
         public override void BeginState()
         {
             shipTransform = transform;
-            enemyRB = this.GetComponent<Rigidbody2D>();
             targetingSystem = this.GetComponent<IEnemyTargetingSystem>();
+            weaponController = this.GetComponent<IWeaponController>();
             stateManager = this.GetComponent<IStateManager>();
             movementController = this.GetComponent<IMovementController>();
             targetingSystem.SelectNearestTarget();
@@ -42,6 +42,9 @@ namespace Evacuation.Actor.EnemySystems
         {
             if (isPaused) return;
             RunStateUpdate();
+
+            // Weapon Fire
+            weaponController.RunWeaponSystem();
         }
 
         private void SwitchToFollowState()

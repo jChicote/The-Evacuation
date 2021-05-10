@@ -14,6 +14,7 @@ namespace Evacuation.Actor.EnemySystems
         void InitialiseTargetingSystem();
         void SelectNearestTarget();
         Transform GetTargetTransform();
+        float GetDistanceToTarget();
     }
 
     public class EnemyTargetingSystem : MonoBehaviour, IAssignSceneActorTracker, IEnemyTargetingSystem
@@ -21,9 +22,11 @@ namespace Evacuation.Actor.EnemySystems
         // Fields
         private Transform targetTransform = null;
         private IActorTracker sceneActorTracker;
+        private Transform shipTransform;
 
         public void InitialiseTargetingSystem()
         {
+            shipTransform = transform;
         }
 
         // Selects the nearest target relative to this posiiton. The system will already 'know' where
@@ -35,6 +38,12 @@ namespace Evacuation.Actor.EnemySystems
         }
 
         public Transform GetTargetTransform() { return targetTransform; }
+
+        public float GetDistanceToTarget()
+        {
+            if (targetTransform == null) return 1000000;
+            return Vector2.Distance(shipTransform.position, targetTransform.position);
+        }
 
         public void SetSceneActorTracker(IActorTracker actorTracker) { sceneActorTracker = actorTracker; }
     }
