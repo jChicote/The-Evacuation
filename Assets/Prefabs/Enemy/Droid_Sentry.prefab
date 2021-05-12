@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89afee9f914621d4a8d1bef31e4734fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
 --- !u!114 &7108258555616338084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +270,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingRange: 7
   firingInterval: 3
+  weaponData:
+    name: 
+    stringID: 
+    price: 0
+    equipmentType: 0
+    universalID: 
+    weaponType: 0
+    damage: 12
+    speed: 4
+    fireRate: 0.5
+    life: 5
+    spread: 0
+    isAttached: 0
 --- !u!1 &8024996226824593797
 GameObject:
   m_ObjectHideFlags: 0

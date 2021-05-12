@@ -10,14 +10,19 @@ namespace Evacuation.Actor.EnemySystems
         void SetMovement(Vector2 velocity);
     }
 
-    public class EnemyMovementController : MonoBehaviour, IMovementController, IPausable
+    public class EnemyMovementController : MonoBehaviour, IMovementController, IPausable, IEntitySpeed
     {
+        // Inspector Accessible Fields
+        [SerializeField] private float speed = 5; // TEST DATA
+
         // Interfaces
         private IStateManager stateManager;
         private Rigidbody2D enemyRB;
 
         // Fields
         private bool isPaused = false;
+
+        public float CurrentShipSpeed => speed;
 
         public void InitialiseController()
         {

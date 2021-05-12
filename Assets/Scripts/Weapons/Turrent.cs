@@ -7,12 +7,12 @@ namespace Evacuation.Weapons
 {
     public class Turrent : ProjectileWeapon
     {
-        private IMovementAccessors movementAccessors;
+        private IEntitySpeed movementAccessors;
 
         /// <summary>
         /// Initialises the weapon on start.
         /// </summary>
-        public override void InitialiseWeapon(WeaponInfo data, IMovementAccessors movementAccessors)
+        public override void InitialiseWeapon(WeaponInfo data, IEntitySpeed movementAccessors)
         {
             this.weaponData = data;
             this.movementAccessors = movementAccessors;

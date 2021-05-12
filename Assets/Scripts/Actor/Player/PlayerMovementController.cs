@@ -1,5 +1,12 @@
 using UnityEngine;
 
+// Summary:
+//      Generalised accessor for accessing class private variables
+public interface IEntitySpeed
+{
+    float CurrentShipSpeed { get; }
+}
+
 namespace Evacuation.Actor.PlayerSystems
 {
     // Summary:
@@ -10,13 +17,6 @@ namespace Evacuation.Actor.PlayerSystems
         void CalculateMovement(Vector2 startPos, Vector2 currentPos);
         void CalculateLocalRotation(Vector2 centerPos, Vector2 currentPos);
         void SetTriggerIsHeld(bool isHeld);
-    }
-
-    // Summary:
-    //      Generalised accessor for accessing class private variables
-    public interface IMovementAccessors
-    {
-        float CurrentShipSpeed { get; }
     }
 
     // Summary:
@@ -40,7 +40,7 @@ namespace Evacuation.Actor.PlayerSystems
     // Summary:
     //      The player movement controller handles all the movmenet and rotation related
     //      calculations and transformation of the player during gameplay.
-    public class PlayerMovementController : MonoBehaviour, IMovement, IMovementAccessors, IAutoLandingManoeuvre, IShipPositionLocator
+    public class PlayerMovementController : MonoBehaviour, IMovement, IEntitySpeed, IAutoLandingManoeuvre, IShipPositionLocator
     {
         // Interfaces 
         private ICheckPaused pauseChecker;
@@ -61,7 +61,7 @@ namespace Evacuation.Actor.PlayerSystems
         //private float maxRadiusTransform = 450f / 2; //DEFAULT VALUES FROM UI Joystick
 
         // Accessors
-        float IMovementAccessors.CurrentShipSpeed
+        float IEntitySpeed.CurrentShipSpeed
         {
             get { return currentSpeed; }
         }

@@ -30,10 +30,8 @@ namespace Evacuation.Actor.PlayerSystems
             //Spawn and Initialise Weapon
             weapon = Instantiate(weaponAsset.weaponPrefab, transform);
             IWeapon weaponInterface = weapon.GetComponent<IWeapon>();
-            weaponInterface.InitialiseWeapon(info, transform.root.gameObject.GetComponent<IMovementAccessors>());
+            weaponInterface.InitialiseWeapon(info, transform.root.gameObject.GetComponent<IEntitySpeed>());
             weaponInterface.ConfigureWeaponPositioning(loadoutType);
-
-            Debug.Log(weapon.name + ", " + weaponInterface + ", " + loadoutType);
 
             return weaponInterface;
         }
