@@ -3,7 +3,7 @@ using Evacuation.Actor.PlayerSystems;
 
 public interface IWeapon
 {
-    void InitialiseWeapon(WeaponInfo data, IMovementAccessors movementAccessors);
+    void InitialiseWeapon(WeaponInfo data, IEntitySpeed movementAccessors);
     void FireWeapon(LoadoutPosition currentLoadoutPosition);
     void ConfigureWeaponPositioning(LoadoutPosition loadoutType);
 }
@@ -39,7 +39,7 @@ namespace Evacuation.Weapons
         protected float timeTillNextFire = 0;
         protected float pointedAngle = 0;
 
-        public abstract void InitialiseWeapon(WeaponInfo data, IMovementAccessors movementAccessors);
+        public abstract void InitialiseWeapon(WeaponInfo data, IEntitySpeed movementAccessors);
 
         public abstract void FireWeapon(LoadoutPosition currentLoadoutPosition);
 

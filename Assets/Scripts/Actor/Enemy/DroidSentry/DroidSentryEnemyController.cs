@@ -41,7 +41,12 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
 
         private void InitialiseWeaponSystems()
         {
-            EnemyWeaponController weaponController = this.GetComponent<EnemyWeaponController>();
+            IEnemyTargetingSystem targetingSystem = this.GetComponent<IEnemyTargetingSystem>();
+            targetingSystem.InitialiseTargetingSystem();
+
+            IWeaponController weaponController = this.GetComponent<IWeaponController>();
+            weaponController.InitialiseWeaponController();
+
             IDamageable damageManager = this.GetComponent<IDamageable>();
             damageManager.InitialiseComponent();
         }

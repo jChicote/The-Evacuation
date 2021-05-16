@@ -7,28 +7,27 @@ namespace Evacuation.Actor.EnemySystems
     public interface IWeaponController
     {
         void InitialiseWeaponController();
+        void RunWeaponSystem();
     }
 
-    public class EnemyWeaponController : MonoBehaviour, IWeaponController
+    public class EnemyWeaponController : MonoBehaviour, IWeaponController, IPausable
     {
         // Fields
-        protected IWeapon[] collectedWeapons;
+        protected bool isPaused = false;
+        protected IWeapon[] weapons;
 
-        public void InitialiseWeaponController()
+        public virtual void InitialiseWeaponController() { }
+
+        public void OnPause()
         {
-
+            isPaused = true;
         }
 
-        // Update is called once per frame
-        private void FixedUpdate()
+        public void OnUnpause()
         {
-
+            isPaused = false;
         }
 
-
-        private void CollectAllWeapons()
-        {
-
-        }
+        public virtual void RunWeaponSystem() { }
     }
 }

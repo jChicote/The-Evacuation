@@ -15,6 +15,8 @@ namespace Evacuation.Actor.EnemySystems
 
         public override void OnDamage(float damage)
         {
+            if (healthComponent.GetShipHealth() <= 0) return;
+
             if (healthComponent.IsActive())
             {
                 float newHealth = healthComponent.GetShipHealth() - damage;

@@ -32,7 +32,6 @@ public class HorizontalSubScroller : MonoBehaviour
         lastCameraHorPos = cameraTransform.position.x;
 
         horizontalLayers = new Transform[verticalLayers[0].childCount * verticalLayers.Length];
-        Debug.Log(verticalLayers[0].childCount);
         for (int i = 0; i < verticalLayers.Length; i++)
         {
             for (int j = 0; j < verticalLayers[i].childCount; j++)

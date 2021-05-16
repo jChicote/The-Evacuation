@@ -12,7 +12,7 @@ namespace Evacuation.Weapons
 
         public override void FireWeapon(LoadoutPosition currentLoadoutPosition) {}
 
-        public override void InitialiseWeapon(WeaponInfo data, IMovementAccessors movementAccessors) {}
+        public override void InitialiseWeapon(WeaponInfo data, IEntitySpeed movementAccessors) {}
 
     }
 }

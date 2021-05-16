@@ -33,7 +33,6 @@ namespace Evacuation.Weapons
                 //Check if in bounds
                 if (CheckInBounds(i, turrentWeapon.Count))
                     weapons.Add(holders[i].SetWeapon(turrentWeapon[i]));
-                Debug.Log("Has been created");
             }
         }
 
