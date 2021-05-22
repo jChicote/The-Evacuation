@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Evacuation.Actor.PlayerSystems;
+using Evacuation.Actor;
 
 namespace Evacuation.Weapons
 {
@@ -10,7 +10,7 @@ namespace Evacuation.Weapons
         [Header("Projectile")]
         public GameObject projectileShell;
 
-        public override void FireWeapon(LoadoutPosition currentLoadoutPosition) {}
+        public override void FireWeapon() {}
 
         public override void InitialiseWeapon(WeaponInfo data, IEntitySpeed movementAccessors) {}
 

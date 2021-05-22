@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Evacuation.Actor.PlayerSystems;
+using Evacuation.Actor;
 
 namespace Evacuation.Weapons
 {
@@ -23,10 +23,9 @@ namespace Evacuation.Weapons
         /// <summary>
         /// Turrent weapon fires in succession with increasing counts increasing spread.
         /// </summary>
-        public override void FireWeapon(LoadoutPosition currentLoadoutPosition)
+        public override void FireWeapon()
         {
             if (isPaused) return;
-            if (loadoutPositionType != currentLoadoutPosition) return;
 
             if (timeTillNextFire <= 0)
             {
@@ -42,9 +41,7 @@ namespace Evacuation.Weapons
 
         public override void ProvidePointerLocation(Vector2 pointerPosition)
         {
-            // Rotates the weapon on it's local position to the direction of the pointer input.
-
-            lastPointedPosition = Camera.main.ScreenToWorldPoint(pointerPosition);
+            lastPointedPosition = pointerPosition;
         }
     }
 }

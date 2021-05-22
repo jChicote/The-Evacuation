@@ -68,11 +68,6 @@ namespace Evacuation.Actor.EnemySystems
             drivingDirection = radialPoint - (Vector2)shipTransform.position;
 
             shipVelocity = (drivingDirection + radialVelocity).normalized * shipSpeed;
-
-            //Debug.DrawRay(targetingSystem.GetTargetTransform().position, radialVelocity);
-            //Debug.DrawRay(shipTransform.position, tangentialVelocity, Color.red);
-            //Debug.DrawRay(shipTransform.position, shipDirection, Color.red);
-            //Debug.DrawRay(shipTransform.position, resultantVelocity, Color.green);
         }
 
         protected virtual void CalculateSpeed()
