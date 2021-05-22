@@ -1,10 +1,13 @@
 using UnityEngine;
 
-// Summary:
-//      Generalised accessor for accessing class private variables
-public interface IEntitySpeed
+namespace Evacuation.Actor
 {
-    float CurrentShipSpeed { get; }
+    // Summary:
+    //      Generalised accessor for accessing class private variables
+    public interface IEntitySpeed
+    {
+        float CurrentShipSpeed { get; }
+    }
 }
 
 namespace Evacuation.Actor.PlayerSystems

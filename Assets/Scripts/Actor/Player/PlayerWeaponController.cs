@@ -14,7 +14,7 @@ namespace Evacuation.Actor.PlayerSystems
 {
     public interface IWeaponLoadoutSelector
     {
-        void ChooseLoadoutPosition(LoadoutPosition positionType);
+        void ChooseLoadoutPosition(LoadoutConfiguration positionType);
     }
 
     /// <summary>
@@ -31,7 +31,7 @@ namespace Evacuation.Actor.PlayerSystems
         private IWeaponRotator[] weaponRotators;
 
         // Fields
-        private LoadoutPosition loadoutPosition = LoadoutPosition.Forward;
+        private LoadoutConfiguration loadoutPosition = LoadoutConfiguration.Forward;
         private List<IWeapon> weapons;
         private bool isFiring = false;
 
@@ -41,7 +41,7 @@ namespace Evacuation.Actor.PlayerSystems
         public void InitialiseWeaponController()
         {
             pauseChecker = this.GetComponent<ICheckPaused>();
-            loadoutPosition = LoadoutPosition.Forward;
+            loadoutPosition = LoadoutConfiguration.Forward;
 
             IPlayerStats shipWeaponStats = this.GetComponent<IPlayerStats>();
             ShipInfo shipInfo = shipWeaponStats.GetShipStats();
@@ -52,7 +52,7 @@ namespace Evacuation.Actor.PlayerSystems
         private void FixedUpdate()
         {
             if (pauseChecker.CheckIsPaused()) return;
-            if (loadoutPosition == LoadoutPosition.Pivot) RotatePivotWeapons();
+            if (loadoutPosition == LoadoutConfiguration.Pivot) RotatePivotWeapons();
             if (!isFiring) return;
 
             FireWeapons();
@@ -85,7 +85,8 @@ namespace Evacuation.Actor.PlayerSystems
         {
             for (int i = 0; i < weaponRotators.Length; i++)
             {
-                weaponRotators[i].RotateWeaponToPosition(loadoutPosition);
+                weapons[i].CheckIfValidLoadoutPosition(loadoutPosition);
+                weaponRotators[i].RotateWeaponToDirection();
             }
         }
 
@@ -93,13 +94,14 @@ namespace Evacuation.Actor.PlayerSystems
         {
             if (weapons.Count == 0)
             {
-                Debug.Log("No Weapons Loaded");
+                print("No Weapons Loaded");
                 return;
             }
 
             foreach (IWeapon weapon in weapons)
             {
-                weapon.FireWeapon(loadoutPosition);
+                if (weapon.CheckIfValidLoadoutPosition(loadoutPosition))
+                    weapon.FireWeapon();
             }
         }
 
@@ -116,7 +118,7 @@ namespace Evacuation.Actor.PlayerSystems
         /// Sets the loadout position on all weapons in ship
         /// </summary>
         /// <param name="positionType">Active position type either forward or pivot</param>
-        public void ChooseLoadoutPosition(LoadoutPosition positionType)
+        public void ChooseLoadoutPosition(LoadoutConfiguration positionType)
         {
             loadoutPosition = positionType;
         }

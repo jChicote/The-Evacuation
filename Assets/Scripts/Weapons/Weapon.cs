@@ -1,11 +1,12 @@
 using UnityEngine;
-using Evacuation.Actor.PlayerSystems;
+using Evacuation.Actor;
 
 public interface IWeapon
 {
     void InitialiseWeapon(WeaponInfo data, IEntitySpeed movementAccessors);
-    void FireWeapon(LoadoutPosition currentLoadoutPosition);
-    void ConfigureWeaponPositioning(LoadoutPosition loadoutType);
+    void FireWeapon();
+    void ConfigureWeaponPositioning(LoadoutConfiguration loadoutType);
+    bool CheckIfValidLoadoutPosition(LoadoutConfiguration loadoutType);
 }
 
 public interface IImageExtract
@@ -19,19 +20,19 @@ namespace Evacuation.Weapons
     public interface IWeaponRotator
     {
         void ProvidePointerLocation(Vector2 pointerPosition);
-        void RotateWeaponToPosition(LoadoutPosition currentLoadoutPosition);
+        void RotateWeaponToDirection();
     }
 
     public abstract class Weapon : MonoBehaviour, IWeapon, IPausable, IImageExtract, IWeaponRotator
     {
-        // Public Members
+        // Inspector Accesible Members
         [SerializeField] protected SpriteRenderer weaponRenderer;
         [SerializeField] protected Transform firingPoint;
 
         // Fields
         protected Transform weaponTransform;
         protected WeaponInfo weaponData;
-        protected LoadoutPosition loadoutPositionType;
+        protected LoadoutConfiguration loadoutConfiguration;
         protected Vector3 relativeWeaponDirectionToPoint;
         protected Vector3 lastPointedPosition;
         protected bool isReloading = false;
@@ -41,14 +42,12 @@ namespace Evacuation.Weapons
 
         public abstract void InitialiseWeapon(WeaponInfo data, IEntitySpeed movementAccessors);
 
-        public abstract void FireWeapon(LoadoutPosition currentLoadoutPosition);
+        public abstract void FireWeapon();
 
         protected virtual void ReloadWeapon() { }
 
-        public virtual void RotateWeaponToPosition(LoadoutPosition currentLoadoutPosition)
+        public virtual void RotateWeaponToDirection()
         {
-            if (loadoutPositionType != currentLoadoutPosition) return;
-
             relativeWeaponDirectionToPoint = lastPointedPosition - transform.position;
             pointedAngle = Mathf.Atan2(relativeWeaponDirectionToPoint.y, relativeWeaponDirectionToPoint.x) * Mathf.Rad2Deg - 90;
             weaponTransform.rotation = Quaternion.Euler(0, 0, pointedAngle);
@@ -60,15 +59,15 @@ namespace Evacuation.Weapons
         /// Configures the weapons appearance and position based on loadout type.
         /// </summary>
         /// <param name="loadoutType"></param>
-        public void ConfigureWeaponPositioning(LoadoutPosition loadoutType)
+        public void ConfigureWeaponPositioning(LoadoutConfiguration configuration)
         {
-            if (loadoutType == LoadoutPosition.Forward)
+            if (configuration == LoadoutConfiguration.Forward)
             {
                 weaponRenderer.enabled = false;
                 firingPoint = transform;
             }
 
-            this.loadoutPositionType = loadoutType;
+            this.loadoutConfiguration = configuration;
         }
 
         /// <summary>
@@ -78,6 +77,11 @@ namespace Evacuation.Weapons
         public Sprite ExtractImage()
         {
             return weaponRenderer.sprite;
+        }
+
+        public bool CheckIfValidLoadoutPosition(LoadoutConfiguration configuration)
+        {
+            return loadoutConfiguration == configuration;
         }
 
         public void OnPause()

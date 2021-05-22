@@ -58,7 +58,7 @@ namespace Evacuation.Actor.PlayerSystems
 
         public void AttachToPlatform()
         {
-            loadoutSelector.ChooseLoadoutPosition(LoadoutPosition.Pivot);
+            loadoutSelector.ChooseLoadoutPosition(LoadoutConfiguration.Pivot);
             cameraZoom.SetTargetZoom(6.5f);
         }
 
@@ -67,7 +67,7 @@ namespace Evacuation.Actor.PlayerSystems
             if (endTransport == null) return;
 
             cameraZoom.SetToDefaultZoom();
-            loadoutSelector.ChooseLoadoutPosition(LoadoutPosition.Forward);
+            loadoutSelector.ChooseLoadoutPosition(LoadoutConfiguration.Forward);
             endTransport.EndCapture();
             endTransport = null;
         }

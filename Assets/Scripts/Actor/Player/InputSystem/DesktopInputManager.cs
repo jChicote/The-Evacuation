@@ -64,7 +64,7 @@ public class DesktopInputManager : MonoBehaviour, IDesktopInput
 
         for (int i = 0; i < playerWeapons.GetWeaponRotators().Length; i++)
         {
-            playerWeapons.GetWeaponRotators()[i].ProvidePointerLocation(value.Get<Vector2>());
+            playerWeapons.GetWeaponRotators()[i].ProvidePointerLocation(Camera.main.ScreenToWorldPoint(value.Get<Vector2>()));
         }
     }
 

@@ -11,7 +11,7 @@ namespace Evacuation.Actor.PlayerSystems
     public class LoadoutHolder : MonoBehaviour
     {
         // Inspector accessible fields
-        [SerializeField] private LoadoutPosition loadoutType;
+        [SerializeField] private LoadoutConfiguration loadoutType;
 
         // Fields
         private GameObject weapon;
@@ -47,7 +47,7 @@ public class Loadout
     public WeaponAsset weaponInformation;
 }
 
-public enum LoadoutPosition
+public enum LoadoutConfiguration
 {
     Forward,
     Pivot

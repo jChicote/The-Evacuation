@@ -17,18 +17,23 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
         // Interfaces
         private IEnemyTargetingSystem targetingSystem;
 
-        // Fields
-        private SimpleTimer simpleTimer;
-
         public override void InitialiseWeaponController()
         {
             targetingSystem = this.GetComponent<IEnemyTargetingSystem>();
-            simpleTimer = new SimpleTimer(firingInterval, Time.deltaTime);
             weapons = this.GetComponentsInChildren<IWeapon>();
             weaponRotator = this.GetComponentsInChildren<IWeaponRotator>();
 
             InitialiseWeapons();
             CollectEnemyWeapons();
+        }
+
+        private void RotateWeapons()
+        {
+            foreach (IWeaponRotator weapon in weaponRotator)
+            {
+                weapon.ProvidePointerLocation(targetingSystem.GetTargetTransform().position);
+                weapon.RotateWeaponToDirection();
+            }
         }
 
         private void CollectEnemyWeapons()
@@ -47,22 +52,15 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
                 // TODO: movement accessors needs to be changed for global recognition;
 
                weapon.InitialiseWeapon(weaponData, entitytSpeed);
-               weapon.ConfigureWeaponPositioning(LoadoutPosition.Pivot);
+               weapon.ConfigureWeaponPositioning(LoadoutConfiguration.Pivot);
             }
         }
 
         private void FireAtTarget()
         {
-            print("Is Firing");
-
-            foreach (IWeaponRotator weapon in weaponRotator)
-            {
-                weapon.ProvidePointerLocation(targetingSystem.GetTargetTransform().position);
-            }
-
             foreach (IWeapon weapon in weapons)
             {
-                weapon.FireWeapon(LoadoutPosition.Pivot);
+                weapon.FireWeapon();
             }
         }
 
@@ -71,13 +69,8 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
             if (isPaused) return;
             if (targetingSystem.GetDistanceToTarget() > firingRange) return;
 
+            RotateWeapons();
             FireAtTarget();
-            /*simpleTimer.TickTimer();
-            if(simpleTimer.CheckTimeIsUp())
-            {
-                FireAtTarget();
-                simpleTimer.ResetTimer();
-            }*/
         }
     }
 }
