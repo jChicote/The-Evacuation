@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Evacuation.Weapons;
+using Evacuation.Model.Data;
 
 public interface IWeaponController
 {
@@ -44,9 +45,9 @@ namespace Evacuation.Actor.PlayerSystems
             loadoutPosition = LoadoutConfiguration.Forward;
 
             IPlayerStats shipWeaponStats = this.GetComponent<IPlayerStats>();
-            ShipInfo shipInfo = shipWeaponStats.GetShipStats();
+            ShipData shipData = shipWeaponStats.GetShipData();
 
-            SetupWeapons(shipInfo);
+            SetupWeapons(shipData);
         }
 
         private void FixedUpdate()
@@ -61,16 +62,16 @@ namespace Evacuation.Actor.PlayerSystems
         /// <summary>
         /// Collects loadout positions and maps weapons to respective positions using the setup handler.
         /// </summary>
-        private void SetupWeapons(ShipInfo shipInfo)
+        private void SetupWeapons(ShipData shipData)
         {
             WeaponSetupHandler setuphandler = new WeaponSetupHandler();
             weapons = new List<IWeapon>();
 
-            if (forwardWeaponLoadout.Length != 0 && shipInfo.fixedWeapons != null && shipInfo.fixedWeapons.Count != 0)
-                setuphandler.SetupForwardWeapons(ref weapons, shipInfo.fixedWeapons, forwardWeaponLoadout);
+            if (forwardWeaponLoadout.Length != 0 && shipData.FixedWeapons != null && shipData.FixedWeapons.Count != 0)
+                setuphandler.SetupForwardWeapons(ref weapons, shipData.FixedWeapons, forwardWeaponLoadout);
 
-            if (turrentWeaponLoadout.Length != 0 && shipInfo.turrentWeapons != null && shipInfo.turrentWeapons.Count != 0)
-                setuphandler.SetupTurrentWeapons(ref weapons, shipInfo.turrentWeapons, turrentWeaponLoadout);
+            if (turrentWeaponLoadout.Length != 0 && shipData.TurrentWeapons != null && shipData.TurrentWeapons.Count != 0)
+                setuphandler.SetupTurrentWeapons(ref weapons, shipData.TurrentWeapons, turrentWeaponLoadout);
 
             CollectAllWeaponRotators(weapons.Count);
         }

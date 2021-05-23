@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Evacuation.Level.SpawnManagement;
+using Evacuation.Model.Data;
 
 namespace Evacuation.Actor.EnemySystems.DroidSystems
 {
@@ -12,7 +13,7 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
         [SerializeField] private string referenceID;
 
         // Fields
-        private EnemyInfo enemyInfo;
+        private ShipData shipData;
         private IStateManager stateManager;
 
         public override void InitialiseController()
@@ -25,7 +26,8 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
 
         private void InitialiseStats()
         {
-            enemyInfo = GameManager.Instance.enemySettings.enemyList.Where(x => x.stringID == referenceID).First().ConvertToEnemyInfo();
+            EnemyInfo enemyInfo = GameManager.Instance.enemySettings.enemyList.Where(x => x.stringID == referenceID).First().ConvertToEnemyInfo();
+            shipData = enemyInfo.GetShipData();
 
             EnemyStatHandler statHandler = this.GetComponent<EnemyStatHandler>();
             statHandler.InitialiseStats(enemyInfo);
@@ -54,7 +56,7 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
         private void InitialiseVitality()
         {
             IHealthComponent healthComponent = this.GetComponent<IHealthComponent>();
-            healthComponent.InitialiseHealth(enemyInfo.maxHealth);
+            healthComponent.InitialiseHealth(shipData.MaxHealth);
         }
 
         public override void SetEntryState(SpawnPattern pattern)

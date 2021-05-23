@@ -84,7 +84,7 @@ namespace Evacuation.Actor.PlayerSystems
 
         public bool CheckAtMaxCapacity()
         {
-            return statHandler.RescueCabinCount == statHandler.CabinCapacity;
+            return statHandler.RescueCabinCount == statHandler.GetShipData().RescueCapacity;
         }
 
         public bool CheckIsEmpty()

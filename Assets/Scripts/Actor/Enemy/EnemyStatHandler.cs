@@ -15,7 +15,7 @@ namespace Evacuation.Actor.EnemySystems
 
         public List<string> GetForwardLoadout()
         {
-            return enemyInfo.fixedWeapons;
+            return enemyInfo.FixedWeapons;
         }
     }
 }

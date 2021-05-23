@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using Evacuation.Session;
+using Evacuation.Model.Data;
 
 namespace Evacuation.Actor
 {
@@ -29,15 +30,28 @@ namespace Evacuation.Actor
         public bool isUnlocked = false;
 
         // Core Stats
-        public int rescueCapacity;
-        public float maxHealth;
-        public float maxSheild;
-        public float maxSpeed;
-        public float maxHandling;
+        protected int rescueCapacity;
+        protected float maxHealth;
+        protected float maxSheild;
+        protected float maxSpeed;
+        protected float maxHandling;
 
         // Weapoon Loadouts
-        public List<string> fixedWeapons;
-        public List<string> turrentWeapons;
+        protected List<string> fixedWeapons;
+        protected List<string> turrentWeapons;
+
+        // Accessors
+        public List<string> FixedWeapons
+        {
+            get { return fixedWeapons; }
+            set { fixedWeapons = value; }
+        }
+
+        public List<string> TurrentWeapons
+        {
+            get { return turrentWeapons; }
+            set { turrentWeapons = value; }
+        }
 
         public void SetData(string stringID, string name, int price, int rescueCapacity, float maxHealth, float maxShield, float maxSpeed, float maxHandling, int forwardWeaponSize, int turrentWeaponSize)
         {
@@ -55,6 +69,12 @@ namespace Evacuation.Actor
             PopulateListToDefault(fixedWeapons);
             this.turrentWeapons = new List<string>(new string[turrentWeaponSize]);
             PopulateListToDefault(turrentWeapons);
+        }
+
+        public ShipData GetShipData()
+        {
+            ShipData dataObject = new ShipData(rescueCapacity, maxHealth, maxSheild, maxSpeed, maxHandling, fixedWeapons, turrentWeapons);
+            return dataObject;
         }
 
         /// <summary>

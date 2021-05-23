@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using Evacuation.Session;
 using Cinemachine;
 using Evacuation.Cinematics;
+using Evacuation.Model.Data;
 
 public interface IPausable
 {
@@ -50,12 +51,16 @@ namespace Evacuation.Actor.PlayerSystems
 
         private void InitiateShipStatHandler()
         {
+            ShipData shipData = SessionData.instance.selectedShip.GetShipData();
+
+            print(shipData.FixedWeapons);
+
             IStatHandler statHandler = this.GetComponent<IStatHandler>();
-            statHandler.InitialiseStats(SessionData.instance.selectedShip);
+            statHandler.InitialiseStats(SessionData.instance.selectedShip.GetShipData());
             PlayerHeathComponent heathComponent = this.GetComponent<PlayerHeathComponent>();
-            heathComponent.InitialiseHealth(SessionData.instance.selectedShip.maxHealth);
+            heathComponent.InitialiseHealth(shipData.MaxHealth);
             PlayerShieldComponent shieldComponent = this.GetComponent<PlayerShieldComponent>();
-            shieldComponent.InitialiseShield(SessionData.instance.selectedShip.maxSheild);
+            shieldComponent.InitialiseShield(shipData.MaxShield);
         }
 
         public void InitiateInputSystem()

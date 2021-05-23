@@ -53,13 +53,13 @@ namespace Evacuation.UserInterface
             switch (equipmentType)
             {
                 case EquipmentType.ForwardWeapon:
-                    foreach (string identifier in selectedShip.fixedWeapons)
+                    foreach (string identifier in selectedShip.FixedWeapons)
                     {
                         SpawnEquipmentCell(identifier, cellPrefab, inventoryCells);
                     }
                     break;
                 case EquipmentType.TurrentWeapon:
-                    foreach (string identifier in selectedShip.turrentWeapons)
+                    foreach (string identifier in selectedShip.TurrentWeapons)
                     {
                         SpawnEquipmentCell(identifier, cellPrefab, inventoryCells);
                     }
