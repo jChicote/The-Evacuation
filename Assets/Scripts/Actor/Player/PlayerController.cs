@@ -34,10 +34,16 @@ namespace Evacuation.Actor.PlayerSystems
         // Initialisers
         // ================================
 
+        private void Awake()
+        {
+            InitialisePlayer(GameManager.Instance.sceneController);
+        }
+
         public void InitialisePlayer(SceneController sceneController)
         {
             // Initialises and sets primary data for vessel
             InitiateShipStatHandler();
+            RegisterPlayer();
 
             // Initialises and activates related handlers and controls
             AssignPlayerCameraToManager();
@@ -49,11 +55,15 @@ namespace Evacuation.Actor.PlayerSystems
             sceneController.OnGameCompletion.AddListener(RemoveInputSystems);
         }
 
+        private void RegisterPlayer()
+        {
+            IActorTracker actorTracker = GameManager.Instance.sceneController.ActorTracker;
+            actorTracker.RegisterFriendlyEntity(this.gameObject);
+        }
+
         private void InitiateShipStatHandler()
         {
             ShipData shipData = SessionData.instance.selectedShip.GetShipData();
-
-            print(shipData.FixedWeapons);
 
             IStatHandler statHandler = this.GetComponent<IStatHandler>();
             statHandler.InitialiseStats(SessionData.instance.selectedShip.GetShipData());

@@ -31,7 +31,7 @@ namespace Evacuation.UserInterface.HUD
         /// </summary>
         public void UpdateScoreText(ScoreData scoreData)
         {
-            Debug.Log(scoreData);
+            //Debug.Log(scoreData);
             labelText.text = scoreData.earnedScore.ToString();
         }
     }

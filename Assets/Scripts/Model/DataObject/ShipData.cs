@@ -16,8 +16,6 @@ namespace Evacuation.Model.Data
             List<string> tWeapon)
         {
             this.rescueCapacity = rescueCap;
-            Debug.Log(fWeapon.Count);
-
             this.maxHealth = maxHealth;
             this.maxShield = maxShield;
             this.maxSpeed = maxSpeed;
