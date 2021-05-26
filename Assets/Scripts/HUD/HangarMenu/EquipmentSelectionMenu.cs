@@ -182,8 +182,8 @@ namespace Evacuation.UserInterface
             }
             else
             {
-                if (info.turrentWeapons.Count == 0) return false;
-                return info.turrentWeapons.Where(x => x == equipmentID).First() == equipmentID;
+                if (info.fixedWeapons.Count == 0) return false;
+                return info.fixedWeapons.Where(x => x == equipmentID).First() == equipmentID;
             }
         }
 

@@ -3,25 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using Evacuation.Model.Data;
 
 namespace Evacuation.Actor
 {
     public interface IStatHandler : IStatRescue
     {
-        void InitialiseStats(ShipInfo shipInfo);
+        void InitialiseStats(ShipData shipData);
+        ShipData GetShipData();
     }
 
     public interface IStatRescue
     {
         int RescueCabinCount { get; set; }
-        int CabinCapacity { get; }
+        //int CabinCapacity { get; }
     }
 
-    public interface IPlayerWeaponStats
+    /*public interface IPlayerWeaponStats
     {
         List<string> GetForwardLoadout();
         List<string> GetTurrentLoadout();
-    }
+    }*/
 
     public interface IModifier
     {
@@ -30,7 +32,7 @@ namespace Evacuation.Actor
 
     public interface IPlayerStats
     {
-        ShipInfo GetShipStats();
+        ShipData GetShipData();
     }
 
     public interface IHealthAccessors
@@ -45,17 +47,17 @@ namespace Evacuation.Actor
         void SetShipShields(float newShields);
     }
 
-    public class StatHandler : BaseStatHandler, IStatHandler, IPlayerWeaponStats, IPlayerStats
+    public class StatHandler : BaseStatHandler, IStatHandler, IPlayerStats
     {
         [Header("Ship Sub Stats")]
-        public ShipInfo shipInfo;
+        [SerializeField] private ShipData shipData;
 
         // Fields
         protected int rescueCabinCount = 0;
 
-        public void InitialiseStats(ShipInfo shipInfo)
+        public void InitialiseStats(ShipData shipData)
         {
-            this.shipInfo = shipInfo;
+            this.shipData = shipData;
 
             SubscribeToEvents();
         }
@@ -78,6 +80,7 @@ namespace Evacuation.Actor
             set { rescueCabinCount = value; }
         }
 
+        /*
         public int CabinCapacity
         {
             get { return shipInfo.rescueCapacity; }
@@ -91,11 +94,11 @@ namespace Evacuation.Actor
         public List<string> GetTurrentLoadout()
         {
             return shipInfo.turrentWeapons;
-        }
+        }*/
 
-        public ShipInfo GetShipStats()
+        public ShipData GetShipData()
         {
-            return shipInfo;
+            return shipData;
         }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Settings/Player Setting")]
 public class PlayerSettings : ScriptableObject
 {
+    public GameObject playerSpawnManager;
     public ShipAsset[] shipsList;
 
     /// <summary>

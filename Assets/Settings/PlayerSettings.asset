@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008f04e09dac2744d95b17f35bc750c7, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
+  playerSpawnManager: {fileID: 7536507197623663951, guid: 6d91b37866c375b4881bf512db9ee458, type: 3}
   shipsList:
-  - stringID: '#132'
-    name: Old Reliable
+  - name: Old Reliable
+    stringID: '#132'
     price: 0
     equipmentType: 0
     description: Everyone starts off somewhere. This does the job and is dirt cheap
@@ -22,17 +23,17 @@ MonoBehaviour:
     requiredLevel: 0
     stats:
       shipID: '#132'
-      maxRescueCapacity: 5
       maxHealth: 100
       maxSheild: 100
       maxSpeed: 18
       maxHandling: 6
+      maxRescueCapacity: 5
       forwardSize: 1
       turrentSize: 1
     image: {fileID: 21300000, guid: 5de19ea59899d41458464ae328b38e48, type: 3}
     shipPrefab: {fileID: 4413370118639381924, guid: 1f1fe562a11991d4eaace466e6d38aa6, type: 3}
-  - stringID: '#169'
-    name: Old Reliable
+  - name: Old Reliable
+    stringID: '#169'
     price: 0
     equipmentType: 0
     description: Everyone starts off somewhere. This does the job and is dirt cheap
@@ -40,17 +41,17 @@ MonoBehaviour:
     requiredLevel: 2
     stats:
       shipID: '#169'
-      maxRescueCapacity: 5
       maxHealth: 100
       maxSheild: 100
       maxSpeed: 8
       maxHandling: 6
+      maxRescueCapacity: 5
       forwardSize: 2
       turrentSize: 2
     image: {fileID: 21300000, guid: 5de19ea59899d41458464ae328b38e48, type: 3}
     shipPrefab: {fileID: 4413370118639381924, guid: 1f1fe562a11991d4eaace466e6d38aa6, type: 3}
-  - stringID: '#275'
-    name: Old Reliable
+  - name: Old Reliable
+    stringID: '#275'
     price: 0
     equipmentType: 0
     description: Everyone starts off somewhere. This does the job and is dirt cheap
@@ -58,17 +59,17 @@ MonoBehaviour:
     requiredLevel: 6
     stats:
       shipID: '#275'
-      maxRescueCapacity: 5
       maxHealth: 100
       maxSheild: 100
       maxSpeed: 8
       maxHandling: 6
+      maxRescueCapacity: 5
       forwardSize: 2
       turrentSize: 2
     image: {fileID: 21300000, guid: 5de19ea59899d41458464ae328b38e48, type: 3}
     shipPrefab: {fileID: 4413370118639381924, guid: 1f1fe562a11991d4eaace466e6d38aa6, type: 3}
-  - stringID: '#345'
-    name: Old Reliable
+  - name: Old Reliable
+    stringID: '#345'
     price: 0
     equipmentType: 0
     description: Everyone starts off somewhere. This does the job and is dirt cheap
@@ -76,11 +77,11 @@ MonoBehaviour:
     requiredLevel: 10
     stats:
       shipID: '#345'
-      maxRescueCapacity: 5
       maxHealth: 100
       maxSheild: 100
       maxSpeed: 8
       maxHandling: 6
+      maxRescueCapacity: 5
       forwardSize: 2
       turrentSize: 2
     image: {fileID: 21300000, guid: 5de19ea59899d41458464ae328b38e48, type: 3}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Evacuation.Model.Data;
 
 namespace Evacuation.Actor
 {
@@ -53,7 +54,7 @@ namespace Evacuation.Actor.PlayerSystems
         private Vector2 targetVelocity = Vector2.zero;
         private Vector2 currentVelocity = Vector2.zero;
         private Vector2 currentDirection = Vector2.zero;
-        private ShipInfo shipInfo;
+        private ShipData shipData;
 
         private float currentSpeed;
         private float angleRotation;
@@ -74,8 +75,8 @@ namespace Evacuation.Actor.PlayerSystems
             pauseChecker = this.GetComponent<ICheckPaused>();
             playerRB = this.GetComponent<Rigidbody2D>();
 
-            this.shipInfo = this.GetComponent<IPlayerStats>().GetShipStats();
-            currentSpeed = shipInfo.maxSpeed; 
+            this.shipData = this.GetComponent<StatHandler>().GetShipData();
+            currentSpeed = shipData.MaxShield; 
         }
 
         private void FixedUpdate()
@@ -98,7 +99,7 @@ namespace Evacuation.Actor.PlayerSystems
             if (!isTriggerHeld) return;
 
             //currentSpeed = shipInfo.maxSpeed * (Vector3.Magnitude(startPos - currentPos) / maxRadiusTransform);
-            currentSpeed = shipInfo.maxSpeed;
+            currentSpeed = shipData.MaxSpeed;
 
             targetVelocity = currentPos * currentSpeed;
         }

@@ -11,6 +11,16 @@ using Evacuation.Actor.EnemySystems;
 using Evacuation.Session;
 using Evacuation.Cinematics;
 
+//  NOTICE FOR FUTURE REFERENCE
+//
+//  Functions associated with the scene controller myst be responsible for global and event based functions.
+//  This must only be contained within the local scene and hold global reference to flyweight resources and 
+//  core objects. This must not contain local entity based functions or functions that are not related to the
+//  nature of this class. To maintain strict decoupling, initialisation of classes cannot be performed on the
+//  scene controller and other local functions must be performed by the local object itself.
+//
+//  Initialisers are permitted
+
 public class SceneController : MonoBehaviour
 {
     // Public Events
@@ -33,6 +43,8 @@ public class SceneController : MonoBehaviour
     [Space]
     [SerializeField] private LevelData levelData;
     [SerializeField] private GameObject[] inhabitedSatellites;
+    [SerializeField] private GameObject[] enemySpawnManagers;
+    [SerializeField] private GameObject playerSpawnManager;
 
     // Fields
     private GameManager gameManager;
@@ -53,7 +65,15 @@ public class SceneController : MonoBehaviour
         OnGameCompletion.AddListener(RevealGameCompletionHUD);
 
         LoadLevelData();
-        PrepareScene();
+    }
+
+    private void Start()
+    {
+        LoadHUD();
+        LoadEntityTracker();
+        LoadPlayerSpawner();
+        LoadEnemySpawners();
+        LoadInhabitedSatellites();
     }
 
     private void LoadLevelData()
@@ -62,20 +82,15 @@ public class SceneController : MonoBehaviour
         // In the future this should be transferred to a session data setup
 
         levelData = GameManager.Instance.levelSettings.defaultLevelData.Where(x => x.levelID == "#00091").First();
+        //SessionData.instance.selectedShip.SetData();
     }
 
-    /// <summary>
-    /// Manages the sequential creation of important scene objects.
-    /// </summary>
-    private void PrepareScene()
-    {
-        //LoadSceneCamera();
-        LoadHUD();
+    private void LoadLevelConfigurations() { }
 
-        //Load Entities
-        SpawnPlayer();
-        //SpawnEnemyEntities();
-        LoadInhabitedSatellites();
+    private void LoadEntityTracker()
+    {
+        actorTracker = Instantiate(GameManager.Instance.levelSettings.sceneActorTrackerPrefab, transform.position, Quaternion.identity).GetComponent<IActorTracker>();
+        print("SceneController >> Entity Tracker Loaded");
     }
 
     /// <summary>
@@ -97,20 +112,51 @@ public class SceneController : MonoBehaviour
         completionHUD.InitialiseGameCompletionHUD(levelData);
     }
 
+    private void LoadPlayerSpawner()
+    {
+        playerSpawnManager = FindObjectOfType<PlayerSpawnManager>().gameObject;
+
+        if (playerSpawnManager == null)
+        {
+            PlayerSettings playerSettings = gameManager.playerSettings;
+            playerSpawnManager = Instantiate(playerSettings.playerSpawnManager, transform.position, Quaternion.identity);
+        }
+
+        ISpawnManager spawnManager = playerSpawnManager.GetComponent<ISpawnManager>();
+        spawnManager.InitialiseSpawner();
+        print("Scene Controller >> Loaded Player Spawn Manager");
+    }
+
+    private void LoadEnemySpawners()
+    {
+        if (enemySpawnManagers == null)
+        {
+            Debug.LogWarning("You Are Missing an Enemy Manager");
+            return;
+        }
+
+        ISpawnManager spawnInterface;
+        foreach (GameObject spawnManager in enemySpawnManagers)
+        {
+            spawnInterface = spawnManager.GetComponent<ISpawnManager>();
+            spawnInterface.InitialiseSpawner();
+        }
+    }
+
     /// <summary>
     /// Spawns the selected player into the scene.
     /// </summary>
-    private void SpawnPlayer()
+    /*private void SpawnPlayer()
     {
         SessionData sessionData = SessionData.instance;
         ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == sessionData.selectedShip.stringID).First();
         GameObject player = Instantiate(asset.shipPrefab, transform.position, Quaternion.identity);
-        IPlayerInitialiser playerInitialiser = player.GetComponent<IPlayerInitialiser>();
-        playerInitialiser.InitialisePlayer(this);
+        //IPlayerInitialiser playerInitialiser = player.GetComponent<IPlayerInitialiser>();
+        //playerInitialiser.InitialisePlayer(this);
 
         actorTracker = Instantiate(GameManager.Instance.levelSettings.sceneActorTrackerPrefab, transform.position, Quaternion.identity).GetComponent<IActorTracker>();
         actorTracker.RegisterFriendlyEntity(player);
-    }
+    }*/
 
     /// <summary>
     /// Spawns the team AI entities from the spawn managers.

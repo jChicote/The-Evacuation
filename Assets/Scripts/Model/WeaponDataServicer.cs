@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// Manages operations of the weapon hangar. Such hangar weapons are the entire collection
+// of weapons accessible and purchased in the game. This includes both inventory weapons 
+// and weapons attached to vessels.
+
 public class WeaponDataServicer
 {
     // Responisble for handling logic associated with weapon organisation in data and 
@@ -37,7 +41,6 @@ public class WeaponDataServicer
     public WeaponInfo GetWeaponItem(string weaponID)
     {
         // To limit the clunckiness of passing weapon info around, each vessel will instead store only the string reference.
-
         return hangarWeapons.Where(x => x.stringID == weaponID).First();
     }
 

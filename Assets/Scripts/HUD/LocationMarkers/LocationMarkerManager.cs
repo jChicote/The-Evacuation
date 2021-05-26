@@ -71,6 +71,8 @@ namespace Evacuation.UserInterface.LocationMarker
 
         private void UpdateMarkerCollection()
         {
+            if (locationMarkers == null) return;
+
             for (int i = 0; i < locationMarkers.Length; i++)
             {
                 locationMarkers[i].RunMarker();

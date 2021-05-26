@@ -15,14 +15,10 @@ namespace Evacuation.Level.SpawnManagement
         protected SceneController sceneController;
         protected ISpawnPositioner spawnPositioner;
 
-        private void Start()
-        {
-            InitialiseManager();
-        }
 
-        public override void InitialiseManager()
+        public override void InitialiseSpawner()
         {
-            base.InitialiseManager();
+            base.InitialiseSpawner();
             gameManager = GameManager.Instance;
             sceneController = gameManager.sceneController;
             spawnPositioner = this.GetComponent<ISpawnPositioner>();
@@ -30,18 +26,18 @@ namespace Evacuation.Level.SpawnManagement
 
         public override void SpawnEntity()
         {
-            if (entityCount > maximumEntityCount) return;
-
             base.SpawnEntity();
+            if (entityCount > maximumEntityCount) return;
 
             GameObject spawnedDroid = Instantiate(gameManager.enemySettings.droidSentryPrefab, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
             IStatePatternSetter patternSetter = spawnedDroid.GetComponent<IStatePatternSetter>();
 
+            print(entityCount);
+            entityCount++;
+
             InitialiseEntity(spawnedDroid);
             spawnPositioner.PositionEntity(spawnedDroid, patternSetter);
             spawnedDroid.SetActive(true);
-
-            entityCount++;
         }
 
         public void InitialiseEntity(GameObject entity)

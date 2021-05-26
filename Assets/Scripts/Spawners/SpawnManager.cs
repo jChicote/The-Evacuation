@@ -12,7 +12,7 @@ namespace Evacuation.Level.SpawnManagement
         void DeductEntityCount();
     }
 
-    public class SpawnManager : MonoBehaviour, IPausable, IActionSwitch, ISpawnCountTracker
+    public class SpawnManager : MonoBehaviour, IPausable, IActionSwitch, ISpawnCountTracker, ISpawnManager
     {
         // Inspector Accessible Fields
         [SerializeField] protected GameObject entityPrefab;
@@ -23,7 +23,7 @@ namespace Evacuation.Level.SpawnManagement
         protected int entityCount;
         protected bool isPaused = false;
 
-        public virtual void InitialiseManager() 
+        public virtual void InitialiseSpawner() 
         {
             timer = new SimpleTimer(spawnIntervalTime, Time.deltaTime);
         }
