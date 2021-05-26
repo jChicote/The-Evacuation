@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Evacuation.Session
+namespace Evacuation.Model
 {
     public class UTestSaveLoader : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Evacuation.Session;
+using Evacuation.Model;
 
 public interface IShopMenu
 {
@@ -71,11 +71,11 @@ namespace Evacuation.UserInterface
         /// </summary>
         private void UpdateShopList()
         {
-            IUpdateCell cellUpdator;
+            IEquipmentCells cellUpdator;
 
             foreach (GameObject cell in shopCells)
             {
-                cellUpdator = cell.GetComponent<IUpdateCell>();
+                cellUpdator = cell.GetComponent<IEquipmentCells>();
                 cellUpdator.UpdateCell();
             }
         }
@@ -86,11 +86,31 @@ namespace Evacuation.UserInterface
         private void CreateCell(WeaponAsset asset, GameObject cellPrefab, GameObject spawnedCell)
         {
             spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
-            IShopInsertData cellInserter = spawnedCell.GetComponent<IShopInsertData>();
-            cellInserter.InsertInformation(asset);
+
+            IShopEquipmentCell cellInserter = spawnedCell.GetComponent<IShopEquipmentCell>();
+            cellInserter.InitialiseCell(asset.universalID, asset);
             cellInserter.PassInterfaces(informationPanel, this);
-            cellInserter.SetColor();
+            cellInserter.SetColor(GetWeaponCellColor(asset.defaultData.weaponType));
+
             shopCells.Add(spawnedCell);
+        }
+
+        // TODO: get this to reference string type
+        private Color GetWeaponCellColor(WeaponType type)
+        {
+            UISettings uiSetting = GameManager.Instance.uiSettings;
+
+            switch (type)
+            {
+                case WeaponType.Turrent:
+                    return uiSetting.GetSpecifiedColor(CellColor.Red);
+                case WeaponType.Laser:
+                    return uiSetting.GetSpecifiedColor(CellColor.Green);
+                case WeaponType.Launcher:
+                    return uiSetting.GetSpecifiedColor(CellColor.Blue);
+            }
+
+            return Color.gray;
         }
 
         private void ClearList()

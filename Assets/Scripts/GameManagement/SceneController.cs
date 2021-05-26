@@ -8,7 +8,7 @@ using Evacuation.Actor.PlayerSystems;
 using Evacuation.UserInterface.LocationMarker;
 using Evacuation.Level.Collections;
 using Evacuation.Actor.EnemySystems;
-using Evacuation.Session;
+using Evacuation.Model;
 using Evacuation.Cinematics;
 
 //  NOTICE FOR FUTURE REFERENCE
@@ -142,21 +142,6 @@ public class SceneController : MonoBehaviour
             spawnInterface.InitialiseSpawner();
         }
     }
-
-    /// <summary>
-    /// Spawns the selected player into the scene.
-    /// </summary>
-    /*private void SpawnPlayer()
-    {
-        SessionData sessionData = SessionData.instance;
-        ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == sessionData.selectedShip.stringID).First();
-        GameObject player = Instantiate(asset.shipPrefab, transform.position, Quaternion.identity);
-        //IPlayerInitialiser playerInitialiser = player.GetComponent<IPlayerInitialiser>();
-        //playerInitialiser.InitialisePlayer(this);
-
-        actorTracker = Instantiate(GameManager.Instance.levelSettings.sceneActorTrackerPrefab, transform.position, Quaternion.identity).GetComponent<IActorTracker>();
-        actorTracker.RegisterFriendlyEntity(player);
-    }*/
 
     /// <summary>
     /// Spawns the team AI entities from the spawn managers.

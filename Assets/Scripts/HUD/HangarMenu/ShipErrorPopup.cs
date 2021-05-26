@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Evacuation.Actor;
-using Evacuation.Session;
+using Evacuation.Model;
 
 public interface IShipMessagePopup
 {

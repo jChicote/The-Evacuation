@@ -31,7 +31,7 @@ namespace Evacuation.UserInterface
         [Space]
         public List<GameObject> cellList;
 
-        // Interfaces
+        // Fields
         private IHangarActions hangarActions;
         private IShipMessagePopup shipPopup;
 

@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Evacuation.Actor;
-using Evacuation.Session;
+using Evacuation.Model;
 
 namespace Evacuation.UserInterface
 {
     public class EquipmentCellPopulator : MonoBehaviour
     {
+        // Fields
         private GameObject contentView;
         private ICheckShipSlot slotChecker;
         private IShipAssign assigner;
         private IInfoPanel infoPanel;
         private IEquipmentMenu equipmentMenu;
+        private IWeaponServicer weaponServicer;
 
         public void IntialisePopulator(IEquipmentMenu equipmentMenu, GameObject contentView, ICheckShipSlot slotChecker, IShipAssign assigner, IInfoPanel infoPanel)
         {
@@ -21,6 +23,8 @@ namespace Evacuation.UserInterface
             this.slotChecker = slotChecker;
             this.assigner = assigner;
             this.infoPanel = infoPanel;
+
+            weaponServicer = SessionData.instance.weaponServicer.GetComponent<IWeaponServicer>();
         }
 
 
@@ -29,7 +33,7 @@ namespace Evacuation.UserInterface
         /// </summary>
         public void CreateInventoryCell(GameObject cellPrefab, List<GameObject> inventoryCells)
         {
-            foreach (WeaponInfo info in SessionData.instance.weaponServicer.GetHangarWeapons())
+            foreach (WeaponInfo info in weaponServicer.GetHangarWeapons())
             {
                 if (!info.isAttached)
                 {
@@ -80,7 +84,7 @@ namespace Evacuation.UserInterface
             }
             else
             {
-                WeaponInfo info = SessionData.instance.weaponServicer.GetWeaponItem(identifier);
+                WeaponInfo info = weaponServicer.GetWeaponItem(identifier);
                 GameObject spawnedInstance = Instantiate(cellPrefab, contentView.transform);
 
                 IInventoryCell cellInterface = spawnedInstance.GetComponent<IInventoryCell>();

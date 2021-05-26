@@ -79,6 +79,6 @@ public class LoadingScreen : MonoBehaviour, ILoadingScreen
 
         loadingBar.gameObject.SetActive(false);
         screenImage.gameObject.SetActive(false);
-        Debug.Log("Triggered hidden");
+        //Debug.Log("Triggered hidden");
     }
 }

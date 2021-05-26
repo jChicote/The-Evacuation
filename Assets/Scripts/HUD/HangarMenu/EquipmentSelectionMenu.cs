@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Evacuation.Session;
+using Evacuation.Model;
 using Evacuation.Actor;
 using TMPro;
 
@@ -59,6 +59,7 @@ namespace Evacuation.UserInterface
         private EquipmentType equipmentType;
         private ShipDataServicer shipDataServicer;
         private string shipID;
+        private IWeaponServicer weaponServicer;
 
         // Sub Presenters
         private EquipmentCellPopulator cellPopulator;
@@ -69,6 +70,7 @@ namespace Evacuation.UserInterface
             cellPopulator.IntialisePopulator(this, contentView, this, this, this);
 
             shipDataServicer = SessionData.instance.shipServicer;
+            weaponServicer = SessionData.instance.weaponServicer.GetComponent<IWeaponServicer>();
         }
 
         public void OpenMenu(string shipID)
@@ -192,7 +194,7 @@ namespace Evacuation.UserInterface
         /// </summary>
         public void SetInfoPanel(string equipmentID)
         {
-            WeaponInfo info = SessionData.instance.weaponServicer.GetWeaponItem(equipmentID);
+            WeaponInfo info = weaponServicer.GetWeaponItem(equipmentID);
             WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.universalID);
 
             informationPanel.SetActive(true);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using Evacuation.Session;
+using Evacuation.Model;
 using Evacuation.Model.Data;
 
 namespace Evacuation.Actor

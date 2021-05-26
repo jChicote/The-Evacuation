@@ -4,9 +4,9 @@ using System.Linq;
 using UnityEngine;
 using Evacuation.Actor;
 
-namespace Evacuation.Session
+namespace Evacuation.Model
 {
-    public class ShipDataServicer
+    public class ShipDataServicer : MonoBehaviour
     {
         private SessionData instance;
 
