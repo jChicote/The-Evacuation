@@ -4,19 +4,20 @@ using System.Linq;
 using UnityEngine;
 using Evacuation.Session;
 
+public interface ISpawnManager
+{
+    void InitialiseSpawner();
+}
+
 namespace Evacuation.Actor.PlayerSystems
 {
-    public interface ISpawnManager
-    {
-        void InitialisePlayerSpawner();
-    }
 
     public class PlayerSpawnManager : MonoBehaviour, ISpawnManager
     {
         [SerializeField] private PlayerController player;
         [SerializeField] private Transform spawnPosition;
 
-        public void InitialisePlayerSpawner()
+        public void InitialiseSpawner()
         {
             if (player == null)
             {

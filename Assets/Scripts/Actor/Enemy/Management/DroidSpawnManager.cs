@@ -15,14 +15,10 @@ namespace Evacuation.Level.SpawnManagement
         protected SceneController sceneController;
         protected ISpawnPositioner spawnPositioner;
 
-        private void Start()
-        {
-            InitialiseManager();
-        }
 
-        public override void InitialiseManager()
+        public override void InitialiseSpawner()
         {
-            base.InitialiseManager();
+            base.InitialiseSpawner();
             gameManager = GameManager.Instance;
             sceneController = gameManager.sceneController;
             spawnPositioner = this.GetComponent<ISpawnPositioner>();

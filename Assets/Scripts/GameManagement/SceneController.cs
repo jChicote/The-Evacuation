@@ -82,6 +82,7 @@ public class SceneController : MonoBehaviour
         // In the future this should be transferred to a session data setup
 
         levelData = GameManager.Instance.levelSettings.defaultLevelData.Where(x => x.levelID == "#00091").First();
+        //SessionData.instance.selectedShip.SetData();
     }
 
     private void LoadLevelConfigurations() { }
@@ -122,13 +123,24 @@ public class SceneController : MonoBehaviour
         }
 
         ISpawnManager spawnManager = playerSpawnManager.GetComponent<ISpawnManager>();
-        spawnManager.InitialisePlayerSpawner();
+        spawnManager.InitialiseSpawner();
         print("Scene Controller >> Loaded Player Spawn Manager");
     }
 
     private void LoadEnemySpawners()
     {
+        if (enemySpawnManagers == null)
+        {
+            Debug.LogWarning("You Are Missing an Enemy Manager");
+            return;
+        }
 
+        ISpawnManager spawnInterface;
+        foreach (GameObject spawnManager in enemySpawnManagers)
+        {
+            spawnInterface = spawnManager.GetComponent<ISpawnManager>();
+            spawnInterface.InitialiseSpawner();
+        }
     }
 
     /// <summary>

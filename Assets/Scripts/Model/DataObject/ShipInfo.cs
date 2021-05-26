@@ -29,29 +29,18 @@ namespace Evacuation.Actor
         // This class is a more lightweight configuration made for storage on device locally and does not draw from settings.
         public bool isUnlocked = false;
 
+        //public ShipData data;
+
         // Core Stats
-        protected int rescueCapacity;
-        protected float maxHealth;
-        protected float maxSheild;
-        protected float maxSpeed;
-        protected float maxHandling;
+        public int rescueCapacity;
+        public float maxHealth;
+        public float maxSheild;
+        public float maxSpeed;
+        public float maxHandling;
 
         // Weapoon Loadouts
-        protected List<string> fixedWeapons;
-        protected List<string> turrentWeapons;
-
-        // Accessors
-        public List<string> FixedWeapons
-        {
-            get { return fixedWeapons; }
-            set { fixedWeapons = value; }
-        }
-
-        public List<string> TurrentWeapons
-        {
-            get { return turrentWeapons; }
-            set { turrentWeapons = value; }
-        }
+        public List<string> fixedWeapons;
+        public List<string> turrentWeapons;
 
         public void SetData(string stringID, string name, int price, int rescueCapacity, float maxHealth, float maxShield, float maxSpeed, float maxHandling, int forwardWeaponSize, int turrentWeaponSize)
         {
@@ -96,11 +85,11 @@ namespace Evacuation.Actor
         {
             if (weaponConfig == WeaponConfiguration.Forward)
             {
-                AllocateWeaponToList(weaponID, fixedWeapons);
+                AllocateWeaponToList(weaponID, this.fixedWeapons);
             }
             else if (weaponConfig == WeaponConfiguration.Turrent)
             {
-                AllocateWeaponToList(weaponID, turrentWeapons);
+                AllocateWeaponToList(weaponID, this.turrentWeapons);
             }
         }
 
@@ -142,20 +131,23 @@ namespace Evacuation.Actor
 
             if (weaponConfig == WeaponConfiguration.Forward)
             {
-                int indexPosition = GetEquipmentPosition(fixedWeapons, stringID);
-                fixedWeapons[indexPosition] = "";
-
-                // Changes info in weapon hangar to be unattached
-                hangarWeapons.Where(x => x.stringID == stringID).First().isAttached = false;
+                RemoveWeaponFromList(fixedWeapons, stringID);
             }
             else
             {
-                int indexPosition = GetEquipmentPosition(turrentWeapons, stringID);
-                turrentWeapons[indexPosition] = "";
-
-                // Changes info in weapon hangar to be unattached
-                hangarWeapons.Where(x => x.stringID == stringID).First().isAttached = false;
+                RemoveWeaponFromList(turrentWeapons, stringID);
             }
+        }
+
+        private void RemoveWeaponFromList(List<string> weaponList, string stringID)
+        {
+            List<WeaponInfo> hangarWeapons = SessionData.instance.weaponServicer.GetHangarWeapons();
+
+            int indexPosition = GetEquipmentPosition(weaponList, stringID);
+            weaponList[indexPosition] = "";
+
+            // Changes info in weapon hangar to be unattached
+            hangarWeapons.Where(x => x.stringID == stringID).First().isAttached = false;
         }
 
         /// <summary>
@@ -205,11 +197,11 @@ namespace Evacuation.Actor
         {
             if (configuration == WeaponConfiguration.Forward)
             {
-                return fixedWeapons;
+                return this.fixedWeapons;
             }
             else
             {
-                return turrentWeapons;
+                return this.turrentWeapons;
             }
         }
 
@@ -220,11 +212,11 @@ namespace Evacuation.Actor
         {
             if (configuration == WeaponConfiguration.Forward)
             {
-                return fixedWeapons.Where(x => x == "").Count() == 0;
+                return this.fixedWeapons.Where(x => x == "").Count() == 0;
             }
             else
             {
-                return turrentWeapons.Where(x => x == "").Count() == 0;
+                return this.turrentWeapons.Where(x => x == "").Count() == 0;
             }
         }
 

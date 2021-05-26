@@ -65,6 +65,11 @@ namespace Evacuation.Actor.PlayerSystems
         {
             ShipData shipData = SessionData.instance.selectedShip.GetShipData();
 
+            if(shipData.FixedWeapons == null)
+            {
+                Debug.LogError("Caught null data");
+            }
+
             IStatHandler statHandler = this.GetComponent<IStatHandler>();
             statHandler.InitialiseStats(SessionData.instance.selectedShip.GetShipData());
             PlayerHeathComponent heathComponent = this.GetComponent<PlayerHeathComponent>();

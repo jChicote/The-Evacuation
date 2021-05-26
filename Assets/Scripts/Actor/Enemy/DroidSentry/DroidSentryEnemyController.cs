@@ -31,6 +31,14 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
 
             EnemyStatHandler statHandler = this.GetComponent<EnemyStatHandler>();
             statHandler.InitialiseStats(enemyInfo);
+
+            RegisterToTracker();
+        }
+
+        private void RegisterToTracker()
+        {
+            IActorTracker actorTracker = GameManager.Instance.sceneController.ActorTracker;
+            actorTracker.RegisterEnemyEntity(this.gameObject);
         }
 
         private void InitialiseMovementSystems()
