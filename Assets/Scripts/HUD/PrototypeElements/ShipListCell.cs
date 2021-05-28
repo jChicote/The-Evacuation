@@ -46,7 +46,7 @@ namespace Evacuation.UserInterface
         public void OpenSelectedShip()
         {
             ShipInfo info = SessionData.instance.shipServicer.GetShipItem(stringID);
-            ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == stringID).First();
+            ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.instanceID == stringID).First();
             if (info.isUnlocked)
             {
                 shipSelector.LoadMenuSelection(stringID);

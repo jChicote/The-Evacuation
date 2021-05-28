@@ -42,7 +42,7 @@ namespace Evacuation.UserInterface
             {
                 cellInstance = Instantiate(selectionCellPrefab, contentView.transform);
                 cellInterface = cellInstance.GetComponent<ISelectionShipCell>();
-                cellInterface.SetCell(asset.stringID, asset.image);
+                cellInterface.SetCell(asset.instanceID, asset.image);
                 selectionCellList.Add(cellInstance);
             }
         }

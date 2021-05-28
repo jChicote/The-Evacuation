@@ -20,7 +20,7 @@ namespace Evacuation.Settings
         {
             foreach (EnemyAsset asset in enemyList)
             {
-                if (asset.stringID == stringID) return asset;
+                if (asset.instanceID == stringID) return asset;
             }
 
             return null;

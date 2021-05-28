@@ -23,7 +23,7 @@ namespace Evacuation.Actor.PlayerSystems
         {
             // Grab asset from the scriptable object
             WeaponInfo info = SessionData.instance.weaponServicer.GetWeaponItem(weaponID);
-            WeaponAsset weaponAsset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.universalID);
+            WeaponAsset weaponAsset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.globalID);
 
             if (weaponAsset == null) return null;
 

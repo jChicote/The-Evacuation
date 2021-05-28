@@ -6,6 +6,11 @@ using TMPro;
 
 namespace Evacuation.UserInterface
 {
+    public interface IUICellChecker
+    {
+        void SetCell(ICheckShipSlot slotChecker, IShipAssign assigner, bool isAttached);
+    }
+
     public interface IEquipmentCells
     {
         void InitialiseCell(string itemID);
@@ -28,7 +33,7 @@ namespace Evacuation.UserInterface
         // Fields
         [Space]
         protected bool isActionsVisible = false;
-        public string itemID;
+        public string instanceID;
         public int price;
 
         // Interfaces
@@ -36,7 +41,7 @@ namespace Evacuation.UserInterface
 
         public virtual void InitialiseCell(string itemID)
         {
-            this.itemID = itemID;
+            this.instanceID = itemID;
         }
 
         public virtual void UpdateCell() { }

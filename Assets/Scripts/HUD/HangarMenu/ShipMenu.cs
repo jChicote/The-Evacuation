@@ -65,7 +65,7 @@ namespace Evacuation.UserInterface
             {
                 cellInstance = Instantiate(shipCellprefab, contentView.transform);
                 shipCell = cellInstance.GetComponent<IShipCell>();
-                shipCell.SetCell(this, hangarActions, asset.stringID, asset.image);
+                shipCell.SetCell(this, hangarActions, asset.instanceID, asset.image);
                 cellList.Add(cellInstance);
             }
         }

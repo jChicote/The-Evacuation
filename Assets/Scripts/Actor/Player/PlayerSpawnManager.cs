@@ -29,7 +29,7 @@ namespace Evacuation.Actor.PlayerSystems
         private void CreatePlayer()
         {
             SessionData sessionData = SessionData.instance;
-            ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == sessionData.selectedShip.stringID).First();
+            ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.instanceID == sessionData.selectedShip.instanceID).First();
             GameObject playerObject = Instantiate(asset.shipPrefab, transform.position, Quaternion.identity);
             player = playerObject.GetComponent<PlayerController>();
         }

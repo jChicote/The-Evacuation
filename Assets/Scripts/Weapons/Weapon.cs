@@ -100,7 +100,7 @@ namespace Evacuation.Weapons
 public class ObjectInfo
 {
     public string name;
-    public string stringID;
+    public string instanceID;
     public int price;
 
     [HideInInspector] 

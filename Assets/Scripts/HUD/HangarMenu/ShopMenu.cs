@@ -88,7 +88,7 @@ namespace Evacuation.UserInterface
             spawnedCell = Instantiate(cellPrefab, shopPanel.transform);
 
             IShopEquipmentCell cellInserter = spawnedCell.GetComponent<IShopEquipmentCell>();
-            cellInserter.InitialiseCell(asset.universalID, asset);
+            cellInserter.InitialiseCell(asset.globalID, asset);
             cellInserter.PassInterfaces(informationPanel, this);
             cellInserter.SetColor(GetWeaponCellColor(asset.defaultData.weaponType));
 
@@ -131,7 +131,7 @@ namespace Evacuation.UserInterface
         /// <summary>
         /// Processes purchases made in the shop.
         /// </summary>
-        public void MakePurchase(string universalID, WeaponType type, int purchaseCost)
+        public void MakePurchase(string globalID, WeaponType type, int purchaseCost)
         {
             UserStatus userStatus = SessionData.instance.userStatus;
 
@@ -142,7 +142,7 @@ namespace Evacuation.UserInterface
             }
 
             userStatus.credits -= purchaseCost;
-            WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(type, universalID);
+            WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(type, globalID);
             SessionData.instance.weaponServicer.AddWeaponInstance(asset);
             SessionData.instance.OnUserTransaction.Invoke();
 
@@ -152,10 +152,10 @@ namespace Evacuation.UserInterface
         /// <summary>
         /// Processes sales made in the shop.
         /// </summary>
-        public void MakeSale(string universalID, int sellPrice)
+        public void MakeSale(string instanceID, int sellPrice)
         {
             SessionData.instance.userStatus.credits += sellPrice;
-            SessionData.instance.weaponServicer.RemoveWeaponInstance(universalID);
+            SessionData.instance.weaponServicer.RemoveWeaponOccurance(instanceID);
             SessionData.instance.OnUserTransaction.Invoke();
 
             UpdateShopList();

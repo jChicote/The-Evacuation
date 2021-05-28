@@ -36,22 +36,18 @@ namespace Evacuation.UserInterface
         private IShopTransaction shopTransaction;
         private IWeaponServicer weaponServicer;
 
-        public override void InitialiseCell(string itemID)
-        {
-            base.InitialiseCell(itemID);
-        }
 
         public void InitialiseCell(string itemID, WeaponAsset weaponAsset)
         {
             weaponServicer = SessionData.instance.weaponServicer.GetComponent<IWeaponServicer>();
 
-            this.itemID = itemID;
+            this.instanceID = itemID;
             this.type = weaponAsset.defaultData.weaponType;
             this.price = weaponAsset.price;
 
             cellTitle.text = weaponAsset.name;
             itemPrice.text = "$" + price;
-            availableCount.text = "Inventory: " + weaponServicer.GetAvailableWeaponInstanceCount(itemID);
+            availableCount.text = "Inventory: " + weaponServicer.GetAvailableWeaponOccuranceCount(itemID);
             cellImage.sprite = weaponAsset.weaponPrefab.GetComponent<IImageExtract>().ExtractImage();
         }
 
@@ -69,7 +65,7 @@ namespace Evacuation.UserInterface
         /// </summary>
         public override void UpdateCell()
         {
-            availableCount.text = "Inventory: " + weaponServicer.GetAvailableWeaponInstanceCount(itemID);
+            availableCount.text = "Inventory: " + weaponServicer.GetAvailableWeaponOccuranceCount(instanceID);
         }
 
         /// <summary>
@@ -86,7 +82,8 @@ namespace Evacuation.UserInterface
         /// </summary>
         public void SellItem()
         {
-            shopTransaction.MakeSale(itemID, price);
+            print(instanceID);
+            shopTransaction.MakeSale(instanceID, price);
         }
 
         /// <summary>
@@ -94,7 +91,7 @@ namespace Evacuation.UserInterface
         /// </summary>
         public void PurchaseItem()
         {
-            shopTransaction.MakePurchase(itemID, type, price);
+            shopTransaction.MakePurchase(instanceID, type, price);
         }
 
         /// <summary>
@@ -102,7 +99,7 @@ namespace Evacuation.UserInterface
         /// </summary>
         public override void RevealInformation()
         {
-            informationPanel.SetInfoPanel(this.type, this.itemID);
+            informationPanel.SetInfoPanel(this.type, this.instanceID);
         }
     }
 }

@@ -13,8 +13,8 @@ namespace Evacuation.Model
     {
         List<WeaponInfo> GetHangarWeapons();
         WeaponInfo GetWeaponItem(string weaponID);
-        int GetAvailableWeaponInstanceCount(string universalID);
-        void RemoveWeaponInstance(string universalID);
+        int GetAvailableWeaponOccuranceCount(string universalID);
+        void RemoveWeaponOccurance(string globalID);
         void AddWeaponInstance(WeaponAsset asset);
     }
 
@@ -49,26 +49,26 @@ namespace Evacuation.Model
         /// <summary>
         /// Gets the weapon info of the specified weapon
         /// </summary>
-        public WeaponInfo GetWeaponItem(string weaponID)
+        public WeaponInfo GetWeaponItem(string weaponInstanceID)
         {
             // To limit the clunckiness of passing weapon info around, each vessel will instead store only the string reference.
-            return hangarWeapons.Where(x => x.stringID == weaponID).First();
+            return hangarWeapons.Where(x => x.instanceID == weaponInstanceID).First();
         }
 
         /// <summary>
         /// Gets the available weapon count in the hangar
         /// </summary>
-        public int GetAvailableWeaponInstanceCount(string universalID)
+        public int GetAvailableWeaponOccuranceCount(string universalID)
         {
-            return hangarWeapons.Where(x => x.universalID == universalID && x.isAttached == false).Count();
+            return hangarWeapons.Where(x => x.globalID == universalID && x.isAttached == false).Count();
         }
 
         /// <summary>
-        /// Removes weapon instance from list
+        /// Removes a single instance of weapon that contains the global ID
         /// </summary>
-        public void RemoveWeaponInstance(string universalID)
+        public void RemoveWeaponOccurance(string globalID)
         {
-            hangarWeapons.Remove(hangarWeapons.Where(x => x.universalID == universalID && x.isAttached == false).First());
+            hangarWeapons.Remove(hangarWeapons.Where(x => x.globalID == globalID && x.isAttached == false).First());
         }
 
         /// <summary>

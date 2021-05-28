@@ -35,7 +35,7 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
             IAssignSceneActorTracker assignTracker = this.GetComponent<IAssignSceneActorTracker>();
             assignTracker.SetSceneActorTracker(actorTracker);
 
-            EnemyInfo enemyInfo = GameManager.Instance.enemySettings.enemyList.Where(x => x.stringID == referenceID).First().ConvertToEnemyInfo();
+            EnemyInfo enemyInfo = GameManager.Instance.enemySettings.enemyList.Where(x => x.instanceID == referenceID).First().ConvertToEnemyInfo();
             shipData = enemyInfo.GetShipData();
 
             EnemyStatHandler statHandler = this.GetComponent<EnemyStatHandler>();

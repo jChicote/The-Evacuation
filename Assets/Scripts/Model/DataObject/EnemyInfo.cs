@@ -11,7 +11,7 @@ namespace Evacuation.Actor.EnemySystems
 
         public void SetData(string stringID, string name, float maxHealth, float maxShield, float maxSpeed, float maxHandling, int weaponSize)
         {
-            this.stringID = stringID;
+            this.instanceID = stringID;
             this.name = name;
 
             this.maxHealth = maxHealth;

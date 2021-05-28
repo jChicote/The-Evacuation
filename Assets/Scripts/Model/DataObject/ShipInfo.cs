@@ -29,8 +29,6 @@ namespace Evacuation.Actor
         // This class is a more lightweight configuration made for storage on device locally and does not draw from settings.
         public bool isUnlocked = false;
 
-        //public ShipData data;
-
         // Core Stats
         public int rescueCapacity;
         public float maxHealth;
@@ -44,7 +42,7 @@ namespace Evacuation.Actor
 
         public void SetData(string stringID, string name, int price, int rescueCapacity, float maxHealth, float maxShield, float maxSpeed, float maxHandling, int forwardWeaponSize, int turrentWeaponSize)
         {
-            this.stringID = stringID;
+            this.instanceID = stringID;
             this.name = name;
             this.price = price;
 
@@ -81,44 +79,43 @@ namespace Evacuation.Actor
         /// <summary>
         /// Called to assign weapons to the specified weapon configuration.
         /// </summary>
-        public void AssignWeapons(WeaponConfiguration weaponConfig, string weaponID)
+        public void AssignWeapons(WeaponConfiguration weaponConfig, string weaponInstanceID)
         {
             if (weaponConfig == WeaponConfiguration.Forward)
             {
-                AllocateWeaponToList(weaponID, this.fixedWeapons);
+                AllocateWeaponToList(weaponInstanceID, this.fixedWeapons);
             }
             else if (weaponConfig == WeaponConfiguration.Turrent)
             {
-                AllocateWeaponToList(weaponID, this.turrentWeapons);
+                AllocateWeaponToList(weaponInstanceID, this.turrentWeapons);
             }
         }
 
         /// <summary>
         /// Allocates weapons to their their position if existent.
         /// </summary>
-        protected void AllocateWeaponToList(string weaponID, List<string> weaponList)
+        protected void AllocateWeaponToList(string weaponInstanceID, List<string> weaponList)
         {
             List<WeaponInfo> hangarWeapons = SessionData.instance.weaponServicer.GetHangarWeapons();
             int indexPosition = GetFirstEmptySlot(weaponList);
-            string extractedWeaponID = "";
+            string extractedInstanceID = "";
 
             for (int i = 0; i < hangarWeapons.Count; i++)
             {
-                if (extractedWeaponID == "")
+                if (extractedInstanceID == "")
                 {
-                    if (hangarWeapons[i].stringID.Equals(weaponID) && !hangarWeapons[i].isAttached)
+                    if (hangarWeapons[i].instanceID.Equals(weaponInstanceID) && !hangarWeapons[i].isAttached)
                     {
-                        extractedWeaponID = hangarWeapons[i].stringID;
+                        extractedInstanceID = hangarWeapons[i].instanceID;
                         hangarWeapons[i].isAttached = true;
                     }
                 }
             }
 
             // Check if array search turned up with a result.
-            if (extractedWeaponID != "")
+            if (extractedInstanceID != "")
             {
-                //extractedWeaponID.isAttached = true;
-                weaponList[indexPosition] = extractedWeaponID;
+                weaponList[indexPosition] = extractedInstanceID;
             }
         }
 
@@ -127,8 +124,6 @@ namespace Evacuation.Actor
         /// </summary>
         public void RemoveWeapon(WeaponConfiguration weaponConfig, string stringID)
         {
-            List<WeaponInfo> hangarWeapons = SessionData.instance.weaponServicer.GetHangarWeapons();
-
             if (weaponConfig == WeaponConfiguration.Forward)
             {
                 RemoveWeaponFromList(fixedWeapons, stringID);
@@ -147,7 +142,7 @@ namespace Evacuation.Actor
             weaponList[indexPosition] = "";
 
             // Changes info in weapon hangar to be unattached
-            hangarWeapons.Where(x => x.stringID == stringID).First().isAttached = false;
+            hangarWeapons.Where(x => x.instanceID == stringID).First().isAttached = false;
         }
 
         /// <summary>

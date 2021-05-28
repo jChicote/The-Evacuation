@@ -6,45 +6,55 @@ using TMPro;
 using Evacuation.Model;
 
 
-public interface IInventoryCell
-{
-    void SetData(string stringID, string title, Sprite cellThumbnail, string cellPrice, EquipmentType type, IInfoPanel panel);
-    void SetColor();
-}
-
 namespace Evacuation.UserInterface
 {
-    public abstract class InventoryListCell : MonoBehaviour, IInventoryCell
+    public interface IInventoryCell : IEquipmentCells
+    {
+        void InitialiseCell(WeaponInfo itemInfo);
+        //void SetData(string stringID, string title, Sprite cellThumbnail, string cellPrice, EquipmentType type, IInfoPanel panel);
+        void PassInterfaces(IInfoPanel infoPanel);
+    }
+
+    public abstract class InventoryListCell : BaseEquipmentCell, IInventoryCell
     {
         [Header("Cell Attributes")]
-        public TextMeshProUGUI cellTitle;
-        public Image cellThumbnail;
-        public Image cellBackgroundImage;
         public TextMeshProUGUI cellPrice;
 
         // Information view for item listing
         protected GameObject informationView;
-        protected EquipmentType equipmentType;
-        protected IInfoPanel infoPanelInterface;
+        //protected EquipmentType equipmentType;
+        //protected IInfoPanel infoPanelInterface;
 
-        protected string equipmentID;
+        public virtual void InitialiseCell(WeaponInfo itemInfo)
+        {
+            this.instanceID = itemInfo.instanceID;
+            this.cellTitle.text = itemInfo.name;
+            //this.cellImage.sprite = itemInfo.im;
+            this.cellPrice.text = itemInfo.price.ToString();
+        }
 
-        public void SetData(string stringID, string title, Sprite cellThumbnail, string cellPrice, EquipmentType type, IInfoPanel panel)
+        /*public void SetData(string stringID, string title, Sprite cellThumbnail, string cellPrice, EquipmentType type, IInfoPanel panel)
         {
             this.equipmentID = stringID;
             this.cellTitle.text = title;
-            this.cellThumbnail.sprite = cellThumbnail;
+            this.cellImage.sprite = cellThumbnail;
             this.cellPrice.text = cellPrice;
             this.equipmentType = type;
             this.infoPanelInterface = panel;
-        }
+        }*/
 
-        public virtual void RevealInformation()
+        public virtual void PassInterfaces(IInfoPanel infoPanel)
         {
-            infoPanelInterface.SetInfoPanel(equipmentID);
+            this.informationPanel = infoPanel;
         }
 
-        public void SetColor()
+
+        public override void RevealInformation()
+        {
+            informationPanel.SetInfoPanel(instanceID);
+        }
+
+        /*public void SetColor()
         {
             WeaponType type = SessionData.instance.weaponServicer.GetWeaponItem(equipmentID).weaponType;
             Color cellColor;
@@ -64,7 +74,7 @@ namespace Evacuation.UserInterface
                     cellBackgroundImage.color = cellColor;
                     break;
             }
-        }
+        }*/
     }
 
 }

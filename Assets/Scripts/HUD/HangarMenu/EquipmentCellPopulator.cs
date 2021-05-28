@@ -27,28 +27,6 @@ namespace Evacuation.UserInterface
             weaponServicer = SessionData.instance.weaponServicer.GetComponent<IWeaponServicer>();
         }
 
-
-        /// <summary>
-        /// Called to instantiate an inventory prototype cell to be added to the inventory cell list.
-        /// </summary>
-        public void CreateInventoryCell(GameObject cellPrefab, List<GameObject> inventoryCells)
-        {
-            foreach (WeaponInfo info in weaponServicer.GetHangarWeapons())
-            {
-                if (!info.isAttached)
-                {
-                    GameObject spawnedInstance = Instantiate(cellPrefab, contentView.transform);
-                    IInventoryCell cellInterface = spawnedInstance.GetComponent<IInventoryCell>();
-                    cellInterface.SetData(info.stringID, info.name, null, info.price.ToString(), EquipmentType.ForwardWeapon, infoPanel);
-                    cellInterface.SetColor();
-                    IEquipmentCell equipmentInterface = spawnedInstance.GetComponent<IEquipmentCell>();
-                    equipmentInterface.SetCell(slotChecker, assigner, false);
-
-                    inventoryCells.Add(spawnedInstance);
-                }
-            }
-        }
-
         /// <summary>
         /// Called to load equipment representation of ship's equipment loadout to UI.
         /// </summary>
@@ -71,6 +49,50 @@ namespace Evacuation.UserInterface
             }
         }
 
+
+        /// <summary>
+        /// Called to instantiate an inventory prototype cell to be added to the inventory cell list.
+        /// </summary>
+        public void CreateInventoryCell(GameObject cellPrefab, List<GameObject> inventoryCells)
+        {
+            foreach (WeaponInfo info in weaponServicer.GetHangarWeapons())
+            {
+                if (!info.isAttached)
+                {
+                    GameObject spawnedInstance = Instantiate(cellPrefab, contentView.transform);
+
+                    IInventoryCell cellInterface = spawnedInstance.GetComponent<IInventoryCell>();
+                    cellInterface.InitialiseCell(info);
+                    cellInterface.PassInterfaces(infoPanel);
+                    cellInterface.SetColor(GetWeaponCellColor(info.weaponType));
+
+                    IUICellChecker equipmentInterface = spawnedInstance.GetComponent<IUICellChecker>();
+                    equipmentInterface.SetCell(slotChecker, assigner, false);
+
+                    inventoryCells.Add(spawnedInstance);
+                }
+            }
+        }
+
+        // TODO: get this to reference string type
+        // TODO: this class is being repeated twice
+        private Color GetWeaponCellColor(WeaponType type)
+        {
+            UISettings uiSetting = GameManager.Instance.uiSettings;
+
+            switch (type)
+            {
+                case WeaponType.Turrent:
+                    return uiSetting.GetSpecifiedColor(CellColor.Red);
+                case WeaponType.Laser:
+                    return uiSetting.GetSpecifiedColor(CellColor.Green);
+                case WeaponType.Launcher:
+                    return uiSetting.GetSpecifiedColor(CellColor.Blue);
+            }
+
+            return Color.gray;
+        }
+
         /// <summary>
         /// Called to instantiate an equipment cell using the specified prefab.
         /// </summary>
@@ -88,9 +110,11 @@ namespace Evacuation.UserInterface
                 GameObject spawnedInstance = Instantiate(cellPrefab, contentView.transform);
 
                 IInventoryCell cellInterface = spawnedInstance.GetComponent<IInventoryCell>();
-                cellInterface.SetData(info.stringID, info.name, null, info.price.ToString(), equipmentMenu.GetCurrentType(), infoPanel);
+                cellInterface.InitialiseCell(info);
+                cellInterface.PassInterfaces(infoPanel);
+                //cellInterface.SetColor(GetWeaponCellColor(equipmentMenu.GetCurrentType())); DOES NOT WORK UNTIL EQUIPMENT TYPES ARE CONSIDERED.
 
-                IEquipmentCell equipmentInterface = spawnedInstance.GetComponent<IEquipmentCell>();
+                IUICellChecker equipmentInterface = spawnedInstance.GetComponent<IUICellChecker>();
                 equipmentInterface.SetCell(slotChecker, assigner, true);
 
                 inventoryCells.Add(spawnedInstance);
