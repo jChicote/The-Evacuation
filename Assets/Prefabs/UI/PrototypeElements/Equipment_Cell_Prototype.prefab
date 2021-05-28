@@ -1009,9 +1009,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81bffe30cf5fed43bd1f879c61f3c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionGroup: {fileID: 5333678717085342256}
   cellTitle: {fileID: 8007343284855451897}
-  cellThumbnail: {fileID: 6458881454898034107}
+  itemPrice: {fileID: 0}
+  cellImage: {fileID: 6458881454898034107}
   cellBackgroundImage: {fileID: 2761241311741720277}
+  itemID: 
+  price: 0
   cellPrice: {fileID: 3754681203443083808}
   actionGroup: {fileID: 5333678717085342256}
   informationButton: {fileID: 3305800182874323370}

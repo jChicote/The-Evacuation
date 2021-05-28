@@ -32,24 +32,24 @@ namespace Evacuation.Level.SpawnManagement
             GameObject spawnedDroid = Instantiate(gameManager.enemySettings.droidSentryPrefab, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
             IStatePatternSetter patternSetter = spawnedDroid.GetComponent<IStatePatternSetter>();
 
-            print(entityCount);
+            //print(entityCount);
             entityCount++;
 
-            InitialiseEntity(spawnedDroid);
+            //InitialiseEntity(spawnedDroid);
             spawnPositioner.PositionEntity(spawnedDroid, patternSetter);
             spawnedDroid.SetActive(true);
         }
 
-        public void InitialiseEntity(GameObject entity)
+       /* public void InitialiseEntity(GameObject entity)
         {
             IAssignSceneActorTracker assignTracker = entity.GetComponent<IAssignSceneActorTracker>();
             assignTracker.SetSceneActorTracker(sceneController.ActorTracker);
             sceneController.ActorTracker.RegisterEnemyEntity(entity);
 
-            IEnemyController enemyController = entity.GetComponent<IEnemyController>();
-            enemyController.InitialiseController();
+            //IEnemyController enemyController = entity.GetComponent<IEnemyController>();
+            //enemyController.InitialiseController();
             entity.SetActive(false);
-        }
+        }*/
 
         public override void GloballyClearAllEntities()
         {

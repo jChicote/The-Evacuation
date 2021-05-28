@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: WeaponSettings
   m_EditorClassIdentifier: 
   turrentWeapons:
-  - stringID: 
-    name: Smith - Mini Turrent
+  - name: Smith - Mini Turrent
+    instanceID: 
     price: 2000
     equipmentType: 0
-    universalID: '#1528'
+    globalID: 6146
     defaultData:
       weaponType: 0
       damage: 1
@@ -29,11 +29,11 @@ MonoBehaviour:
       for starters....
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
     spriteThumbnail: {fileID: 0}
-  - stringID: 
-    name: Meson - Nano RailGun MK I
+  - name: Meson - Nano RailGun MK I
+    instanceID: 
     price: 2500
     equipmentType: 0
-    universalID: '#1839'
+    globalID: 1648
     defaultData:
       weaponType: 0
       damage: 1
@@ -47,11 +47,11 @@ MonoBehaviour:
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
     spriteThumbnail: {fileID: 0}
   laserWeapon:
-  - stringID: 
-    name: Mirai Alpha NX I
+  - name: Mirai Alpha NX I
+    instanceID: 
     price: 15000
     equipmentType: 0
-    universalID: '#6237'
+    globalID: 1753
     defaultData:
       weaponType: 1
       damage: 10
@@ -64,11 +64,11 @@ MonoBehaviour:
       effective power at a reasonable low cost for fighters.
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
     spriteThumbnail: {fileID: 0}
-  - stringID: 
-    name: Mirai Alpha NX II
+  - name: Mirai Alpha NX II
+    instanceID: 
     price: 25000
     equipmentType: 0
-    universalID: '#9674'
+    globalID: 9468
     defaultData:
       weaponType: 1
       damage: 25
@@ -81,11 +81,11 @@ MonoBehaviour:
       manufacturers saw it's value drop.
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
     spriteThumbnail: {fileID: 0}
-  - stringID: 
-    name: Mirai Beta I
+  - name: Mirai Beta I
+    instanceID: 
     price: 40000
     equipmentType: 0
-    universalID: '#3759'
+    globalID: 6279
     defaultData:
       weaponType: 1
       damage: 10
@@ -100,11 +100,11 @@ MonoBehaviour:
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
     spriteThumbnail: {fileID: 0}
   launcherWeapons:
-  - stringID: 
-    name: 'TX6A - Launcher '
+  - name: 'TX6A - Launcher '
+    instanceID: 
     price: 30000
     equipmentType: 0
-    universalID: '#2893'
+    globalID: 1738
     defaultData:
       weaponType: 2
       damage: 50
@@ -117,11 +117,11 @@ MonoBehaviour:
       launch rate, it was favourable for its cost and formidable when in large numbers.
     weaponPrefab: {fileID: 4503141399910976343, guid: cafa20e6153d78c44ad84ddfc04d00a7, type: 3}
     spriteThumbnail: {fileID: 0}
-  - stringID: 
-    name: 'TXMJ - Stairway '
+  - name: 'TXMJ - Stairway '
+    instanceID: 
     price: 80000
     equipmentType: 0
-    universalID: '#1794'
+    globalID: 5802
     defaultData:
       weaponType: 2
       damage: 50

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Evacuation.Session;
+using Evacuation.Model;
 
 public interface IHangarActions
 {
@@ -107,7 +107,7 @@ namespace Evacuation.UserInterface
         public void SetInfoPanel(string equipmentID)
         {
             WeaponInfo info = SessionData.instance.weaponServicer.GetWeaponItem(equipmentID);
-            WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.universalID);
+            WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.globalID);
 
             informationPanel.SetActive(true);
             InformationPanel infoPanel = informationPanel.GetComponent<InformationPanel>();

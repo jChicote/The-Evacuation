@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Evacuation.Actor;
 
-namespace Evacuation.Session
+namespace Evacuation.Model
 {
     [System.Serializable]
     public class HangarInventory

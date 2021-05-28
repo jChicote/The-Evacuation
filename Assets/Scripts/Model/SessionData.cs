@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using System.Collections;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
@@ -8,8 +5,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.IO;
 using Evacuation.Actor;
+using Evacuation.Model;
 
-namespace Evacuation.Session
+namespace Evacuation.Model
 {
     public class SessionData : MonoBehaviour
     {
@@ -43,8 +41,8 @@ namespace Evacuation.Session
                 Destroy(gameObject);
             }
 
-            weaponServicer = new WeaponDataServicer();
-            shipServicer = new ShipDataServicer();
+            weaponServicer = this.GetComponent<WeaponDataServicer>();
+            shipServicer = this.GetComponent<ShipDataServicer>();
         }
 
         /// <summary>

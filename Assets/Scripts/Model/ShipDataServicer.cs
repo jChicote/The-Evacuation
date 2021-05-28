@@ -4,9 +4,9 @@ using System.Linq;
 using UnityEngine;
 using Evacuation.Actor;
 
-namespace Evacuation.Session
+namespace Evacuation.Model
 {
-    public class ShipDataServicer
+    public class ShipDataServicer : MonoBehaviour
     {
         private SessionData instance;
 
@@ -39,7 +39,7 @@ namespace Evacuation.Session
             // As there are no duplicates storing ship identifiers through string, hangar will only store id for simplification.
             // Only will fetch and store ship info of vessels that are either in use or unlocked.
 
-            return hangarShips.Where(x => x.stringID == shipID).First();
+            return hangarShips.Where(x => x.instanceID == shipID).First();
         }
 
         /// <summary>

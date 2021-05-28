@@ -26,7 +26,7 @@ public class ShipAsset : ObjectInfo
         ShipInfo info = new ShipInfo();
 
         info.SetData(
-            stringID,
+            instanceID,
             name,
             price,
             stats.maxRescueCapacity,
@@ -54,7 +54,7 @@ public class ShipStats : BaseStats
 public class BaseStats
 {
     [Tooltip("A copy is necessary as the struct is what is passed into ship prefabs")]
-    public string shipID;
+    //public string shipID;
     public float maxHealth = 100;
     public float maxSheild = 100;
 

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Evacuation.Session;
+using Evacuation.Model;
 using Evacuation.Actor;
 using TMPro;
 
@@ -59,6 +59,7 @@ namespace Evacuation.UserInterface
         private EquipmentType equipmentType;
         private ShipDataServicer shipDataServicer;
         private string shipID;
+        private IWeaponServicer weaponServicer;
 
         // Sub Presenters
         private EquipmentCellPopulator cellPopulator;
@@ -69,12 +70,13 @@ namespace Evacuation.UserInterface
             cellPopulator.IntialisePopulator(this, contentView, this, this, this);
 
             shipDataServicer = SessionData.instance.shipServicer;
+            weaponServicer = SessionData.instance.weaponServicer.GetComponent<IWeaponServicer>();
         }
 
         public void OpenMenu(string shipID)
         {
             this.shipID = shipID;
-            shipImage.sprite = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == shipID).First().image;
+            shipImage.sprite = GameManager.Instance.playerSettings.shipsList.Where(x => x.instanceID == shipID).First().image;
         }
 
 
@@ -111,20 +113,26 @@ namespace Evacuation.UserInterface
         /// <summary>
         /// Assigns / Attaches equipment item to the open equipment type and ship list.
         /// </summary>
-        public bool AssignItem(string equipmentID)
+        public bool AssignItem(string itemID)
         {
             ShipInfo selectedShip = shipDataServicer.GetShipItem(shipID);
+            /*print("Has been encountered");
+            print("Item ID: " + itemID);
+            print(shipID);
+            print(selectedShip);*/
 
             if (equipmentType == EquipmentType.ForwardWeapon)
             {
                 if (selectedShip.CheckIsFull(WeaponConfiguration.Forward)) return false;
-                selectedShip.AssignWeapons(WeaponConfiguration.Forward, equipmentID);
+                selectedShip.AssignWeapons(WeaponConfiguration.Forward, itemID);
+               // print("Has assigned weapon");
             }
 
             if (equipmentType == EquipmentType.TurrentWeapon)
             {
                 if (selectedShip.CheckIsFull(WeaponConfiguration.Turrent)) return false;
-                selectedShip.AssignWeapons(WeaponConfiguration.Turrent, equipmentID);
+                selectedShip.AssignWeapons(WeaponConfiguration.Turrent, itemID);
+                //print("Has assigned weapon");
             }
 
             ResetEquipmentList();
@@ -134,18 +142,18 @@ namespace Evacuation.UserInterface
         /// <summary>
         /// Removes the specified equipment ID from the ship's info list based on set equipment type.
         /// </summary>
-        public void RemoveItem(string equipmentID)
+        public void RemoveItem(string itemID)
         {
             ShipInfo selectedShip = shipDataServicer.GetShipItem(shipID);
 
             if (equipmentType == EquipmentType.ForwardWeapon)
             {
-                selectedShip.RemoveWeapon(WeaponConfiguration.Forward, equipmentID);
+                selectedShip.RemoveWeapon(WeaponConfiguration.Forward, itemID);
             }
 
             if (equipmentType == EquipmentType.TurrentWeapon)
             {
-                selectedShip.RemoveWeapon(WeaponConfiguration.Turrent, equipmentID);
+                selectedShip.RemoveWeapon(WeaponConfiguration.Turrent, itemID);
             }
 
             ResetEquipmentList();
@@ -192,8 +200,8 @@ namespace Evacuation.UserInterface
         /// </summary>
         public void SetInfoPanel(string equipmentID)
         {
-            WeaponInfo info = SessionData.instance.weaponServicer.GetWeaponItem(equipmentID);
-            WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.universalID);
+            WeaponInfo info = weaponServicer.GetWeaponItem(equipmentID);
+            WeaponAsset asset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.globalID);
 
             informationPanel.SetActive(true);
             InformationPanel infoPanel = informationPanel.GetComponent<InformationPanel>();
@@ -250,6 +258,7 @@ namespace Evacuation.UserInterface
         /// </summary>
         private void ResetEquipmentList()
         {
+            print("Encountered Reset");
             ClearInventoryList();
             PopulateInventoryList();
         }

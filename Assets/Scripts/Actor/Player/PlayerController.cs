@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Evacuation.Session;
+using Evacuation.Model;
 using Cinemachine;
 using Evacuation.Cinematics;
 using Evacuation.Model.Data;

@@ -16,7 +16,7 @@ namespace Evacuation.Actor.EnemySystems
             EnemyInfo info = new EnemyInfo();
 
             info.SetData(
-                stringID,
+                instanceID,
                 name,
                 enemyStats.maxHealth,
                 enemyStats.maxSheild,

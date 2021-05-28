@@ -16,7 +16,7 @@ public class PlayerSettings : ScriptableObject
     {
         foreach (ShipAsset asset in shipsList)
         {
-            if (asset.stringID == stringID)
+            if (asset.instanceID == stringID)
             {
                 return asset;
             }

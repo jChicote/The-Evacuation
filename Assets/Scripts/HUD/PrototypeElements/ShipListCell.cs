@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Evacuation.Session;
+using Evacuation.Model;
 using Evacuation.Actor;
-
-public interface IShipCell
-{
-    void SetCell(IShipSelection shipSelector, IHangarActions hangarActions, string stringID, Sprite image);
-
-}
 
 namespace Evacuation.UserInterface
 {
+    public interface IShipCell
+    {
+        void SetCell(IShipSelection shipSelector, IHangarActions hangarActions, string stringID, Sprite image);
+
+    }
+
     public class ShipListCell : MonoBehaviour, IShipCell
     {
         [Header("Cell Attributes")]
@@ -46,7 +46,7 @@ namespace Evacuation.UserInterface
         public void OpenSelectedShip()
         {
             ShipInfo info = SessionData.instance.shipServicer.GetShipItem(stringID);
-            ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == stringID).First();
+            ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.instanceID == stringID).First();
             if (info.isUnlocked)
             {
                 shipSelector.LoadMenuSelection(stringID);

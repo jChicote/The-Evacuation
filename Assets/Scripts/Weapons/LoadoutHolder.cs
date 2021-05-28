@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Evacuation.Session;
+using Evacuation.Model;
 
 namespace Evacuation.Actor.PlayerSystems
 {
@@ -23,10 +23,15 @@ namespace Evacuation.Actor.PlayerSystems
         {
             // Grab asset from the scriptable object
             WeaponInfo info = SessionData.instance.weaponServicer.GetWeaponItem(weaponID);
-            WeaponAsset weaponAsset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.universalID);
+            WeaponAsset weaponAsset = GameManager.Instance.weaponSettings.RetrieveFromSettings(info.weaponType, info.globalID);
 
             if (weaponAsset == null) return null;
 
+            return InitialiseWeapon(weaponAsset, info);
+        }
+
+        private IWeapon InitialiseWeapon(WeaponAsset weaponAsset, WeaponInfo info)
+        {
             //Spawn and Initialise Weapon
             weapon = Instantiate(weaponAsset.weaponPrefab, transform);
             IWeapon weaponInterface = weapon.GetComponent<IWeapon>();

@@ -16,6 +16,11 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
         private ShipData shipData;
         private IStateManager stateManager;
 
+        private void Awake()
+        {
+            InitialiseController();
+        }
+
         public override void InitialiseController()
         {
             InitialiseStats();
@@ -26,7 +31,11 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
 
         private void InitialiseStats()
         {
-            EnemyInfo enemyInfo = GameManager.Instance.enemySettings.enemyList.Where(x => x.stringID == referenceID).First().ConvertToEnemyInfo();
+            IActorTracker actorTracker = GameManager.Instance.sceneController.ActorTracker;
+            IAssignSceneActorTracker assignTracker = this.GetComponent<IAssignSceneActorTracker>();
+            assignTracker.SetSceneActorTracker(actorTracker);
+
+            EnemyInfo enemyInfo = GameManager.Instance.enemySettings.enemyList.Where(x => x.instanceID == referenceID).First().ConvertToEnemyInfo();
             shipData = enemyInfo.GetShipData();
 
             EnemyStatHandler statHandler = this.GetComponent<EnemyStatHandler>();

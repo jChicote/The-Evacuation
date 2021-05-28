@@ -1,6 +1,9 @@
 
 namespace Evacuation.Level.TransportSystems
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class CaptureState
     {
         protected PlatformCapture platformCapture;
@@ -18,11 +21,14 @@ namespace Evacuation.Level.TransportSystems
         public abstract void RunState();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class TrackingState : CaptureState
     {
         public override void InitState()
         {
-            platformCapture.captureRenderer.BeginRenderingCaptureVisual(platformCapture.shipPositionLocator);
+            platformCapture.captureRenderer.BeginRenderingCaptureVisual(platformCapture.autoLandingSystem);
             platformCapture.CaptureTimer.StartTimer();
         }
 
@@ -33,6 +39,9 @@ namespace Evacuation.Level.TransportSystems
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class GuideState : CaptureState
     {
         public override void InitState()
@@ -43,29 +52,35 @@ namespace Evacuation.Level.TransportSystems
 
         public override void RunState()
         {
-            platformCapture.shipLandingManoeuvre.AutoLand(platformCapture.transform);
+            platformCapture.autoLandingSystem.AutoLand(platformCapture.transform);
 
-            if (platformCapture.shipLandingManoeuvre.CheckHasLanded())
+            if (platformCapture.autoLandingSystem.CheckHasLanded())
             {
                 platformCapture.TransitionState(new LandedState());
             }
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class LandedState : CaptureState
     {
         public override void InitState()
         {
-            platformCapture.shipTranslate.AttachToPlatform();
+            platformCapture.shipLandingSystem.AttachToPlatform();
             platformCapture.platform.EnablePlatformTransport();
         }
 
         public override void RunState()
         {
-            platformCapture.shipTranslate.StickToPlatform(platformCapture.transform.position);
+            platformCapture.shipLandingSystem.StickToPlatform(platformCapture.transform.position);
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class DepartedState : CaptureState
     {
         public override void InitState() { }

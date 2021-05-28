@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public interface IEquipmentCell
-{
-    void SetCell(ICheckShipSlot slotChecker, IShipAssign assigner, bool isAttached);
-}
-
 namespace Evacuation.UserInterface
 {
-    public class ShipInventoryCell : InventoryListCell, IEquipmentCell
+    public class ShipInventoryCell : InventoryListCell, IUICellChecker
     {
         [Header("Cell Attributes")]
-        public GameObject actionGroup;
+        //public GameObject actionGroup;
         public Button informationButton;
         public Button attachButton;
         public Button detachButton;
@@ -21,8 +16,6 @@ namespace Evacuation.UserInterface
         // Interfaces
         private IShipAssign assignerAction;
         private ICheckShipSlot slotChecker;
-
-        private bool isActionsVisible = false;
 
         public void SetCell(ICheckShipSlot slotChecker, IShipAssign assigner, bool isAttached)
         {
@@ -44,13 +37,11 @@ namespace Evacuation.UserInterface
                 detachButton.gameObject.SetActive(false);
                 attachButton.gameObject.SetActive(true);
             }
-
         }
 
-        public void RevealActionGroup()
+        public override void RevealActionGroup()
         {
-            isActionsVisible = !isActionsVisible;
-            actionGroup.SetActive(isActionsVisible);
+            base.RevealActionGroup();
 
             if (!slotChecker.CheckSlotAvailability())
             {
@@ -62,20 +53,19 @@ namespace Evacuation.UserInterface
             }
         }
 
-
         public void InvokeAttachAction()
         {
-            assignerAction.AssignItem(equipmentID);
+            assignerAction.AssignItem(instanceID);
         }
 
         public void InvokeRemovalAction()
         {
-            assignerAction.RemoveItem(equipmentID);
+            assignerAction.RemoveItem(instanceID);
         }
 
         public override void RevealInformation()
         {
-            infoPanelInterface.SetInfoPanel(this.equipmentID);
+            informationPanel.SetInfoPanel(this.instanceID);
         }
     }
 

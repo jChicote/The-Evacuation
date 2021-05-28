@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Evacuation.Actor;
-using Evacuation.Session;
+using Evacuation.Model;
 
-public interface IShipMessagePopup
-{
-    void InitialisePopup(IShipMenu shipMenu);
-    void ShowPurchasePopup(string shipID);
-    void ShowLockedPopup(string shipID);
-}
 
 namespace Evacuation.UserInterface
 {
+    public interface IShipMessagePopup
+    {
+        void InitialisePopup(IShipMenu shipMenu);
+        void ShowPurchasePopup(string shipID);
+        void ShowLockedPopup(string shipID);
+    }
+
     /// <summary>
     /// Responsible for handling the popup actions associated with the ship menu.
     /// </summary>
@@ -58,7 +59,7 @@ namespace Evacuation.UserInterface
             this.shipID = shipID;
             lockedPopup.SetActive(true);
 
-            ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == shipID).First();
+            ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.instanceID == shipID).First();
 
             lockedName.text = asset.name;
             lockedDescription.text = "You need to be at level " + asset.requiredLevel + " in order to unlock this ship.";
@@ -69,7 +70,7 @@ namespace Evacuation.UserInterface
             this.shipID = shipID;
             purchasePopup.SetActive(true);
 
-            ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.stringID == shipID).First();
+            ShipAsset asset = GameManager.Instance.playerSettings.shipsList.Where(x => x.instanceID == shipID).First();
 
             purchasedName.text = asset.name;
             purchaseDescription.text = "Want to purchase this ship for $" + asset.price + "?";

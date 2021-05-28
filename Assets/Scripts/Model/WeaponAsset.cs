@@ -6,7 +6,7 @@ using UnityEngine;
 public class WeaponAsset : ObjectInfo
 {
     [Header("Data")]
-    public string universalID;
+    public string globalID;
     public WeaponData defaultData;
 
     [TextArea(5, 15)]
@@ -24,7 +24,7 @@ public class WeaponAsset : ObjectInfo
 
         info.SetData(
             defaultData.weaponType,
-            universalID,
+            globalID,
             name,
             price,
             defaultData.damage,

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Evacuation.Session;
+using Evacuation.Model;
 
 namespace Evacuation.UserInterface
 {
@@ -42,7 +42,7 @@ namespace Evacuation.UserInterface
             {
                 cellInstance = Instantiate(selectionCellPrefab, contentView.transform);
                 cellInterface = cellInstance.GetComponent<ISelectionShipCell>();
-                cellInterface.SetCell(asset.stringID, asset.image);
+                cellInterface.SetCell(asset.instanceID, asset.image);
                 selectionCellList.Add(cellInstance);
             }
         }

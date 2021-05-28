@@ -5,8 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class WeaponInfo : ObjectInfo
 {
-    public string universalID;
+    // Note that the global ID is universally referrs to the weapon 
+    // and not the instance of the weapon
+    public string globalID;
 
+    // Fields
     public WeaponType weaponType;
     public float damage;
     public float speed;
@@ -20,8 +23,8 @@ public class WeaponInfo : ObjectInfo
         this.weaponType = weaponType;
 
         //Code ID combination is: # + ObjectName + count
-        this.stringID = CreateUniqueID(name);
-        this.universalID = universalID;
+        this.instanceID = CreateUniqueID(name);
+        this.globalID = universalID;
         this.name = name;
         this.price = price;
         this.damage = damage;
