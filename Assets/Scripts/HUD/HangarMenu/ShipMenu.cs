@@ -4,21 +4,22 @@ using UnityEngine.UI;
 using TMPro;
 using Evacuation.UserInterface;
 
-public interface IShipSelection
-{
-    void LoadMenuSelection(string shipID);
-    void OpenMessagePopup(string shipID, ShipPopupOptions options);
-}
-
-public interface IShipMenu
-{
-    void InitialiseMenu(IHangarActions hangarActions);
-    void OpenMenu();
-
-}
 
 namespace Evacuation.UserInterface
 {
+    public interface IShipSelection
+    {
+        void LoadMenuSelection(string shipID);
+        void OpenMessagePopup(string shipID, ShipPopupOptions options);
+    }
+
+    public interface IShipMenu
+    {
+        void InitialiseMenu(IHangarActions hangarActions);
+        void OpenMenu();
+
+    }
+
     public class ShipMenu : MonoBehaviour, IShipSelection, IShipMenu
     {
         [Header("Menu Attribute4s")]

@@ -20,24 +20,20 @@ namespace Evacuation.Level.TransportSystems
     {
         // Interface variables
         public ITransportPlatform platform;
-        public IAutoLandingManoeuvre shipLandingManoeuvre;
         public ICaptureRenderer captureRenderer;
-        public IShipPlatformTranslator shipTranslate;
-        public IShipPositionLocator shipPositionLocator;
-
-        private CaptureState captureState = null;
+        public IAutoLandingSystem autoLandingSystem;
+        public IShipLandingSystem shipLandingSystem;
 
         // Inspector Accessible Fields
         [SerializeField] private Timer timer;
 
         // Fields
         private bool isPaused = false;
+        private CaptureState captureState = null;
 
         // Accessors
-        public Timer CaptureTimer
-        {
-           get { return timer;  }
-        }
+        public Timer CaptureTimer => timer;
+
 
         public void InitialiseCaptureSystem(ITransportPlatform transporterPlatform)
         {
@@ -71,7 +67,7 @@ namespace Evacuation.Level.TransportSystems
         /// </summary>
         public void SetActionsOnTimerCompletion()
         {
-            shipLandingManoeuvre.LockMovement();
+            autoLandingSystem.LockMovement();
             captureRenderer.StopRenderingCaptureVisual();
             TransitionState(new GuideState());
         }
@@ -81,9 +77,8 @@ namespace Evacuation.Level.TransportSystems
             if (!collision.CompareTag("Player")) return;
             if (collision.GetComponent<IProjectile>() != null) return;
 
-            shipLandingManoeuvre = collision.gameObject.GetComponent<IAutoLandingManoeuvre>();
-            shipTranslate = collision.gameObject.GetComponent<IShipPlatformTranslator>();
-            shipPositionLocator = collision.gameObject.GetComponent<IShipPositionLocator>();
+            autoLandingSystem = collision.gameObject.GetComponent<IAutoLandingSystem>();
+            shipLandingSystem = collision.gameObject.GetComponent<IShipLandingSystem>();
             platform.LoadPlayerCabin(collision.gameObject.GetComponent<IPlayerCabin>());
 
             TransitionState(new TrackingState());
@@ -92,6 +87,7 @@ namespace Evacuation.Level.TransportSystems
         private void OnTriggerExit2D(Collider2D collision)
         {
             if (!collision.CompareTag("Player")) return;
+            if (collision.GetComponent<IProjectile>() != null) return;
 
             ResetCaptureSystem();
         }
@@ -101,7 +97,7 @@ namespace Evacuation.Level.TransportSystems
         /// </summary>
         public void EndCapture()
         {
-            shipLandingManoeuvre.UnlockMovement();
+            autoLandingSystem.UnlockMovement();
             platform.EndPlatformTransport();
             ResetCaptureSystem();
         }

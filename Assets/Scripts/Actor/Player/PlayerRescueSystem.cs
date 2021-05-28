@@ -14,7 +14,7 @@ namespace Evacuation.Actor.PlayerSystems
         bool CheckIsEmpty();
     }
 
-    public interface IShipPlatformTranslator
+    public interface IShipLandingSystem : IShipToPlatformAction
     {
         void AttachToPlatform();
         void StickToPlatform(Vector3 platformPosition);
@@ -25,12 +25,12 @@ namespace Evacuation.Actor.PlayerSystems
         void DetachFromPlatform();
     }
 
-    public class PlayerRescueSystem : MonoBehaviour, IShipPlatformTranslator, IPlayerCabin, IShipToPlatformAction
+    public class PlayerRescueSystem : MonoBehaviour, IShipLandingSystem, IPlayerCabin
     {
-        private ICapture endTransport;
+        // Interfaces
+        private ICapture capturePlatform;
         private IStatHandler statHandler;
         private IWeaponLoadoutSelector loadoutSelector;
-
         private ICameraZoom cameraZoom;
 
         public void InitialiseRescueSsytem()
@@ -44,11 +44,11 @@ namespace Evacuation.Actor.PlayerSystems
         {
             // Must check on both parent and children object if rigidbody is combining colliders
             if (!collision.CompareTag("Platform")) return;
-            
-            endTransport = collision.gameObject.GetComponent<ICapture>();
+
+            capturePlatform = collision.gameObject.GetComponent<ICapture>();
                 
-            if (endTransport == null)
-                endTransport = collision.gameObject.GetComponentInChildren<ICapture>();
+            if (capturePlatform == null)
+                capturePlatform = collision.gameObject.GetComponentInChildren<ICapture>();
         }
 
         public void StickToPlatform(Vector3 platformPosition)
@@ -64,12 +64,12 @@ namespace Evacuation.Actor.PlayerSystems
 
         public void DetachFromPlatform()
         {
-            if (endTransport == null) return;
+            if (capturePlatform == null) return;
 
             cameraZoom.SetToDefaultZoom();
             loadoutSelector.ChooseLoadoutPosition(LoadoutConfiguration.Forward);
-            endTransport.EndCapture();
-            endTransport = null;
+            capturePlatform.EndCapture();
+            capturePlatform = null;
         }
 
         public void AddToShipCabin()

@@ -27,6 +27,11 @@ namespace Evacuation.Actor.PlayerSystems
 
             if (weaponAsset == null) return null;
 
+            return InitialiseWeapon(weaponAsset, info);
+        }
+
+        private IWeapon InitialiseWeapon(WeaponAsset weaponAsset, WeaponInfo info)
+        {
             //Spawn and Initialise Weapon
             weapon = Instantiate(weaponAsset.weaponPrefab, transform);
             IWeapon weaponInterface = weapon.GetComponent<IWeapon>();

@@ -29,7 +29,6 @@ namespace Evacuation.Level.TransportSystems
         // Fields
         protected bool canTransport;
 
-
         public abstract void InitialisePlatform(IRescueInhabitant islandInhabitants);
 
         public virtual void RunTransfer() 

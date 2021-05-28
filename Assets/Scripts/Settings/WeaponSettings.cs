@@ -38,7 +38,6 @@ public class WeaponSettings : ScriptableObject
     {
         foreach (WeaponAsset asset in assetList)
         {
-            Debug.Log(globalID + ", " + asset.globalID);
             if (asset.globalID == globalID)
             {
                 return asset;

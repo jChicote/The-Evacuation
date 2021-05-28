@@ -7,7 +7,7 @@ namespace Evacuation.Level.TransportSystems
 {
     public interface ICaptureRenderer
     {
-        void BeginRenderingCaptureVisual(IShipPositionLocator shipPositionLocator);
+        void BeginRenderingCaptureVisual(IAutoLandingSystem shipPositionLocator);
         void StopRenderingCaptureVisual();
         void ShrinkCaptureCircle();
         void PositionCaptureLine();
@@ -25,9 +25,9 @@ namespace Evacuation.Level.TransportSystems
         // Fields
         private float scaleValue;
 
-        public void BeginRenderingCaptureVisual(IShipPositionLocator shipPositionLocator)
+        public void BeginRenderingCaptureVisual(IAutoLandingSystem landingSystem)
         {
-            this.shipPositionLocator = shipPositionLocator;
+            this.shipPositionLocator = landingSystem;
 
             // Initialise visual position
             ShrinkCaptureCircle();

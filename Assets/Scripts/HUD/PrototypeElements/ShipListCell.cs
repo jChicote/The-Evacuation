@@ -6,14 +6,14 @@ using UnityEngine.UI;
 using Evacuation.Model;
 using Evacuation.Actor;
 
-public interface IShipCell
-{
-    void SetCell(IShipSelection shipSelector, IHangarActions hangarActions, string stringID, Sprite image);
-
-}
-
 namespace Evacuation.UserInterface
 {
+    public interface IShipCell
+    {
+        void SetCell(IShipSelection shipSelector, IHangarActions hangarActions, string stringID, Sprite image);
+
+    }
+
     public class ShipListCell : MonoBehaviour, IShipCell
     {
         [Header("Cell Attributes")]

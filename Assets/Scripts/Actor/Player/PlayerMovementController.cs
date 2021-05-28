@@ -25,7 +25,7 @@ namespace Evacuation.Actor.PlayerSystems
 
     // Summary:
     //      This defines the player's landing actions needed when captured by a platform.
-    public interface IAutoLandingManoeuvre
+    public interface IAutoLandingSystem : IShipPositionLocator
     {
         void AutoLand(Transform landingPosition);
         void TakeOff();
@@ -44,7 +44,7 @@ namespace Evacuation.Actor.PlayerSystems
     // Summary:
     //      The player movement controller handles all the movmenet and rotation related
     //      calculations and transformation of the player during gameplay.
-    public class PlayerMovementController : MonoBehaviour, IMovement, IEntitySpeed, IAutoLandingManoeuvre, IShipPositionLocator
+    public class PlayerMovementController : MonoBehaviour, IMovement, IEntitySpeed, IAutoLandingSystem
     {
         // Interfaces 
         private ICheckPaused pauseChecker;

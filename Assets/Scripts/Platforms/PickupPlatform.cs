@@ -8,14 +8,16 @@ namespace Evacuation.Level.TransportSystems
     // Summary:
     //      The PickupPlatform is the child of the BasePlatform and is responsible
     //      for pickup related actions, preferably found on islands.
-    public class PickupPlatform : BasePlatform, ITransportPlatform, IPausable
+    public class PickupPlatform : BasePlatform, IPausable
     {
+        private ICapture captureSystem;
+
         public override void InitialisePlatform(IRescueInhabitant islandInhabitants)
         {
             this.islandInhabitants = islandInhabitants;
 
             GameManager.Instance.sceneController.markerManager.GenerateLocationMarker(this.transform, MarkerType.Island);
-            ICapture captureSystem = this.GetComponent<ICapture>();
+            captureSystem = this.GetComponent<ICapture>();
             captureSystem.InitialiseCaptureSystem(this);
         }
 
@@ -23,6 +25,7 @@ namespace Evacuation.Level.TransportSystems
         {
             base.RunTransfer();
 
+            if (captureSystem == null) return;
             if (playerCabin.CheckAtMaxCapacity()) return;
 
             islandInhabitants.PickupIndividual();

@@ -3,20 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Evacuation.Model;
 
-public interface IShopMenu
-{
-
-}
-
-public interface IShopTransaction
-{
-    void MakePurchase(string universalID, WeaponType type, int purchaseCost);
-    void MakeSale(string universalID, int sellPrice);
-}
 
 namespace Evacuation.UserInterface
 {
-    public class ShopMenu : MonoBehaviour, IShopMenu, IShopTransaction
+    public interface IShopTransaction
+    {
+        void MakePurchase(string universalID, WeaponType type, int purchaseCost);
+        void MakeSale(string universalID, int sellPrice);
+    }
+
+    public class ShopMenu : MonoBehaviour, IShopTransaction
     {
         // This is the presenter class for the shop menu.
         // This utilises a MVP design for interfacing between data and UI. Session data (currently) handles most of the model functionality.

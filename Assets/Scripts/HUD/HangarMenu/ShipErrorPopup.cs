@@ -6,15 +6,16 @@ using TMPro;
 using Evacuation.Actor;
 using Evacuation.Model;
 
-public interface IShipMessagePopup
-{
-    void InitialisePopup(IShipMenu shipMenu);
-    void ShowPurchasePopup(string shipID);
-    void ShowLockedPopup(string shipID);
-}
 
 namespace Evacuation.UserInterface
 {
+    public interface IShipMessagePopup
+    {
+        void InitialisePopup(IShipMenu shipMenu);
+        void ShowPurchasePopup(string shipID);
+        void ShowLockedPopup(string shipID);
+    }
+
     /// <summary>
     /// Responsible for handling the popup actions associated with the ship menu.
     /// </summary>

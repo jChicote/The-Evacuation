@@ -5,12 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 using Evacuation.Model;
 
-public interface IShopInsertData
-{
-    void InsertInformation(WeaponAsset asset);
-    void PassInterfaces(IInfoPanel infoPanel, IShopTransaction shopTransaction);
-    void SetColor();
-}
 
 namespace Evacuation.UserInterface
 {
