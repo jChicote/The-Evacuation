@@ -88,5 +88,16 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
                     break;
             }
         }
+
+        public override void OnPlayerHasLanded(bool hasLanded)
+        {
+            if (hasLanded)
+            {
+                IStateManager stateManager = this.GetComponent<IStateManager>();
+                stateManager.AddState<EnemyScatterState>();
+            }
+
+            // TODO: implement alternative option
+        }
     }
 }
