@@ -91,10 +91,14 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
 
         public override void OnPlayerHasLanded(bool hasLanded)
         {
+            IStateManager stateManager = this.GetComponent<IStateManager>();
+
             if (hasLanded)
             {
-                IStateManager stateManager = this.GetComponent<IStateManager>();
                 stateManager.AddState<EnemyScatterState>();
+            } else
+            {
+                stateManager.AddState<EnemyFollowState>();
             }
 
             // TODO: implement alternative option

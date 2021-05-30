@@ -10,6 +10,7 @@ namespace Evacuation.Actor.EnemySystems
         protected IEnemyTargetingSystem targetingSystem;
         protected IStateManager stateManager;
         protected IMovementController movementController;
+        protected IWeaponController weaponController;
 
         // Fields
         private Camera mainCamera;
@@ -28,16 +29,21 @@ namespace Evacuation.Actor.EnemySystems
             shipTransform = transform;
 
             movementController = this.GetComponent<IMovementController>();
+            weaponController = this.GetComponent<IWeaponController>();
             targetingSystem = this.GetComponent<IEnemyTargetingSystem>();
             stateManager = this.GetComponent<IStateManager>();
 
             movementController.SetMovement(Vector2.zero);
+            targetingSystem.SelectNearestTarget();
         }
 
         private void FixedUpdate()
         {
             if (isPaused) return;
             RunStateUpdate();
+
+            // Run weapon fire
+            weaponController.RunWeaponSystem();
         }
 
         public override void RunStateUpdate()
@@ -77,8 +83,10 @@ namespace Evacuation.Actor.EnemySystems
 
         private void SelectNewPosition()
         {
-            selectedDestination.x = (Random.Range(1, 10) >= 5 ? 1 : -1) * (Random.Range(0, 7) + (viewPlaneDimensions.x / 2)) + mainCamera.transform.position.x;
-            selectedDestination.y = (Random.Range(1, 10) >= 5 ? 1 : -1) * (Random.Range(0, 4) + (viewPlaneDimensions.y / 2))  + mainCamera.transform.position.y;
+            float xDimension = viewPlaneDimensions.x / 2;
+            float yDimension = viewPlaneDimensions.y / 2;
+            selectedDestination.x = (Random.Range(1, 10) >= 5 ? 1 : -1) * (Random.Range(0, xDimension) + (viewPlaneDimensions.x / 2)) + mainCamera.transform.position.x;
+            selectedDestination.y = (Random.Range(1, 10) >= 5 ? 1 : -1) * (Random.Range(0, yDimension) + (viewPlaneDimensions.y / 2))  + mainCamera.transform.position.y;
         }
 
         /// <summary>
