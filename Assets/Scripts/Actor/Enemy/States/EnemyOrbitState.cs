@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Evacuation.Actor.EnemySystems
+namespace Evacuation.Actor.EnemySystems.States
 {
     public class EnemyOrbitState : BaseComponentState
     {

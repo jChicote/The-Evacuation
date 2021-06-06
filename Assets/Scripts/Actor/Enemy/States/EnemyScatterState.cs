@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Evacuation.Actor.EnemySystems
+namespace Evacuation.Actor.EnemySystems.States
 {
     public class EnemyScatterState : BaseComponentState
     {
@@ -16,11 +16,11 @@ namespace Evacuation.Actor.EnemySystems
         private Camera mainCamera;
         protected Transform shipTransform;
         private SimpleTimer timer;
-        private Vector2 shipVelocity = Vector2.zero;
         private Vector2 selectedDestination = Vector2.zero;
         private Vector2 viewPlaneDimensions = Vector2.one;
-        private bool canTravel = false;
         private float interpolationValue = 0;
+        private float xDimension = 0;
+        private float yDimension = 0;
 
         public override void BeginState()
         {
@@ -83,10 +83,10 @@ namespace Evacuation.Actor.EnemySystems
 
         private void SelectNewPosition()
         {
-            float xDimension = viewPlaneDimensions.x / 2;
-            float yDimension = viewPlaneDimensions.y / 2;
-            selectedDestination.x = (Random.Range(1, 10) >= 5 ? 1 : -1) * (Random.Range(0, xDimension) + (viewPlaneDimensions.x / 2)) + mainCamera.transform.position.x;
-            selectedDestination.y = (Random.Range(1, 10) >= 5 ? 1 : -1) * (Random.Range(0, yDimension) + (viewPlaneDimensions.y / 2))  + mainCamera.transform.position.y;
+            xDimension = viewPlaneDimensions.x / 2;
+            yDimension = viewPlaneDimensions.y / 2;
+            selectedDestination.x = (Random.Range(1, 10) >= 5 ? 1 : -1) * (Random.Range(0, xDimension) + xDimension) + mainCamera.transform.position.x;
+            selectedDestination.y = (Random.Range(1, 10) >= 5 ? 1 : -1) * (Random.Range(0, yDimension) + yDimension) + mainCamera.transform.position.y;
         }
 
         /// <summary>

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Evacuation.Actor.EnemySystems
+namespace Evacuation.Actor.EnemySystems.States
 {
     /// <summary>
     /// This state enables for enemies to follow target smoothly tracking in the direction
