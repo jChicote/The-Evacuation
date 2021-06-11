@@ -10,7 +10,7 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
         IWeaponRotator[] weaponRotator;
 
         // Inspector Accessible Fields
-        [SerializeField] private float firingRange = 5;
+        [SerializeField] private float firingRange = 10;
         [SerializeField] private float firingInterval = 3;
         [SerializeField] private WeaponInfo weaponData; //TEST DATA
 

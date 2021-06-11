@@ -33,11 +33,16 @@ namespace Evacuation.Actor.PlayerSystems
         private IWeaponLoadoutSelector loadoutSelector;
         private ICameraZoom cameraZoom;
 
+        // Fields
+        private SceneController sceneController;
+
         public void InitialiseRescueSsytem()
         {
             statHandler = this.GetComponent<IStatHandler>();
             loadoutSelector = this.GetComponent<IWeaponLoadoutSelector>();
             cameraZoom = this.GetComponentInChildren<ICameraZoom>();
+
+            sceneController = GameManager.Instance.sceneController;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -60,6 +65,8 @@ namespace Evacuation.Actor.PlayerSystems
         {
             loadoutSelector.ChooseLoadoutPosition(LoadoutConfiguration.Pivot);
             cameraZoom.SetTargetZoom(6.5f);
+
+            sceneController.OnPlatformLandingEvent.Invoke(true);
         }
 
         public void DetachFromPlatform()
@@ -70,6 +77,8 @@ namespace Evacuation.Actor.PlayerSystems
             loadoutSelector.ChooseLoadoutPosition(LoadoutConfiguration.Forward);
             capturePlatform.EndCapture();
             capturePlatform = null;
+
+            sceneController.OnPlatformLandingEvent.Invoke(false);
         }
 
         public void AddToShipCabin()

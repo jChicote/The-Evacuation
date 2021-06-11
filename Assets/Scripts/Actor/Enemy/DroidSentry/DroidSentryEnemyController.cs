@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using Evacuation.Level.SpawnManagement;
 using Evacuation.Model.Data;
+using Evacuation.Actor.EnemySystems.States;
 
 namespace Evacuation.Actor.EnemySystems.DroidSystems
 {
@@ -87,6 +88,21 @@ namespace Evacuation.Actor.EnemySystems.DroidSystems
                     stateManager.AddState<EnemyFollowState>();
                     break;
             }
+        }
+
+        public override void OnPlayerHasLanded(bool hasLanded)
+        {
+            IStateManager stateManager = this.GetComponent<IStateManager>();
+
+            if (hasLanded)
+            {
+                stateManager.AddState<EnemyScatterState>();
+            } else
+            {
+                stateManager.AddState<EnemyFollowState>();
+            }
+
+            // TODO: implement alternative option
         }
     }
 }

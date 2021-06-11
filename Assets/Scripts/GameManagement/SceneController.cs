@@ -28,6 +28,7 @@ public class SceneController : MonoBehaviour
     public UnityEvent OnPlayerRespawn;
     public UnityEvent OnPlayerDeath;
     public UnityEvent OnGameCompletion;
+    public PlatformLandingEvent OnPlatformLandingEvent;
 
     [Header("User Interfaces")]
     public PauseScreen pauseMenu;
@@ -63,6 +64,8 @@ public class SceneController : MonoBehaviour
 
         OnGameCompletion = new UnityEvent();
         OnGameCompletion.AddListener(RevealGameCompletionHUD);
+
+        OnPlatformLandingEvent = new PlatformLandingEvent();
 
         LoadLevelData();
     }
@@ -184,3 +187,5 @@ public class SceneController : MonoBehaviour
         carrierInitialiser.InitialiseCarrier();
     }
 }
+
+public class PlatformLandingEvent : UnityEvent<bool> { }

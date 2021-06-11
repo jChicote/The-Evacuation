@@ -8,6 +8,7 @@ namespace Evacuation.Actor.EnemySystems
     {
         void InitialiseController();
         void SetMovement(Vector2 velocity);
+        void SetPosition(Vector2 position);
     }
 
     public class EnemyMovementController : MonoBehaviour, IMovementController, IPausable, IEntitySpeed
@@ -20,6 +21,7 @@ namespace Evacuation.Actor.EnemySystems
         private Rigidbody2D enemyRB;
 
         // Fields
+        private Transform shipTransform;
         private bool isPaused = false;
 
         public float CurrentShipSpeed => speed;
@@ -27,11 +29,17 @@ namespace Evacuation.Actor.EnemySystems
         public void InitialiseController()
         {
             enemyRB = this.GetComponent<Rigidbody2D>();
+            shipTransform = this.transform;
         }
 
         public void SetMovement(Vector2 velocity)
         {
             enemyRB.velocity = velocity;
+        }
+
+        public void SetPosition(Vector2 position)
+        {
+            shipTransform.position = position;
         }
 
         public void SetRotation()
