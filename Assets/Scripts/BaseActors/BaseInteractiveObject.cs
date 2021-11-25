@@ -6,6 +6,7 @@ namespace TheEvacuation
 {
     public interface IPausable
     {
+        bool IsPaused { get; set; }
         void OnPause();
         void OnUnpause();
     }
@@ -17,8 +18,12 @@ namespace TheEvacuation
 
     public class BaseInteractiveObject : MonoBehaviour, IPausable
     {
+        // Fields
         [SerializeField]
-        private bool isPaused = false;
+        public bool isPaused = false;
+
+        // Properties
+        public bool IsPaused { get => isPaused; set => isPaused = value; }
 
         public virtual void OnPause()
         {
