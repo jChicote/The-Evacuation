@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TheEvacuation.InputSystem;
 
-namespace TheEvacuation.Controllers
+namespace TheEvacuation.Character
 {
-    public class InputControlledCharacter : BaseInteractiveObject
+    public class InputControlledCharacter : CharacterController
     {
         protected UnityEngine.InputSystem.PlayerInput playerInput;
         protected IMobileInput mobileInputController;

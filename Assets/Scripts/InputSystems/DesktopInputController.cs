@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TheEvacuation;
+using TheEvacuation.Character.Movement;
 
 namespace TheEvacuation.InputSystem
 {
@@ -18,7 +18,7 @@ namespace TheEvacuation.InputSystem
 
     public class DesktopInputController : MonoBehaviour, IDesktopInputController
     {
-        //private ICharacterMovement possessedCharacterMovement;
+        private ICharacterMovement possessedCharacterMovement;
        // private ICharacterWeaponController possessedCharacterWeaponController;
         private IPausable pauseInstance;
 
@@ -29,6 +29,12 @@ namespace TheEvacuation.InputSystem
         public void InitialiseDesktop()
         {
             pauseInstance = this.GetComponent<IPausable>();
+            possessedCharacterMovement = this.GetComponent<ICharacterMovement>();
+
+            centerPosition = new Vector2();
+            centerPosition.x = Screen.width / 2;
+            centerPosition.y = Screen.height / 2;
+
         }
 
         public void ToggleInputActivation(bool enabled)
@@ -44,9 +50,8 @@ namespace TheEvacuation.InputSystem
             if (pauseInstance.IsPaused) return;
 
             currentKeyMovementNormals = value.Get<Vector2>();
-            //playerMovement.SetTriggerIsHeld(value.Get<Vector2>() != Vector2.zero);
-            //currentMousePosition = value.Get<Vector2>();
-            // playerMovement.CalculateMovement(centerPosition, currentMousePosition);
+            possessedCharacterMovement.IsMovementHeld = value.Get<Vector2>() != Vector2.zero;
+            possessedCharacterMovement.CalculateMovement(currentKeyMovementNormals);
         }
 
 
@@ -55,7 +60,7 @@ namespace TheEvacuation.InputSystem
         private void OnAim(InputValue value)
         {
             currentMousePosition = value.Get<Vector2>();
-            //playerMovement.CalculateLocalRotation(centerPosition, currentAimPosition);
+            possessedCharacterMovement.CalculateShipRotation(centerPosition, currentMousePosition);
 
             DirectWeaponRotatorsToPoint(value);
         }
