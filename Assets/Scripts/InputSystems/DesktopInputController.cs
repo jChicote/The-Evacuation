@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TheEvacuation.Character.Movement;
+using TheEvacuation.Character.Weapons;
 
 namespace TheEvacuation.InputSystem
 {
@@ -19,7 +20,7 @@ namespace TheEvacuation.InputSystem
     public class DesktopInputController : MonoBehaviour, IDesktopInputController
     {
         private ICharacterMovement possessedCharacterMovement;
-       // private ICharacterWeaponController possessedCharacterWeaponController;
+        private ICharacterWeaponController possessedCharacterWeaponController;
         private IPausable pauseInstance;
 
         private Vector2 centerPosition;
@@ -30,6 +31,7 @@ namespace TheEvacuation.InputSystem
         {
             pauseInstance = this.GetComponent<IPausable>();
             possessedCharacterMovement = this.GetComponent<ICharacterMovement>();
+            possessedCharacterWeaponController = this.GetComponent<ICharacterWeaponController>();
 
             centerPosition = new Vector2();
             centerPosition.x = Screen.width / 2;
@@ -95,8 +97,7 @@ namespace TheEvacuation.InputSystem
 
         private void OnAttack(InputValue value)
         {
-            //Debug.Log(value.isPressed);
-            //playerWeapons.ActivateWeapons(value.isPressed);
+            possessedCharacterWeaponController.IsFiring = value.isPressed;
         }
 
         private void OnDetach(InputValue value)

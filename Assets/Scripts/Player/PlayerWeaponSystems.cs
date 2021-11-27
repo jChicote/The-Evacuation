@@ -5,23 +5,26 @@ using TheEvacuation.Character.Weapons;
 
 namespace TheEvacuation.Player.Weapons
 {
+
     public class PlayerWeaponSystems : CharacterWeaponSystem
     {
         // Field
-        protected IPausable pauseInstance;
-
-        protected bool isFiring = false;
 
         // Properties
 
         private void Start()
         {
-
+            pauseInstance = this.GetComponent<IPausable>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-
+            FireWeapon();
+        }
+        
+        public override void FireWeapon()
+        {
+            print("Player Firing Weapon");
         }
     }
 }
