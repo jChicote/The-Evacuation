@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace TheEvacuation.Character.Weapons
 {
-    public interface ICharacterWeaponController
+    public interface ICharacterWeaponSystem
     {
         bool IsFiring { get; set; }
     }
 
-    public class CharacterWeaponSystem : MonoBehaviour, ICharacterWeaponController
+    public class CharacterWeaponSystem : MonoBehaviour, ICharacterWeaponSystem
     {
         // Fields
         protected IPausable pauseInstance;

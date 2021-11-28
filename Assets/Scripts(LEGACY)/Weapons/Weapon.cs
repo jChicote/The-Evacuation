@@ -1,14 +1,6 @@
 using UnityEngine;
 using Evacuation.Actor;
 
-public interface IWeapon
-{
-    void InitialiseWeapon(WeaponInfo data, IEntitySpeed movementAccessors);
-    void FireWeapon();
-    void ConfigureWeaponPositioning(LoadoutConfiguration loadoutType);
-    bool CheckIfValidLoadoutPosition(LoadoutConfiguration loadoutType);
-}
-
 public interface IImageExtract
 {
     Sprite ExtractImage();
@@ -16,6 +8,13 @@ public interface IImageExtract
 
 namespace Evacuation.Weapons
 {
+    public interface IWeapon
+    {
+        void InitialiseWeapon(WeaponInfo data, IEntitySpeed movementAccessors);
+        void FireWeapon();
+        void ConfigureWeaponPositioning(LoadoutConfiguration loadoutType);
+        bool CheckIfValidLoadoutPosition(LoadoutConfiguration loadoutType);
+    }
 
     public interface IWeaponRotator
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Evacuation.Model;
+using Evacuation.Weapons;
 
 namespace Evacuation.Actor.PlayerSystems
 {
