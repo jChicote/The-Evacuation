@@ -20,10 +20,12 @@ namespace TheEvacuation.Weapon
     {
         // Fields
         public GameObject projectile;
-        public TheEvacuation.TimeUtility.SimpleTimer timer;
-        private Vector2 mousePosition;
+        public TimeUtility.SimpleCountDown timer;
+        protected Vector2 mousePosition;
+        protected Vector2 relativeWeaponDirectionRotation;
 
         private bool canRotate = false;
+        private float weaponRotAngle;
 
         // Properties
         public Vector2 MousePosition { get => mousePosition; set => mousePosition = value; }
@@ -31,7 +33,7 @@ namespace TheEvacuation.Weapon
 
         private void Start()
         {
-            timer = new TimeUtility.SimpleTimer(0.5f, Time.deltaTime);
+            timer = new TimeUtility.SimpleCountDown(0.5f, Time.deltaTime);
         }
 
         private void FixedUpdate()
@@ -57,6 +59,10 @@ namespace TheEvacuation.Weapon
         public virtual void RotateTowardsAimPosition(Vector2 aimTargetPoint)
         {
             if (!canRotate) return;
+
+            relativeWeaponDirectionRotation = Camera.main.ScreenToWorldPoint(mousePosition) - transform.position;
+            weaponRotAngle = Mathf.Atan2(relativeWeaponDirectionRotation.y, relativeWeaponDirectionRotation.x) * Mathf.Rad2Deg - 90;
+            transform.rotation = Quaternion.Euler(0, 0, weaponRotAngle);
         }
     }
 }

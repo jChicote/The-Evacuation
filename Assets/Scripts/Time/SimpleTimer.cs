@@ -4,16 +4,19 @@ using UnityEngine;
 
 namespace TheEvacuation.TimeUtility
 {
-    public class SimpleTimer
+    public class SimpleCountDown
     {
         // Fields
         private float intervalLength;
         private float timeLeft;
         private float deltaTime;
+        private float interpolateValue;
 
+        // Properties
         public float TimeLeft { get => timeLeft; }
+        public float InterpolateValue { get => interpolateValue;  }
 
-        public SimpleTimer(float intervalLength, float deltaTime)
+        public SimpleCountDown(float intervalLength, float deltaTime)
         {
             this.intervalLength = intervalLength;
             this.timeLeft = intervalLength;
@@ -23,6 +26,7 @@ namespace TheEvacuation.TimeUtility
         public void TickTimer()
         {
             timeLeft -= deltaTime;
+            interpolateValue = 1 - timeLeft / intervalLength;
         }
 
         public bool CheckTimeIsUp()
