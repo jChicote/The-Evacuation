@@ -23,7 +23,6 @@ namespace TheEvacuation.Platforms
         public bool IsCaptured { get => isCaptured; set => isCaptured = value; }
         public bool IsActive { get => isActive; set => isActive = value; }
 
-        // Start is called before the first frame update
         private void Start()
         {
             timer = new TimeUtility.SimpleCountDown(12, Time.deltaTime);
@@ -31,7 +30,6 @@ namespace TheEvacuation.Platforms
             captureLine.gameObject.SetActive(false);
         }
 
-        // Update is called once per frame
         private void Update()
         {
             if (isPaused) return;
@@ -45,44 +43,44 @@ namespace TheEvacuation.Platforms
             switch (captureState)
             {
                 case CaptureState.Enter:
-                    captureCircle.gameObject.SetActive(true);
-                    captureLine.gameObject.SetActive(true);
-                    captureCircleScaleValue = 1;
-                    captureState = CaptureState.Running;
+                    BeginRenderingCaptureSystem();
                     break;
                 case CaptureState.Running:
                     RenderAnimatingCaptureCircle();
                     RenderCaptureLine();
                     break;
                 case CaptureState.End:
-                    StopRenderingCaptureCircle();
-                    StopCaptureLine();
-                    isCaptured = true;
-                    captureState = CaptureState.InActive;
-                    timer.ResetTimer();
+                    StopRederingCaptureSystem();
+                    ResetCaptureSystem();
                     break;
                 default:
                     break;
             }
         }
 
+        public virtual void BeginRenderingCaptureSystem()
+        {
+            captureCircle.gameObject.SetActive(true);
+            captureLine.gameObject.SetActive(true);
+
+            captureCircleScaleValue = 1;
+            captureState = CaptureState.Running;
+        }
+
         public virtual void ResetCaptureSystem()
         {
-            captureCircle.gameObject.SetActive(false);
-            captureLine.gameObject.SetActive(false);
-            captureCircle.localScale = new Vector2(1, 1);
+            captureCircle.localScale = new Vector2(0.33528f, 0.33528f);
             captureCircleScaleValue = 1;
             isCaptured = false;
             captureState = CaptureState.InActive;
             timer.ResetTimer();
         }
 
-        private void RenderAnimatingCaptureCircle()
+        protected void RenderAnimatingCaptureCircle()
         {
             captureCircleScaleValue = Mathf.Lerp(0.33528f, 0, timer.InterpolateValue);
             captureCircle.localScale = new Vector2(captureCircleScaleValue, captureCircleScaleValue);
 
-            print(timer.InterpolateValue);
             if (timer.CheckTimeIsUp())
             {
                 print("Time is Up");
@@ -93,21 +91,15 @@ namespace TheEvacuation.Platforms
             timer.TickTimer();
         }
 
-        private void RenderCaptureLine()
+        protected void RenderCaptureLine()
         {
             captureLine.SetPosition(0, new Vector2(0, 0));
             captureLine.SetPosition(1, transform.InverseTransformPoint(capturedCharacter.transform.position));
         }
 
-        private void StopRenderingCaptureCircle()
+        protected void StopRederingCaptureSystem()
         {
             captureCircle.gameObject.SetActive(false);
-            captureCircle.localScale = new Vector2(1, 1);
-            captureCircleScaleValue = 1;
-        }
-
-        private void StopCaptureLine()
-        {
             captureLine.gameObject.SetActive(false);
         }
 
@@ -128,9 +120,10 @@ namespace TheEvacuation.Platforms
             if (collision.GetComponent<IProjectile>() != null) return;
 
             IsActive = false;
-            isCaptured = false;
             capturedCharacter = null;
+            StopRederingCaptureSystem();
             ResetCaptureSystem();
+            print("Has Released Character");
         }
     }
 
