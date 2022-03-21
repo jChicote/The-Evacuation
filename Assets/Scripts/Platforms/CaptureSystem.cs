@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using TheEvacuation.Shared;
 using UnityEngine;
-using TheEvacuation.TimeUtility;
 
 namespace TheEvacuation.Platforms
 {
+
+    // Capture system has disables some guard statements
+
     public class CaptureSystem : BaseInteractiveObject
     {
         // Fields
@@ -106,7 +107,7 @@ namespace TheEvacuation.Platforms
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (!collision.CompareTag("Player")) return;
-            if (collision.GetComponent<IProjectile>() != null) return;
+            //if (collision.GetComponent<IProjectile>() != null) return;
 
             capturedCharacter = collision.transform;
             captureState = CaptureState.Enter;
@@ -117,7 +118,7 @@ namespace TheEvacuation.Platforms
         private void OnTriggerExit2D(Collider2D collision)
         {
             if (!collision.CompareTag("Player")) return;
-            if (collision.GetComponent<IProjectile>() != null) return;
+            //if (collision.GetComponent<IProjectile>() != null) return;
 
             IsActive = false;
             capturedCharacter = null;

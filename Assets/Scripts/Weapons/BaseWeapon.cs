@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using TheEvacuation.Shared;
 using UnityEngine;
-using TheEvacuation.TimeUtility;
 
 namespace TheEvacuation.Weapon
 {
@@ -18,7 +16,6 @@ namespace TheEvacuation.Weapon
 
     public class BaseWeapon : BaseInteractiveObject, IWeapon, IWeaponRotator
     {
-        // Fields
         public GameObject projectile;
         public TimeUtility.SimpleCountDown timer;
         protected Vector2 mousePosition;
@@ -27,7 +24,6 @@ namespace TheEvacuation.Weapon
         private bool canRotate = false;
         private float weaponRotAngle;
 
-        // Properties
         public Vector2 MousePosition { get => mousePosition; set => mousePosition = value; }
         public bool CanRotate { get => canRotate; set => canRotate = value; }
 

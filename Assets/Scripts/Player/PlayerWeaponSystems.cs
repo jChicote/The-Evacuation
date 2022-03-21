@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TheEvacuation.Character.Weapons;
+using TheEvacuation.Shared;
 using TheEvacuation.Weapon;
+using UnityEngine;
 
 namespace TheEvacuation.Player.Weapons
 {
@@ -16,7 +14,7 @@ namespace TheEvacuation.Player.Weapons
         void ChangeActiveWeaponGroup(ActiveWeaponGroup current);
     }
 
-    public class PlayerWeaponSystems : CharacterWeaponSystem, IInputWeaponSystemVariables, IWeaponGroupModifier
+    public class PlayerWeaponSystems : ShipWeaponSystems, IInputWeaponSystemVariables, IWeaponGroupModifier
     {
         // Field
         [SerializeField] protected GameObject[] fixedWeapons;
@@ -29,7 +27,7 @@ namespace TheEvacuation.Player.Weapons
 
         protected IWeapon[] playerWeapons;
         protected IWeaponRotator[] rotatingWeapons;
-        
+
         // Properties
         public Vector2 InputMousePosition { get => inputMousePosition; set => inputMousePosition = value; }
 
@@ -49,10 +47,10 @@ namespace TheEvacuation.Player.Weapons
             if (!isFiring) return;
             FireWeapon();
         }
-        
+
         public override void FireWeapon()
         {
-            for(int i = 0; i < playerWeapons.Length; i++)
+            for (int i = 0; i < playerWeapons.Length; i++)
             {
                 fixedWeaponInterfaces[i].Fire();
                 fixedWeaponInterfaces[i].MousePosition = inputMousePosition;
@@ -62,7 +60,7 @@ namespace TheEvacuation.Player.Weapons
         public void ChangeActiveWeaponGroup(ActiveWeaponGroup current)
         {
             weaponGroup = current;
-            
+
             for (int i = 0; i < rotatingWeapons.Length; i++)
             {
                 rotatingWeapons[i].CanRotate = weaponGroup == ActiveWeaponGroup.Revolving;

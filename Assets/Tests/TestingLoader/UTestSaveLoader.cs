@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Evacuation.Model
@@ -13,7 +11,7 @@ namespace Evacuation.Model
         {
             if (!isRunning) return;
 
-            SessionData.instance.Save();
+            //SessionData.instance.Save();
             isRunning = false;
         }
     }
