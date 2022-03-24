@@ -1,4 +1,4 @@
-using TheEvacuation.Shared;
+using TheEvacuation.Common;
 using UnityEngine;
 
 namespace TheEvacuation.Platforms

@@ -1,10 +1,10 @@
-using TheEvacuation.Shared;
+using TheEvacuation.Common;
 using UnityEngine;
 
 namespace TheEvacuation.Player.Movement
 {
 
-    public class ShipMovementSystem : MonoBehaviour, ICharacterMovement
+    public class ShipMovementSystem : GameHandler, ICharacterMovement
     {
 
         #region - - - - - - Fields - - - - - -
@@ -19,7 +19,7 @@ namespace TheEvacuation.Player.Movement
 
         [SerializeField]
         protected float angleRotation;
-        protected float currentSpeed = 0;
+        protected float currentSpeed = 3; // Controls speed
         protected bool isMovementKeyHeld = false;
 
         #endregion Fields
@@ -49,13 +49,20 @@ namespace TheEvacuation.Player.Movement
 
         #region - - - - - - Methods - - - - - -
 
+        public override object AwakeHandle(object request)
+        {
+            // Future: uses dto to get all data from the scene model layer
+
+            return base.AwakeHandle(request);
+        }
+
         protected virtual void UpdateMovement()
         {
-            if (!isMovementKeyHeld)
-                currentVelocity = Vector2.Lerp(currentVelocity, Vector3.zero, 0.03f);
-            else
+            if (isMovementKeyHeld)
                 currentVelocity = Vector2.Lerp(currentVelocity, projectedVelocity, 0.07f);
-            //print(projectedVelocity);
+            else
+                currentVelocity = Vector2.Lerp(currentVelocity, Vector3.zero, 0.03f);
+
             characterRB.velocity = currentVelocity;
         }
 

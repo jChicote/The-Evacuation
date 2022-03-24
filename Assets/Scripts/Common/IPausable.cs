@@ -1,4 +1,4 @@
-﻿namespace TheEvacuation.Shared
+﻿namespace TheEvacuation.Common
 {
 
     public interface IPausable

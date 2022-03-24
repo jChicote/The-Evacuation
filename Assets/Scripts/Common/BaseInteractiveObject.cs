@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TheEvacuation.Shared
+namespace TheEvacuation.Common
 {
 
     public interface ICheckPaused

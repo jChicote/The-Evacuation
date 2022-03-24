@@ -1,4 +1,4 @@
-using TheEvacuation.Shared;
+using TheEvacuation.Common;
 
 namespace TheEvacuation.Character
 {

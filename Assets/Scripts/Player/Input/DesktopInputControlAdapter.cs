@@ -1,6 +1,6 @@
 using TheEvacuation.Player.Movement;
 using TheEvacuation.Player.Weapons;
-using TheEvacuation.Shared;
+using TheEvacuation.Common;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
