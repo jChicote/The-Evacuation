@@ -62,6 +62,8 @@ namespace TheEvacuation.Player.Input
             currentKeyMovementNormals = value.Get<Vector2>();
             possessedCharacterMovement.IsMovementHeld = value.Get<Vector2>() != Vector2.zero;
             possessedCharacterMovement.CalculateMovement(currentKeyMovementNormals);
+
+            print(currentKeyMovementNormals);
         }
 
         // Summary:

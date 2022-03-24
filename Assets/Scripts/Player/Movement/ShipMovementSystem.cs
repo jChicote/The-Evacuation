@@ -55,7 +55,7 @@ namespace TheEvacuation.Player.Movement
                 currentVelocity = Vector2.Lerp(currentVelocity, Vector3.zero, 0.03f);
             else
                 currentVelocity = Vector2.Lerp(currentVelocity, projectedVelocity, 0.07f);
-
+            //print(projectedVelocity);
             characterRB.velocity = currentVelocity;
         }
 
