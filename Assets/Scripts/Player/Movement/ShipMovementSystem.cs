@@ -60,14 +60,10 @@ namespace TheEvacuation.Player.Movement
         }
 
         protected virtual void UpdateRotation()
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleRotation));
-        }
+            => transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleRotation));
 
         public void CalculateMovement(Vector2 normalisedDirection)
-        {
-            projectedVelocity = normalisedDirection * currentSpeed;
-        }
+            => projectedVelocity = normalisedDirection * currentSpeed;
 
         public void CalculateShipRotation(Vector2 startPos, Vector2 endPos)
         {
