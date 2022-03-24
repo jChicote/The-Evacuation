@@ -20,12 +20,12 @@ namespace TheEvacuation.Character
 
             if (Application.isMobilePlatform)
             {
-                print("Is ported to mobile");
+                //print("Is ported to mobile");
                 //BeginMobileInputSystem();
             }
             else
             {
-                print("Is ported to desktop");
+                //print("Is ported to desktop")
                 BeginDesktopInputSystem();
             }
         }
@@ -61,7 +61,7 @@ namespace TheEvacuation.Character
             // mobileInput.enabled = false;
 
             //DisableMobileInput(mobileInputController);
-            print("Enabled Desktop input");
+            //print("Enabled Desktop input");
 
             IDesktopInputControlAdapter desktopInput = this.GetComponent<IDesktopInputControlAdapter>();
             if (desktopInput != null)
