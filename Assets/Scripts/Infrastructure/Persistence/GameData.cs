@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TheEvacuation.Model.Entities;
 
 namespace TheEvacuation.Infrastructure.Persistence
 {
@@ -8,7 +9,7 @@ namespace TheEvacuation.Infrastructure.Persistence
 
         #region - - - - - - Fields - - - - - -
 
-        public List<PlayerInput> m_Players;
+        public List<Player> m_Players;
 
         #endregion Fields
 

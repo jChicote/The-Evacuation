@@ -1,18 +1,83 @@
+using NUnit.Framework;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.TestTools;
 
-public class PlayerRepositoryTests : MonoBehaviour
+namespace TheEvacuation.Tests.EditMode.Infrastructure.Persistence.Repository
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public class PlayerRepositoryTests
     {
-        
+
+        #region - - - - - - Fields - - - - - - -
+
+        //private readonly Mock<DataContext>
+
+        #endregion Fields
+
+        #region - - - - - - Constructors - - - - - - -
+
+        public PlayerRepositoryTests()
+        {
+
+        }
+
+        #endregion Constructors
+
+        #region - - - - - - Methods - - - - - - -
+
+        [UnityTest]
+        public IEnumerator GetById_EntityExistsInList_EntityFoundWithMatchingID()
+        {
+            // Arrange
+
+            // Act
+
+            // Assert
+            yield return null;
+            Assert.AreEqual(true, true);
+        }
+
+        [UnityTest]
+        public IEnumerator Add_EntityExists_NonEmptyCollection()
+        {
+            // Arrange
+
+            // Act
+
+            // Assert
+            yield return null;
+            Assert.AreEqual(true, true);
+
+        }
+
+        [UnityTest]
+        public IEnumerator Delete_ValidEntityForDeletion_EmptyCollection()
+        {
+            // Arrange
+
+            // Act
+
+            // Assert
+            yield return null;
+            Assert.AreEqual(true, true);
+
+        }
+
+        [UnityTest]
+        public IEnumerator Modify_PlayerEntityWithAttributeObject_PlayerContainsAttributeObject()
+        {
+            // Arrange
+
+            // Act
+
+            // Assert
+            yield return null;
+            Assert.AreEqual(true, true);
+
+        }
+
+        #endregion Methods
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
