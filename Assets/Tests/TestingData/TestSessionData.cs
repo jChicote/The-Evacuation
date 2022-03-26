@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Evacuation.Model;
 
 public class TestSessionData : MonoBehaviour
 {
@@ -21,7 +18,7 @@ public class TestSessionData : MonoBehaviour
     {
         if (!isReset) return;
 
-        SessionData.instance.ResetAllSaves();
+        //SessionData.instance.ResetAllSaves();
         Debug.Log("Has Reset");
         isReset = false;
     }
@@ -30,7 +27,7 @@ public class TestSessionData : MonoBehaviour
     {
         if (!isSaving) return;
 
-        SessionData.instance.Save();
+        //SessionData.instance.Save();
         isSaving = false;
     }
 
@@ -38,7 +35,7 @@ public class TestSessionData : MonoBehaviour
     {
         if (!isLoading) return;
 
-        SessionData.instance.Load();
+        //SessionData.instance.Load();
         isLoading = false;
     }
 }

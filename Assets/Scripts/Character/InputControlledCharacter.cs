@@ -1,16 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using TheEvacuation.Player.Input;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using TheEvacuation.InputSystem;
 
 namespace TheEvacuation.Character
 {
     public class InputControlledCharacter : CharacterController
     {
         protected UnityEngine.InputSystem.PlayerInput playerInput;
-        protected IMobileInput mobileInputController;
-        protected IDesktopInputController desktopInputController;
+        //protected IMobileInput mobileInputController;
+        protected IDesktopInputControlAdapter desktopInputController;
 
         private void Start()
         {
@@ -23,12 +20,12 @@ namespace TheEvacuation.Character
 
             if (Application.isMobilePlatform)
             {
-                print("Is ported to mobile");
-                BeginMobileInputSystem();
+                //print("Is ported to mobile");
+                //BeginMobileInputSystem();
             }
             else
             {
-                print("Is ported to desktop");
+                //print("Is ported to desktop")
                 BeginDesktopInputSystem();
             }
         }
@@ -40,7 +37,7 @@ namespace TheEvacuation.Character
         {
             //Spawn UI HUD
             //UISettings uiSettings = GameManager.Instance.uiSettings;
-           // GameObject mobileHUD = Instantiate(uiSettings.mobileUIHUDPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+            // GameObject mobileHUD = Instantiate(uiSettings.mobileUIHUDPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 
             playerInput.SwitchCurrentActionMap("Mobile");
             //DesktopInputManager desktopinput = this.GetComponent<DesktopInputManager>();
@@ -48,9 +45,9 @@ namespace TheEvacuation.Character
 
             DisableDesktopInput(desktopInputController);
 
-            IMobileInput mobileInput = this.GetComponent<IMobileInput>();
-           // if (mobileInput != null)
-                //mobileInput.InitialiseInput();
+            //IMobileInput mobileInput = this.GetComponent<IMobileInput>();
+            // if (mobileInput != null)
+            //mobileInput.InitialiseInput();
             //mobileInput.InitialiseInput(mobileHUD);
         }
 
@@ -63,25 +60,26 @@ namespace TheEvacuation.Character
             // MobileInputManager mobileInput = this.GetComponent<MobileInputManager>();
             // mobileInput.enabled = false;
 
-            DisableMobileInput(mobileInputController);
+            //DisableMobileInput(mobileInputController);
+            //print("Enabled Desktop input");
 
-            IDesktopInputController desktopInput = this.GetComponent<IDesktopInputController>();
+            IDesktopInputControlAdapter desktopInput = this.GetComponent<IDesktopInputControlAdapter>();
             if (desktopInput != null)
                 desktopInput.InitialiseDesktop();
         }
 
-        private void DisableMobileInput(IMobileInput mobileInput)
-        {
-            if (mobileInput == null)
-            {
-                Debug.LogWarning("No Mobile Input has been found");
-                return;
-            }
+        //private void DisableMobileInput(IMobileInput mobileInput)
+        //{
+        //    if (mobileInput == null)
+        //    {
+        //        Debug.LogWarning("No Mobile Input has been found");
+        //        return;
+        //    }
 
-            //mobileInput.enabled = false;
-        }
+        //    //mobileInput.enabled = false;
+        //}
 
-        private void DisableDesktopInput(IDesktopInputController desktopInput)
+        private void DisableDesktopInput(IDesktopInputControlAdapter desktopInput)
         {
             if (desktopInput == null)
             {
