@@ -1,18 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class GameData : MonoBehaviour
+namespace TheEvacuation.Infrastructure.Persistence
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public class GameData
     {
-        
+
+        #region - - - - - - Fields - - - - - -
+
+        public List<PlayerInput> m_Players;
+
+        #endregion Fields
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

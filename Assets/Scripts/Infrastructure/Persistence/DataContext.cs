@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TheEvacuation.Model.Entities;
 using UnityEngine;
 
 namespace TheEvacuation.Infrastructure.Persistence
@@ -21,7 +22,8 @@ namespace TheEvacuation.Infrastructure.Persistence
 
         public List<TBase> Set<TBase>()
         {
-            // Implementation missing
+            if (typeof(TBase) == typeof(Player))
+                return data.m_Players as List<TBase>;
 
             return null;
         }

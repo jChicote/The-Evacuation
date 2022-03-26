@@ -1,5 +1,5 @@
 using TheEvacuation.Common;
-using TheEvacuation.Player.Input;
+using TheEvacuation.PlayerSystems.Input;
 using UnityEngine;
 
 namespace TheEvacuation.Character
