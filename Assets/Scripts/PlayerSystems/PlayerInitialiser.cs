@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TheEvacuation.Player
+namespace TheEvacuation.PlayerSystems
 {
 
     public interface IPlayerComponentHandler

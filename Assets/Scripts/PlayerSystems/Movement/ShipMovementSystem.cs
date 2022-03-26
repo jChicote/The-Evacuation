@@ -1,7 +1,7 @@
 using TheEvacuation.Common;
 using UnityEngine;
 
-namespace TheEvacuation.Player.Movement
+namespace TheEvacuation.PlayerSystems.Movement
 {
 
     public class ShipMovementSystem : GameHandler, ICharacterMovement

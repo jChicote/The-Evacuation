@@ -1,7 +1,7 @@
 using TheEvacuation.Common;
 using UnityEngine;
 
-namespace TheEvacuation.Player.Weapons
+namespace TheEvacuation.PlayerSystems.Weapons
 {
     public interface ICharacterWeaponSystem
     {

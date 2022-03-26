@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TheEvacuation.Player.Input
+namespace TheEvacuation.PlayerSystems.Input
 {
     public interface IMobileInputControlAdapter : IInputToggling
     {

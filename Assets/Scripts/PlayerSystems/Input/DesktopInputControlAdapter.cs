@@ -1,10 +1,10 @@
-using TheEvacuation.Player.Movement;
-using TheEvacuation.Player.Weapons;
 using TheEvacuation.Common;
+using TheEvacuation.PlayerSystems.Movement;
+using TheEvacuation.PlayerSystems.Weapons;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace TheEvacuation.Player.Input
+namespace TheEvacuation.PlayerSystems.Input
 {
 
     public interface IInputToggling

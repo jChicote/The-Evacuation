@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TheEvacuation.Player.Movement
+namespace TheEvacuation.PlayerSystems.Movement
 {
     public interface ICharacterMovement
     {

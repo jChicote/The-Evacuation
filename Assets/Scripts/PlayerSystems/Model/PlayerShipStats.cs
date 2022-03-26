@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace TheEvacuation.Player.Model
+namespace TheEvacuation.PlayerSystems.Model
 {
     public class PlayerShipStats : MonoBehaviour
     {
