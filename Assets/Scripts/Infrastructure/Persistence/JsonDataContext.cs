@@ -10,8 +10,7 @@ namespace TheEvacuation.Infrastructure.Persistence
 
         #region - - - - - - Fields - - - - - -
 
-        public string fileName;
-        public string filePath = Application.persistentDataPath + "GameSaveData";
+        public string fileName = "GameSaveData";
 
         #endregion Fields
 
@@ -19,8 +18,8 @@ namespace TheEvacuation.Infrastructure.Persistence
 
         public override async Task Load()
         {
-            if (!File.Exists(filePath)) return;
-            using var reader = new StreamReader(filePath);
+            if (!File.Exists(FilePath)) return;
+            using var reader = new StreamReader(FilePath);
             var jsonString = await reader.ReadToEndAsync();
             JsonUtility.FromJsonOverwrite(jsonString, data);
         }
@@ -28,9 +27,11 @@ namespace TheEvacuation.Infrastructure.Persistence
         public override async Task Save()
         {
             var jsonString = JsonUtility.ToJson(data);
-            using var writer = new StreamWriter(filePath);
+            using var writer = new StreamWriter(FilePath);
             await writer.WriteAsync(jsonString);
         }
+
+        private string FilePath => $"{ Application.persistentDataPath}/{fileName}.json";
 
         #endregion Methods
 

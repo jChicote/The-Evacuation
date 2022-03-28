@@ -1,18 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+using TheEvacuation.Infrastructure.Persistence.Repository;
 using UnityEngine;
 
-public class UnitOfWork : MonoBehaviour
+namespace TheEvacuation.Infrastructure.Persistence
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public class UnitOfWork : MonoBehaviour
     {
-        
+
+        #region - - - - - - Fields - - - - - -
+
+        [SerializeField] private DataContext dataContext;
+        [SerializeField] private PlayerRepository playerRepository;
+
+        #endregion Fields
+
+        #region - - - - - - Properties - - - - - -
+
+        public PlayerRepository Players => Players;
+
+        #endregion Properties
+
+        #region - - - - - - Methods - - - - - -
+
+        public async void Save() => await dataContext.Save();
+
+        #endregion Methods
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
