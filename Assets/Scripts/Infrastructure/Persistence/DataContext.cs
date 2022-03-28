@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheEvacuation.Model.Entities;
@@ -6,7 +7,8 @@ using UnityEngine;
 namespace TheEvacuation.Infrastructure.Persistence
 {
 
-    public abstract class DataContext : MonoBehaviour
+    [Serializable]
+    public abstract class DataContext : MonoBehaviour, IDataContext
     {
 
         #region - - - - - - Fields - - - - - -

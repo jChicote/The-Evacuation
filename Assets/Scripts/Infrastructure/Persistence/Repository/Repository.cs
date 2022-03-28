@@ -13,7 +13,7 @@ namespace TheEvacuation.Infrastructure.Persistence.Repository
 
         #region - - - - - - Fields - - - - - -
 
-        public DataContext context;
+        public IDataContext context;
 
         #endregion
 
