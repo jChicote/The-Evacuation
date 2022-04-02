@@ -6,7 +6,9 @@ namespace TheEvacuation.Model.Entities
 
         #region - - - - - - Properties - - - - - -
 
-        public PlayerAttributes PlayerAttributes { get; set; }
+        public string Name { get; set; }
+
+        public PlayerAttributes PlayerAttributes { get; set; } // Remove Later
 
         #endregion Properties
 
