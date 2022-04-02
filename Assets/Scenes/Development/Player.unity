@@ -529,12 +529,12 @@ GameObject:
   - component: {fileID: 1315900676}
   - component: {fileID: 1315900675}
   - component: {fileID: 1315900674}
+  - component: {fileID: 1315900682}
   - component: {fileID: 1315900679}
   - component: {fileID: 1315900678}
   - component: {fileID: 1315900680}
   - component: {fileID: 1315900681}
   - component: {fileID: 1315900677}
-  - component: {fileID: 1315900682}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Player
@@ -655,6 +655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
+  playerInput: {fileID: 0}
 --- !u!114 &1315900679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -698,7 +699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterRB: {fileID: 1315900675}
-  currentSpeed: 18
+  angleRotation: 0
 --- !u!114 &1315900681
 MonoBehaviour:
   m_ObjectHideFlags: 0

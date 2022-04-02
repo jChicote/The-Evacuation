@@ -1,9 +1,10 @@
-using TheEvacuation.Player.Input;
+using TheEvacuation.Common;
+using TheEvacuation.PlayerSystems.Input;
 using UnityEngine;
 
 namespace TheEvacuation.Character
 {
-    public class InputControlledCharacter : CharacterController
+    public class InputControlledCharacter : BaseInteractiveObject
     {
         protected UnityEngine.InputSystem.PlayerInput playerInput;
         //protected IMobileInput mobileInputController;
