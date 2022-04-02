@@ -9,6 +9,8 @@ namespace TheEvacuation.Infrastructure.Persistence
 
         #region - - - - - - Methods - - - - - -
 
+        public void CreateNewGameData();
+
         public abstract Task Load();
 
         public abstract Task Save();

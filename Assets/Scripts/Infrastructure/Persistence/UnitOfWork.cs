@@ -16,11 +16,13 @@ namespace TheEvacuation.Infrastructure.Persistence
 
         #region - - - - - - Properties - - - - - -
 
-        public PlayerRepository Players => Players;
+        public PlayerRepository Players => playerRepository;
 
         #endregion Properties
 
         #region - - - - - - Methods - - - - - -
+
+        public async void Load() => await dataContext.Load();
 
         public async void Save() => await dataContext.Save();
 
