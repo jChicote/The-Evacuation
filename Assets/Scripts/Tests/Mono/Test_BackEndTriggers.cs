@@ -4,7 +4,7 @@ using TheEvacuation.Infrastructure.Persistence;
 using TheEvacuation.Model.Entities;
 using UnityEngine;
 
-namespace TheEvacuation.Tests.Mono
+namespace TheEvacuation.Tests.GameMode
 {
 
     public class Test_BackEndTriggers : MonoBehaviour
