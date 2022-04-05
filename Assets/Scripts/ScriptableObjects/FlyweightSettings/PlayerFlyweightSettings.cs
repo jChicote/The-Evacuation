@@ -1,3 +1,4 @@
+using TheEvacuation.Model.Entities;
 using UnityEngine;
 
 namespace TheEvacuation.ScriptableObjects.FlyweightSettings
@@ -9,7 +10,7 @@ namespace TheEvacuation.ScriptableObjects.FlyweightSettings
 
         #region - - - - - - Prefabs - - - - - -
 
-        public GameObject[] shipPrefabs;
+        public ShipAsset[] shipPrefabs;
 
         #endregion
 

@@ -8,7 +8,7 @@ namespace TheEvacuation.Infrastructure.GameSystems
 
         #region - - - - - - Fields - - - - - -
 
-        public static GameManager instance { get; private set; }
+        public static GameManager Instance { get; private set; }
 
         public SessionDataFacade SessionData;
 
@@ -18,9 +18,9 @@ namespace TheEvacuation.Infrastructure.GameSystems
 
         private void Awake()
         {
-            if (instance == null)
+            if (Instance == null)
             {
-                instance = this;
+                Instance = this;
                 DontDestroyOnLoad(gameObject);
             }
             else
