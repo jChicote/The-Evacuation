@@ -4,13 +4,12 @@ namespace TheEvacuation.Model.Entities
 {
 
     [Serializable]
-    public class Player : BaseEntity
+    public class ShipAttributes
     {
 
         #region - - - - - - Fields - - - - - -
 
-        public string name;
-        public SpaceShip[] spaceShipHanger;
+        public float maxSpeed;
 
         #endregion Fields
 
