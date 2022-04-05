@@ -12,4 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a1ac09497c1d745bb4e82fa73b7a7d, type: 3}
   m_Name: Player-Flyweight-Settings
   m_EditorClassIdentifier: 
-  shipPrefabs: []
+  shipPrefabs:
+  - name: Demo Ship
+    identifier: 0
+    shipDefaults:
+      identifier: 0
+      shipAttributes:
+        maxSpeed: 25
+    shipShell: {fileID: 5076542227884735075, guid: e8a9df2c157154c469f91a755b308217, type: 3}
