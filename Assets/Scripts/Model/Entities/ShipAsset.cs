@@ -1,16 +1,19 @@
 using System;
+using UnityEngine;
 
 namespace TheEvacuation.Model.Entities
 {
 
     [Serializable]
-    public class Player : BaseEntity
+    public class ShipAsset
     {
 
         #region - - - - - - Fields - - - - - -
 
         public string name;
-        public SpaceShip[] spaceShipHanger;
+        public int identifier;
+        public SpaceShip shipDefaults;
+        public GameObject shipShell;
 
         #endregion Fields
 

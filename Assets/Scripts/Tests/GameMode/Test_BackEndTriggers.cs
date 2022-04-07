@@ -4,7 +4,7 @@ using TheEvacuation.Infrastructure.Persistence;
 using TheEvacuation.Model.Entities;
 using UnityEngine;
 
-namespace TheEvacuation.Tests.Mono
+namespace TheEvacuation.Tests.GameMode
 {
 
     public class Test_BackEndTriggers : MonoBehaviour
@@ -57,7 +57,7 @@ namespace TheEvacuation.Tests.Mono
             dataContext.CreateNewGameData();
 
             var playerID = Guid.NewGuid();
-            var createdPlayer = new Player() { Name = "Jaiden Chicote", ID = playerID };
+            var createdPlayer = new Player() { name = "Jaiden Chicote", ID = playerID };
             unitOfWork.Players.Add(createdPlayer);
             unitOfWork.Save();
 
@@ -77,7 +77,7 @@ namespace TheEvacuation.Tests.Mono
             dataContext.CreateNewGameData();
 
             var playerID = Guid.NewGuid();
-            var createdPlayer = new Player() { Name = "Jaiden Chicote", ID = playerID };
+            var createdPlayer = new Player() { name = "Jaiden Chicote", ID = playerID };
             unitOfWork.Players.Add(createdPlayer);
             unitOfWork.Save();
             unitOfWork.Players.Delete(createdPlayer);
@@ -97,12 +97,12 @@ namespace TheEvacuation.Tests.Mono
             dataContext.CreateNewGameData();
 
             var playerID = Guid.NewGuid();
-            var createdPlayer = new Player() { Name = "Jaiden Chicote", ID = playerID };
+            var createdPlayer = new Player() { name = "Jaiden Chicote", ID = playerID };
             unitOfWork.Players.Add(createdPlayer);
             unitOfWork.Save();
-            Debug.Log("Player Name Before:  " + unitOfWork.Players.GetById(playerID).Name); // Expects: Jaiden Chicote
+            Debug.Log("Player Name Before:  " + unitOfWork.Players.GetById(playerID).name); // Expects: Jaiden Chicote
 
-            unitOfWork.Players.GetById(playerID).Name = "Senki";
+            unitOfWork.Players.GetById(playerID).name = "Senki";
             unitOfWork.Players.Modify(createdPlayer);
             unitOfWork.Save();
 
@@ -111,7 +111,7 @@ namespace TheEvacuation.Tests.Mono
             unitOfWork.Load();
 
             // Assert
-            Debug.Log("Player Name After: " + unitOfWork.Players.GetById(playerID).Name); // Expects: Senki
+            Debug.Log("Player Name After: " + unitOfWork.Players.GetById(playerID).name); // Expects: Senki
         }
 
         #endregion Load Tests
