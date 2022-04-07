@@ -42,8 +42,6 @@ namespace TheEvacuation.Tests.GameMode
 
             // Act
             playerSpawner.CreateEntityInstance();
-
-            // Assert
         }
 
         #endregion Methods

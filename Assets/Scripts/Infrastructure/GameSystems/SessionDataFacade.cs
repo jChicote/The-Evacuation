@@ -12,10 +12,15 @@ namespace TheEvacuation.Infrastructure.GameSystems
 
         public UnitOfWork unitOfWork;
 
-        public Player currentPlayer;
-        public ActiveShip activeShip;
-
         #endregion Fields
+
+        #region - - - - - - Properties - - - - - -
+
+        public Player Player { get; set; }
+        public SpaceShip SelectedSpaceShip { get; set; }
+        public ScoreBoard PlayerScoreBoard { get; set; }
+
+        #endregion Properties
 
     }
 

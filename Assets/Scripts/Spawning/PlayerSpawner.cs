@@ -6,43 +6,43 @@ using UnityEngine;
 namespace TheEvacuation.Spawner
 {
 
-    public interface IPlayerSpawner : ISpawner
-    {
-
-        #region - - - - - - Methods - - - - - -
-
-        void IntialisePlayerSpawner(SpaceShip spaceShip);
-
-        #endregion Methods
-
-    }
-
     public class PlayerSpawner : Spawner
     {
 
         #region - - - - - - Fields - - - - - -
 
         public PlayerFlyweightSettings playerFlyweightSettings;
-
         public SpaceShip spaceShip;
         public GameObject spaceShipShell;
+
         public bool hasSpawned = false;
 
         #endregion Fields
 
-        #region - - - - - - Methods - - - - - -
+        #region - - - - - - Initialiser - - - - - -
 
-        public void IntialisePlayerSpawner(SpaceShip spaceShip) // Equivalent of a constructor
+        public void IntialisePlayerSpawner(SpaceShip spaceShip)
         {
             this.spaceShip = spaceShip;
             GetSpaceShipShellPrefabByIdentifier(spaceShip.identifier);
         }
 
+        #endregion Initialiser
+
+        #region - - - - - - Methods - - - - - -
+
         public override GameObject CreateEntityInstance()
         {
-            /*
+            if (IsPaused)
+                return null;
+
+            /* ------------------------------------------------------------------------------------------------------
+             *
              * This implementation is basic at the moment but will need implementation to inject values into the class
+             *
+             * ------------------------------------------------------------------------------------------------------
              */
+
             GameObject player = Instantiate(spaceShipShell, Vector3.zero, Quaternion.identity);
             return player;
         }
