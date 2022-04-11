@@ -1,5 +1,6 @@
 using System.Linq;
 using TheEvacuation.Model.Entities;
+using TheEvacuation.PlayerSystems.Movement;
 using TheEvacuation.ScriptableObjects.FlyweightSettings;
 using UnityEngine;
 
@@ -36,14 +37,9 @@ namespace TheEvacuation.Spawner
             if (IsPaused)
                 return null;
 
-            /* ------------------------------------------------------------------------------------------------------
-             *
-             * This implementation is basic at the moment but will need implementation to inject values into the class
-             *
-             * ------------------------------------------------------------------------------------------------------
-             */
-
             GameObject player = Instantiate(spaceShipShell, Vector3.zero, Quaternion.identity);
+            player.GetComponent<IShipMovementSystem>().InitialiseShipMovementSystem(spaceShip.shipAttributes);
+
             return player;
         }
 

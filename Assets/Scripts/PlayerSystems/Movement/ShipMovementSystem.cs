@@ -1,16 +1,18 @@
 using TheEvacuation.Common;
+using TheEvacuation.Model.Entities;
 using UnityEngine;
 
 namespace TheEvacuation.PlayerSystems.Movement
 {
 
-    public class ShipMovementSystem : GameHandler, ICharacterMovement
+    public class ShipMovementSystem : GameHandler, ICharacterMovement, IShipMovementSystem
     {
 
         #region - - - - - - Fields - - - - - -
 
         [SerializeField]
         protected Rigidbody2D characterRB;
+        protected ShipAttributes shipAttributes;
         protected Vector2 currentVelocity = Vector2.zero;
         protected Vector2 currentDirection = Vector2.zero;
         protected Vector2 projectedVelocity = Vector2.zero;
@@ -48,6 +50,11 @@ namespace TheEvacuation.PlayerSystems.Movement
         #endregion MonoBehaviour
 
         #region - - - - - - Methods - - - - - -
+
+        public void InitialiseShipMovementSystem(ShipAttributes shipAttributes)
+        {
+            this.shipAttributes = shipAttributes;
+        }
 
         public override object AwakeHandle(object request)
         {
