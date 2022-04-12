@@ -5586,6 +5586,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1348539796}
+  - component: {fileID: 1348539797}
   m_Layer: 5
   m_Name: Select-Player-Menu
   m_TagString: Untagged
@@ -5616,6 +5617,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1348539797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348539795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3292628de7b49a542bef685a6786e13b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playButton: {fileID: 896259064}
+  cancelButton: {fileID: 253843063}
 --- !u!1 &1361346779
 GameObject:
   m_ObjectHideFlags: 0
