@@ -1,61 +1,63 @@
 using TheEvacuation.Infrastructure.GameSystems;
 using TheEvacuation.Infrastructure.Persistence;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 {
 
-    public interface IOpeningMenuController
-    {
-
-    }
-
-    public class OpeningMenuController : MonoBehaviour, IOpeningMenuController
+    public class OpeningMenuController
     {
 
         #region - - - - - - Fields - - - - - -
 
-        public Button newGameButton;
-        public Button continueAsPlayerButton;
-        public Button selectPlayerButton;
-        public UnitOfWork unitOfWork;
+        private readonly UnitOfWork unitOfWork;
+        private readonly OpeningMenuView view;
 
         #endregion Fields
 
-        #region - - - - - - MonoBehaviour - - - - - -
+        #region - - - - - - Constructors - - - - - -
 
-        // Start is called before the first frame update
-        void Start()
+        public OpeningMenuController(OpeningMenuView view)
         {
-            unitOfWork = GameManager.Instance.SessionData.unitOfWork;
-
-            ResolveBetweenContinueAndNewGameButtons();
+            this.unitOfWork = GameManager.Instance.SessionData.unitOfWork;
+            this.view = view;
         }
 
-        #endregion MonoBehaviour
+        #endregion Constructors
 
         #region - - - - - - Methods - - - - - -
+
+        public void BeginNewGame(GameObject newGameMenu)
+        {
+            Debug.Log("Beginning New Game");
+            view.DisableViewElements();
+            newGameMenu.SetActive(true);
+
+            // Create a new player model for new game
+
+            view.gameObject.SetActive(false);
+        }
+
+        public void OpenPlayerSelection(GameObject selectionGameMenu)
+        {
+            Debug.Log("Selecting Player");
+            view.DisableViewElements();
+            selectionGameMenu.SetActive(true);
+
+            // Prepare model for the player selection
+
+            view.gameObject.SetActive(false);
+        }
 
         public void ResolveBetweenContinueAndNewGameButtons()
         {
             if (unitOfWork.Players.Entities == null)
-                DisplayValidButton(newGameButton, continueAsPlayerButton);
+                view.DisplayContinueButton(false);
             else
-                DisplayValidButton(selectPlayerButton, continueAsPlayerButton);
-        }
-
-        public void DisplayValidButton(Button buttonToDisplay, Button buttonToHide)
-        {
-            buttonToDisplay.gameObject.SetActive(true);
-            buttonToDisplay.enabled = true;
-
-            buttonToHide.enabled = false;
-            buttonToHide.gameObject.SetActive(false);
+                view.DisplayContinueButton(true);
         }
 
         #endregion Methods
-
     }
 
 }

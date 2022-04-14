@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 {
 
-    public class SelectPlayerMenuController : MonoBehaviour
+    public class SelectPlayerMenuView : MonoBehaviour
     {
 
         #region - - - - - - Fields - - - - - -
