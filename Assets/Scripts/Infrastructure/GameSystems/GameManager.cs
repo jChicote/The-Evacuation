@@ -1,3 +1,4 @@
+using TheEvacuation.Model.Entities;
 using UnityEngine;
 
 namespace TheEvacuation.Infrastructure.GameSystems
@@ -11,6 +12,8 @@ namespace TheEvacuation.Infrastructure.GameSystems
         public static GameManager Instance { get; private set; }
 
         public SessionDataFacade SessionData;
+
+        public Player activePlayer;
 
         #endregion Fields
 
