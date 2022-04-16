@@ -3,6 +3,7 @@ using System;
 namespace TheEvacuation.Model.Entities
 {
 
+    [Serializable]
     public class BaseEntity
     {
 

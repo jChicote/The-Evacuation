@@ -1,14 +1,15 @@
+using System;
+
 namespace TheEvacuation.Model.Entities
 {
 
-    [System.Serializable]
-    public class ScoreBoard
+    [Serializable]
+    public class PlayerStatistics
     {
 
         #region - - - - - - Fields - - - - - -
 
-        public int totalPoints = 0;
-        public int highScore = 0;
+        public ScoreBoard scoreBoard;
 
         #endregion Fields
 

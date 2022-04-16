@@ -1,6 +1,7 @@
 namespace TheEvacuation.Model.Entities
 {
 
+    [System.Serializable]
     public class PlayerAttributes : BaseEntity
     {
 

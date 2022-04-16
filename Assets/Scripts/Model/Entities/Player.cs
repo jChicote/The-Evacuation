@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace TheEvacuation.Model.Entities
 {
@@ -11,6 +12,8 @@ namespace TheEvacuation.Model.Entities
 
         public string name;
         public SpaceShip[] spaceShipHanger;
+        public Sprite avatarImage;
+        public PlayerStatistics statistics;
 
         #endregion Fields
 
