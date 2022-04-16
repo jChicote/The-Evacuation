@@ -9,7 +9,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 
     }
 
-    public class OpeningMenuView : MonoBehaviour, IOpeningMenuView
+    public class OpeningMenuView : BaseMenuView, IOpeningMenuView
     {
 
         #region - - - - - - Fields - - - - - -
@@ -20,7 +20,6 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
         public OpeningMenuController controller;
         public GameObject selectPlayerMenu;
         public GameObject newGameMenu;
-        public GameObject viewElements;
 
         #endregion Fields
 
@@ -43,9 +42,6 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
             newGameButton.enabled = !canContinue;
             newGameButton.gameObject.SetActive(!canContinue);
         }
-
-        public void DisableViewElements()
-            => viewElements.SetActive(false);
 
         public void OnNewGame()
             => controller.BeginNewGame(this.newGameMenu);

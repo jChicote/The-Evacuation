@@ -1,17 +1,99 @@
+using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 {
 
-    public class NewGameView : MonoBehaviour
+    public class NewGameView : BaseMenuView
     {
 
         #region - - - - - - Fields - - - - - -
 
+        public ScreenButtons avatarScreenButtons;
+        public ScreenButtons nameScreenButtons;
+        public GameObject openingMenu;
         public GameObject selectAvatarScreen;
         public GameObject nameScreen;
+        public NewGameController controller;
+        public TMP_InputField nameInputField;
 
         #endregion Fields
+
+        #region - - - - - - Structs - - - - - -
+
+        [Serializable]
+        public struct ScreenButtons
+        {
+            public Button continueButton;
+            public Button backButton;
+        }
+
+        #endregion Structs
+
+        #region - - - - - - MonoBehaviour - - - - - -
+
+        private void Start()
+        {
+            controller = new NewGameController(this);
+        }
+
+        #endregion MonoBehaviour
+
+        #region - - - - - - Methods - - - - - -
+
+        public override void EnableViewElements()
+        {
+            base.EnableViewElements();
+            controller = new NewGameController(this);
+            controller.CreateNewPlayer();
+        }
+
+        public void OnReturnToOpeningMenu()
+        {
+            controller.OpenOpeningMenu(openingMenu);
+            controller.ClearNewPlayer();
+        }
+
+        public void OnNameInputFieldValueChange()
+            => controller.ValidateName(nameInputField.text);
+
+        public void OnNameInputFieldEndValueEdit()
+            => controller.SetPlayerName(nameInputField.text);
+
+        public void OpenNameScreen()
+        {
+            nameScreen.SetActive(true);
+            selectAvatarScreen.SetActive(false);
+        }
+
+        public void OpenAvatarScreen()
+        {
+            nameScreen.SetActive(false);
+            selectAvatarScreen.SetActive(true);
+        }
+
+        public void MakeAvatarScreenContinueButtonInteractable()
+            => ToggleButtonInteractivity(avatarScreenButtons.continueButton, true);
+
+        public void MakeNamingScreenContinueButtonInteractable()
+            => ToggleButtonInteractivity(nameScreenButtons.continueButton, true);
+
+        public void DisableNamingContinueButton()
+            => ToggleButtonInteractivity(nameScreenButtons.continueButton, false);
+
+        public void DisableAvatarContinueButton()
+            => ToggleButtonInteractivity(avatarScreenButtons.continueButton, false);
+
+        public void ToggleButtonInteractivity(Button targetButton, bool isInteractable)
+            => targetButton.interactable = isInteractable;
+
+        public void OnAvatarSelection(Sprite avatar)
+            => controller.SelectAvatarImage(avatar);
+
+        #endregion Methods
 
     }
 
