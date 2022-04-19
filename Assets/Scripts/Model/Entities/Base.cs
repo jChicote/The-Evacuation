@@ -13,6 +13,10 @@ namespace TheEvacuation.Model.Entities
 
         #endregion Properties
 
+        #region MyRegion
+
+        #endregion
+
     }
 
 }

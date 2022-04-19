@@ -9,6 +9,8 @@ namespace TheEvacuation.Model.Entities
 
         #region - - - - - - Fields - - - - - -
 
+        public Guid ID;
+        public int gold;
         public ScoreBoard scoreBoard;
 
         #endregion Fields

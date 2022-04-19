@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TheEvacuation.Model.Entities
@@ -11,7 +12,7 @@ namespace TheEvacuation.Model.Entities
         #region - - - - - - Fields - - - - - -
 
         public string name;
-        public SpaceShip[] spaceShipHanger;
+        public List<SpaceShip> spaceShipHanger;
         public Sprite avatarImage;
         public PlayerStatistics statistics;
 
