@@ -7,7 +7,7 @@ using UnityEngine;
 namespace TheEvacuation.Spawner
 {
 
-    public class PlayerSpawner : Spawner
+    public class PlayerShipSpawner : Spawner
     {
 
         #region - - - - - - Fields - - - - - -

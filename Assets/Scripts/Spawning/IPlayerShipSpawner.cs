@@ -2,7 +2,7 @@
 
 namespace TheEvacuation.Spawner
 {
-    public interface IPlayerSpawner : ISpawner
+    public interface IPlayerShipSpawner : ISpawner
     {
 
         #region - - - - - - Methods - - - - - -
