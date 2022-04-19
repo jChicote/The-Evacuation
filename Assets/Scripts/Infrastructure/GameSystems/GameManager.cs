@@ -14,6 +14,7 @@ namespace TheEvacuation.Infrastructure.GameSystems
 
         public SessionDataFacade SessionData;
         public PlayerFlyweightSettings playerFlyweightSettings;
+        public UserInterfaceFlyweightSettings userInterfaceFlyweightSettings;
 
         public Player activePlayer;
 

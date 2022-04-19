@@ -48,6 +48,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SessionData: {fileID: 4486208773155038816}
+  playerFlyweightSettings: {fileID: 11400000, guid: 2a8d78a179845194c8eb5b25f64e2831, type: 2}
+  userInterfaceFlyweightSettings: {fileID: 11400000, guid: ab00f50c72e62344c8f62d5e4fb83fe4, type: 2}
+  activePlayer:
+    name: 
+    spaceShipHanger: []
+    avatarImage: {fileID: 0}
+    avatarIdentifier: 0
+    statistics:
+      gold: 0
+      scoreBoard:
+        totalPoints: 0
+        highScore: 0
 --- !u!114 &4486208773155038816
 MonoBehaviour:
   m_ObjectHideFlags: 0
