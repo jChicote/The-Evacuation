@@ -1,3 +1,4 @@
+using TheEvacuation.Model.Entities;
 using UnityEngine;
 
 namespace TheEvacuation.ScriptableObjects.FlyweightSettings
@@ -9,7 +10,26 @@ namespace TheEvacuation.ScriptableObjects.FlyweightSettings
 
         #region - - - - - - Fields - - - - - -
 
+        public AvatarImage[] avatarImages;
+
         #endregion Fields
+
+        #region - - - - - - Methods - - - - - -
+
+        public int GetIdentifierFromSearchImage(Sprite sprite)
+        {
+            int identifier = 0;
+
+            for (int i = 0; i < avatarImages.Length; i++)
+            {
+                if (avatarImages[i].avatarSprite == sprite)
+                    return i;
+            }
+
+            return identifier;
+        }
+
+        #endregion Methods
 
     }
 

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace TheEvacuation.Model.Entities
 {
@@ -13,10 +12,25 @@ namespace TheEvacuation.Model.Entities
 
         public string name;
         public List<SpaceShip> spaceShipHanger;
-        public Sprite avatarImage;
+        public int avatarIdentifier;
         public PlayerStatistics statistics;
 
         #endregion Fields
+
+        #region - - - - - - Methods - - - - - -
+
+        public Player ShallowCopy()
+            => this.MemberwiseClone() as Player;
+
+        public Player Clone()
+        {
+            Player clone = ShallowCopy();
+            clone.name = String.Copy(this.name);
+
+            return clone;
+        }
+
+        #endregion Methods
 
     }
 
