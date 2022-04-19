@@ -34,8 +34,6 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
             newGameMenu.SetActive(true);
             newGameMenu.GetComponent<IMenuView>().EnableViewElements();
 
-            // Create a new player model for new game
-
             view.gameObject.SetActive(false);
         }
 
@@ -47,9 +45,6 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
             var selectionView = selectionGameMenu.GetComponent<ISelectPlayerMenuView>();
             selectionView.EnableViewElements();
             selectionView.OnViewStart();
-
-            // Prepare model for the player selection
-
 
             view.gameObject.SetActive(false);
         }

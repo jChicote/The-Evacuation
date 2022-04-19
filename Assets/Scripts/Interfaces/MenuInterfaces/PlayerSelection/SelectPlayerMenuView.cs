@@ -26,6 +26,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
         public Button cancelButton;
         public SelectPlayerMenuController controller;
         public GameObject openingMenu;
+        public GameObject newGameMenu;
         public GameObject elementList;
 
         public Player[] playerArray;
@@ -57,6 +58,12 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
             }
         }
 
+        public void CreatePlayerSelectionListCell(GameObject prefab, PlayerCellModel playerCellModel)
+        {
+            GameObject cell = Instantiate(prefab, elementList.transform);
+            cell.GetComponent<IPlayerSelectionCellView>().PopulateListCell(playerCellModel, controller);
+        }
+
         public void OnReturnToOpeningMenu()
         {
             controller.OpenOpeningMenu(openingMenu);
@@ -71,14 +78,11 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
             controller.LoadPlayerSelectionList();
         }
 
+        public void OnNewPlayer()
+            => controller.OpenNewPlayerGameMenu(newGameMenu);
+
         public void OnPlay()
             => controller.OnPlay();
-
-        public void CreatePlayerSelectionListCell(GameObject prefab, PlayerCellModel playerCellModel)
-        {
-            GameObject cell = Instantiate(prefab, elementList.transform);
-            cell.GetComponent<IPlayerSelectionCellView>().PopulateListCell(playerCellModel, controller);
-        }
 
         public void MakePlayButtonInteractable()
             => ToggleButtonInteractivity(playButton, true);

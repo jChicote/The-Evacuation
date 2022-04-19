@@ -1,6 +1,8 @@
+using System;
 using TheEvacuation.Infrastructure.GameSystems;
 using TheEvacuation.Infrastructure.Persistence;
 using TheEvacuation.Model.Entities;
+using TheEvacuation.ScriptableObjects.FlyweightSettings;
 using UnityEngine;
 
 namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
@@ -42,6 +44,35 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
             view.DisableNamingContinueButton();
         }
 
+        public void FinalisePlayer()
+        {
+            // default prefabs are alawyas at index 0 in settings
+
+            PlayerFlyweightSettings settings = GameManager.Instance.playerFlyweightSettings;
+            SpaceShip defaultShipModel = settings.shipPrefabs[0].shipDefaults;
+
+            SpaceShip playerDefaultShip = new SpaceShip()
+            {
+                identifier = defaultShipModel.identifier,
+                shipAttributes = new ShipAttributes()
+                {
+                    maxSpeed = defaultShipModel.shipAttributes.maxSpeed
+                }
+            };
+
+            model.ID = Guid.NewGuid();
+            model.spaceShipHanger.Add(playerDefaultShip);
+            model.statistics = new PlayerStatistics()
+            {
+                gold = 200,
+                scoreBoard = new ScoreBoard()
+                {
+                    totalPoints = 0,
+                    highScore = 0,
+                }
+            };
+        }
+
         public void OpenOpeningMenu(GameObject openingMenu)
         {
             view.DisableViewElements();
@@ -58,6 +89,9 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
             view.MakeAvatarScreenContinueButtonInteractable();
         }
 
+        public void SetPlayerName(string name)
+            => model.name = name;
+
         public void ValidateName(string name)
         {
             if (name == null || name.Length == 0 || name.Length >= 35)
@@ -65,9 +99,6 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
             else
                 view.MakeNamingScreenContinueButtonInteractable();
         }
-
-        public void SetPlayerName(string name)
-            => model.name = name;
 
         #endregion Methods
 

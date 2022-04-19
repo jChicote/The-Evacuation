@@ -47,6 +47,16 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
             view.gameObject.SetActive(false);
         }
 
+        public void OpenNewPlayerGameMenu(GameObject newGameMenu)
+        {
+            view.DisableViewElements();
+            newGameMenu.SetActive(true);
+            newGameMenu.GetComponent<IMenuView>().EnableViewElements();
+
+            view.gameObject.SetActive(false);
+        }
+
+
         public void LoadPlayerSelectionList()
         {
             if (playerArray == null || playerArray.Length == 0)
