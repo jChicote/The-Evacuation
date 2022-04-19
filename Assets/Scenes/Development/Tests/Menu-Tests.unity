@@ -1427,7 +1427,6 @@ RectTransform:
   - {fileID: 1526576819}
   - {fileID: 1348539796}
   - {fileID: 595833332}
-  - {fileID: 939422023}
   m_Father: {fileID: 433584855}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3064,7 +3063,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 853152496}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1348539797}
+        m_TargetAssemblyTypeName: TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection.SelectPlayerMenuView,
+          Scripts
+        m_MethodName: OnNewPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &853152496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3654,7 +3666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &939422023
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3667,7 +3679,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 853152494}
-  m_Father: {fileID: 446993225}
+  m_Father: {fileID: 1631765259}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -4988,6 +5000,7 @@ MonoBehaviour:
   playButton: {fileID: 896259064}
   cancelButton: {fileID: 253843063}
   openingMenu: {fileID: 1526576818}
+  newGameMenu: {fileID: 595833331}
   elementList: {fileID: 494796816}
   playerArray:
   - name: Altair
@@ -6197,6 +6210,7 @@ RectTransform:
   - {fileID: 1207812317}
   - {fileID: 1131320859}
   - {fileID: 2106787177}
+  - {fileID: 939422023}
   m_Father: {fileID: 1348539796}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
