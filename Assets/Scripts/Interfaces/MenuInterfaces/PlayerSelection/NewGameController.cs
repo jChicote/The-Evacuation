@@ -85,7 +85,9 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 
         public void SelectAvatarImage(Sprite avatar)
         {
-            model.avatarImage = avatar;
+            UserInterfaceFlyweightSettings settings = GameManager.Instance.userInterfaceFlyweightSettings;
+            model.avatarIdentifier = settings.GetIdentifierFromSearchImage(avatar);
+            //model.avatarImage = avatar;
             view.MakeAvatarScreenContinueButtonInteractable();
         }
 

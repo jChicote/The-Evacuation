@@ -67,7 +67,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
                 view.CreatePlayerSelectionListCell(testPrefab, new PlayerCellModel()
                 {
                     id = player.ID,
-                    avatar = player.avatarImage,
+                    avatar = GameManager.Instance.userInterfaceFlyweightSettings.avatarImages[player.avatarIdentifier].avatarSprite,
                     name = player.name,
                     score = player.statistics.scoreBoard.totalPoints.ToString()
                 });
