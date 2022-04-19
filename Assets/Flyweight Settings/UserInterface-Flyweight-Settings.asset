@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74953d61b99c0364caf4e35dfa6ecd3b, type: 3}
+  m_Name: UserInterface-Flyweight-Settings
+  m_EditorClassIdentifier: 
+  avatarImages:
+  - identifier: 0
+    avatarSprite: {fileID: 21300000, guid: 4b9c4fadf3a24884eacbba2513e88a46, type: 3}
+  - identifier: 1
+    avatarSprite: {fileID: 21300000, guid: 9cdf3913e84c0984193fe8f88c61f977, type: 3}
+  - identifier: 2
+    avatarSprite: {fileID: 21300000, guid: bda7b3425a24bbb498da0b01b4b4102d, type: 3}
+  - identifier: 3
+    avatarSprite: {fileID: 21300000, guid: 8681af0e4bc50e9468979effbbf868c0, type: 3}
+  - identifier: 4
+    avatarSprite: {fileID: 21300000, guid: 537c4d0b36bf9e940ad8b66f35681688, type: 3}
+  - identifier: 5
+    avatarSprite: {fileID: 21300000, guid: 4913ecde06d011d41989b32288dc5e6a, type: 3}
