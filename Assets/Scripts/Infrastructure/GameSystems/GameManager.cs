@@ -1,4 +1,5 @@
 using TheEvacuation.Model.Entities;
+using TheEvacuation.ScriptableObjects.FlyweightSettings;
 using UnityEngine;
 
 namespace TheEvacuation.Infrastructure.GameSystems
@@ -12,6 +13,7 @@ namespace TheEvacuation.Infrastructure.GameSystems
         public static GameManager Instance { get; private set; }
 
         public SessionDataFacade SessionData;
+        public PlayerFlyweightSettings playerFlyweightSettings;
 
         public Player activePlayer;
 
