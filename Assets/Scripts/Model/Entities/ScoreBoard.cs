@@ -2,7 +2,7 @@ namespace TheEvacuation.Model.Entities
 {
 
     [System.Serializable]
-    public class ScoreBoard
+    public class ScoreBoard : ICloneable<ScoreBoard>
     {
 
         #region - - - - - - Fields - - - - - -
@@ -11,6 +11,19 @@ namespace TheEvacuation.Model.Entities
         public int highScore = 0;
 
         #endregion Fields
+
+        #region - - - - - - Methods - - - - - -
+
+        public ScoreBoard Clone()
+        {
+            ScoreBoard clone = ShallowClone();
+            return clone;
+        }
+
+        public ScoreBoard ShallowClone()
+            => this.MemberwiseClone() as ScoreBoard;
+
+        #endregion Methods
 
     }
 
