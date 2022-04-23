@@ -19,7 +19,7 @@ namespace TheEvacuation.Model.Entities
         public SpaceShip Clone()
         {
             SpaceShip clone = ShallowClone();
-            clone.shipAttributes = this.shipAttributes;
+            clone.shipAttributes = this.shipAttributes.Clone();
 
             return clone;
         }

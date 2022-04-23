@@ -12,6 +12,16 @@ namespace TheEvacuation.Model.Entities
 
         #endregion Fields
 
+        #region - - - - - - Constructors - - - - - -
+
+        public ScoreBoard()
+        {
+            totalPoints = 0;
+            highScore = 0;
+        }
+
+        #endregion Constructors
+
         #region - - - - - - Methods - - - - - -
 
         public ScoreBoard Clone()

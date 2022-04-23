@@ -11,6 +11,15 @@ namespace TheEvacuation.Model.Entities
 
         #endregion Properties
 
+        #region - - - - - - Constructors - - - - - -
+
+        public PlayerAttributes()
+        {
+            Speed = 0;
+        }
+
+        #endregion Constructors
+
     }
 
 }

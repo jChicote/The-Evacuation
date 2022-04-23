@@ -18,6 +18,17 @@ namespace TheEvacuation.Model.Entities
 
         #endregion Fields
 
+        #region - - - - - - Constructors - - - - - -
+
+        public Player()
+        {
+            ID = Guid.NewGuid();
+            spaceShipHanger = new List<SpaceShip>();
+            statistics = new PlayerStatistics();
+        }
+
+        #endregion Constructors
+
         #region - - - - - - Methods - - - - - -
 
         public Player ShallowClone()

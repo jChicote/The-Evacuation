@@ -15,6 +15,17 @@ namespace TheEvacuation.Model.Entities
 
         #endregion Fields
 
+        #region - - - - - - Constructors - - - - - -
+
+        public PlayerStatistics()
+        {
+            ID = Guid.NewGuid();
+            gold = 0;
+            scoreBoard = new ScoreBoard();
+        }
+
+        #endregion Constructors
+
         #region - - - - - - Methods - - - - - -
 
         public PlayerStatistics Clone()
