@@ -1,4 +1,5 @@
-using TheEvacuation.Model.Entities;
+using TheEvacuation.Infrastructure.GameSystems;
+using TheEvacuation.Interfaces.MenuInterfaces.MainMenu;
 using TheEvacuation.Model.ViewModels;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,9 +29,8 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
         public GameObject openingMenu;
         public GameObject newGameMenu;
         public GameObject elementList;
-
-        public Player[] playerArray;
-        public GameObject testPrefab;
+        public GameObject mainMenu;
+        public GameObject playerSelectionPanel;
 
         #endregion Fields
 
@@ -38,7 +38,13 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 
         void Start()
         {
-            controller = new SelectPlayerMenuController(playerArray, testPrefab, this);
+            controller = new SelectPlayerMenuController
+            (
+                GameManager.Instance.SessionData,
+                GameManager.Instance.userInterfaceFlyweightSettings,
+                this
+            );
+
             OnViewStart();
         }
 
@@ -67,7 +73,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
         public void OnReturnToOpeningMenu()
         {
             controller.OpenOpeningMenu(openingMenu);
-            ClearSelectionList();
+            ClearSelectionList(); // THIS IS LIKELY A REPEATED CALL
         }
 
         public void OnViewStart()
@@ -75,6 +81,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
             if (controller == null)
                 return;
 
+            ClearSelectionList();
             controller.LoadPlayerSelectionList();
         }
 
@@ -82,7 +89,17 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
             => controller.OpenNewPlayerGameMenu(newGameMenu);
 
         public void OnPlay()
-            => controller.OnPlay();
+        {
+            controller.OnPlay();
+
+            mainMenu.SetActive(true);
+            MainMenuView mainMenuView = mainMenu.GetComponent<MainMenuView>();
+            mainMenuView.EnableViewElements();
+            mainMenuView.OnViewStart();
+
+            this.gameObject.SetActive(false);
+            playerSelectionPanel.SetActive(false);
+        }
 
         public void MakePlayButtonInteractable()
             => ToggleButtonInteractivity(playButton, true);

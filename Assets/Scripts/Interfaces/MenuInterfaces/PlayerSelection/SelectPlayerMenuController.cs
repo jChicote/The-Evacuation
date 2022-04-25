@@ -4,6 +4,7 @@ using TheEvacuation.Infrastructure.GameSystems;
 using TheEvacuation.Infrastructure.Persistence;
 using TheEvacuation.Model.Entities;
 using TheEvacuation.Model.ViewModels;
+using TheEvacuation.ScriptableObjects.FlyweightSettings;
 using UnityEngine;
 
 namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
@@ -14,23 +15,25 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 
         #region - - - - - - Fields - - - - - -
 
+        public UserInterfaceFlyweightSettings settings;
+        public SessionDataFacade sessionData;
         public UnitOfWork unitOfWork;
         public SelectPlayerMenuView view;
         public Player selectedModel;
         public Guid selectedID;
 
-        public Player[] playerArray; // too remove
-        public GameObject testPrefab; // Too Remove
-
         #endregion Fields
 
         #region - - - - - - Constructors - - - - - -
 
-        public SelectPlayerMenuController(Player[] array, GameObject testPrefab, SelectPlayerMenuView view)
+        public SelectPlayerMenuController(
+            SessionDataFacade sessionData,
+            UserInterfaceFlyweightSettings settings,
+            SelectPlayerMenuView view)
         {
-            unitOfWork = GameManager.Instance.SessionData.unitOfWork;
-            playerArray = array;
-            this.testPrefab = testPrefab;
+            this.sessionData = sessionData;
+            this.settings = settings;
+            this.unitOfWork = sessionData.unitOfWork;
             this.view = view;
         }
 
@@ -38,13 +41,21 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 
         #region - - - - - - Methods - - - - - -
 
-        public void OpenOpeningMenu(GameObject openingMenu)
+        public void LoadPlayerSelectionList()
         {
-            view.DisableViewElements();
-            openingMenu.SetActive(true);
-            openingMenu.GetComponent<IMenuView>().EnableViewElements();
+            if (unitOfWork.Players.Entities == null || unitOfWork.Players.Entities.Count == 0)
+                return;
 
-            view.gameObject.SetActive(false);
+            foreach (var player in unitOfWork.Players.Entities)
+            {
+                view.CreatePlayerSelectionListCell(settings.playerSelectionCellPrefab, new PlayerCellModel()
+                {
+                    id = player.ID,
+                    avatar = GameManager.Instance.userInterfaceFlyweightSettings.avatarImages[player.avatarIdentifier].avatarSprite,
+                    name = player.name,
+                    score = player.statistics.scoreBoard.totalPoints.ToString()
+                });
+            }
         }
 
         public void OpenNewPlayerGameMenu(GameObject newGameMenu)
@@ -56,35 +67,30 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
             view.gameObject.SetActive(false);
         }
 
-
-        public void LoadPlayerSelectionList()
+        public void OpenOpeningMenu(GameObject openingMenu)
         {
-            if (playerArray == null || playerArray.Length == 0)
-                return;
+            view.DisableViewElements();
+            openingMenu.SetActive(true);
+            openingMenu.GetComponent<IMenuView>().EnableViewElements();
 
-            foreach (var player in playerArray)
-            {
-                view.CreatePlayerSelectionListCell(testPrefab, new PlayerCellModel()
-                {
-                    id = player.ID,
-                    avatar = GameManager.Instance.userInterfaceFlyweightSettings.avatarImages[player.avatarIdentifier].avatarSprite,
-                    name = player.name,
-                    score = player.statistics.scoreBoard.totalPoints.ToString()
-                });
-            }
+            view.gameObject.SetActive(false);
+        }
+
+        public void OnPlay()
+        {
+            Player player = unitOfWork.Players.Entities
+                                .Where(p => p.ID == selectedID)
+                                .FirstOrDefault()
+                                .Clone();
+
+            sessionData.Player = player;
+            Debug.Log("Has toggled on play");
         }
 
         public void OnPlayerCellSelection(Guid id)
         {
             selectedID = id;
             view.MakePlayButtonInteractable();
-        }
-
-        public void OnPlay()
-        {
-            Player player = playerArray.Where(p => p.ID == selectedID).FirstOrDefault();
-            GameManager.Instance.activePlayer = player;
-            Debug.Log("Has toggled on play");
         }
 
         #endregion Methods

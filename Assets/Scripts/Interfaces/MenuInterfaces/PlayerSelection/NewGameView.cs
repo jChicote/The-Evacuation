@@ -1,4 +1,6 @@
 using System;
+using TheEvacuation.Infrastructure.GameSystems;
+using TheEvacuation.Interfaces.MenuInterfaces.MainMenu;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +19,8 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
         public GameObject openingMenu;
         public GameObject selectAvatarScreen;
         public GameObject nameScreen;
+        public GameObject mainMenu;
+        public GameObject playerSelectionPanel;
         public NewGameController controller;
         public TMP_InputField nameInputField;
 
@@ -37,7 +41,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 
         private void Start()
         {
-            controller = new NewGameController(this);
+            // controller = new NewGameController(this, GameManager.Instance.SessionData, GameManager.Instance.playerFlyweightSettings);
         }
 
         #endregion MonoBehaviour
@@ -47,7 +51,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
         public override void EnableViewElements()
         {
             base.EnableViewElements();
-            controller = new NewGameController(this);
+            controller = new NewGameController(this, GameManager.Instance.SessionData, GameManager.Instance.playerFlyweightSettings);
             controller.CreateNewPlayer();
         }
 
@@ -55,6 +59,20 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
         {
             controller.OpenOpeningMenu(openingMenu);
             controller.ClearNewPlayer();
+        }
+
+        public void OnOpeningMainMenu()
+        {
+            controller.FinalisePlayer();
+
+            mainMenu.SetActive(true);
+            MainMenuView mainMenuView = mainMenu.GetComponent<MainMenuView>();
+            mainMenuView.EnableViewElements();
+            mainMenuView.OnViewStart();
+
+            controller.ClearNewPlayer();
+            this.gameObject.SetActive(false);
+            this.playerSelectionPanel.SetActive(false);
         }
 
         public void OnNameInputFieldValueChange()

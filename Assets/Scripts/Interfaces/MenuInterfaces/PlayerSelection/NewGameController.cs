@@ -1,4 +1,3 @@
-using System;
 using TheEvacuation.Infrastructure.GameSystems;
 using TheEvacuation.Infrastructure.Persistence;
 using TheEvacuation.Model.Entities;
@@ -13,7 +12,9 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 
         #region - - - - - - Fields - - - - - -
 
+        public SessionDataFacade sessionDataFacade;
         public UnitOfWork unitOfWork;
+        public PlayerFlyweightSettings settings;
         public Player model;
         public NewGameView view;
 
@@ -21,12 +22,12 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 
         #region - - - - - - Constructors - - - - - -
 
-        public NewGameController(NewGameView view)
+        public NewGameController(NewGameView view, SessionDataFacade sessionDataFacade, PlayerFlyweightSettings settings)
         {
             this.unitOfWork = GameManager.Instance.SessionData.unitOfWork;
+            this.sessionDataFacade = sessionDataFacade;
+            this.settings = settings;
             this.view = view;
-
-            CreateNewPlayer();
         }
 
         #endregion Constructors
@@ -34,7 +35,15 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
         #region - - - - - - Methods - - - - - -
 
         public void CreateNewPlayer()
-            => this.model = new Player();
+        {
+            SpaceShip defaultShipModel = settings.shipPrefabs[0].shipDefaults;
+            SpaceShip playerShipClone = defaultShipModel.Clone();
+
+            this.model = new Player();
+            model.spaceShipHanger.Add(playerShipClone);
+
+            Debug.Log("New Player has been created.");
+        }
 
         public void ClearNewPlayer()
         {
@@ -42,35 +51,6 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 
             view.DisableAvatarContinueButton();
             view.DisableNamingContinueButton();
-        }
-
-        public void FinalisePlayer()
-        {
-            // default prefabs are alawyas at index 0 in settings
-
-            PlayerFlyweightSettings settings = GameManager.Instance.playerFlyweightSettings;
-            SpaceShip defaultShipModel = settings.shipPrefabs[0].shipDefaults;
-
-            SpaceShip playerDefaultShip = new SpaceShip()
-            {
-                identifier = defaultShipModel.identifier,
-                shipAttributes = new ShipAttributes()
-                {
-                    maxSpeed = defaultShipModel.shipAttributes.maxSpeed
-                }
-            };
-
-            model.ID = Guid.NewGuid();
-            model.spaceShipHanger.Add(playerDefaultShip);
-            model.statistics = new PlayerStatistics()
-            {
-                gold = 200,
-                scoreBoard = new ScoreBoard()
-                {
-                    totalPoints = 0,
-                    highScore = 0,
-                }
-            };
         }
 
         public void OpenOpeningMenu(GameObject openingMenu)
@@ -81,6 +61,13 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
             model = null;
 
             view.gameObject.SetActive(false);
+        }
+
+        public void FinalisePlayer()
+        {
+            sessionDataFacade.Player = model;
+            unitOfWork.Players.Add(model);
+            unitOfWork.Save();
         }
 
         public void SelectAvatarImage(Sprite avatar)
