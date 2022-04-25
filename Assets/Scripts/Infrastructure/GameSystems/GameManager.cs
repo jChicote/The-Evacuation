@@ -1,4 +1,3 @@
-using TheEvacuation.Model.Entities;
 using TheEvacuation.ScriptableObjects.FlyweightSettings;
 using UnityEngine;
 
@@ -16,8 +15,6 @@ namespace TheEvacuation.Infrastructure.GameSystems
         public PlayerFlyweightSettings playerFlyweightSettings;
         public UserInterfaceFlyweightSettings userInterfaceFlyweightSettings;
 
-        public Player activePlayer;
-
         #endregion Fields
 
         #region - - - - - - MonoBehaviour - - - - - -
@@ -31,6 +28,8 @@ namespace TheEvacuation.Infrastructure.GameSystems
             }
             else
                 Destroy(gameObject);
+
+            SessionData.unitOfWork.Load();
         }
 
         #endregion MonoBehaviour
