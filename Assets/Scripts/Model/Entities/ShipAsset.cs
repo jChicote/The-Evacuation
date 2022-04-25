@@ -12,8 +12,9 @@ namespace TheEvacuation.Model.Entities
 
         public string name;
         public int identifier;
+        public Sprite shipSprite;
         public SpaceShip shipDefaults;
-        public GameObject shipShell;
+        public GameObject shipPrefab;
 
         #endregion Fields
 

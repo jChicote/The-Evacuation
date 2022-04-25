@@ -10,6 +10,7 @@ namespace TheEvacuation.Model.Entities
         #region - - - - - - Fields - - - - - -
 
         public int identifier;
+        public string name;
         public ShipAttributes shipAttributes;
 
         #endregion Fields
@@ -19,6 +20,7 @@ namespace TheEvacuation.Model.Entities
         public SpaceShip Clone()
         {
             SpaceShip clone = ShallowClone();
+            clone.name = String.Copy(this.name);
             clone.shipAttributes = this.shipAttributes.Clone();
 
             return clone;
