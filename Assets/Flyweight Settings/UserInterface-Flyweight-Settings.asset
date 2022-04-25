@@ -25,3 +25,5 @@ MonoBehaviour:
     avatarSprite: {fileID: 21300000, guid: 537c4d0b36bf9e940ad8b66f35681688, type: 3}
   - identifier: 5
     avatarSprite: {fileID: 21300000, guid: 4913ecde06d011d41989b32288dc5e6a, type: 3}
+  playerSelectionCellPrefab: {fileID: 2447207520806787444, guid: a489cf7c127ab1b4b8aeb5a848cacf14, type: 3}
+  shipSelectionCellPrefab: {fileID: 6874519981762266499, guid: 124d5c3fcb9fa2a4c980425bdacc266b, type: 3}

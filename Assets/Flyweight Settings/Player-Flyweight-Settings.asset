@@ -15,8 +15,10 @@ MonoBehaviour:
   shipPrefabs:
   - name: Demo Ship
     identifier: 0
+    shipSprite: {fileID: 21300000, guid: 5de19ea59899d41458464ae328b38e48, type: 3}
     shipDefaults:
       identifier: 0
+      name: Demo Ship
       shipAttributes:
         maxSpeed: 25
-    shipShell: {fileID: 5076542227884735075, guid: e8a9df2c157154c469f91a755b308217, type: 3}
+    shipPrefab: {fileID: 5076542227884735075, guid: e8a9df2c157154c469f91a755b308217, type: 3}
