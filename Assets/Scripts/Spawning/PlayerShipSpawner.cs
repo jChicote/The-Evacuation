@@ -48,7 +48,7 @@ namespace TheEvacuation.Spawner
             spaceShipShell = playerFlyweightSettings.shipPrefabs
                                 .Where(sp => sp.identifier == id)
                                 .SingleOrDefault()
-                                .shipShell;
+                                .shipPrefab;
 
             if (spaceShipShell == null)
                 Debug.LogError("Space Ship Shell not found with identifier: " + id);

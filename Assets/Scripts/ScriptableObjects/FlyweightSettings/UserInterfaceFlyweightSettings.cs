@@ -12,6 +12,10 @@ namespace TheEvacuation.ScriptableObjects.FlyweightSettings
 
         public AvatarImage[] avatarImages;
 
+        [Space]
+        public GameObject playerSelectionCellPrefab;
+        public GameObject shipSelectionCellPrefab;
+
         #endregion Fields
 
         #region - - - - - - Methods - - - - - -
