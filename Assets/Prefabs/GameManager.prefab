@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4486208773155038822}
   - component: {fileID: 4486208773155038823}
   - component: {fileID: 4486208773155038816}
+  - component: {fileID: 4321071285797800750}
   - component: {fileID: 4486208773155038817}
   - component: {fileID: 4486208773155038818}
   - component: {fileID: 4486208773155038819}
@@ -50,16 +51,7 @@ MonoBehaviour:
   SessionData: {fileID: 4486208773155038816}
   playerFlyweightSettings: {fileID: 11400000, guid: 2a8d78a179845194c8eb5b25f64e2831, type: 2}
   userInterfaceFlyweightSettings: {fileID: 11400000, guid: ab00f50c72e62344c8f62d5e4fb83fe4, type: 2}
-  activePlayer:
-    name: 
-    spaceShipHanger: []
-    avatarImage: {fileID: 0}
-    avatarIdentifier: 0
-    statistics:
-      gold: 0
-      scoreBoard:
-        totalPoints: 0
-        highScore: 0
+  sceneLoader: {fileID: 4321071285797800750}
 --- !u!114 &4486208773155038816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,6 +65,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitOfWork: {fileID: 4486208773155038817}
+--- !u!114 &4321071285797800750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4486208773155038844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e6974914966c64d9c031c93161008c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4486208773155038817
 MonoBehaviour:
   m_ObjectHideFlags: 0
