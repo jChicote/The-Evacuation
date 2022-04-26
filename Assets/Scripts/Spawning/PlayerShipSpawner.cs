@@ -7,7 +7,18 @@ using UnityEngine;
 namespace TheEvacuation.Spawner
 {
 
-    public class PlayerShipSpawner : Spawner
+    public interface IPlayerSpawner
+    {
+
+        #region - - - - - - Methods - - - - - -
+
+        void IntialisePlayerSpawner(SpaceShip spaceShip);
+
+        #endregion Methods
+
+    }
+
+    public class PlayerShipSpawner : Spawner, IPlayerSpawner
     {
 
         #region - - - - - - Fields - - - - - -
