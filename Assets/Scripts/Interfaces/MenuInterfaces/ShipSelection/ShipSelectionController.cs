@@ -1,3 +1,4 @@
+using System.Linq;
 using TheEvacuation.Infrastructure.GameSystems;
 using TheEvacuation.Model.Entities;
 using TheEvacuation.Model.ViewModels;
@@ -60,6 +61,15 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.ShipSelection
             shipIndentifier = identifier;
             view.MakePlayButtonInteractable();
             Debug.Log("Ship has been selected.");
+        }
+
+        public void SetSelectedShip()
+        {
+            sessionData.SelectedSpaceShip = sessionData.Player.spaceShipHanger
+                                                .Where(ss => ss.identifier == shipIndentifier)
+                                                .AsEnumerable()
+                                                .SingleOrDefault()
+                                                .Clone();
         }
 
         #endregion Methods

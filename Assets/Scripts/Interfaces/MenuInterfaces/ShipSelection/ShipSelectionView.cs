@@ -27,6 +27,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.ShipSelection
         public GameObject elementList;
         public GameObject mainMenu;
         public Button playButton;
+        public string sceneName;
 
         #endregion Fields
 
@@ -82,7 +83,10 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.ShipSelection
 
         public void OnPlay()
         {
+            controller.SetSelectedShip();
 
+            GameManager.Instance.sceneLoader.LoadNextScene(sceneName);
+            Debug.Log("Load Next Scene: " + sceneName);
         }
 
         public void OnViewStart()
