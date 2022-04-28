@@ -3,19 +3,6 @@ using UnityEngine;
 namespace TheEvacuation.Interfaces.MenuInterfaces
 {
 
-    public interface IMenuView
-    {
-
-        #region - - - - - - Methods - - - - - -
-
-        void DisableViewElements();
-
-        void EnableViewElements();
-
-        #endregion Methods
-
-    }
-
     public class BaseMenuView : MonoBehaviour, IMenuView
     {
 
