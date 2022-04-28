@@ -344,10 +344,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 829936706545379028, guid: b98ca73d79c7dda48954faa23489afe5, type: 3}
-      propertyPath: sceneName
-      value: Scene-Test
-      objectReference: {fileID: 0}
     - target: {fileID: 829936706883009555, guid: b98ca73d79c7dda48954faa23489afe5, type: 3}
       propertyPath: m_Pivot.x
       value: 0

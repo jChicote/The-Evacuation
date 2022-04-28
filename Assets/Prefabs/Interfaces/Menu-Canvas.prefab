@@ -1563,6 +1563,7 @@ MonoBehaviour:
   elementList: {fileID: 829936706237133189}
   mainMenu: {fileID: 829936706233144870}
   playButton: {fileID: 829936707501627301}
+  sceneName: Scene-Test
 --- !u!1 &829936706550266718
 GameObject:
   m_ObjectHideFlags: 0
