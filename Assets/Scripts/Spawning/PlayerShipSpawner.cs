@@ -7,7 +7,18 @@ using UnityEngine;
 namespace TheEvacuation.Spawner
 {
 
-    public class PlayerSpawner : Spawner
+    public interface IPlayerSpawner
+    {
+
+        #region - - - - - - Methods - - - - - -
+
+        void IntialisePlayerSpawner(SpaceShip spaceShip);
+
+        #endregion Methods
+
+    }
+
+    public class PlayerShipSpawner : Spawner, IPlayerSpawner
     {
 
         #region - - - - - - Fields - - - - - -
@@ -48,7 +59,7 @@ namespace TheEvacuation.Spawner
             spaceShipShell = playerFlyweightSettings.shipPrefabs
                                 .Where(sp => sp.identifier == id)
                                 .SingleOrDefault()
-                                .shipShell;
+                                .shipPrefab;
 
             if (spaceShipShell == null)
                 Debug.LogError("Space Ship Shell not found with identifier: " + id);

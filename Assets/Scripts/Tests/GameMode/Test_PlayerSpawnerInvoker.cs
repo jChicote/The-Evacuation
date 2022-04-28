@@ -13,7 +13,7 @@ namespace TheEvacuation.Tests.GameMode
         #region - - - - - - Fields - - - - - -
 
         public PlayerFlyweightSettings playerFlyweightSettings;
-        public PlayerSpawner playerSpawner;
+        public PlayerShipSpawner playerSpawner;
         public GameManager gameManager;
         public int spaceShipIdentifier = 0;
 

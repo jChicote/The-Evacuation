@@ -1,6 +1,7 @@
 namespace TheEvacuation.Model.Entities
 {
 
+    [System.Serializable]
     public class PlayerAttributes : BaseEntity
     {
 
@@ -9,6 +10,15 @@ namespace TheEvacuation.Model.Entities
         public float Speed { get; set; }
 
         #endregion Properties
+
+        #region - - - - - - Constructors - - - - - -
+
+        public PlayerAttributes()
+        {
+            Speed = 0;
+        }
+
+        #endregion Constructors
 
     }
 
