@@ -15,6 +15,7 @@ namespace TheEvacuation.ScriptableObjects.FlyweightSettings
         [Space]
         public GameObject playerSelectionCellPrefab;
         public GameObject shipSelectionCellPrefab;
+        public GameObject loadingScreenPrefab;
 
         #endregion Fields
 
