@@ -37,15 +37,6 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 
         #endregion Structs
 
-        #region - - - - - - MonoBehaviour - - - - - -
-
-        private void Start()
-        {
-            // controller = new NewGameController(this, GameManager.Instance.SessionData, GameManager.Instance.playerFlyweightSettings);
-        }
-
-        #endregion MonoBehaviour
-
         #region - - - - - - Methods - - - - - -
 
         public override void EnableViewElements()
