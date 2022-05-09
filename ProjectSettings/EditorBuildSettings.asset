@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Development/Tests/Scene-Test.unity
     guid: 3882683dadb8dd14190aae977507eb84
+  - enabled: 1
+    path: Assets/Scenes/Development/MVP_01/Main-Menu.unity
+    guid: fe7eed58f5255d744a000eca4e84191f
+  - enabled: 1
+    path: Assets/Scenes/Development/MVP_01/01-Test-Level.unity
+    guid: 0bbaf6ebc69168540bb6cba7a2f861b3
   m_configObjects: {}
