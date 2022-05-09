@@ -18,8 +18,8 @@ namespace TheEvacuation.Infrastructure.GameSystems
 
         public void LoadNextScene(string sceneName)
             => StartCoroutine(Instantiate(settings.loadingScreenPrefab, transform.position, Quaternion.identity)
-                                            .GetComponent<LoadingScreen>()
-                                            .LoadSceneAsync(sceneName));
+                    .GetComponent<LoadingScreen>()
+                    .LoadSceneAsync(sceneName));
 
         #endregion Methods
 
