@@ -7,7 +7,7 @@ using UnityEngine;
 namespace TheEvacuation.Spawner
 {
 
-    public interface IPlayerSpawner
+    public interface IPlayerSpawner : ISpawner
     {
 
         #region - - - - - - Methods - - - - - -
@@ -28,6 +28,7 @@ namespace TheEvacuation.Spawner
         public GameObject spaceShipShell;
 
         public bool hasSpawned = false;
+        public bool canSpawnOnStart = false;
 
         #endregion Fields
 
@@ -40,6 +41,16 @@ namespace TheEvacuation.Spawner
         }
 
         #endregion Initialiser
+
+        #region - - - - - - MonoBehaviour - - - - - -
+
+        private void Start()
+        {
+            if (canSpawnOnStart && spaceShipShell != null)
+                CreateEntityInstance();
+        }
+
+        #endregion MonoBehaviour
 
         #region - - - - - - Methods - - - - - -
 
@@ -60,6 +71,8 @@ namespace TheEvacuation.Spawner
                                 .Where(sp => sp.identifier == id)
                                 .SingleOrDefault()
                                 .shipPrefab;
+
+            Debug.Log(spaceShipShell);
 
             if (spaceShipShell == null)
                 Debug.LogError("Space Ship Shell not found with identifier: " + id);
