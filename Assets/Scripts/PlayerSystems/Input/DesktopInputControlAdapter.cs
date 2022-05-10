@@ -28,6 +28,8 @@ namespace TheEvacuation.PlayerSystems.Input
 
         private IPausable pauseInstance;
 
+        public bool inputActive;
+
         private Vector2 centerPosition;
         private Vector2 currentMousePosition;
         private Vector3 currentKeyMovementNormals;
@@ -42,6 +44,8 @@ namespace TheEvacuation.PlayerSystems.Input
             possessedCharacterWeaponSystem = this.GetComponent<ICharacterWeaponSystem>();
             possessedWSInputVariables = this.GetComponent<IInputWeaponSystemVariables>();
 
+            inputActive = false;
+
             centerPosition = new Vector2();
             centerPosition.x = Screen.width / 2;
             centerPosition.y = Screen.height / 2;
@@ -49,7 +53,7 @@ namespace TheEvacuation.PlayerSystems.Input
 
         public void ToggleInputActivation(bool enabled)
         {
-            throw new System.NotImplementedException();
+            inputActive = enabled;
         }
 
         // Summary:
@@ -57,6 +61,7 @@ namespace TheEvacuation.PlayerSystems.Input
         // Movement vectors provided are the net directions relative to a fixed center.
         private void OnMovement(InputValue value)
         {
+            if (!inputActive) return;
             if (pauseInstance.IsPaused) return;
 
             currentKeyMovementNormals = value.Get<Vector2>();
@@ -70,6 +75,8 @@ namespace TheEvacuation.PlayerSystems.Input
         // Stores the aim position of the present position of the mouse within the game view.
         private void OnAim(InputValue value)
         {
+            if (!inputActive) return;
+
             currentMousePosition = value.Get<Vector2>();
             possessedCharacterMovement.CalculateShipRotation(centerPosition, currentMousePosition);
 
@@ -106,6 +113,8 @@ namespace TheEvacuation.PlayerSystems.Input
 
         private void OnAttack(InputValue value)
         {
+            if (!inputActive) return;
+
             possessedCharacterWeaponSystem.IsFiring = value.isPressed;
             possessedWSInputVariables.InputMousePosition = currentMousePosition;
         }
