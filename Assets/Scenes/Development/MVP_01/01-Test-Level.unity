@@ -350,7 +350,7 @@ PrefabInstance:
     - target: {fileID: 116274080680138600, guid: e02bf13adc75da84b950477769812aa3, type: 3}
       propertyPath: spaceShipShell
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5076542227884735075, guid: e8a9df2c157154c469f91a755b308217, type: 3}
     - target: {fileID: 116274080680138600, guid: e02bf13adc75da84b950477769812aa3, type: 3}
       propertyPath: canSpawnOnStart
       value: 0
