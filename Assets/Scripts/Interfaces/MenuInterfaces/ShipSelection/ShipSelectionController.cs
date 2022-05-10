@@ -70,6 +70,8 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.ShipSelection
                                                 .AsEnumerable()
                                                 .SingleOrDefault()
                                                 .Clone();
+
+            Debug.Log("Selected Ship: " + sessionData.SelectedSpaceShip.name);
         }
 
         #endregion Methods

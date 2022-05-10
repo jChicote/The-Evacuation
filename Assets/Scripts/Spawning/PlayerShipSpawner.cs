@@ -1,13 +1,14 @@
 using System.Linq;
+using TheEvacuation.Character.ConfigurationDispatcher;
+using TheEvacuation.Character.ConfigurationDispatcher.Player;
 using TheEvacuation.Model.Entities;
-using TheEvacuation.PlayerSystems.Movement;
 using TheEvacuation.ScriptableObjects.FlyweightSettings;
 using UnityEngine;
 
 namespace TheEvacuation.Spawner
 {
 
-    public interface IPlayerSpawner
+    public interface IPlayerSpawner : ISpawner
     {
 
         #region - - - - - - Methods - - - - - -
@@ -28,6 +29,7 @@ namespace TheEvacuation.Spawner
         public GameObject spaceShipShell;
 
         public bool hasSpawned = false;
+        public bool canSpawnOnStart = false;
 
         #endregion Fields
 
@@ -41,6 +43,16 @@ namespace TheEvacuation.Spawner
 
         #endregion Initialiser
 
+        #region - - - - - - MonoBehaviour - - - - - -
+
+        private void Start()
+        {
+            if (canSpawnOnStart && spaceShipShell != null)
+                CreateEntityInstance();
+        }
+
+        #endregion MonoBehaviour
+
         #region - - - - - - Methods - - - - - -
 
         public override GameObject CreateEntityInstance()
@@ -49,7 +61,11 @@ namespace TheEvacuation.Spawner
                 return null;
 
             GameObject player = Instantiate(spaceShipShell, Vector3.zero, Quaternion.identity);
-            player.GetComponent<IShipMovementSystem>().InitialiseShipMovementSystem(spaceShip.shipAttributes);
+
+            PlayerInputConfigurationPort inputPort = new PlayerInputConfigurationPort();
+            inputPort.SpaceShip = this.spaceShip;
+            player.GetComponent<IConfigurationDispatcher<PlayerInputConfigurationPort>>().ConfigureGameObjectSystems(inputPort);
+
 
             return player;
         }
@@ -60,6 +76,8 @@ namespace TheEvacuation.Spawner
                                 .Where(sp => sp.identifier == id)
                                 .SingleOrDefault()
                                 .shipPrefab;
+
+            Debug.Log(spaceShipShell);
 
             if (spaceShipShell == null)
                 Debug.LogError("Space Ship Shell not found with identifier: " + id);

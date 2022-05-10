@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 5076542227884735076}
   - component: {fileID: 5076542227884735082}
   - component: {fileID: 5076542227884735083}
-  - component: {fileID: 5076542227884735079}
+  - component: {fileID: 1718377801306184163}
   m_Layer: 0
   m_Name: Demo-Ship
   m_TagString: Player
@@ -400,7 +400,7 @@ MonoBehaviour:
   - {fileID: 5076542227839087858}
   revolvingWeapons:
   - {fileID: 0}
---- !u!114 &5076542227884735079
+--- !u!114 &1718377801306184163
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -409,6 +409,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5076542227884735075}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 861f890fb5d38de498553bf257ef9a69, type: 3}
+  m_Script: {fileID: 11500000, guid: dfb57b3e034f2b5458de72e6f0032abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

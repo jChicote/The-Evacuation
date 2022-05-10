@@ -12,7 +12,7 @@ namespace TheEvacuation.Character
 
         private void Start()
         {
-            InitiateInputSystem();
+            //InitiateInputSystem();
         }
 
         public void InitiateInputSystem()
@@ -64,7 +64,7 @@ namespace TheEvacuation.Character
             //DisableMobileInput(mobileInputController);
             //print("Enabled Desktop input");
 
-            IDesktopInputControlAdapter desktopInput = this.GetComponent<IDesktopInputControlAdapter>();
+            IDesktopInputControlAdapter desktopInput = this.gameObject.AddComponent<DesktopInputControlAdapter>();
             if (desktopInput != null)
                 desktopInput.InitialiseDesktop();
         }
