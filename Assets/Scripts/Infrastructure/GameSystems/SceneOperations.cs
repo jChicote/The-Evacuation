@@ -10,20 +10,9 @@ namespace TheEvacuation.Infrastructure.GameSystems
     public class SceneOperations : MonoBehaviour
     {
 
-        #region - - - - - - Fields - - - - - -
+        #region - - - - - - Methods - - - - - -
 
-        private PlayerShipSpawner playerSpawner;
-
-        #endregion Fields
-
-        #region - - - - - - MonoBehaviour - - - - - -
-
-        private void Awake()
-        {
-            playerSpawner = FindObjectOfType<PlayerShipSpawner>();
-        }
-
-        private void Start()
+        public void ConfigureSceneLevel(PlayerShipSpawner playerSpawner)
         {
             // Initialise the player spawner
             if (GameManager.Instance.SessionData.SelectedSpaceShip != null)
@@ -31,12 +20,7 @@ namespace TheEvacuation.Infrastructure.GameSystems
                 playerSpawner.IntialisePlayerSpawner(GameManager.Instance.SessionData.SelectedSpaceShip);
                 playerSpawner.CreateEntityInstance();
             }
-
         }
-
-        #endregion MonoBehaviour
-
-        #region - - - - - - Methods - - - - - -
 
         public void OnSceneClosing()
         {

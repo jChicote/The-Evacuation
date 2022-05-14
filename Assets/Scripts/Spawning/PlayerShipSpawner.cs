@@ -1,23 +1,14 @@
 using System.Linq;
 using TheEvacuation.Character.ConfigurationDispatcher;
 using TheEvacuation.Character.ConfigurationDispatcher.Player;
+using TheEvacuation.Infrastructure.GameSystems;
+using TheEvacuation.Interfaces.GameInterfaces.VitalityBars;
 using TheEvacuation.Model.Entities;
 using TheEvacuation.ScriptableObjects.FlyweightSettings;
 using UnityEngine;
 
 namespace TheEvacuation.Spawner
 {
-
-    public interface IPlayerSpawner : ISpawner
-    {
-
-        #region - - - - - - Methods - - - - - -
-
-        void IntialisePlayerSpawner(SpaceShip spaceShip);
-
-        #endregion Methods
-
-    }
 
     public class PlayerShipSpawner : Spawner, IPlayerSpawner
     {
@@ -61,11 +52,15 @@ namespace TheEvacuation.Spawner
                 return null;
 
             GameObject player = Instantiate(spaceShipShell, Vector3.zero, Quaternion.identity);
+            SceneLevelManager sceneLevelManager = GameManager.Instance.sceneLevelManager;
 
-            PlayerInputConfigurationPort inputPort = new PlayerInputConfigurationPort();
-            inputPort.SpaceShip = this.spaceShip;
+            PlayerInputConfigurationPort inputPort = new PlayerInputConfigurationPort()
+            {
+                SpaceShip = this.spaceShip.Clone(),
+                HealthBar = sceneLevelManager.playerHealthBarGameObject.GetComponent<IPlayerHealthBar>()
+            };
+
             player.GetComponent<IConfigurationDispatcher<PlayerInputConfigurationPort>>().ConfigureGameObjectSystems(inputPort);
-
 
             return player;
         }
