@@ -15,6 +15,7 @@ namespace TheEvacuation.Infrastructure.GameSystems
         public PlayerFlyweightSettings playerFlyweightSettings;
         public UserInterfaceFlyweightSettings userInterfaceFlyweightSettings;
         public SceneLoader sceneLoader;
+        public SceneLevelManager sceneLevelManager;
 
         #endregion Fields
 
