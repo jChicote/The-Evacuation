@@ -1,3 +1,4 @@
+using TheEvacuation.Interfaces.GameInterfaces.Score;
 using TheEvacuation.Spawner;
 using UnityEngine;
 
@@ -12,8 +13,13 @@ namespace TheEvacuation.Infrastructure.GameSystems
 
         #region - - - - - - Methods - - - - - -
 
-        public void ConfigureSceneLevel(PlayerShipSpawner playerSpawner)
+        public void ConfigureSceneLevel(
+            PlayerShipSpawner playerSpawner,
+            SceneScoreSystem sceneScoreSystem,
+            ScorePresenter scorePresenter)
         {
+            sceneScoreSystem.InitialiseSceneScoreSystem(scorePresenter);
+
             // Initialise the player spawner
             if (GameManager.Instance.SessionData.SelectedSpaceShip != null)
             {

@@ -1,3 +1,4 @@
+using TheEvacuation.Interfaces.GameInterfaces.Score;
 using UnityEngine;
 
 namespace TheEvacuation.Infrastructure.GameSystems
@@ -7,6 +8,8 @@ namespace TheEvacuation.Infrastructure.GameSystems
     {
 
         #region - - - - - - Fields - - - - - -
+
+        public IScorePresenter scorePresenter;
 
         public int totalScore;
 
@@ -33,6 +36,17 @@ namespace TheEvacuation.Infrastructure.GameSystems
          * - Operate idenpendantely nor coupled with any entity in the scene.
          *
          */
+
+        public void InitialiseSceneScoreSystem(IScorePresenter scorePresenter)
+        {
+            this.scorePresenter = scorePresenter;
+        }
+
+        public void UpdateTotalScore(int scoreValue)
+        {
+            totalScore += scoreValue;
+            scorePresenter.PresentScore(totalScore);
+        }
 
         #endregion Methods
 

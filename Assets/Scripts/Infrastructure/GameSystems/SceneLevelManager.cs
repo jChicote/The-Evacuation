@@ -1,3 +1,4 @@
+using TheEvacuation.Interfaces.GameInterfaces.Score;
 using TheEvacuation.Spawner;
 using UnityEngine;
 
@@ -11,8 +12,9 @@ namespace TheEvacuation.Infrastructure.GameSystems
 
         public PlayerShipSpawner playerSpawner;
         public GameObject playerHealthBarGameObject;
-
         public SceneOperations sceneOperations;
+        public ScorePresenter scorePresenter;
+        public SceneScoreSystem sceneScoreSystem;
 
         #endregion Fields
 
@@ -22,13 +24,15 @@ namespace TheEvacuation.Infrastructure.GameSystems
         {
             playerSpawner = FindObjectOfType<PlayerShipSpawner>();
             sceneOperations = this.GetComponent<SceneOperations>();
+            sceneScoreSystem = this.GetComponent<SceneScoreSystem>();
+            scorePresenter = FindObjectOfType<ScorePresenter>();
         }
 
         private void Start()
         {
             GameManager.Instance.sceneLevelManager = this;
 
-            sceneOperations.ConfigureSceneLevel(playerSpawner);
+            sceneOperations.ConfigureSceneLevel(playerSpawner, sceneScoreSystem, scorePresenter);
         }
 
         #endregion MonoBehaviour
