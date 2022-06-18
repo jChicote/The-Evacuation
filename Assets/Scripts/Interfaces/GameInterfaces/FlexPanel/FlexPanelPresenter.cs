@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel
 {
@@ -8,14 +9,16 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel
 
         #region - - - - - - Fields - - - - - -
 
-        public float maxHeight = 0;
-        public float minHeight = 0;
-        public float maxWidth = 0;
-        public float minWidth = 0;
+        public float targetHeight = 0;
+        public float startingHeight = 0;
+        public float targetWidth = 0;
+        public float startWidth = 0;
 
         public bool useTransformDimensions = true;
 
+        public Image panelImage;
         protected RectTransform panelTransform;
+        protected FlexPanelTweenAnimator panelAnimator;
 
         #endregion Fields
 
@@ -30,13 +33,25 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel
 
         private void Start()
         {
-            this.panelTransform = GetComponent<RectTransform>();
+            this.panelTransform = this.GetComponent<RectTransform>();
+            this.panelAnimator = this.GetComponent<FlexPanelTweenAnimator>();
+
+            this.panelAnimator.InitialiseFlexPanelTweenAnimator(this);
 
             if (useTransformDimensions)
             {
                 Height = panelTransform.rect.height;
                 Width = panelTransform.rect.width;
             }
+        }
+
+        private void OnEnable()
+        {
+            if (panelAnimator == null || panelImage == null)
+                return;
+
+            StartCoroutine(panelAnimator.TweenToTargetDimensions(startingHeight, targetHeight, startWidth, targetWidth));
+            panelImage.enabled = true;
         }
 
         #endregion MonoBehaviour
