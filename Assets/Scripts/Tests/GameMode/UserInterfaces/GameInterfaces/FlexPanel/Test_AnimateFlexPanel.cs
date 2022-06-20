@@ -23,7 +23,7 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel
             // Act
 
             // Assert
-            StartCoroutine(tweenAnimator.TweenToTargetDimensions(0, 500, 0, 500));
+            StartCoroutine(tweenAnimator.TweenToTargetDimensions(0, 500, 0, 500, default));
         }
 
         #endregion Tests
