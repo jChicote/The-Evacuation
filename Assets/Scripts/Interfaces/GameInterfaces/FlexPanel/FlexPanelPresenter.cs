@@ -58,7 +58,7 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel
             this.gameObject.SetActive(false);
         }
 
-        public void OnDisablePanel()
+        public virtual void OnDisablePanel()
         {
             if (!this.gameObject.activeInHierarchy || panelAnimator == null || panelImage == null)
                 return;
@@ -66,7 +66,7 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel
             StartCoroutine(panelAnimator.TweenToTargetDimensions(targetHeight, startingHeight, targetWidth, startWidth, ClosePanel));
         }
 
-        public void OnEnablePanel()
+        public virtual void OnEnablePanel()
         {
             if (panelAnimator == null || panelImage == null)
                 return;
