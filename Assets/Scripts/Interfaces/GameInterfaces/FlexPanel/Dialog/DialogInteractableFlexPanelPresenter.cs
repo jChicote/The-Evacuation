@@ -1,5 +1,7 @@
+using TheEvacuation.Interfaces.GameInterfaces.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel.Dialog
 {
@@ -10,6 +12,8 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel.Dialog
         #region - - - - - - Field - - - - - -
 
         public TMP_Text panelText;
+        public AnimatingTextPresenter animatingTextPresenter;
+        public Button panelButton;
 
         public string[] dialogChain;
         private int indexSequence = 0;
@@ -17,6 +21,9 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel.Dialog
         #endregion Field
 
         #region - - - - - - Methods - - - - - -
+
+        public void DisablePanelInteraction()
+            => panelButton.interactable = false;
 
         public void DisplayTextInSequence()
         {
@@ -27,8 +34,13 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel.Dialog
             }
 
             panelText.text = dialogChain[indexSequence];
+            animatingTextPresenter.DisplayAnimatingText(dialogChain[indexSequence], EnablePanelInteraction);
+            DisablePanelInteraction();
             indexSequence++;
         }
+
+        public void EnablePanelInteraction()
+            => panelButton.interactable = true;
 
         public override void OnDisablePanel()
         {
