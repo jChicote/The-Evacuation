@@ -196,7 +196,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 0.23921569}
@@ -962,6 +962,9 @@ GameObject:
   - component: {fileID: 1019657452}
   - component: {fileID: 1019657454}
   - component: {fileID: 1019657453}
+  - component: {fileID: 1019657457}
+  - component: {fileID: 1019657456}
+  - component: {fileID: 1019657455}
   m_Layer: 0
   m_Name: Dialog-Text
   m_TagString: Untagged
@@ -1085,6 +1088,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1019657451}
   m_CullTransparentMesh: 1
+--- !u!114 &1019657455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019657451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ced8d4f8dcfa71468437608d3f014f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1019657456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019657451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ba495ef0954a0347879ce61baddd7f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationSpeed: 0.05
+--- !u!114 &1019657457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019657451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2631c44dae7f933448227543170d07d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textLabel: {fileID: 1019657453}
 --- !u!1 &1127318539
 GameObject:
   m_ObjectHideFlags: 0
@@ -2068,6 +2109,8 @@ MonoBehaviour:
   useRectTransformDimensions: 1
   panelImage: {fileID: 5997851581743968947}
   panelText: {fileID: 1019657453}
+  animatingTextPresenter: {fileID: 1019657455}
+  panelButton: {fileID: 101807798}
   dialogChain:
   - Hello this is a simple text sentence.
   - This text sentence should follow afterwards.
