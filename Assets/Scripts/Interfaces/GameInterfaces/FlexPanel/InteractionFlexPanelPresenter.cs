@@ -7,7 +7,7 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel
         #region - - - - - - Methods - - - - - -
 
         public virtual void OnPanelInteraction()
-            => OnDisablePanel();
+            => HandlePanelExitAction();
 
         #endregion Methods
 

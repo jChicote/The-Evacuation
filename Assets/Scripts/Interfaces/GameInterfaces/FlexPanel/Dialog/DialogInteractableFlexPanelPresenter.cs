@@ -11,11 +11,14 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel.Dialog
 
         #region - - - - - - Field - - - - - -
 
-        public TMP_Text panelText;
+        [Space]
         public AnimatingTextPresenter animatingTextPresenter;
         public Button panelButton;
+        public TMP_Text panelText;
 
+        [Space]
         public string[] dialogChain;
+
         private int indexSequence = 0;
 
         #endregion Field
@@ -42,21 +45,27 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel.Dialog
         public void EnablePanelInteraction()
             => panelButton.interactable = true;
 
-        public override void OnDisablePanel()
+        public override void HandlePanelExitAction()
         {
-            base.OnDisablePanel();
+            base.HandlePanelExitAction();
             panelText.enabled = false;
+            indexSequence = 0;
         }
 
-        public override void OnEnablePanel()
+        public override void HandlePanelAwakeAction()
         {
             if (panelAnimator == null || panelImage == null)
                 return;
-
-            StartCoroutine(panelAnimator.TweenToTargetDimensions(startingHeight, targetHeight, startWidth, targetWidth, DisplayTextInSequence));
+            base.HandlePanelAwakeAction();
             panelImage.enabled = true;
             panelText.enabled = true;
             panelText.text = "";
+        }
+
+        public override void HandlePanelStartingAction()
+        {
+            base.HandlePanelStartingAction();
+            DisplayTextInSequence();
         }
 
         public override void OnPanelInteraction()
@@ -65,7 +74,7 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel.Dialog
             if (indexSequence < dialogChain.Length)
                 DisplayTextInSequence();
             else
-                OnDisablePanel();
+                HandlePanelExitAction();
         }
 
         #endregion Methods
