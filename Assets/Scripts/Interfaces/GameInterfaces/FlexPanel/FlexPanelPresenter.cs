@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel
@@ -9,14 +10,21 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel
 
         #region - - - - - - Fields - - - - - -
 
-        public float targetHeight = 0;
         public float startingHeight = 0;
-        public float targetWidth = 0;
         public float startWidth = 0;
-
+        public float targetHeight = 0;
+        public float targetWidth = 0;
         public bool useRectTransformDimensions = true;
 
+        [Space]
         public Image panelImage;
+
+        [Space]
+        public UnityEvent OnPanelAwake;
+        public UnityEvent OnPanelStart;
+        public UnityEvent OnPanelExit;
+        public UnityEvent OnPanelEnd;
+
         protected RectTransform panelTransform;
         protected IFlexPanelTweenAnimator panelAnimator;
 
@@ -43,37 +51,51 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel
                 targetHeight = panelTransform.rect.height;
                 targetWidth = panelTransform.rect.width;
             }
+
+            HandlePanelAwakeAction();
         }
 
         private void OnEnable()
-            => OnEnablePanel();
+            => HandlePanelAwakeAction();
 
         #endregion MonoBehaviour
 
         #region - - - - - - Methods - - - - - -
 
+        public void AnimatePanelToOpen()
+        {
+            StartCoroutine(panelAnimator.TweenToTargetDimensions(startingHeight, targetHeight, startWidth, targetWidth, HandlePanelStartingAction));
+            panelImage.enabled = true;
+        }
+
         public void ClosePanel()
         {
+            OnPanelEnd.Invoke();
             panelImage.enabled = false;
             this.gameObject.SetActive(false);
         }
 
-        public void OnDisablePanel()
+        public virtual void HandlePanelAwakeAction()
+        {
+            if (panelAnimator == null || panelImage == null)
+                return;
+
+            OnPanelAwake.Invoke();
+            SetAndUpdateDimensions(startingHeight, startWidth);
+            AnimatePanelToOpen();
+        }
+
+        public virtual void HandlePanelExitAction()
         {
             if (!this.gameObject.activeInHierarchy || panelAnimator == null || panelImage == null)
                 return;
 
             StartCoroutine(panelAnimator.TweenToTargetDimensions(targetHeight, startingHeight, targetWidth, startWidth, ClosePanel));
+            OnPanelExit.Invoke();
         }
 
-        public void OnEnablePanel()
-        {
-            if (panelAnimator == null || panelImage == null)
-                return;
-
-            StartCoroutine(panelAnimator.TweenToTargetDimensions(startingHeight, targetHeight, startWidth, targetWidth, default));
-            panelImage.enabled = true;
-        }
+        public virtual void HandlePanelStartingAction()
+            => OnPanelStart.Invoke();
 
         public void SetAndUpdateDimensions(float height, float width)
         {

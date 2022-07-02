@@ -6,9 +6,9 @@
 
         #region - - - - - - Methods - - - - - -
 
-        void OnDisablePanel();
+        void HandlePanelAwakeAction();
 
-        void OnEnablePanel();
+        void HandlePanelExitAction();
 
         void SetAndUpdateDimensions(float height, float width);
 

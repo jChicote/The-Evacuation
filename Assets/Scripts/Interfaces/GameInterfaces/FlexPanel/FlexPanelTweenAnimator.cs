@@ -22,7 +22,12 @@ namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel
         public void InitialiseFlexPanelTweenAnimator(FlexPanelPresenter panelPresenter)
             => this.panelPresenter = panelPresenter;
 
-        public IEnumerator TweenToTargetDimensions(float startingHeight, float targetHeight, float statingWidth, float targetWidth, UnityAction endingAction)
+        public IEnumerator TweenToTargetDimensions(
+            float startingHeight,
+            float targetHeight,
+            float statingWidth,
+            float targetWidth,
+            UnityAction endingAction)
         {
             float currentHeight = startingHeight;
             float currentWidth = statingWidth;
