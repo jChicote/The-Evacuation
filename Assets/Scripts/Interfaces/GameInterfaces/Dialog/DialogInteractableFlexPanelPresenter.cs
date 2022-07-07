@@ -1,9 +1,10 @@
+using TheEvacuation.Interfaces.GameInterfaces.FlexPanel;
 using TheEvacuation.Interfaces.GameInterfaces.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TheEvacuation.Interfaces.GameInterfaces.FlexPanel.Dialog
+namespace TheEvacuation.Interfaces.GameInterfaces.Dialog
 {
 
     public class DialogInteractableFlexPanelPresenter : InteractionFlexPanelPresenter
