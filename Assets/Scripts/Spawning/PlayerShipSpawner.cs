@@ -2,6 +2,7 @@ using System.Linq;
 using TheEvacuation.Character.ConfigurationDispatcher;
 using TheEvacuation.Character.ConfigurationDispatcher.Player;
 using TheEvacuation.Infrastructure.GameSystems;
+using TheEvacuation.Infrastructure.GameSystems.SceneSystems;
 using TheEvacuation.Interfaces.GameInterfaces.VitalityBars;
 using TheEvacuation.Model.Entities;
 using TheEvacuation.ScriptableObjects.FlyweightSettings;
@@ -57,7 +58,8 @@ namespace TheEvacuation.Spawner
             PlayerInputConfigurationPort inputPort = new PlayerInputConfigurationPort()
             {
                 SpaceShip = this.spaceShip.Clone(),
-                HealthBar = sceneLevelManager.playerHealthBarGameObject.GetComponent<IPlayerHealthBar>()
+                HealthBar = sceneLevelManager.playerHealthBarGameObject.GetComponent<IPlayerHealthBar>(),
+                PauseEventHandler = sceneLevelManager
             };
 
             player.GetComponent<IConfigurationDispatcher<PlayerInputConfigurationPort>>().ConfigureGameObjectSystems(inputPort);

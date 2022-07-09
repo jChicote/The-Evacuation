@@ -1,3 +1,4 @@
+using TheEvacuation.Infrastructure.GameSystems.SceneSystems;
 using TheEvacuation.Interfaces.GameInterfaces.VitalityBars;
 using TheEvacuation.Model.Entities;
 using TheEvacuation.PlayerSystems.Input;
@@ -17,6 +18,8 @@ namespace TheEvacuation.Character.ConfigurationDispatcher.Player
 
         public IPlayerHealthBar HealthBar { get; set; }
 
+        public IScenePauseEventHandler PauseEventHandler { get; set; }
+
         #endregion Properties
 
     }
@@ -29,7 +32,7 @@ namespace TheEvacuation.Character.ConfigurationDispatcher.Player
         public void ConfigureGameObjectSystems(PlayerInputConfigurationPort inputPort)
         {
             InputControlledCharacter inputCharacter = this.GetComponent<InputControlledCharacter>();
-            inputCharacter.InitiateInputSystem();
+            inputCharacter.InitiateInputSystem(inputPort.PauseEventHandler);
 
             IShipMovementSystem shipMovementSystem = GetComponent<IShipMovementSystem>();
             shipMovementSystem.InitialiseShipMovementSystem(inputPort.SpaceShip.shipAttributes);

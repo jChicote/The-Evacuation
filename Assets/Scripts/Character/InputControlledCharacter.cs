@@ -1,21 +1,30 @@
 using TheEvacuation.Common;
+using TheEvacuation.Infrastructure.GameSystems.SceneSystems;
 using TheEvacuation.PlayerSystems.Input;
 using UnityEngine;
 
 namespace TheEvacuation.Character
 {
+
     public class InputControlledCharacter : BaseInteractiveObject
     {
+
+        #region - - - - - - Fields - - - - - -
+
         protected UnityEngine.InputSystem.PlayerInput playerInput;
         //protected IMobileInput mobileInputController;
         protected IDesktopInputControlAdapter desktopInputController;
+
+        #endregion Fields
 
         private void Start()
         {
             //InitiateInputSystem();
         }
 
-        public void InitiateInputSystem()
+        #region - - - - - - Methods - - - - - -
+
+        public void InitiateInputSystem(IScenePauseEventHandler pauseEventHandler)
         {
             playerInput = this.GetComponent<UnityEngine.InputSystem.PlayerInput>();
 
@@ -27,7 +36,7 @@ namespace TheEvacuation.Character
             else
             {
                 //print("Is ported to desktop")
-                BeginDesktopInputSystem();
+                BeginDesktopInputSystem(pauseEventHandler);
             }
         }
 
@@ -55,7 +64,7 @@ namespace TheEvacuation.Character
         /// <summary>
         /// Initiates the desktop input system for this player
         /// </summary>
-        private void BeginDesktopInputSystem()
+        private void BeginDesktopInputSystem(IScenePauseEventHandler pauseEventHandler)
         {
             playerInput.SwitchCurrentActionMap("Desktop");
             // MobileInputManager mobileInput = this.GetComponent<MobileInputManager>();
@@ -66,7 +75,7 @@ namespace TheEvacuation.Character
 
             IDesktopInputControlAdapter desktopInput = this.gameObject.AddComponent<DesktopInputControlAdapter>();
             if (desktopInput != null)
-                desktopInput.InitialiseDesktop();
+                desktopInput.InitialiseDesktopInputControl(pauseEventHandler);
         }
 
         //private void DisableMobileInput(IMobileInput mobileInput)
@@ -90,6 +99,9 @@ namespace TheEvacuation.Character
 
             //desktopInput.enabled = false;
         }
+
+        #endregion Methods
+
     }
 
 }

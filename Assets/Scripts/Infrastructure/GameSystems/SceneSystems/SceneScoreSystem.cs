@@ -1,7 +1,7 @@
 using TheEvacuation.Interfaces.GameInterfaces.Score;
 using UnityEngine;
 
-namespace TheEvacuation.Infrastructure.GameSystems
+namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
 {
 
     public class SceneScoreSystem : MonoBehaviour

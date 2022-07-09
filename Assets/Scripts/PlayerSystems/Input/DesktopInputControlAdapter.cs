@@ -1,4 +1,5 @@
 using TheEvacuation.Common;
+using TheEvacuation.Infrastructure.GameSystems.SceneSystems;
 using TheEvacuation.PlayerSystems.Movement;
 using TheEvacuation.PlayerSystems.Weapons;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace TheEvacuation.PlayerSystems.Input
 
     public interface IDesktopInputControlAdapter : IInputToggling
     {
-        void InitialiseDesktop();
+        void InitialiseDesktopInputControl(IScenePauseEventHandler pauseEventHandler);
     }
 
     public class DesktopInputControlAdapter : MonoBehaviour, IDesktopInputControlAdapter
@@ -27,6 +28,7 @@ namespace TheEvacuation.PlayerSystems.Input
         private IInputWeaponSystemVariables possessedWSInputVariables;
 
         private IPausable pauseInstance;
+        private IScenePauseEventHandler pauseEventHandler;
 
         public bool inputActive;
 
@@ -37,9 +39,10 @@ namespace TheEvacuation.PlayerSystems.Input
         #endregion Fields
 
         #region - - - - - - Methods - - - - - -
-        public void InitialiseDesktop()
+        public void InitialiseDesktopInputControl(IScenePauseEventHandler pauseEventHandler)
         {
             pauseInstance = this.GetComponent<IPausable>();
+            this.pauseEventHandler = pauseEventHandler;
             possessedCharacterMovement = this.GetComponent<ICharacterMovement>();
             possessedCharacterWeaponSystem = this.GetComponent<ICharacterWeaponSystem>();
             possessedWSInputVariables = this.GetComponent<IInputWeaponSystemVariables>();
@@ -98,17 +101,7 @@ namespace TheEvacuation.PlayerSystems.Input
 
         private void OnPause(InputValue value)
         {
-            //PauseScreen pauseMenu = GameManager.Instance.sceneController.pauseMenu;
-
-            //if (pauseMenu == null) return;
-            //if (pauseInstance.IsPaused)
-            //{
-            //    pauseMenu.OnPause();
-            //}
-            //else
-            //{
-            //    pauseMenu.OnResume();
-            //}
+            pauseEventHandler.ToggleGamePause();
         }
 
         private void OnAttack(InputValue value)

@@ -26,15 +26,14 @@ namespace TheEvacuation.Common
 
         #region - - - - - - Methods - - - - - -
 
-        public virtual void OnPause()
+        public virtual void OnPauseEntity()
         {
+            Debug.Log("Entity has been paused");
             isPaused = true;
         }
 
-        public virtual void OnUnpause()
-        {
-            isPaused = false;
-        }
+        public virtual void OnUnpauseEntity()
+            => isPaused = false;
 
         #endregion Methods
 

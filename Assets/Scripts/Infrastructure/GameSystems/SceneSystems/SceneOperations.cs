@@ -2,7 +2,7 @@ using TheEvacuation.Interfaces.GameInterfaces.Score;
 using TheEvacuation.Spawner;
 using UnityEngine;
 
-namespace TheEvacuation.Infrastructure.GameSystems
+namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
 {
 
     /// <summary>

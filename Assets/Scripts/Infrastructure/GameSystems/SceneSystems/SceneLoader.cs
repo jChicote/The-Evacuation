@@ -2,7 +2,7 @@ using TheEvacuation.Interfaces.LoadingScreen;
 using TheEvacuation.ScriptableObjects.FlyweightSettings;
 using UnityEngine;
 
-namespace TheEvacuation.Infrastructure.GameSystems
+namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
 {
 
     public class SceneLoader : MonoBehaviour

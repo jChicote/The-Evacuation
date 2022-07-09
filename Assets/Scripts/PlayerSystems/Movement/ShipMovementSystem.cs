@@ -5,7 +5,7 @@ using UnityEngine;
 namespace TheEvacuation.PlayerSystems.Movement
 {
 
-    public class ShipMovementSystem : GameHandler, ICharacterMovement, IShipMovementSystem
+    public class ShipMovementSystem : GameHandler, ICharacterMovement, IShipMovementSystem, IPausable
     {
 
         #region - - - - - - Fields - - - - - -
@@ -29,15 +29,14 @@ namespace TheEvacuation.PlayerSystems.Movement
         #region - - - - - - Properties - - - - - -
 
         public bool IsMovementHeld { get => isMovementKeyHeld; set => isMovementKeyHeld = value; }
+        public bool IsPaused { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
         #endregion Properties
 
         #region - - - - - - MonoBehaviour - - - - - -
 
         private void Start()
-        {
-            pauseInstance = this.GetComponent<IPausable>();
-        }
+            => pauseInstance = this.GetComponent<IPausable>();
 
         private void Update()
         {
@@ -84,6 +83,13 @@ namespace TheEvacuation.PlayerSystems.Movement
             currentDirection = (endPos - startPos).normalized;
             angleRotation = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg - 90;
         }
+
+        public void OnPauseEntity()
+        {
+            //characterRB.enabled = false;
+        }
+
+        public void OnUnpauseEntity() { }
 
         #endregion Methods
 
