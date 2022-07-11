@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using TheEvacuation.Common;
 using TheEvacuation.Interfaces.GameInterfaces.Score;
 using TheEvacuation.Spawner;
@@ -27,8 +25,7 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
         public UnityEvent OnGameEnd;
         public UnityEvent OnPlayerDeath;
 
-        [HideInInspector]
-        public bool isPaused = false;
+        public bool IsPaused { get; set; } = false;
 
         #endregion Fields
 
@@ -47,7 +44,6 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
             GameManager.Instance.sceneLevelManager = this;
 
             sceneOperations.ConfigureSceneLevel(playerSpawner, sceneScoreSystem, scorePresenter);
-
             OnGameStart?.Invoke();
         }
 
@@ -57,19 +53,14 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
 
         public void PauseAllEntities()
         {
-            GameObject[] allEntities = FindObjectsOfType<GameObject>();
-            List<IPausable> pausableEntities = new List<IPausable>();
+            MonoBehaviour[] allEntities = FindObjectsOfType<MonoBehaviour>();
 
-            foreach (GameObject entity in allEntities)
-                pausableEntities.Union(entity.GetComponents<IPausable>().ToList());
-
-            foreach (IPausable entity in pausableEntities)
-            {
-                if (isPaused)
-                    entity.OnUnpauseEntity();
-                else
-                    entity.OnPauseEntity();
-            }
+            foreach (MonoBehaviour entity in allEntities)
+                foreach (IPausable pausable in entity.GetComponents<IPausable>())
+                    if (IsPaused)
+                        pausable.OnPauseEntity();
+                    else
+                        pausable.OnUnpauseEntity();
         }
 
         public void ToggleGameDeath()
@@ -77,8 +68,8 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
 
         public void ToggleGamePause()
         {
-            (!isPaused ? OnGamePause : OnGameResume)?.Invoke();
-            isPaused = !isPaused;
+            (!IsPaused ? OnGamePause : OnGameResume)?.Invoke();
+            IsPaused = !IsPaused;
         }
 
         #endregion Methods

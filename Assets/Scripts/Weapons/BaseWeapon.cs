@@ -41,7 +41,7 @@ namespace TheEvacuation.Weapon
 
         public virtual void Fire()
         {
-            print("Firing Weapon");
+            // print("Firing Weapon");
 
             if (timer.CheckTimeIsUp())
             {

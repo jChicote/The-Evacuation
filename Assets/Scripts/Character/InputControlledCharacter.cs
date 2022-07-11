@@ -1,7 +1,7 @@
 using TheEvacuation.Common;
 using TheEvacuation.Infrastructure.GameSystems.SceneSystems;
 using TheEvacuation.PlayerSystems.Input;
-using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace TheEvacuation.Character
 {
@@ -11,62 +11,51 @@ namespace TheEvacuation.Character
 
         #region - - - - - - Fields - - - - - -
 
-        protected UnityEngine.InputSystem.PlayerInput playerInput;
+        protected PlayerInput playerInput;
         //protected IMobileInput mobileInputController;
         protected IDesktopInputControlAdapter desktopInputController;
 
         #endregion Fields
 
-        private void Start()
-        {
-            //InitiateInputSystem();
-        }
-
         #region - - - - - - Methods - - - - - -
 
         public void InitiateInputSystem(IScenePauseEventHandler pauseEventHandler)
         {
-            playerInput = this.GetComponent<UnityEngine.InputSystem.PlayerInput>();
+            playerInput = this.GetComponent<PlayerInput>();
 
-            if (Application.isMobilePlatform)
-            {
-                //print("Is ported to mobile");
-                //BeginMobileInputSystem();
-            }
-            else
-            {
-                //print("Is ported to desktop")
-                BeginDesktopInputSystem(pauseEventHandler);
-            }
+            //if (Application.isMobilePlatform)
+            //    BeginMobileInputSystem();
+            //else
+            BeginDesktopInputSystem(pauseEventHandler);
         }
 
         /// <summary>
         /// Initiates the mobile input systerm to this player
         /// </summary>
-        private void BeginMobileInputSystem()
-        {
-            //Spawn UI HUD
-            //UISettings uiSettings = GameManager.Instance.uiSettings;
-            // GameObject mobileHUD = Instantiate(uiSettings.mobileUIHUDPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+        //private void BeginMobileInputSystem()
+        //{
+        //    Spawn UI HUD
+        //    UISettings uiSettings = GameManager.Instance.uiSettings;
+        //    GameObject mobileHUD = Instantiate(uiSettings.mobileUIHUDPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 
-            playerInput.SwitchCurrentActionMap("Mobile");
-            //DesktopInputManager desktopinput = this.GetComponent<DesktopInputManager>();
-            // desktopinput.enabled = false;
+        //    playerInput.SwitchCurrentActionMap("Mobile");
+        //    DesktopInputManager desktopinput = this.GetComponent<DesktopInputManager>();
+        //    desktopinput.enabled = false;
 
-            DisableDesktopInput(desktopInputController);
+        //    DisableDesktopInput(desktopInputController);
 
-            //IMobileInput mobileInput = this.GetComponent<IMobileInput>();
-            // if (mobileInput != null)
-            //mobileInput.InitialiseInput();
-            //mobileInput.InitialiseInput(mobileHUD);
-        }
+        //    IMobileInput mobileInput = this.GetComponent<IMobileInput>();
+        //    if (mobileInput != null)
+        //        mobileInput.InitialiseInput();
+        //    mobileInput.InitialiseInput(mobileHUD);
+        //}
 
         /// <summary>
         /// Initiates the desktop input system for this player
         /// </summary>
         private void BeginDesktopInputSystem(IScenePauseEventHandler pauseEventHandler)
         {
-            playerInput.SwitchCurrentActionMap("Desktop");
+            playerInput.SwitchCurrentActionMap("Gameplay");
             // MobileInputManager mobileInput = this.GetComponent<MobileInputManager>();
             // mobileInput.enabled = false;
 
@@ -89,16 +78,16 @@ namespace TheEvacuation.Character
         //    //mobileInput.enabled = false;
         //}
 
-        private void DisableDesktopInput(IDesktopInputControlAdapter desktopInput)
-        {
-            if (desktopInput == null)
-            {
-                Debug.LogWarning("No Desktop Input has been found");
-                return;
-            }
+        //private void DisableDesktopInput(IDesktopInputControlAdapter desktopInput)
+        //{
+        //    if (desktopInput == null)
+        //    {
+        //        Debug.LogWarning("No Desktop Input has been found");
+        //        return;
+        //    }
 
-            //desktopInput.enabled = false;
-        }
+        //    //desktopInput.enabled = false;
+        //}
 
         #endregion Methods
 

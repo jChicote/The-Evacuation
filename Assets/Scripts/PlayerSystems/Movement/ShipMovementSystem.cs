@@ -29,7 +29,7 @@ namespace TheEvacuation.PlayerSystems.Movement
         #region - - - - - - Properties - - - - - -
 
         public bool IsMovementHeld { get => isMovementKeyHeld; set => isMovementKeyHeld = value; }
-        public bool IsPaused { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public bool IsPaused { get; set; } = false;
 
         #endregion Properties
 
@@ -40,7 +40,7 @@ namespace TheEvacuation.PlayerSystems.Movement
 
         private void Update()
         {
-            if (pauseInstance.IsPaused) return;
+            if (IsPaused) return;
 
             UpdateMovement();
             UpdateRotation();
@@ -86,10 +86,15 @@ namespace TheEvacuation.PlayerSystems.Movement
 
         public void OnPauseEntity()
         {
-            //characterRB.enabled = false;
+            characterRB.isKinematic = false;
+            IsPaused = true;
         }
 
-        public void OnUnpauseEntity() { }
+        public void OnUnpauseEntity()
+        {
+            characterRB.isKinematic = true;
+            IsPaused = false;
+        }
 
         #endregion Methods
 

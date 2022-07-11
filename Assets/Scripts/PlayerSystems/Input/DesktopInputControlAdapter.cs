@@ -10,15 +10,27 @@ namespace TheEvacuation.PlayerSystems.Input
 
     public interface IInputToggling
     {
+
+        #region - - - - - - Methods - - - - - -
+
         void ToggleInputActivation(bool enabled);
+
+        #endregion Methods
+
     }
 
     public interface IDesktopInputControlAdapter : IInputToggling
     {
+
+        #region - - - - - - Methods - - - - - -
+
         void InitialiseDesktopInputControl(IScenePauseEventHandler pauseEventHandler);
+
+        #endregion Methods
+
     }
 
-    public class DesktopInputControlAdapter : MonoBehaviour, IDesktopInputControlAdapter
+    public class DesktopInputControlAdapter : MonoBehaviour, IDesktopInputControlAdapter, IPausable
     {
 
         #region - - - - - - Fields - - - - - -
@@ -26,8 +38,6 @@ namespace TheEvacuation.PlayerSystems.Input
         private ICharacterMovement possessedCharacterMovement;
         private ICharacterWeaponSystem possessedCharacterWeaponSystem;
         private IInputWeaponSystemVariables possessedWSInputVariables;
-
-        private IPausable pauseInstance;
         private IScenePauseEventHandler pauseEventHandler;
 
         public bool inputActive;
@@ -36,59 +46,23 @@ namespace TheEvacuation.PlayerSystems.Input
         private Vector2 currentMousePosition;
         private Vector3 currentKeyMovementNormals;
 
+        public bool IsPaused { get; set; } = false;
+
         #endregion Fields
 
         #region - - - - - - Methods - - - - - -
         public void InitialiseDesktopInputControl(IScenePauseEventHandler pauseEventHandler)
         {
-            pauseInstance = this.GetComponent<IPausable>();
             this.pauseEventHandler = pauseEventHandler;
+
             possessedCharacterMovement = this.GetComponent<ICharacterMovement>();
             possessedCharacterWeaponSystem = this.GetComponent<ICharacterWeaponSystem>();
             possessedWSInputVariables = this.GetComponent<IInputWeaponSystemVariables>();
 
             inputActive = false;
-
-            centerPosition = new Vector2();
-            centerPosition.x = Screen.width / 2;
-            centerPosition.y = Screen.height / 2;
+            centerPosition = new Vector2(Screen.width / 2, Screen.height / 2);
         }
 
-        public void ToggleInputActivation(bool enabled)
-        {
-            inputActive = enabled;
-        }
-
-        // Summary:
-        // Provides movement vectors based on 2-Dimensional keyboard movement normalised before processing.
-        // Movement vectors provided are the net directions relative to a fixed center.
-        private void OnMovement(InputValue value)
-        {
-            if (!inputActive) return;
-            if (pauseInstance.IsPaused) return;
-
-            currentKeyMovementNormals = value.Get<Vector2>();
-            possessedCharacterMovement.IsMovementHeld = value.Get<Vector2>() != Vector2.zero;
-            possessedCharacterMovement.CalculateMovement(currentKeyMovementNormals);
-
-            print(currentKeyMovementNormals);
-        }
-
-        // Summary:
-        // Stores the aim position of the present position of the mouse within the game view.
-        private void OnAim(InputValue value)
-        {
-            if (!inputActive) return;
-
-            currentMousePosition = value.Get<Vector2>();
-            possessedCharacterMovement.CalculateShipRotation(centerPosition, currentMousePosition);
-
-            DirectWeaponRotatorsToPoint(value);
-        }
-
-        /// <summary>
-        /// Called to provide pointer locations of input to rotators.
-        /// </summary>
         private void DirectWeaponRotatorsToPoint(InputValue value)
         {
             // Seperate functionality and does not attach itself to any event action.
@@ -99,13 +73,20 @@ namespace TheEvacuation.PlayerSystems.Input
             }*/
         }
 
-        private void OnPause(InputValue value)
+        private void OnAim(InputValue value)
         {
-            pauseEventHandler.ToggleGamePause();
+            //if (!inputActive || IsPaused) return;
+            if (!inputActive) return;
+
+            currentMousePosition = value.Get<Vector2>();
+            possessedCharacterMovement.CalculateShipRotation(centerPosition, currentMousePosition);
+
+            DirectWeaponRotatorsToPoint(value);
         }
 
         private void OnAttack(InputValue value)
         {
+            //if (!inputActive || IsPaused) return;
             if (!inputActive) return;
 
             possessedCharacterWeaponSystem.IsFiring = value.isPressed;
@@ -116,6 +97,28 @@ namespace TheEvacuation.PlayerSystems.Input
         {
             //shipDetacher.DetachFromPlatform();
         }
+
+        private void OnMovement(InputValue value)
+        {
+            //if (!inputActive || IsPaused) return;
+            if (!inputActive) return;
+
+            currentKeyMovementNormals = value.Get<Vector2>();
+            possessedCharacterMovement.IsMovementHeld = value.Get<Vector2>() != Vector2.zero;
+            possessedCharacterMovement.CalculateMovement(currentKeyMovementNormals);
+        }
+
+        private void OnPause(InputValue value)
+            => pauseEventHandler.ToggleGamePause();
+
+        public void OnPauseEntity()
+            => IsPaused = true;
+
+        public void OnUnpauseEntity()
+            => IsPaused = false;
+
+        public void ToggleInputActivation(bool enabled)
+            => inputActive = enabled;
 
         #endregion Methods
 
