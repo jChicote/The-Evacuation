@@ -15,34 +15,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     ""name"": ""PlayerInput"",
     ""maps"": [
         {
-            ""name"": ""Mobile"",
-            ""id"": ""93226f20-54cf-440d-9cf0-a426547a0681"",
-            ""actions"": [
-                {
-                    ""name"": ""Movement"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""773e632a-127c-45af-b9fb-a4178f197525"",
-                    ""expectedControlType"": ""Touch"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""cdad3fa0-6264-48f8-a5d8-5caa6a1612d0"",
-                    ""path"": ""<Touchscreen>/primaryTouch"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Desktop"",
+            ""name"": ""Gameplay"",
             ""id"": ""7eb654c3-5d5e-4def-9c7f-b6040c376a0e"",
             ""actions"": [
                 {
@@ -104,7 +77,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Desktop"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -115,7 +88,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Desktop"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -126,7 +99,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Desktop"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -137,7 +110,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Desktop"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -148,7 +121,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Desktop"",
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -159,7 +132,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Desktop"",
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -170,7 +143,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Desktop"",
                     ""action"": ""Detach"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -181,26 +154,75 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Desktop"",
                     ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""User-Interface"",
+            ""id"": ""60fff0e7-a541-4692-86c9-67d808a983f7"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Value"",
+                    ""id"": ""087c77cc-0b98-49bf-8fa3-6b52fe4412d7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ee89921e-7af5-48c1-8ba8-ebd44111e65f"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Desktop"",
+                    ""action"": ""New action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Desktop"",
+            ""bindingGroup"": ""Desktop"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
-        // Mobile
-        m_Mobile = asset.FindActionMap("Mobile", throwIfNotFound: true);
-        m_Mobile_Movement = m_Mobile.FindAction("Movement", throwIfNotFound: true);
-        // Desktop
-        m_Desktop = asset.FindActionMap("Desktop", throwIfNotFound: true);
-        m_Desktop_Movement = m_Desktop.FindAction("Movement", throwIfNotFound: true);
-        m_Desktop_Pause = m_Desktop.FindAction("Pause", throwIfNotFound: true);
-        m_Desktop_Attack = m_Desktop.FindAction("Attack", throwIfNotFound: true);
-        m_Desktop_Detach = m_Desktop.FindAction("Detach", throwIfNotFound: true);
-        m_Desktop_Aim = m_Desktop.FindAction("Aim", throwIfNotFound: true);
+        // Gameplay
+        m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
+        m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
+        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
+        m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
+        m_Gameplay_Detach = m_Gameplay.FindAction("Detach", throwIfNotFound: true);
+        m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
+        // User-Interface
+        m_UserInterface = asset.FindActionMap("User-Interface", throwIfNotFound: true);
+        m_UserInterface_Newaction = m_UserInterface.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -247,82 +269,49 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         asset.Disable();
     }
 
-    // Mobile
-    private readonly InputActionMap m_Mobile;
-    private IMobileActions m_MobileActionsCallbackInterface;
-    private readonly InputAction m_Mobile_Movement;
-    public struct MobileActions
+    // Gameplay
+    private readonly InputActionMap m_Gameplay;
+    private IGameplayActions m_GameplayActionsCallbackInterface;
+    private readonly InputAction m_Gameplay_Movement;
+    private readonly InputAction m_Gameplay_Pause;
+    private readonly InputAction m_Gameplay_Attack;
+    private readonly InputAction m_Gameplay_Detach;
+    private readonly InputAction m_Gameplay_Aim;
+    public struct GameplayActions
     {
         private @PlayerInput m_Wrapper;
-        public MobileActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Mobile_Movement;
-        public InputActionMap Get() { return m_Wrapper.m_Mobile; }
+        public GameplayActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
+        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
+        public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
+        public InputAction @Detach => m_Wrapper.m_Gameplay_Detach;
+        public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
+        public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MobileActions set) { return set.Get(); }
-        public void SetCallbacks(IMobileActions instance)
+        public static implicit operator InputActionMap(GameplayActions set) { return set.Get(); }
+        public void SetCallbacks(IGameplayActions instance)
         {
-            if (m_Wrapper.m_MobileActionsCallbackInterface != null)
+            if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
             {
-                @Movement.started -= m_Wrapper.m_MobileActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_MobileActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_MobileActionsCallbackInterface.OnMovement;
+                @Movement.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMovement;
+                @Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Attack.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
+                @Detach.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDetach;
+                @Detach.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDetach;
+                @Detach.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDetach;
+                @Aim.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAim;
             }
-            m_Wrapper.m_MobileActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Movement.started += instance.OnMovement;
-                @Movement.performed += instance.OnMovement;
-                @Movement.canceled += instance.OnMovement;
-            }
-        }
-    }
-    public MobileActions @Mobile => new MobileActions(this);
-
-    // Desktop
-    private readonly InputActionMap m_Desktop;
-    private IDesktopActions m_DesktopActionsCallbackInterface;
-    private readonly InputAction m_Desktop_Movement;
-    private readonly InputAction m_Desktop_Pause;
-    private readonly InputAction m_Desktop_Attack;
-    private readonly InputAction m_Desktop_Detach;
-    private readonly InputAction m_Desktop_Aim;
-    public struct DesktopActions
-    {
-        private @PlayerInput m_Wrapper;
-        public DesktopActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Desktop_Movement;
-        public InputAction @Pause => m_Wrapper.m_Desktop_Pause;
-        public InputAction @Attack => m_Wrapper.m_Desktop_Attack;
-        public InputAction @Detach => m_Wrapper.m_Desktop_Detach;
-        public InputAction @Aim => m_Wrapper.m_Desktop_Aim;
-        public InputActionMap Get() { return m_Wrapper.m_Desktop; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(DesktopActions set) { return set.Get(); }
-        public void SetCallbacks(IDesktopActions instance)
-        {
-            if (m_Wrapper.m_DesktopActionsCallbackInterface != null)
-            {
-                @Movement.started -= m_Wrapper.m_DesktopActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_DesktopActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_DesktopActionsCallbackInterface.OnMovement;
-                @Pause.started -= m_Wrapper.m_DesktopActionsCallbackInterface.OnPause;
-                @Pause.performed -= m_Wrapper.m_DesktopActionsCallbackInterface.OnPause;
-                @Pause.canceled -= m_Wrapper.m_DesktopActionsCallbackInterface.OnPause;
-                @Attack.started -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAttack;
-                @Attack.performed -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAttack;
-                @Attack.canceled -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAttack;
-                @Detach.started -= m_Wrapper.m_DesktopActionsCallbackInterface.OnDetach;
-                @Detach.performed -= m_Wrapper.m_DesktopActionsCallbackInterface.OnDetach;
-                @Detach.canceled -= m_Wrapper.m_DesktopActionsCallbackInterface.OnDetach;
-                @Aim.started -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAim;
-                @Aim.performed -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAim;
-                @Aim.canceled -= m_Wrapper.m_DesktopActionsCallbackInterface.OnAim;
-            }
-            m_Wrapper.m_DesktopActionsCallbackInterface = instance;
+            m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Movement.started += instance.OnMovement;
@@ -343,17 +332,59 @@ public class @PlayerInput : IInputActionCollection, IDisposable
             }
         }
     }
-    public DesktopActions @Desktop => new DesktopActions(this);
-    public interface IMobileActions
+    public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // User-Interface
+    private readonly InputActionMap m_UserInterface;
+    private IUserInterfaceActions m_UserInterfaceActionsCallbackInterface;
+    private readonly InputAction m_UserInterface_Newaction;
+    public struct UserInterfaceActions
     {
-        void OnMovement(InputAction.CallbackContext context);
+        private @PlayerInput m_Wrapper;
+        public UserInterfaceActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_UserInterface_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_UserInterface; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UserInterfaceActions set) { return set.Get(); }
+        public void SetCallbacks(IUserInterfaceActions instance)
+        {
+            if (m_Wrapper.m_UserInterfaceActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_UserInterfaceActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_UserInterfaceActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_UserInterfaceActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_UserInterfaceActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
     }
-    public interface IDesktopActions
+    public UserInterfaceActions @UserInterface => new UserInterfaceActions(this);
+    private int m_DesktopSchemeIndex = -1;
+    public InputControlScheme DesktopScheme
+    {
+        get
+        {
+            if (m_DesktopSchemeIndex == -1) m_DesktopSchemeIndex = asset.FindControlSchemeIndex("Desktop");
+            return asset.controlSchemes[m_DesktopSchemeIndex];
+        }
+    }
+    public interface IGameplayActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnDetach(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+    }
+    public interface IUserInterfaceActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }
