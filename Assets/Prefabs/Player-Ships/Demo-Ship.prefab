@@ -352,10 +352,34 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f5a03672-9395-413e-aa12-e41bf70abe68
+    m_ActionName: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1ae8a80c-54f6-4024-8971-268e971cd461
+    m_ActionName: Gameplay/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2db943a6-e14d-434d-8788-ed6c1fd080ff
+    m_ActionName: Gameplay/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9c866548-0c6b-4941-ad06-9b780c342c85
+    m_ActionName: Gameplay/Detach[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 60652993-9f9e-4543-8ffe-50e7b5d20f8d
+    m_ActionName: Gameplay/Aim[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 087c77cc-0b98-49bf-8fa3-6b52fe4412d7
+    m_ActionName: User-Interface/New action[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Desktop
+  m_DefaultControlScheme: Desktop
+  m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &5076542227884735076
