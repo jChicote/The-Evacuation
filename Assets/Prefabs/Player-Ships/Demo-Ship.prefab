@@ -201,7 +201,6 @@ GameObject:
   - component: {fileID: 5076542227884735073}
   - component: {fileID: 5076542227884735072}
   - component: {fileID: 5076542227884735080}
-  - component: {fileID: 5076542227884735077}
   - component: {fileID: 5076542227884735076}
   - component: {fileID: 5076542227884735082}
   - component: {fileID: 5076542227884735083}
@@ -328,60 +327,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
---- !u!114 &5076542227884735077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5076542227884735075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 3f1f92d8588576e4880aca6300156c82, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f5a03672-9395-413e-aa12-e41bf70abe68
-    m_ActionName: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1ae8a80c-54f6-4024-8971-268e971cd461
-    m_ActionName: Gameplay/Pause[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2db943a6-e14d-434d-8788-ed6c1fd080ff
-    m_ActionName: Gameplay/Attack[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 9c866548-0c6b-4941-ad06-9b780c342c85
-    m_ActionName: Gameplay/Detach[/Keyboard/q]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 60652993-9f9e-4543-8ffe-50e7b5d20f8d
-    m_ActionName: Gameplay/Aim[/Mouse/position]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 087c77cc-0b98-49bf-8fa3-6b52fe4412d7
-    m_ActionName: User-Interface/New action[/Mouse/position]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Desktop
-  m_DefaultActionMap: Gameplay
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &5076542227884735076
 MonoBehaviour:
   m_ObjectHideFlags: 0
