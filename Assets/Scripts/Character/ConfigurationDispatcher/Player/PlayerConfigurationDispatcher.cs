@@ -31,7 +31,7 @@ namespace TheEvacuation.Character.ConfigurationDispatcher.Player
 
         public void ConfigureGameObjectSystems(PlayerInputConfigurationPort inputPort)
         {
-            InputControlledCharacter inputCharacter = this.GetComponent<InputControlledCharacter>();
+            PlayerInputSystemConfigurator inputCharacter = this.GetComponent<PlayerInputSystemConfigurator>();
             inputCharacter.InitiateInputSystem(inputPort.PauseEventHandler);
 
             IShipMovementSystem shipMovementSystem = GetComponent<IShipMovementSystem>();

@@ -1,4 +1,5 @@
 using TheEvacuation.Common;
+using TheEvacuation.InputSystem;
 using TheEvacuation.Interfaces.GameInterfaces.Score;
 using TheEvacuation.Spawner;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
         public SceneOperations sceneOperations;
         public ScorePresenter scorePresenter;
         public SceneScoreSystem sceneScoreSystem;
+        public InputSystemManager inputSystemManager;
 
         [Space]
         public UnityEvent OnGameStart;

@@ -1,4 +1,5 @@
 using TheEvacuation.Common;
+using TheEvacuation.Infrastructure.GameSystems;
 using TheEvacuation.Infrastructure.GameSystems.SceneSystems;
 using TheEvacuation.PlayerSystems.Input;
 using UnityEngine.InputSystem;
@@ -6,7 +7,7 @@ using UnityEngine.InputSystem;
 namespace TheEvacuation.Character
 {
 
-    public class InputControlledCharacter : BaseInteractiveObject
+    public class PlayerInputSystemConfigurator : BaseInteractiveObject
     {
 
         #region - - - - - - Fields - - - - - -
@@ -21,7 +22,7 @@ namespace TheEvacuation.Character
 
         public void InitiateInputSystem(IScenePauseEventHandler pauseEventHandler)
         {
-            playerInput = this.GetComponent<PlayerInput>();
+            playerInput = GameManager.Instance.sceneLevelManager.inputSystemManager.playerInput;
 
             //if (Application.isMobilePlatform)
             //    BeginMobileInputSystem();
@@ -55,16 +56,22 @@ namespace TheEvacuation.Character
         /// </summary>
         private void BeginDesktopInputSystem(IScenePauseEventHandler pauseEventHandler)
         {
-            playerInput.SwitchCurrentActionMap("Gameplay");
+            //playerInput.SwitchCurrentActionMap("Gameplay");
             // MobileInputManager mobileInput = this.GetComponent<MobileInputManager>();
             // mobileInput.enabled = false;
 
             //DisableMobileInput(mobileInputController);
-            //print("Enabled Desktop input");
 
             IDesktopInputControlAdapter desktopInput = this.gameObject.AddComponent<DesktopInputControlAdapter>();
             if (desktopInput != null)
                 desktopInput.InitialiseDesktopInputControl(pauseEventHandler);
+
+            playerInput.actions["Aim"].performed += desktopInput.OnAim;
+            playerInput.actions["Attack"].performed += desktopInput.OnAttack;
+            playerInput.actions["Movement"].performed += desktopInput.OnMovement;
+            playerInput.actions["Pause"].performed += desktopInput.OnPause;
+
+            playerInput.actions["Attack"].canceled += desktopInput.OnAttack;
         }
 
         //private void DisableMobileInput(IMobileInput mobileInput)

@@ -26,6 +26,14 @@ namespace TheEvacuation.PlayerSystems.Input
 
         void InitialiseDesktopInputControl(IScenePauseEventHandler pauseEventHandler);
 
+        void OnAim(InputAction.CallbackContext value);
+
+        void OnAttack(InputAction.CallbackContext value);
+
+        void OnMovement(InputAction.CallbackContext value);
+
+        void OnPause(InputAction.CallbackContext value);
+
         #endregion Methods
 
     }
@@ -63,52 +71,58 @@ namespace TheEvacuation.PlayerSystems.Input
             centerPosition = new Vector2(Screen.width / 2, Screen.height / 2);
         }
 
-        private void DirectWeaponRotatorsToPoint(InputValue value)
+        //private void DirectWeaponRotatorsToPoint(InputValue value)
+        //{
+        //    // Seperate functionality and does not attach itself to any event action.
+
+        //    /*for (int i = 0; i < playerWeapons.GetWeaponRotators().Length; i++)
+        //    {
+        //        playerWeapons.GetWeaponRotators()[i].ProvidePointerLocation(Camera.main.ScreenToWorldPoint(value.Get<Vector2>()));
+        //    }*/
+        //}
+
+        public void OnAim(InputAction.CallbackContext context)
         {
-            // Seperate functionality and does not attach itself to any event action.
+            if (!inputActive || IsPaused) return;
 
-            /*for (int i = 0; i < playerWeapons.GetWeaponRotators().Length; i++)
-            {
-                playerWeapons.GetWeaponRotators()[i].ProvidePointerLocation(Camera.main.ScreenToWorldPoint(value.Get<Vector2>()));
-            }*/
-        }
-
-        private void OnAim(InputValue value)
-        {
-            //if (!inputActive || IsPaused) return;
-            if (!inputActive) return;
-
-            currentMousePosition = value.Get<Vector2>();
+            currentMousePosition = context.ReadValue<Vector2>();
             possessedCharacterMovement.CalculateShipRotation(centerPosition, currentMousePosition);
 
-            DirectWeaponRotatorsToPoint(value);
+            //DirectWeaponRotatorsToPoint(value);
         }
 
-        private void OnAttack(InputValue value)
+        public void OnAttack(InputAction.CallbackContext context)
         {
-            //if (!inputActive || IsPaused) return;
-            if (!inputActive) return;
+            if (!inputActive || IsPaused) return;
 
-            possessedCharacterWeaponSystem.IsFiring = value.isPressed;
+            switch (context.phase)
+            {
+                case InputActionPhase.Performed:
+                    possessedCharacterWeaponSystem.IsFiring = true;
+                    break;
+                case InputActionPhase.Canceled:
+                    possessedCharacterWeaponSystem.IsFiring = false;
+                    break;
+            }
+
             possessedWSInputVariables.InputMousePosition = currentMousePosition;
         }
 
-        private void OnDetach(InputValue value)
-        {
-            //shipDetacher.DetachFromPlatform();
-        }
+        //private void OnDetach(InputValue value)
+        //{
+        //    //shipDetacher.DetachFromPlatform();
+        //}
 
-        private void OnMovement(InputValue value)
+        public void OnMovement(InputAction.CallbackContext context)
         {
-            //if (!inputActive || IsPaused) return;
-            if (!inputActive) return;
+            if (!inputActive || IsPaused) return;
 
-            currentKeyMovementNormals = value.Get<Vector2>();
-            possessedCharacterMovement.IsMovementHeld = value.Get<Vector2>() != Vector2.zero;
+            currentKeyMovementNormals = context.ReadValue<Vector2>();
+            possessedCharacterMovement.IsMovementHeld = context.ReadValue<Vector2>() != Vector2.zero;
             possessedCharacterMovement.CalculateMovement(currentKeyMovementNormals);
         }
 
-        private void OnPause(InputValue value)
+        public void OnPause(InputAction.CallbackContext context)
             => pauseEventHandler.ToggleGamePause();
 
         public void OnPauseEntity()
