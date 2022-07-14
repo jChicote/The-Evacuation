@@ -40,8 +40,8 @@ namespace TheEvacuation.Character.ConfigurationDispatcher.Player
             IPlayerHealthSystem healthSystem = this.GetComponent<IPlayerHealthSystem>();
             healthSystem.InitialisePlayerHealthSystem(inputPort.HealthBar, inputPort.SpaceShip.shipAttributes);
 
-            IInputToggling inputToggle = this.GetComponent<IInputToggling>();
-            inputToggle.ToggleInputActivation(true);
+            IPlayerInputEnabler inputToggle = this.GetComponent<IPlayerInputEnabler>();
+            inputToggle.EnableInputOperation(true);
 
             Destroy(this);
         }

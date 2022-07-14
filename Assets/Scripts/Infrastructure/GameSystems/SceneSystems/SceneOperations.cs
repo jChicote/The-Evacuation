@@ -28,10 +28,8 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
             }
         }
 
-        public void OnSceneClosing()
-        {
-
-        }
+        public void ExitScene(string sceneName)
+            => GameManager.Instance.sceneLoader.LoadNextScene(sceneName);
 
         #endregion Methods
 

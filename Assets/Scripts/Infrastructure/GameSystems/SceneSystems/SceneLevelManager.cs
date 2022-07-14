@@ -68,10 +68,15 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
         public void ToggleGameDeath()
             => OnPlayerDeath?.Invoke();
 
+        public void ToggleGameEnd()
+            => OnGameEnd?.Invoke();
+
         public void ToggleGamePause()
         {
-            (!IsPaused ? OnGamePause : OnGameResume)?.Invoke();
-            IsPaused = !IsPaused;
+            if (IsPaused)
+                OnGameResume?.Invoke();
+            else
+                OnGamePause?.Invoke();
         }
 
         #endregion Methods

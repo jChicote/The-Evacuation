@@ -8,36 +8,6 @@ using UnityEngine.InputSystem;
 namespace TheEvacuation.PlayerSystems.Input
 {
 
-    public interface IInputToggling
-    {
-
-        #region - - - - - - Methods - - - - - -
-
-        void ToggleInputActivation(bool enabled);
-
-        #endregion Methods
-
-    }
-
-    public interface IDesktopInputControlAdapter : IInputToggling
-    {
-
-        #region - - - - - - Methods - - - - - -
-
-        void InitialiseDesktopInputControl(IScenePauseEventHandler pauseEventHandler);
-
-        void OnAim(InputAction.CallbackContext value);
-
-        void OnAttack(InputAction.CallbackContext value);
-
-        void OnMovement(InputAction.CallbackContext value);
-
-        void OnPause(InputAction.CallbackContext value);
-
-        #endregion Methods
-
-    }
-
     public class DesktopInputControlAdapter : MonoBehaviour, IDesktopInputControlAdapter, IPausable
     {
 
@@ -126,12 +96,16 @@ namespace TheEvacuation.PlayerSystems.Input
             => pauseEventHandler.ToggleGamePause();
 
         public void OnPauseEntity()
-            => IsPaused = true;
+        {
+            IsPaused = true;
+        }
 
         public void OnUnpauseEntity()
-            => IsPaused = false;
+        {
+            IsPaused = false;
+        }
 
-        public void ToggleInputActivation(bool enabled)
+        public void EnableInputOperation(bool enabled)
             => inputActive = enabled;
 
         #endregion Methods

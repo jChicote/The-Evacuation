@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace TheEvacuation.PlayerSystems.Input
 {
-    public interface IMobileInputControlAdapter : IInputToggling
+    public interface IMobileInputControlAdapter : IPlayerInputEnabler
     {
         void InitialiseInput();
     }
@@ -14,7 +14,7 @@ namespace TheEvacuation.PlayerSystems.Input
             throw new System.NotImplementedException();
         }
 
-        public void ToggleInputActivation(bool enabled)
+        public void EnableInputOperation(bool enabled)
         {
             throw new System.NotImplementedException();
         }
