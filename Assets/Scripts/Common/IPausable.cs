@@ -12,8 +12,9 @@
 
         #region - - - - - - Methods - - - - - -
 
-        void OnPause();
-        void OnUnpause();
+        void OnPauseEntity();
+
+        void OnUnpauseEntity();
 
         #endregion Methods
 

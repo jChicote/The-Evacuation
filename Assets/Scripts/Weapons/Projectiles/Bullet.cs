@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TheEvacuation.Weapon.Projectiles
@@ -27,7 +25,7 @@ namespace TheEvacuation.Weapon.Projectiles
         {
             if (collision.CompareTag(this.tag)) return;
 
-            print("Has Collided with something");
+            //print("Has Collided with something");
         }
     }
 

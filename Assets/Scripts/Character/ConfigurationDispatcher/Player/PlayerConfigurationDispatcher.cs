@@ -1,3 +1,4 @@
+using TheEvacuation.Infrastructure.GameSystems.SceneSystems;
 using TheEvacuation.Interfaces.GameInterfaces.VitalityBars;
 using TheEvacuation.Model.Entities;
 using TheEvacuation.PlayerSystems.Input;
@@ -17,6 +18,8 @@ namespace TheEvacuation.Character.ConfigurationDispatcher.Player
 
         public IPlayerHealthBar HealthBar { get; set; }
 
+        public IScenePauseEventHandler PauseEventHandler { get; set; }
+
         #endregion Properties
 
     }
@@ -28,8 +31,8 @@ namespace TheEvacuation.Character.ConfigurationDispatcher.Player
 
         public void ConfigureGameObjectSystems(PlayerInputConfigurationPort inputPort)
         {
-            InputControlledCharacter inputCharacter = this.GetComponent<InputControlledCharacter>();
-            inputCharacter.InitiateInputSystem();
+            PlayerInputSystemConfigurator inputCharacter = this.GetComponent<PlayerInputSystemConfigurator>();
+            inputCharacter.InitiateInputSystem(inputPort.PauseEventHandler);
 
             IShipMovementSystem shipMovementSystem = GetComponent<IShipMovementSystem>();
             shipMovementSystem.InitialiseShipMovementSystem(inputPort.SpaceShip.shipAttributes);
@@ -37,8 +40,8 @@ namespace TheEvacuation.Character.ConfigurationDispatcher.Player
             IPlayerHealthSystem healthSystem = this.GetComponent<IPlayerHealthSystem>();
             healthSystem.InitialisePlayerHealthSystem(inputPort.HealthBar, inputPort.SpaceShip.shipAttributes);
 
-            IInputToggling inputToggle = this.GetComponent<IInputToggling>();
-            inputToggle.ToggleInputActivation(true);
+            IPlayerInputEnabler inputToggle = this.GetComponent<IPlayerInputEnabler>();
+            inputToggle.EnableInputOperation(true);
 
             Destroy(this);
         }

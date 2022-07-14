@@ -2,7 +2,7 @@ using TheEvacuation.Interfaces.GameInterfaces.Score;
 using TheEvacuation.Spawner;
 using UnityEngine;
 
-namespace TheEvacuation.Infrastructure.GameSystems
+namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
 {
 
     /// <summary>
@@ -28,10 +28,8 @@ namespace TheEvacuation.Infrastructure.GameSystems
             }
         }
 
-        public void OnSceneClosing()
-        {
-
-        }
+        public void ExitScene(string sceneName)
+            => GameManager.Instance.sceneLoader.LoadNextScene(sceneName);
 
         #endregion Methods
 
