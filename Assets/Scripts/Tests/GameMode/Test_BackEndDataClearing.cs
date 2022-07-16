@@ -7,11 +7,11 @@ namespace TheEvacuation.Tests.GameMode
 
     public class Test_BackEndDataClearing : MonoBehaviour
     {
-        public SessionDataFacade sessionData;
+        public SessionData sessionData;
 
         public void ClearAllData()
         {
-            UnitOfWork unitOfWork = sessionData.unitOfWork;
+            UnitOfWork unitOfWork = sessionData;
             unitOfWork.Players.Entities.Clear();
             unitOfWork.Save();
 

@@ -12,7 +12,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 
         #region - - - - - - Fields - - - - - -
 
-        public SessionDataFacade sessionDataFacade;
+        public SessionData sessionDataFacade;
         public UnitOfWork unitOfWork;
         public PlayerFlyweightSettings settings;
         public Player model;
@@ -22,9 +22,9 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 
         #region - - - - - - Constructors - - - - - -
 
-        public NewGameController(NewGameView view, SessionDataFacade sessionDataFacade, PlayerFlyweightSettings settings)
+        public NewGameController(NewGameView view, SessionData sessionDataFacade, PlayerFlyweightSettings settings)
         {
-            this.unitOfWork = GameManager.Instance.SessionData.unitOfWork;
+            this.unitOfWork = GameManager.Instance.SessionData;
             this.sessionDataFacade = sessionDataFacade;
             this.settings = settings;
             this.view = view;
@@ -65,7 +65,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 
         public void FinalisePlayer()
         {
-            sessionDataFacade.Player = model;
+            sessionDataFacade.CurrentPlayer = model;
             unitOfWork.Players.Add(model);
             unitOfWork.Save();
         }

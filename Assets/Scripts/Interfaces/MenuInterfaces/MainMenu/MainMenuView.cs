@@ -56,7 +56,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.MainMenu
 
         public void SetCurrentPlayerView()
         {
-            Player currentPlayer = GameManager.Instance.SessionData.Player;
+            Player currentPlayer = GameManager.Instance.SessionData.CurrentPlayer;
             UserInterfaceFlyweightSettings settings = GameManager.Instance.userInterfaceFlyweightSettings;
             currentPlayerAvatar.sprite = settings.avatarImages[currentPlayer.avatarIdentifier].avatarSprite;
         }

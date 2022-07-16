@@ -12,7 +12,7 @@ namespace TheEvacuation.Tests.GameMode
 
         #region - - - - - - Fields - - - - - -
 
-        public SessionDataFacade sessionData;
+        public SessionData sessionData;
         public UnitOfWork unitOfWork;
 
         #endregion Fields

@@ -7,6 +7,9 @@ using UnityEngine;
 namespace TheEvacuation.Infrastructure.Persistence
 {
 
+    /// <summary>
+    /// DataContext is the source of all entities and is made to retrieve and cache entities.
+    /// </summary>
     [Serializable]
     public abstract class DataContext : MonoBehaviour, IDataContext
     {

@@ -671,7 +671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4486208773155038844, guid: 205ffff7b0443ca4491da8eb7357b47a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 205ffff7b0443ca4491da8eb7357b47a, type: 3}
@@ -937,7 +937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6451860577408227571, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ToggleGameEnd
+      value: ToggleGameExit
       objectReference: {fileID: 0}
     - target: {fileID: 6451860577408227571, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -1084,13 +1084,29 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnGameEnd:
+  OnGameCompletion:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7179206600304444261}
         m_TargetAssemblyTypeName: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneOperations,
           Scripts
-        m_MethodName: ExitScene
+        m_MethodName: ExitSceneOnCompletion
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Main-Menu
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnGameExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7179206600304444261}
+        m_TargetAssemblyTypeName: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneOperations,
+          Scripts
+        m_MethodName: ExitSceneThroughPauseMenu
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1186,7 +1202,7 @@ PrefabInstance:
       objectReference: {fileID: 5076542227884735075, guid: e8a9df2c157154c469f91a755b308217, type: 3}
     - target: {fileID: 116274080680138600, guid: e02bf13adc75da84b950477769812aa3, type: 3}
       propertyPath: canSpawnOnStart
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 116274080680138600, guid: e02bf13adc75da84b950477769812aa3, type: 3}
       propertyPath: spaceShip.shipAttributes.maxSpeed

@@ -12,7 +12,7 @@ namespace TheEvacuation.Infrastructure.GameSystems
 
         public static GameManager Instance { get; private set; }
 
-        public SessionDataFacade SessionData;
+        public SessionData SessionData;
         public PlayerFlyweightSettings playerFlyweightSettings;
         public UserInterfaceFlyweightSettings userInterfaceFlyweightSettings;
         public SceneLoader sceneLoader;
@@ -32,7 +32,7 @@ namespace TheEvacuation.Infrastructure.GameSystems
             else
                 Destroy(gameObject);
 
-            SessionData.unitOfWork.Load();
+            SessionData.Load();
         }
 
         #endregion MonoBehaviour

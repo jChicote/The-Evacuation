@@ -28,11 +28,31 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
             }
         }
 
-        public void ExitScene(string sceneName)
+        public void ExitSceneOnCompletion(string sceneName)
+        {
+            SessionData sessionData = GameManager.Instance.SessionData;
+
+            // Collect scoreboard
+
+            // Collect player gold earned
+
+            // Saves the Player and Scoreboard
+            sessionData.SaveAllData();
+
+            GameManager.Instance.sceneLoader.LoadNextScene(sceneName);
+        }
+
+        public void ExitSceneThroughPauseMenu(string sceneName)
             => GameManager.Instance.sceneLoader.LoadNextScene(sceneName);
 
         #endregion Methods
 
+    }
+
+    public enum ExitOptions
+    {
+        ExitSceneOnCompletion,
+        ExitSceneThroughPauseMenu,
     }
 
 }
