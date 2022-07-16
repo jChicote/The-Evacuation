@@ -19,7 +19,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
 
         public OpeningMenuController(OpeningMenuView view)
         {
-            this.unitOfWork = GameManager.Instance.SessionData.unitOfWork;
+            this.unitOfWork = GameManager.Instance.SessionData;
             this.view = view;
         }
 

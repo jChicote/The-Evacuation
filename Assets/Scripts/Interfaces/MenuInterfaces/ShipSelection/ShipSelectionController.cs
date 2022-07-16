@@ -14,7 +14,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.ShipSelection
         #region - - - - - - Fields - - - - - -
 
         public ShipSelectionView view;
-        public SessionDataFacade sessionData;
+        public SessionData sessionData;
         public UserInterfaceFlyweightSettings interfacesettings;
         public PlayerFlyweightSettings playerSettings;
         public int shipIndentifier;
@@ -25,7 +25,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.ShipSelection
 
         public ShipSelectionController(
             PlayerFlyweightSettings playerSettings,
-            SessionDataFacade sessionData,
+            SessionData sessionData,
             ShipSelectionView view,
             UserInterfaceFlyweightSettings interfaceSettings)
         {
@@ -41,10 +41,10 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.ShipSelection
 
         public void LoadShipSelectionList()
         {
-            if (sessionData.Player.spaceShipHanger == null || sessionData.Player.spaceShipHanger.Count == 0)
+            if (sessionData.CurrentPlayer.spaceShipHanger == null || sessionData.CurrentPlayer.spaceShipHanger.Count == 0)
                 return;
 
-            foreach (var ship in sessionData.Player.spaceShipHanger)
+            foreach (var ship in sessionData.CurrentPlayer.spaceShipHanger)
             {
                 ShipAsset asset = playerSettings.GetShipAssetFromIdentifier(ship.identifier);
                 view.CreateShipSelectionListCell(interfacesettings.shipSelectionCellPrefab, new ShipCellModel()
@@ -65,7 +65,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.ShipSelection
 
         public void SetSelectedShip()
         {
-            sessionData.SelectedSpaceShip = sessionData.Player.spaceShipHanger
+            sessionData.SelectedSpaceShip = sessionData.CurrentPlayer.spaceShipHanger
                                                 .Where(ss => ss.identifier == shipIndentifier)
                                                 .AsEnumerable()
                                                 .SingleOrDefault()

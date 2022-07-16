@@ -1,26 +1,29 @@
 using TheEvacuation.Infrastructure.Persistence;
 using TheEvacuation.Model.Entities;
-using UnityEngine;
 
 namespace TheEvacuation.Infrastructure.GameSystems
 {
 
-    public class SessionDataFacade : MonoBehaviour
+    public class SessionData : UnitOfWork
     {
-
-        #region - - - - - - Fields - - - - - -
-
-        public UnitOfWork unitOfWork;
-
-        #endregion Fields
 
         #region - - - - - - Properties - - - - - -
 
-        public Player Player { get; set; }
+        public Player CurrentPlayer { get; set; }
         public SpaceShip SelectedSpaceShip { get; set; }
         public ScoreBoard PlayerScoreBoard { get; set; }
 
         #endregion Properties
+
+        #region - - - - - - Methods - - - - - -
+
+        public void SaveAllData()
+        {
+            Players.Modify(CurrentPlayer);
+            Save();
+        }
+
+        #endregion
 
     }
 

@@ -16,7 +16,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
         #region - - - - - - Fields - - - - - -
 
         public UserInterfaceFlyweightSettings settings;
-        public SessionDataFacade sessionData;
+        public SessionData sessionData;
         public UnitOfWork unitOfWork;
         public SelectPlayerMenuView view;
         public Player selectedModel;
@@ -27,13 +27,13 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
         #region - - - - - - Constructors - - - - - -
 
         public SelectPlayerMenuController(
-            SessionDataFacade sessionData,
+            SessionData sessionData,
             UserInterfaceFlyweightSettings settings,
             SelectPlayerMenuView view)
         {
             this.sessionData = sessionData;
             this.settings = settings;
-            this.unitOfWork = sessionData.unitOfWork;
+            this.unitOfWork = sessionData;
             this.view = view;
         }
 
@@ -83,7 +83,7 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.PlayerSelection
                                 .FirstOrDefault()
                                 .Clone();
 
-            sessionData.Player = player;
+            sessionData.CurrentPlayer = player;
             Debug.Log("Has toggled on play");
         }
 
