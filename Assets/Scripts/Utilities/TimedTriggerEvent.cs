@@ -30,7 +30,7 @@ namespace TheEvacuation.Utilities
 
         #region - - - - - - Methods - - - - - -
 
-        private IEnumerator TickUntilDurationEnd(float duration)
+        protected virtual IEnumerator TickUntilDurationEnd(float duration)
         {
             yield return new WaitForSeconds(duration);
             OnTimerCompletion?.Invoke();
