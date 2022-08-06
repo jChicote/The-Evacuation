@@ -22,9 +22,7 @@ namespace TheEvacuation.Utilities
         #region - - - - - - MonoBehaviour - - - - - -
 
         public void OnEnable()
-        {
-            StartCoroutine(TickUntilDurationEnd(timerDuration));
-        }
+            => StartCoroutine(TickUntilDurationEnd(timerDuration));
 
         #endregion MonoBehaviour
 
