@@ -1923,6 +1923,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Successful-Completion-EndSequence
       objectReference: {fileID: 0}
+    - target: {fileID: 1817721913033860251, guid: 7c7c015be8b7ec84eb885d744bc86193, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c7c015be8b7ec84eb885d744bc86193, type: 3}
 --- !u!1001 &2801103253750461936

@@ -261,6 +261,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 567.93, y: 290.3}
   m_Pivot: {x: 0, y: 1}
+--- !u!1 &351406993 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1817721913033860251, guid: 7c7c015be8b7ec84eb885d744bc86193, type: 3}
+  m_PrefabInstance: {fileID: 512559899}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &354324114
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,8 +360,8 @@ RectTransform:
   - {fileID: 1422283200}
   - {fileID: 1659243847}
   - {fileID: 1209207043}
-  - {fileID: 871788512}
   - {fileID: 1116926571}
+  - {fileID: 871788512}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -579,7 +584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 802304609325618936, guid: 7c7c015be8b7ec84eb885d744bc86193, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ToggleGameCompletion
+      value: ToggleGameSaveExit
       objectReference: {fileID: 0}
     - target: {fileID: 802304609325618936, guid: 7c7c015be8b7ec84eb885d744bc86193, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -613,7 +618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1817721913033860250, guid: 7c7c015be8b7ec84eb885d744bc86193, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1817721913033860250, guid: 7c7c015be8b7ec84eb885d744bc86193, type: 3}
       propertyPath: m_AnchorMax.x
@@ -703,7 +708,8 @@ PrefabInstance:
       propertyPath: animationSpeed
       value: 0.232
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1844051678830556597, guid: 7c7c015be8b7ec84eb885d744bc86193, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7c7c015be8b7ec84eb885d744bc86193, type: 3}
 --- !u!1 &519926194 stripped
 GameObject:
@@ -894,17 +900,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 797891733}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -960, y: -540, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 817181474}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &817181474 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 745020081343127496, guid: 7c7c015be8b7ec84eb885d744bc86193, type: 3}
-  m_PrefabInstance: {fileID: 512559899}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &817181476 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 745020081343127497, guid: 7c7c015be8b7ec84eb885d744bc86193, type: 3}
@@ -1144,7 +1145,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1725739489601744753, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1725739489601744753, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -1160,7 +1161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1725739489601744753, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: TogglePausableOnAllEntities
+      value: ToggleGameNoSaveExit
       objectReference: {fileID: 0}
     - target: {fileID: 1725739489601744753, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
@@ -1222,7 +1223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1725739490127982125, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1725739490127982125, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1464,10 +1465,38 @@ MonoBehaviour:
   OnGameCompletion:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 351406993}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1840124048}
+        m_TargetAssemblyTypeName: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneLevelManager,
+          Scripts
+        m_MethodName: PauseAllEntities
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnGameSaveExit:
+    m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 7179206600304444261}
         m_TargetAssemblyTypeName: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneOperations,
           Scripts
-        m_MethodName: ExitSceneOnCompletion
+        m_MethodName: SaveOnSceneExit
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1477,13 +1506,13 @@ MonoBehaviour:
           m_StringArgument: Main-Menu
           m_BoolArgument: 0
         m_CallState: 2
-  OnGameExit:
+  OnGameNoSaveExit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7179206600304444261}
         m_TargetAssemblyTypeName: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneOperations,
           Scripts
-        m_MethodName: ExitSceneThroughPauseMenu
+        m_MethodName: ExitSceneWithoutSaving
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
