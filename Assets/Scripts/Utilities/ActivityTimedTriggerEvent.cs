@@ -12,7 +12,7 @@ namespace TheEvacuation.Utilities
 
         [Space]
         public UnityEvent OnAwake;
-        public UnityEvent OnBeginExit;
+        public UnityEvent OnTimedAction;
 
         [Range(0f, 1f)]
         public float endEventToggleTime = 0.5f;
@@ -27,7 +27,6 @@ namespace TheEvacuation.Utilities
         {
             base.OnEnable();
             OnAwake?.Invoke();
-            print("Did toggle start");
         }
 
         #endregion MonoBehaviour
@@ -44,7 +43,7 @@ namespace TheEvacuation.Utilities
 
                 if (!hasToggledEnd && ((currentDuration / duration) > endEventToggleTime))
                 {
-                    OnBeginExit?.Invoke();
+                    OnTimedAction?.Invoke();
                     hasToggledEnd = true;
                 }
 
@@ -55,6 +54,7 @@ namespace TheEvacuation.Utilities
         }
 
         #endregion Methods
+
     }
 
 }

@@ -25,7 +25,8 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
         public UnityEvent OnGamePause;
         public UnityEvent OnGameResume;
         public UnityEvent OnGameCompletion;
-        public UnityEvent OnGameExit;
+        public UnityEvent OnGameSaveExit;
+        public UnityEvent OnGameNoSaveExit;
         public UnityEvent OnPlayerDeath;
 
         public bool IsPaused { get; set; } = false;
@@ -72,8 +73,11 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
         public void ToggleGameCompletion()
             => OnGameCompletion?.Invoke();
 
-        public void ToggleGameExit()
-            => OnGameExit?.Invoke();
+        public void ToggleGameSaveExit()
+            => OnGameSaveExit?.Invoke();
+
+        public void ToggleGameNoSaveExit()
+            => OnGameNoSaveExit?.Invoke();
 
         public void ToggleGamePause()
         {
