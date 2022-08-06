@@ -9,6 +9,7 @@ namespace TheEvacuation.Model.Entities
 
         public int totalPoints = 0;
         public int highScore = 0;
+        public int totalDeaths = 0;
 
         #endregion Fields
 

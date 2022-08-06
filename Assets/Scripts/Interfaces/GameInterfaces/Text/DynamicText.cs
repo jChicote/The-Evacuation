@@ -11,6 +11,9 @@ namespace TheEvacuation.Interfaces.GameInterfaces.Text
 
         public TMP_Text textLabel;
 
+        public string prefix = "";
+        public string suffix = "";
+
         #endregion Fields
 
         #region - - - - - - Methods - - - - - -
@@ -19,7 +22,7 @@ namespace TheEvacuation.Interfaces.GameInterfaces.Text
             => textLabel.text;
 
         public void SetTextValue(string newText)
-            => textLabel.text = newText;
+            => textLabel.text = prefix + newText + suffix;
 
         #endregion Methods
     }

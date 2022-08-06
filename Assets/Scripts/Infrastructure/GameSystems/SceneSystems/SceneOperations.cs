@@ -28,7 +28,7 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
             }
         }
 
-        public void ExitSceneOnCompletion(string sceneName)
+        public void SaveOnSceneExit(string sceneName)
         {
             SessionData sessionData = GameManager.Instance.SessionData;
 
@@ -42,7 +42,7 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
             GameManager.Instance.sceneLoader.LoadNextScene(sceneName);
         }
 
-        public void ExitSceneThroughPauseMenu(string sceneName)
+        public void ExitSceneWithoutSaving(string sceneName)
             => GameManager.Instance.sceneLoader.LoadNextScene(sceneName);
 
         #endregion Methods
