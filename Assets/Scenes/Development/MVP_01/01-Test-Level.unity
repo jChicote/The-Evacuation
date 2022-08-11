@@ -1536,6 +1536,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa92faa7f1b658a4abb54c4dd8ec39d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1840124050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840124047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2affed58f5d844aaf4b832b811bffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTimerStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTimerEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  timerDuration: 10
+  beginsOnStart: 1
 --- !u!1 &1880651835 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 802304610926895571, guid: 7c7c015be8b7ec84eb885d744bc86193, type: 3}
