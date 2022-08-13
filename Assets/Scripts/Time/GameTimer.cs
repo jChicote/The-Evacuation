@@ -1,3 +1,4 @@
+using System;
 using TheEvacuation.Common;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,9 +12,11 @@ namespace TheEvacuation.TimeUtility
         #region - - - - - - Fields - - - - -
 
         public UnityEvent OnTimerStart;
+        public TimerTickEvent OnTimerTick;
         public UnityEvent OnTimerEnd;
 
-        public float timerDuration;
+        [SerializeField]
+        protected float timerDuration;
         protected float timeLeft;
 
         [Space]
@@ -39,6 +42,7 @@ namespace TheEvacuation.TimeUtility
             if (!isCountingDown || isPaused) return;
 
             this.UpdateTime();
+            this.OnTimerTick?.Invoke(this.timeLeft, timerDuration);
 
             if (timeLeft <= 0)
             {
@@ -62,10 +66,11 @@ namespace TheEvacuation.TimeUtility
         {
             this.isCountingDown = false;
             this.timeLeft = timerDuration;
+
         }
 
         public void UpdateTime()
-            => timeLeft -= UnityEngine.Time.deltaTime;
+            => timeLeft -= Time.deltaTime;
 
         public void OnPauseEntity()
             => isPaused = true;
@@ -76,5 +81,8 @@ namespace TheEvacuation.TimeUtility
         #endregion Methods
 
     }
+
+    [Serializable]
+    public class TimerTickEvent : UnityEvent<float, float> { }
 
 }

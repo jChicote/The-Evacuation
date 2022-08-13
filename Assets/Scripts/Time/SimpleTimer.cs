@@ -40,14 +40,10 @@ namespace TheEvacuation.TimeUtility
         }
 
         public bool CheckTimeIsUp()
-        {
-            return timeLeft <= 0;
-        }
+            => timeLeft <= 0;
 
         public void ResetTimer()
-        {
-            timeLeft = intervalLength;
-        }
+            => timeLeft = intervalLength;
 
         #endregion
 
