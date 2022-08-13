@@ -1,3 +1,5 @@
+using TheEvacuation.Infrastructure.Score.CreateScoreRecord;
+using TheEvacuation.Infrastructure.Score.UpdateScoreRecord;
 using TheEvacuation.Interfaces.GameInterfaces.Score;
 using UnityEngine;
 
@@ -10,8 +12,10 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
         #region - - - - - - Fields - - - - - -
 
         public IScorePresenter scorePresenter;
+        public ICreateScoreRecord createScoreRecord;
+        public IUpdateScoreRecord updateScoreRecord;
 
-        public int totalScore;
+        private ScoreRecord scoreRecord;
 
         #endregion Fields
 
@@ -40,15 +44,40 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
         public void InitialiseSceneScoreSystem(IScorePresenter scorePresenter)
         {
             this.scorePresenter = scorePresenter;
+            this.scoreRecord = this.createScoreRecord.CreateScoreRecord();
         }
 
         public void UpdateTotalScore(int scoreValue)
         {
-            totalScore += scoreValue;
-            scorePresenter.PresentScore(totalScore);
+            this.scoreRecord.TotalScore += scoreValue;
+            scorePresenter.PresentScore(this.scoreRecord.TotalScore);
         }
 
         #endregion Methods
+
+    }
+
+    public class ScoreRecord
+    {
+
+        #region - - - - - - Properties - - - - - -
+
+        public int TotalScore { get; set; }
+
+        #endregion Properties
+
+    }
+
+    public class ScoreEvent
+    {
+
+        #region - - - - - - Properties - - - - - -
+
+        public int ScoreValue { get; set; }
+
+        public GameObject ScoreSubscriber { get; set; }
+
+        #endregion Properties
 
     }
 
