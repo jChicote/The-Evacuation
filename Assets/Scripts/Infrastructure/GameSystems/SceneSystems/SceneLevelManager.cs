@@ -56,12 +56,21 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
         #region - - - - - - Methods - - - - - -
 
         public void PauseAllEntities()
+            => ModifyPauseStateOnAllEntities(IsPaused);
+
+        public void PauseAllEntities(bool gameIsPaused)
+        {
+            ModifyPauseStateOnAllEntities(gameIsPaused);
+            IsPaused = gameIsPaused;
+        }
+
+        private void ModifyPauseStateOnAllEntities(bool gameIsPaused)
         {
             MonoBehaviour[] allEntities = FindObjectsOfType<MonoBehaviour>();
 
             foreach (MonoBehaviour entity in allEntities)
                 foreach (IPausable pausable in entity.GetComponents<IPausable>())
-                    if (IsPaused)
+                    if (gameIsPaused)
                         pausable.OnPauseEntity();
                     else
                         pausable.OnUnpauseEntity();

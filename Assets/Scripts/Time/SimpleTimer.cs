@@ -1,20 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace TheEvacuation.TimeUtility
 {
+
     public class SimpleCountDown
     {
-        // Fields
+
+        #region - - - - - - Fields - - - - - -
+
         private float intervalLength;
         private float timeLeft;
         private float deltaTime;
         private float interpolateValue;
 
-        // Properties
+        #endregion Fields
+
+        #region - - - - - - Properties - - - - - -
+
         public float TimeLeft { get => timeLeft; }
-        public float InterpolateValue { get => interpolateValue;  }
+        public float InterpolateValue { get => interpolateValue; }
+
+        #endregion Properties
+
+        #region - - - - - - Constructors - - - - - -
 
         public SimpleCountDown(float intervalLength, float deltaTime)
         {
@@ -23,6 +29,10 @@ namespace TheEvacuation.TimeUtility
             this.deltaTime = deltaTime;
         }
 
+        #endregion Constructors
+
+        #region - - - - - - Methods - - - - - -
+
         public void TickTimer()
         {
             timeLeft -= deltaTime;
@@ -30,13 +40,13 @@ namespace TheEvacuation.TimeUtility
         }
 
         public bool CheckTimeIsUp()
-        {
-            return timeLeft <= 0;
-        }
+            => timeLeft <= 0;
 
         public void ResetTimer()
-        {
-            timeLeft = intervalLength;
-        }
+            => timeLeft = intervalLength;
+
+        #endregion
+
     }
+
 }

@@ -360,6 +360,7 @@ RectTransform:
   - {fileID: 1422283200}
   - {fileID: 1659243847}
   - {fileID: 1209207043}
+  - {fileID: 371395404}
   - {fileID: 1116926571}
   - {fileID: 871788512}
   m_Father: {fileID: 0}
@@ -370,6 +371,127 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &371395402
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 354324118}
+    m_Modifications:
+    - target: {fileID: 2179118524102650557, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524102650557, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179118524695121355, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+      propertyPath: m_Name
+      value: Gameplay-Scene-Timer-Bar
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+--- !u!114 &371395403 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2179118524695121357, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+  m_PrefabInstance: {fileID: 371395402}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd987741e12b5744a81722b914158873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &371395404 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2179118524695121354, guid: c8334bd58b752704aba342e7d8b8d531, type: 3}
+  m_PrefabInstance: {fileID: 371395402}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &512559899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -618,7 +740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1817721913033860250, guid: 7c7c015be8b7ec84eb885d744bc86193, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1817721913033860250, guid: 7c7c015be8b7ec84eb885d744bc86193, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1182,10 +1304,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1725739490055871019, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725739490055871019, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1725739490055871019, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1840124048}
+    - target: {fileID: 1725739490055871019, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 1840124048}
     - target: {fileID: 1725739490055871019, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
@@ -1193,7 +1323,15 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1725739490055871019, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725739490055871019, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PauseAllEntities
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725739490055871019, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: PauseAllEntities
       objectReference: {fileID: 0}
     - target: {fileID: 1725739490055871019, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
@@ -1202,7 +1340,20 @@ PrefabInstance:
         Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 1725739490055871019, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneLevelManager,
+        Scripts
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725739490055871019, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725739490055871019, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725739490055871019, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1725739490127982114, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
@@ -1223,7 +1374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1725739490127982125, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1725739490127982125, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1328,212 +1479,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a6cf01c52815924f8db478f05623697, type: 3}
---- !u!1 &1840124047 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7175011430299763206, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+--- !u!114 &1840124048 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1840124048, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
   m_PrefabInstance: {fileID: 7179206600304444260}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1840124048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840124047}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed31d98eecc41004b9ddad524c20af77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpawner: {fileID: 1666939360}
-  playerHealthBarGameObject: {fileID: 4090060948097720838}
-  sceneOperations: {fileID: 7179206600304444261}
-  scorePresenter: {fileID: 1911689718}
-  sceneScoreSystem: {fileID: 1840124049}
-  inputSystemManager: {fileID: 1147862328}
-  OnGameStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnGamePause:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 871788511}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1840124048}
-        m_TargetAssemblyTypeName: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneLevelManager,
-          Scripts
-        m_MethodName: set_IsPaused
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1840124048}
-        m_TargetAssemblyTypeName: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneLevelManager,
-          Scripts
-        m_MethodName: PauseAllEntities
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1840124048}
-        m_TargetAssemblyTypeName: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneLevelManager,
-          Scripts
-        m_MethodName: set_IsPaused
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  OnGameResume:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 871788511}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1840124048}
-        m_TargetAssemblyTypeName: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneLevelManager,
-          Scripts
-        m_MethodName: set_IsPaused
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1840124048}
-        m_TargetAssemblyTypeName: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneLevelManager,
-          Scripts
-        m_MethodName: PauseAllEntities
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1840124048}
-        m_TargetAssemblyTypeName: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneLevelManager,
-          Scripts
-        m_MethodName: set_IsPaused
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnGameCompletion:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 351406993}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1840124048}
-        m_TargetAssemblyTypeName: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneLevelManager,
-          Scripts
-        m_MethodName: PauseAllEntities
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  OnGameSaveExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7179206600304444261}
-        m_TargetAssemblyTypeName: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneOperations,
-          Scripts
-        m_MethodName: SaveOnSceneExit
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Main-Menu
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnGameNoSaveExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7179206600304444261}
-        m_TargetAssemblyTypeName: TheEvacuation.Infrastructure.GameSystems.SceneSystems.SceneOperations,
-          Scripts
-        m_MethodName: ExitSceneWithoutSaving
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Main-Menu
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnPlayerDeath:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1840124049 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5689362174105829292, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
-  m_PrefabInstance: {fileID: 7179206600304444260}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840124047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa92faa7f1b658a4abb54c4dd8ec39d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1880651835 stripped
@@ -1758,6 +1712,63 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1840124048, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+      propertyPath: playerSpawner
+      value: 
+      objectReference: {fileID: 1666939360}
+    - target: {fileID: 1840124048, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+      propertyPath: scorePresenter
+      value: 
+      objectReference: {fileID: 1911689718}
+    - target: {fileID: 1840124048, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+      propertyPath: inputSystemManager
+      value: 
+      objectReference: {fileID: 1147862328}
+    - target: {fileID: 1840124048, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+      propertyPath: playerHealthBarGameObject
+      value: 
+      objectReference: {fileID: 4090060948097720838}
+    - target: {fileID: 1840124048, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+      propertyPath: OnGamePause.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 871788511}
+    - target: {fileID: 1840124048, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+      propertyPath: OnGameResume.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 871788511}
+    - target: {fileID: 1840124048, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+      propertyPath: OnGameCompletion.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 351406993}
+    - target: {fileID: 1840124050, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+      propertyPath: OnTimerTick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840124050, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+      propertyPath: OnTimerTick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840124050, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+      propertyPath: OnTimerTick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 371395403}
+    - target: {fileID: 1840124050, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+      propertyPath: OnTimerTick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840124050, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+      propertyPath: OnTimerTick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetBarValue
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840124050, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+      propertyPath: OnTimerTick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TheEvacuation.Interfaces.GameInterfaces.GameplayTimer.GameplayTimerBarPresenter,
+        Scripts
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840124050, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
+      propertyPath: OnTimerTick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3604235501558473656, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1808,17 +1819,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
---- !u!114 &7179206600304444261 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4633916171591234185, guid: e9ee3ac8edfbd2b4b90a46c9ff07c9cc, type: 3}
-  m_PrefabInstance: {fileID: 7179206600304444260}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840124047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77c0224380b5ad6488cf9a2c8ec060ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8873591751378096290
 PrefabInstance:
   m_ObjectHideFlags: 0
