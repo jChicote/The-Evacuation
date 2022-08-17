@@ -1,3 +1,5 @@
+using System;
+using TheEvacuation.Infrastructure.Score.UpdateScoreRecord;
 using TheEvacuation.Model.Entities;
 using UnityEngine;
 
@@ -32,6 +34,11 @@ namespace TheEvacuation.ScriptableObjects.FlyweightSettings
             }
 
             return identifier;
+        }
+
+        public GameObject GetSelectedScorePopupPrefab(ScoreEventType eventType)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Methods

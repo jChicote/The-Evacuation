@@ -44,6 +44,14 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.ScoreBoard
             }
         }
 
+        //private SummaryViewModel GetSummaryViewModel()
+        //{
+        //    var summaryViewModel = new SummaryViewModel()
+        //    {
+
+        //    }
+        //}
+
         #endregion Methods
 
     }
@@ -62,6 +70,24 @@ namespace TheEvacuation.Interfaces.MenuInterfaces.ScoreBoard
         #endregion Fields
 
     }
+
+    public class SummaryViewModel
+    {
+
+        #region - - - - - - Properties - - - - - -
+
+        public int KillCount { get; set; }
+
+        public int SkillPoints { get; set; }
+
+        public int TotalDeaths { get; set; }
+
+        public int TotalScore { get; set; }
+
+        #endregion Properties
+
+    }
+
 
     public enum SummaryBoardRowItemType
     {

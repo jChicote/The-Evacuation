@@ -16,7 +16,7 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
         public void ConfigureSceneLevel(
             PlayerShipSpawner playerSpawner,
             SceneScoreSystem sceneScoreSystem,
-            ScorePresenter scorePresenter)
+            ScorePointsPresenter scorePresenter)
         {
             sceneScoreSystem.InitialiseSceneScoreSystem(scorePresenter);
 

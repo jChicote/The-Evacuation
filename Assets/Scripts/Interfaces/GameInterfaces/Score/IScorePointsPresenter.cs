@@ -1,6 +1,7 @@
 ﻿namespace TheEvacuation.Interfaces.GameInterfaces.Score
 {
-    public interface IScorePresenter
+
+    public interface IScorePointsPresenter
     {
 
         #region - - - - - - Methods - - - - - -
