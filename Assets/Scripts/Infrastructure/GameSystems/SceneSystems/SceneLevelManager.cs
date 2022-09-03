@@ -16,7 +16,7 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
         public PlayerShipSpawner playerSpawner;
         public GameObject playerHealthBarGameObject;
         public SceneOperations sceneOperations;
-        public ScorePresenter scorePresenter;
+        public ScorePointsPresenter scorePointsPresenter;
         public SceneScoreSystem sceneScoreSystem;
         public InputSystemManager inputSystemManager;
 
@@ -40,14 +40,14 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
             playerSpawner = FindObjectOfType<PlayerShipSpawner>();
             sceneOperations = this.GetComponent<SceneOperations>();
             sceneScoreSystem = this.GetComponent<SceneScoreSystem>();
-            scorePresenter = FindObjectOfType<ScorePresenter>();
+            scorePointsPresenter = FindObjectOfType<ScorePointsPresenter>();
         }
 
         private void Start()
         {
             GameManager.Instance.sceneLevelManager = this;
 
-            sceneOperations.ConfigureSceneLevel(playerSpawner, sceneScoreSystem, scorePresenter);
+            sceneOperations.ConfigureSceneLevel(playerSpawner, sceneScoreSystem, scorePointsPresenter);
             OnGameStart?.Invoke();
         }
 

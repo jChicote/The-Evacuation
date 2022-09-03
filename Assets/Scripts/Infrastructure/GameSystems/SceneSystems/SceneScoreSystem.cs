@@ -1,3 +1,6 @@
+using TheEvacuation.Infrastructure.Score.CreateScoreRecord;
+using TheEvacuation.Infrastructure.Score.LoadScoreBoard;
+using TheEvacuation.Infrastructure.Score.UpdateScoreRecord;
 using TheEvacuation.Interfaces.GameInterfaces.Score;
 using UnityEngine;
 
@@ -9,20 +12,14 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
 
         #region - - - - - - Fields - - - - - -
 
-        public IScorePresenter scorePresenter;
+        public IScorePointsPresenter scorePresenter;
+        public ICreateScoreRecord createScoreRecord;
+        public IUpdateScoreRecord updateScoreRecord;
+        public ILoadScoreBoard loadScoreBoard;
 
-        public int totalScore;
+        private ScoreRecord scoreRecord;
 
         #endregion Fields
-
-        #region - - - - - - MonoBehaviour - - - - - -
-
-        private void Start()
-        {
-
-        }
-
-        #endregion MonoBehaviour
 
         #region - - - - - - Methods - - - - - -
 
@@ -37,19 +34,70 @@ namespace TheEvacuation.Infrastructure.GameSystems.SceneSystems
          *
          */
 
-        public void InitialiseSceneScoreSystem(IScorePresenter scorePresenter)
+        public void InitialiseSceneScoreSystem(IScorePointsPresenter scorePresenter)
         {
             this.scorePresenter = scorePresenter;
+
+            this.createScoreRecord = new CreateScoreRecordController();
+            this.updateScoreRecord = new UpdateScoreRecordController(scorePresenter);
+            this.loadScoreBoard = new LoadScoreBoardController();
+
+            this.scoreRecord = this.createScoreRecord.CreateScoreRecord();
         }
 
-        public void UpdateTotalScore(int scoreValue)
-        {
-            totalScore += scoreValue;
-            scorePresenter.PresentScore(totalScore);
-        }
+        public void UpdateTotalScore(ScoreEvent scoreEvent)
+            => this.updateScoreRecord.UpdateScoreRecord(scoreRecord, scoreEvent);
+
+        public ScoreRecord GetScoreRecord()
+            => this.scoreRecord;
 
         #endregion Methods
 
     }
+
+    public class ScoreRecord
+    {
+
+        #region - - - - - - Properties - - - - - -
+
+        public int KillCount { get; set; }
+
+        public int SkillPoints { get; set; }
+
+        public int TotalScore { get; set; }
+
+        #endregion Properties
+
+    }
+
+    public class ScoreEvent
+    {
+
+        #region - - - - - - Properties - - - - - -
+
+        public int ScoreValue { get; set; }
+
+        public ScoreEventType EventType { get; set; }
+
+        public ScoreSubscriber ScoreSubscriber { get; set; }
+
+        #endregion Properties
+
+    }
+
+    public class ScoreSubscriber
+    {
+
+        #region - - - - - - Properties - - - - - -
+
+        public string Name { get; set; }
+
+        public Transform Transform { get; set; }
+
+        #endregion Properties
+
+    }
+
+
 
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace TheEvacuation.Interfaces.GameInterfaces.Score
 {
 
-    public class ScorePresenter : MonoBehaviour, IScorePresenter
+    public class ScorePointsPresenter : MonoBehaviour, IScorePointsPresenter
     {
 
         #region - - - - - - Fields - - - - - -

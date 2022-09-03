@@ -1,5 +1,6 @@
 using TheEvacuation.Common;
 using TheEvacuation.Infrastructure.GameSystems.SceneSystems;
+using TheEvacuation.Infrastructure.Score.UpdateScoreRecord;
 using UnityEngine;
 
 public class Test_DamageIncrementer : MonoBehaviour, IDamageable
@@ -14,7 +15,16 @@ public class Test_DamageIncrementer : MonoBehaviour, IDamageable
     {
         Debug.LogWarning("Has Hit");
         SceneScoreSystem scoreSystem = GameObject.FindObjectOfType<SceneScoreSystem>();
-        scoreSystem.UpdateTotalScore(100);
+        scoreSystem.UpdateTotalScore(new ScoreEvent()
+        {
+            ScoreValue = 100,
+            EventType = ScoreEventType.Hit,
+            ScoreSubscriber = new ScoreSubscriber()
+            {
+                Name = gameObject.name,
+                Transform = this.gameObject.transform
+            }
+        });
     }
 
 }
