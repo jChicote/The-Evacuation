@@ -26,7 +26,9 @@ namespace TheEvacuation.Infrastructure.Persistence
         {
             data = new GameData()
             {
-                m_Players = new List<Player>()
+                m_Levels = new List<Level>(),
+                m_Players = new List<Player>(),
+                m_ScoreBoards = new List<ScoreBoard>()
             };
         }
 
@@ -35,8 +37,12 @@ namespace TheEvacuation.Infrastructure.Persistence
 
         public List<TBase> Set<TBase>()
         {
-            if (typeof(TBase) == typeof(Player))
+            if (typeof(TBase) == typeof(Level))
+                return data.m_Levels as List<TBase>;
+            else if (typeof(TBase) == typeof(Player))
                 return data.m_Players as List<TBase>;
+            else if (typeof(TBase) == typeof(ScoreBoard))
+                return data.m_ScoreBoards as List<TBase>;
 
             return null;
         }

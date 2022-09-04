@@ -9,7 +9,9 @@ namespace TheEvacuation.Infrastructure.Persistence
 
         #region - - - - - - Fields - - - - - -
 
+        public List<Level> m_Levels;
         public List<Player> m_Players;
+        public List<ScoreBoard> m_ScoreBoards;
 
         #endregion Fields
 

@@ -10,13 +10,19 @@ namespace TheEvacuation.Infrastructure.Persistence
         #region - - - - - - Fields - - - - - -
 
         [SerializeField] private DataContext dataContext;
+        [SerializeField] private LevelRepository levelRepository;
         [SerializeField] private PlayerRepository playerRepository;
+        [SerializeField] private ScoreBoardRepository scoreBoardRepository;
 
         #endregion Fields
 
         #region - - - - - - Properties - - - - - -
 
+        public LevelRepository LevelRepository => levelRepository;
+
         public PlayerRepository Players => playerRepository;
+
+        public ScoreBoardRepository ScoreBoard => scoreBoardRepository;
 
         #endregion Properties
 
