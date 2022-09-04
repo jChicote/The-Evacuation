@@ -11,7 +11,6 @@ namespace TheEvacuation.Infrastructure.GameSystems
 
         public Player CurrentPlayer { get; set; }
         public SpaceShip SelectedSpaceShip { get; set; }
-        public ScoreBoard PlayerScoreBoard { get; set; }
 
         #endregion Properties
 
