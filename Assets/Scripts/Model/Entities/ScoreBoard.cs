@@ -1,8 +1,17 @@
+using System;
+
 namespace TheEvacuation.Model.Entities
 {
 
+    /// <summary>
+    /// Stores the score data from each level.
+    /// <para>
+    /// This entity can be overriden by boards created within each level scene.
+    /// Only stores calculated data and stored inside the data context.
+    /// </para>
+    /// </summary>
     [System.Serializable]
-    public class ScoreBoard : ICloneable<ScoreBoard>
+    public class ScoreBoard : BaseEntity, ICloneable<ScoreBoard>
     {
 
         #region - - - - - - Fields - - - - - -
@@ -17,6 +26,7 @@ namespace TheEvacuation.Model.Entities
 
         public ScoreBoard()
         {
+            ID = new Guid();
             totalPoints = 0;
             highScore = 0;
         }
