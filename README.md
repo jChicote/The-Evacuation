@@ -1,5 +1,7 @@
 # Evacuation
 
+UPDATE !!!: Development has paused so that I can focus on more important smaller projects
+
 Evacuation is a rescue shoot-em all game where you fly your pixel vessel around the local system in space and transport evacuees to the drop ship. However it is not all that easy, meanwhile a shockwave is heading to your position with multiple aliens invading your area of space. Thus you must both save and fight off the other worldly invaders. 
 
 This game is developed for both gameplay in Desktop and for iOS 
